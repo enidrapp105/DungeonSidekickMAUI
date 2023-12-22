@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.SelectedClassPage"
+             Title="SelectedClassPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+                <Label Text="" HorizontalTextAlignment="Center" TextColor="White" FontSize="36" x:Name="Classlabel"/>
+            </Frame>
+            <Label Text="" TextColor="white" HorizontalOptions="Start" x:Name="ClassDescLabel"/>
+            <Label Text="" TextColor="white" HorizontalOptions="Start" x:Name="ClassHitDieLabel"/>
+            <Button BackgroundColor="Red" TextColor="White" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

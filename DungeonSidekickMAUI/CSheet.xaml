@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.CSheet"
+             Title="CSheet">
+    <ScrollView>
+        <StackLayout>
+            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+                <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="PName"
+                WidthRequest="1000" HorizontalOptions="Start" />
+            <!--PName = Player Name, CName = Character Name-->
+
+            <Entry Placeholder="Character Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="CName"
+                WidthRequest="1000" HorizontalOptions="Start"/>
+            <!--Color is temp-->
+
+            <Entry Placeholder="Race" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Race"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Button BackgroundColor="Red" TextColor="White" Text="Pick your Class" Clicked="ClassPickerPage"
+               WidthRequest="1000" HorizontalOptions="Start" x:Name="ClassButton"/>
+
+            <Entry Placeholder="Background" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Background"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="50"/>
+
+            <Entry Placeholder="Allignment" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Allignment"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Personality Traits" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="PTraits"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Ideals" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Ideals"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Bonds" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Bonds"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Flaws" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Flaws"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Features and Traits" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Traits"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="100"/>
+            <!--'&' doesnt work?-->
+
+            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Inventory"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Attacks" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Attacks"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Spells" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Spells"
+               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
+
+            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Proficiencies"
+           VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="100"/>
+
+            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Strength"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+            <!--Probably want something to make sure its an int-->
+
+            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Dexterity"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Constitution"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Intelligence"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Wisdom"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Charisma"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Button BackgroundColor="Red" TextColor="White" Text="Roll for Stats" Clicked="RollForStats"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Button BackgroundColor="Red" TextColor="White"  Text="Submit Form" Clicked="SubmitStats"
+               WidthRequest="1000" HorizontalOptions="Start"/>
+
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

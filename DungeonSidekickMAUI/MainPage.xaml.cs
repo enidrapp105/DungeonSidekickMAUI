@@ -1,0 +1,20 @@
+﻿namespace DungeonSidekickMAUI
+{
+    public partial class MainPage : ContentPage
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+        }
+
+        private void Player_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Info_For_Stats());
+        }
+        private void Player_Import(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CSheet_Import());
+        }
+    }
+
+}
