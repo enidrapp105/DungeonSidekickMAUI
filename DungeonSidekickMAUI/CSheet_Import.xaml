@@ -11,7 +11,7 @@
                 </Frame>
                 <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="PName"/>
                 <!--PName = Player Name, CName = Character Name-->
-                <Button BackgroundColor="Red" TextColor="White" />
+                <Button BackgroundColor="Red" TextColor="White" Text="Import Sheet" Clicked="ImportSheet"/>
 
             </StackLayout>
         </ScrollView>

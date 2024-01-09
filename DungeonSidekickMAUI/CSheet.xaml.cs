@@ -70,7 +70,7 @@ public partial class CSheet : ContentPage
     private void SubmitStats(object sender, EventArgs e)
     {
 
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6";
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
         string query = "INSERT INTO dbo.CharacterSheet" +
             "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
@@ -91,7 +91,12 @@ public partial class CSheet : ContentPage
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
                         cmd.Parameters.AddWithValue("@Race", Race.Text);
-                        cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);
+                        //commented out because of issues with out class picker page
+                        //cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
+                        // to test the db connection
+                        // PLACEHOLDER
+                        cmd.Parameters.AddWithValue("@Class", "NOT A REAL CLASS");
+                        // PLACEHOLDER ^^^^^
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
                         cmd.Parameters.AddWithValue("@PersonalityTraits", PTraits.Text);
