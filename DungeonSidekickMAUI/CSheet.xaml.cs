@@ -1,5 +1,5 @@
 using System.Diagnostics;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
