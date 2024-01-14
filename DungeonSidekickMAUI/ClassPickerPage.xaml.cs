@@ -43,12 +43,13 @@ public partial class ClassPickerPage : ContentPage
                 MinimumHeightRequest = 50,
                 MinimumWidthRequest = 50,
                 BackgroundColor = color
+
             };
             classButton.Clicked += OnClassButtonClicked;
 
             classButtonContainer.Children.Add(classButton);
         }
-        this.Classpagestack.Children.Add(classButtonContainer);
+        //this.Classpagestack.Children.Add(classButtonContainer);
     }
     /*
      * Function: RollForStats
