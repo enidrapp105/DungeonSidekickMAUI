@@ -48,7 +48,7 @@ public partial class ClassPickerPage : ContentPage
 
             classButtonContainer.Children.Add(classButton);
         }
-        this.Classpagestack.Children.Add(classButtonContainer);
+        //this.Classpagestack.Children.Add(classButtonContainer);
     }
     /*
      * Function: RollForStats
