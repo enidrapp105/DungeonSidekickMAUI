@@ -5,7 +5,7 @@
              Title="CSheet_Import">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="MainPanel">
+            <StackLayout x:Name="MainPanel" BackgroundColor="Black">
                 <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>

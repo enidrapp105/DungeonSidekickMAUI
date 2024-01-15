@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.SelectedClassPage"
              Title="SelectedClassPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="Black">
             <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="White" FontSize="36" x:Name="Classlabel"/>
             </Frame>

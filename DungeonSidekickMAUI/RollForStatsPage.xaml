@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.RollForStatsPage"
              Title="RollForStatsPage">
     <ContentPage.Content>
-        <StackLayout x:Name="RollPage" >
+        <StackLayout x:Name="RollPage" BackgroundColor="Black" >
             <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>

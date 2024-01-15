@@ -5,7 +5,7 @@
              Title="Info_For_Stats">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
+            <StackLayout BackgroundColor="Black">
                 <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation Information" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
