@@ -91,12 +91,7 @@ public partial class CSheet : ContentPage
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
                         cmd.Parameters.AddWithValue("@Race", Race.Text);
-                        //commented out because of issues with out class picker page
-                        //cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
-                        // to test the db connection
-                        // PLACEHOLDER
-                        cmd.Parameters.AddWithValue("@Class", "NOT A REAL CLASS");
-                        // PLACEHOLDER ^^^^^
+                        cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
                         cmd.Parameters.AddWithValue("@PersonalityTraits", PTraits.Text);
