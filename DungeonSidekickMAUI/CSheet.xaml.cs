@@ -4,6 +4,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
 {
+    CharacterSheet CharacterSheet;
     private string DexterityRolled;
     private string IntelligenceRolled;
     private string CharismaRolled;
@@ -16,6 +17,7 @@ public partial class CSheet : ContentPage
     public CSheet()
     {
         InitializeComponent();
+        CharacterSheet = new CharacterSheet();
     }
     public CSheet(string DEX, string INT, string CHA, string STR, string WIS, string CON, DndClass dndclass)
     {
@@ -63,7 +65,7 @@ public partial class CSheet : ContentPage
      */
     private void ClassPickerPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ClassPickerPage());
+        Navigation.PushAsync(new ClassPickerPage(CharacterSheet));
     }
 
 
