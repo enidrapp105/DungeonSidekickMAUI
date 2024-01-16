@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonSidekickMAUI
 {
-    class CharacterSheet
+    public class CharacterSheet
     {
         public string? playername { get; set; }
         public string? charactername {  get; set; }

@@ -2,10 +2,12 @@ namespace DungeonSidekickMAUI;
 
 public partial class SelectedClassPage : ContentPage
 {
-    DndClass SelectedClass;
-    public SelectedClassPage(DndClass Class)
+    public DndClass SelectedClass;
+    CharacterSheet characterSheet;
+    public SelectedClassPage(CharacterSheet characterSheet, DndClass selectedclass)
     {
-        SelectedClass = Class;
+        this.characterSheet = characterSheet;
+        this.SelectedClass = selectedclass;
         InitializeComponent();
         Classlabel.Text = SelectedClass.ClassName;
         ClassDescLabel.Text = SelectedClass.ClassDesc;
@@ -13,7 +15,8 @@ public partial class SelectedClassPage : ContentPage
     }
     private void Submit(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CSheet(SelectedClass));
+        characterSheet.characterclass = SelectedClass;
+        Navigation.PushAsync(new CSheet(characterSheet));
     }
 
 }

@@ -63,7 +63,7 @@ public partial class ClassPickerPage : ContentPage
     {
         if (sender is Button classButton && classButton.CommandParameter is DndClass selectedClass)
         {
-            Navigation.PushAsync(new SelectedClassPage(selectedClass));
+            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass));
         }
     }
 }
