@@ -4,9 +4,10 @@ public partial class RollForStatsPage : ContentPage
 {
     private Random random = new Random();
     private DndClass dndclass;
-    public RollForStatsPage(DndClass selectedclass)
+    CharacterSheet characterSheet;
+    public RollForStatsPage(CharacterSheet characterSheet)
     {
-        dndclass = selectedclass;
+        this.characterSheet = characterSheet;   
         InitializeComponent();
     }
     /*
@@ -138,7 +139,7 @@ public partial class RollForStatsPage : ContentPage
             string retotal4 = ExtractIntFromTotal(total4.Text);
             string retotal5 = ExtractIntFromTotal(total5.Text);
             string retotal6 = ExtractIntFromTotal(total6.Text);
-            Navigation.PushAsync(new StatAssignmentPage(retotal1, retotal2, retotal3, retotal4, retotal5, retotal6, dndclass));
+            Navigation.PushAsync(new StatAssignmentPage(retotal1, retotal2, retotal3, retotal4, retotal5, retotal6, characterSheet));
         }
         else
         {

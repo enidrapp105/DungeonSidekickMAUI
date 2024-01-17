@@ -19,29 +19,16 @@ public partial class CSheet : ContentPage
         InitializeComponent();
         CharacterSheetcurrent = new CharacterSheet();
     }
-    public CSheet(string DEX, string INT, string CHA, string STR, string WIS, string CON, DndClass dndclass)
-    {
-        DexterityRolled = DEX;
-        IntelligenceRolled = INT;
-        CharismaRolled = CHA;
-        StrengthRolled = STR;
-        WisdomRolled = WIS;
-        ConstitutionRolled = CON;
-        CharacterClass = dndclass;
-        InitializeComponent();
-        Dexterity.Text = DEX;
-        Intelligence.Text = INT;
-        Charisma.Text = CHA;
-        Strength.Text = STR;
-        Wisdom.Text = WIS;
-        Constitution.Text = CON;
-        ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
-    }
+    
     public CSheet(CharacterSheet characterSheet)
     {
         InitializeComponent();
+        CharacterSheetcurrent = characterSheet;
         LoadCharacterSheetPage(characterSheet);
-        ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+        if (characterSheet.characterclass != null)
+        {
+            ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+        }
     }
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
@@ -66,6 +53,7 @@ public partial class CSheet : ContentPage
         Intelligence.Text = characterSheet.intelligence;
         Wisdom.Text = characterSheet.wisdom;
         Constitution.Text = characterSheet.constitution;
+        Charisma.Text = characterSheet.charisma;
     }
     private void LoadCharacterSheetClass()
     {
@@ -90,7 +78,7 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.intelligence = Intelligence.Text;
         CharacterSheetcurrent.wisdom = Wisdom.Text;
         CharacterSheetcurrent.constitution = Constitution.Text;
-
+        CharacterSheetcurrent.charisma = Charisma.Text;
     }
     /*
      * Function: RollForStats
@@ -100,10 +88,8 @@ public partial class CSheet : ContentPage
      */
     private void RollForStats(object sender, EventArgs e)
     {
-        if (ClassButton.Text == "Pick your Class")
-            DisplayAlert("Error", "Please select yor Class", "Ok");
-        else
-            Navigation.PushAsync(new RollForStatsPage(CharacterClass));
+        LoadCharacterSheetClass();
+        Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
     }
     /*
      * Function: RollForStats

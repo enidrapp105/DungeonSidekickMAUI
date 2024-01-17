@@ -15,9 +15,9 @@ public partial class StatAssignmentPage : ContentPage
     private string WIS;
     private string CON;
     private DndClass dndclass;
+    CharacterSheet characterSheet;
 
-
-    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, DndClass selectedclass)
+    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, CharacterSheet characterSheet)
     {
         this.total1 = total1;
         this.total2 = total2;
@@ -25,7 +25,7 @@ public partial class StatAssignmentPage : ContentPage
         this.total4 = total4;
         this.total5 = total5;
         this.total6 = total6;
-        dndclass = selectedclass;
+        this.characterSheet = characterSheet;
         InitializeComponent();
         totallabel1.Text = total1;
         totallabel2.Text = total2;
@@ -34,6 +34,7 @@ public partial class StatAssignmentPage : ContentPage
         totallabel5.Text = total5;
         totallabel6.Text = total6;
         SetPickerItems();
+        this.characterSheet = characterSheet;
     }
     /*
      * Function: SetPickerItems
@@ -88,7 +89,13 @@ public partial class StatAssignmentPage : ContentPage
             totallabel5.Text = $"{selectedStat5} {total5}";
             totallabel6.Text = $"{selectedStat6} {total6}";
             AssignValue(totallabel1.Text, totallabel2.Text, totallabel3.Text, totallabel4.Text, totallabel5.Text, totallabel6.Text);
-            Navigation.PushAsync(new CSheet(DEX, INT, CHA, STR, WIS, CON, dndclass));
+            this.characterSheet.dexterity = DEX;
+            this.characterSheet.intelligence = INT;
+            this.characterSheet.charisma = CHA;
+            this.characterSheet.strength = STR;
+            this.characterSheet.wisdom = WIS;
+            this.characterSheet.constitution = CON;
+            Navigation.PushAsync(new CSheet(characterSheet));
         }
     }
     /*
