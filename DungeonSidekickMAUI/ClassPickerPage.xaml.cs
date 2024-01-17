@@ -45,6 +45,7 @@ public partial class ClassPickerPage : ContentPage
                 MinimumHeightRequest = 50,
                 MinimumWidthRequest = 50,
                 BackgroundColor = color
+
             };
             classButton.Clicked += OnClassButtonClicked;
 

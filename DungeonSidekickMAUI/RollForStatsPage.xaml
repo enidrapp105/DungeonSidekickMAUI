@@ -12,6 +12,7 @@
                 <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1">
                     <Button BackgroundColor="Red" TextColor="White" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
+
                     <Button BackgroundColor="Red" TextColor="White" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA1" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="Red" TextColor="White" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA2" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="Red" TextColor="White" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA3" Clicked="OnButtonClicked"/>

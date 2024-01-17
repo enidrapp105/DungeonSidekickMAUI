@@ -5,13 +5,13 @@
              Title="CSheet_Import">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="MainPanel">
+            <StackLayout x:Name="MainPanel" BackgroundColor="Black">
                 <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
                 <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="PName"/>
                 <!--PName = Player Name, CName = Character Name-->
-                <Button BackgroundColor="Red" TextColor="White" />
+                <Button BackgroundColor="Red" TextColor="White" Text="Import Sheet" Clicked="ImportSheet"/>
 
             </StackLayout>
         </ScrollView>
