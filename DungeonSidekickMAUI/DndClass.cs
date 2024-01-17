@@ -8,8 +8,8 @@ namespace DungeonSidekickMAUI
 {
     public class DndClass
     {
-        public string ClassName { get; set; }
-        public string HitDie { get; set; }
-        public string ClassDesc { get; set; }
+        public required string ClassName { get; set; }
+        public required string HitDie { get; set; }
+        public required string ClassDesc { get; set; }
     }
 }

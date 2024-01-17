@@ -4,43 +4,81 @@ namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
 {
+    private CharacterSheet CharacterSheetcurrent;
     private string DexterityRolled;
     private string IntelligenceRolled;
     private string CharismaRolled;
     private string StrengthRolled;
     private string WisdomRolled;
     private string ConstitutionRolled;
-    private DndClass CharacterClass;
+    public DndClass CharacterClass;
 
 
     public CSheet()
     {
         InitializeComponent();
+        CharacterSheetcurrent = new CharacterSheet();
     }
-    public CSheet(string DEX, string INT, string CHA, string STR, string WIS, string CON, DndClass dndclass)
+    
+    public CSheet(CharacterSheet characterSheet)
     {
-        DexterityRolled = DEX;
-        IntelligenceRolled = INT;
-        CharismaRolled = CHA;
-        StrengthRolled = STR;
-        WisdomRolled = WIS;
-        ConstitutionRolled = CON;
-        CharacterClass = dndclass;
         InitializeComponent();
-        Dexterity.Text = DEX;
-        Intelligence.Text = INT;
-        Charisma.Text = CHA;
-        Strength.Text = STR;
-        Wisdom.Text = WIS;
-        Constitution.Text = CON;
-        ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+        CharacterSheetcurrent = characterSheet;
+        LoadCharacterSheetPage(characterSheet);
+        if (characterSheet.characterclass != null)
+        {
+            ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+        }
     }
-
-    public CSheet(DndClass selectedclass)
+    private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
-        CharacterClass = selectedclass;
-        InitializeComponent();
-        ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+        PName.Text = characterSheet.playername;
+        CName.Text = characterSheet.charactername ;
+        Race.Text = characterSheet.race;
+        CharacterClass = characterSheet.characterclass;
+        Background.Text = characterSheet.background;
+        Allignment.Text = characterSheet.alignment;
+        PTraits.Text = characterSheet.personalitytraits;
+        Ideals.Text = characterSheet.ideals;
+        Bonds.Text = characterSheet.bonds;
+        Flaws.Text = characterSheet.flaws;
+        Traits.Text = characterSheet.featurestraits;
+        Inventory.Text = characterSheet.equipment;
+        Proficiencies.Text = characterSheet.proficiencies;
+        Attacks.Text = characterSheet.attacks;
+        Spells.Text = characterSheet.spells;
+        Strength.Text = characterSheet.strength;
+        Dexterity.Text = characterSheet.dexterity;
+        Constitution.Text = characterSheet.constitution;
+        Intelligence.Text = characterSheet.intelligence;
+        Wisdom.Text = characterSheet.wisdom;
+        Constitution.Text = characterSheet.constitution;
+        Charisma.Text = characterSheet.charisma;
+    }
+    private void LoadCharacterSheetClass()
+    {
+        CharacterSheetcurrent.playername = PName.Text;
+        CharacterSheetcurrent.charactername = CName.Text;
+        CharacterSheetcurrent.race = Race.Text;
+        CharacterSheetcurrent.characterclass = CharacterClass;
+        CharacterSheetcurrent.background = Background.Text;
+        CharacterSheetcurrent.alignment = Allignment.Text;
+        CharacterSheetcurrent.personalitytraits = PTraits.Text;
+        CharacterSheetcurrent.ideals = Ideals.Text;
+        CharacterSheetcurrent.bonds = Bonds.Text;
+        CharacterSheetcurrent.flaws = Flaws.Text;
+        CharacterSheetcurrent.featurestraits = Traits.Text;
+        CharacterSheetcurrent.equipment = Inventory.Text;
+        CharacterSheetcurrent.proficiencies = Proficiencies.Text;
+        CharacterSheetcurrent.attacks = Attacks.Text;
+        CharacterSheetcurrent.spells = Spells.Text;
+        CharacterSheetcurrent.strength = Strength.Text;
+        CharacterSheetcurrent.dexterity = Dexterity.Text;
+        CharacterSheetcurrent.constitution = Constitution.Text;
+        CharacterSheetcurrent.intelligence = Intelligence.Text;
+        CharacterSheetcurrent.wisdom = Wisdom.Text;
+        CharacterSheetcurrent.constitution = Constitution.Text;
+        CharacterSheetcurrent.charisma = Charisma.Text;
     }
     /*
      * Function: RollForStats
@@ -50,10 +88,8 @@ public partial class CSheet : ContentPage
      */
     private void RollForStats(object sender, EventArgs e)
     {
-        if (ClassButton.Text == "Pick your Class")
-            DisplayAlert("Error", "Please select yor Class", "Ok");
-        else
-            Navigation.PushAsync(new RollForStatsPage(CharacterClass));
+        LoadCharacterSheetClass();
+        Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
     }
     /*
      * Function: RollForStats
@@ -63,7 +99,8 @@ public partial class CSheet : ContentPage
      */
     private void ClassPickerPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ClassPickerPage());
+        LoadCharacterSheetClass();
+        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
     }
 
 
