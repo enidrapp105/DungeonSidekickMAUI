@@ -42,16 +42,14 @@ public partial class CSheet_Import : ContentPage
                             while (reader.Read())
                             {
                                 StackLayout CharacterStack = new StackLayout();
-                                Button Edit = new Button();
-                                Edit.TextColor = Color.FromRgb(255, 255, 255);
-                                Edit.Text = "Edit";
+
                                 Label CName = new Label();
                                 CName.TextColor = Color.FromRgb(255, 255, 255);
                                 CName.Text = "Character Name";
                                 Label CName2 = new Label();
                                 CName2.TextColor = Color.FromRgb(255, 255, 255);
                                 CName2.Text = reader.GetString(0);
-                                CharacterStack.Children.Add(Edit);
+
                                 CharacterStack.Children.Add(CName);
                                 CharacterStack.Children.Add(CName2);
 
@@ -107,6 +105,19 @@ public partial class CSheet_Import : ContentPage
                                 CharacterStack.Children.Add(Charisma);
                                 CharacterStack.Children.Add(Charisma2);
 
+                                Button Edit = new Button {
+                                    TextColor = Color.FromRgb(0, 0, 0),
+                                    Text = "Edit",
+                                    BackgroundColor = Color.FromRgb(255, 255, 255),
+                                    Command = new Command
+                                    (
+                                        execute: async() =>
+                                        {
+                                            
+                                        }
+                                    )
+                                };
+                                CharacterStack.Children.Add(Edit);
                                 BoxView line = new BoxView
                                 {
                                     Color = Color.FromRgb(255,255,255),
