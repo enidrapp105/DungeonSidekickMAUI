@@ -4,14 +4,16 @@ namespace DungeonSidekickMAUI;
 public partial class ClassPickerPage : ContentPage
 {
     CharacterSheet characterSheet;
+    private bool exists;
     /*
      * Function: ClassPicker default Constructor
      * Author: Kenny Rapp
      * Purpose: Initilizes all of the class choises based on the json file
      * last Modified : 12/04/2023 3:20pm
      */
-    public ClassPickerPage(CharacterSheet CharacterSheet)
+    public ClassPickerPage(CharacterSheet CharacterSheet, bool edit = false)
     {
+        exists = edit;
         InitializeComponent();
         this.characterSheet = CharacterSheet;
         classButtonContainer = new StackLayout()
@@ -64,7 +66,7 @@ public partial class ClassPickerPage : ContentPage
     {
         if (sender is Button classButton && classButton.CommandParameter is DndClass selectedClass)
         {
-            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass));
+            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass, exists));
         }
     }
 }

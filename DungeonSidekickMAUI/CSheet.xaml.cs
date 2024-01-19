@@ -12,16 +12,20 @@ public partial class CSheet : ContentPage
     private string WisdomRolled;
     private string ConstitutionRolled;
     public DndClass CharacterClass;
+    private bool exists;
 
 
     public CSheet()
     {
+        exists = false;
         InitializeComponent();
         CharacterSheetcurrent = new CharacterSheet();
+        
     }
     
-    public CSheet(CharacterSheet characterSheet)
+    public CSheet(CharacterSheet characterSheet, bool edit = false)
     {
+        exists = edit;
         InitializeComponent();
         CharacterSheetcurrent = characterSheet;
         LoadCharacterSheetPage(characterSheet);
@@ -100,7 +104,7 @@ public partial class CSheet : ContentPage
     private void ClassPickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
+        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent, exists));
     }
 
 
@@ -114,7 +118,17 @@ public partial class CSheet : ContentPage
             "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
             "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
             "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
-
+        
+        // Used for updating existing character sheets
+        if (exists == true)
+        {
+            // This will need changed to a ID of some sort when our DB is finalized
+            query = "UPDATE dbo.CharacterSheet " +
+            "SET Race = @Race, Class = @Class, Background = @Background, Alignment = @Alignment, PersonalityTraits = @PersonalityTraits, Ideals = @Ideals, " +
+            "Bonds = @Bonds, Flaws = @Flaws, FeaturesTraits = @FeaturesTraits, Equipment = @Equipment, Proficiencies = @Proficiencies, Attacks = @Attacks, " +
+            "Spells = @Spells, Strength = @Strength, Dexterity = @Dexterity, Constitution = @Constitution, Intelligence = @Intelligence, Wisdom = @Wisdom, Charisma = @Charisma " +
+            "WHERE CharacterName = @CharacterName;";
+        }
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))

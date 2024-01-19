@@ -122,7 +122,7 @@ public partial class CSheet_Import : ContentPage
                                             sheet.intelligence = Intelligence2.Text;
                                             sheet.wisdom = Wisdom2.Text;
                                             sheet.charisma = Charisma2.Text;
-                                            Navigation.PushAsync(new CSheet(sheet));
+                                            Navigation.PushAsync(new CSheet(sheet, true));
                                         }
                                     )
                                 };
