@@ -113,7 +113,16 @@ public partial class CSheet_Import : ContentPage
                                     (
                                         execute: async() =>
                                         {
-                                            
+                                            CharacterSheet sheet = new CharacterSheet();
+                                            sheet.playername = PName.Text;
+                                            sheet.charactername = CName2.Text;
+                                            sheet.strength = Strength2.Text;
+                                            sheet.dexterity = Dexterity2.Text;
+                                            sheet.constitution = Constitution2.Text;
+                                            sheet.intelligence = Intelligence2.Text;
+                                            sheet.wisdom = Wisdom2.Text;
+                                            sheet.charisma = Charisma2.Text;
+                                            Navigation.PushAsync(new CSheet(sheet, true));
                                         }
                                     )
                                 };

@@ -4,8 +4,10 @@ public partial class SelectedClassPage : ContentPage
 {
     public DndClass SelectedClass;
     CharacterSheet characterSheet;
-    public SelectedClassPage(CharacterSheet characterSheet, DndClass selectedclass)
+    private bool exists;
+    public SelectedClassPage(CharacterSheet characterSheet, DndClass selectedclass, bool edit = false)
     {
+        exists = edit;
         this.characterSheet = characterSheet;
         this.SelectedClass = selectedclass;
         InitializeComponent();
@@ -16,7 +18,7 @@ public partial class SelectedClassPage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.characterclass = SelectedClass;
-        Navigation.PushAsync(new CSheet(characterSheet));
+        Navigation.PushAsync(new CSheet(characterSheet, exists));
     }
 
 }
