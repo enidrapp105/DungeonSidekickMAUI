@@ -1,8 +1,9 @@
+using Microsoft.Maui.Controls;
 namespace DungeonSidekickMAUI;
 
 public partial class LayoutDesigner : ContentPage
 {
-	public LayoutDesigner()
+    public LayoutDesigner()
 	{
 		InitializeComponent();
 	}
@@ -36,5 +37,6 @@ public partial class LayoutDesigner : ContentPage
 
         stackLayout.BackgroundColor = Color.FromRgb((int)red, (int)green, (int)blue);
     }
+
 
 }

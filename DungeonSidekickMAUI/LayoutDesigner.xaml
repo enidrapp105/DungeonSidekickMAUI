@@ -10,21 +10,21 @@
         
         <!-- RGB Sliders for Colors -->
         <StackLayout Orientation="Horizontal" Padding="20">
-            <Label Text="R  " TextColor="White" VerticalOptions="Center"/>
+            <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+            <Label x:Name="redValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
             <Slider x:Name="redSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-            <Label x:Name="redValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" Padding="20">
-            <Label Text="G  " TextColor="White" VerticalOptions="Center"/>
+            <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+            <Label x:Name="greenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
             <Slider x:Name="greenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-            <Label x:Name="greenValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
         </StackLayout>
 
         <StackLayout Orientation="Horizontal" Padding="20">
-            <Label Text="B  " TextColor="White" VerticalOptions="Center"/>
+            <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+            <Label x:Name="blueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
             <Slider x:Name="blueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-            <Label x:Name="blueValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
         </StackLayout>
 
         <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SettingsPage" />
