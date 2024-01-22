@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Maui.Controls;
+using Microsoft.IdentityModel.Tokens;
 
 namespace DungeonSidekickMAUI
 {
@@ -31,7 +32,7 @@ namespace DungeonSidekickMAUI
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error loading state: {ex.Message}");
+                Console.WriteLine($"Error loading design: {ex.Message}");
             }
         }
 
@@ -53,7 +54,7 @@ namespace DungeonSidekickMAUI
                         }
                         else
                         {
-                            Console.WriteLine($"Failed to parse '{numStr}' as an integer.");
+                            Console.WriteLine("Failed to get design data.");
                         }
                     }
                 }
@@ -69,10 +70,18 @@ namespace DungeonSidekickMAUI
     {
         public static void ChangeDesign(Page page, List<int> list)
         {
-            int x = 0;
-            Color backgroundColor = Color.FromRgb(list[x], list[x+1], list[x+2]);
-            page.BackgroundColor = backgroundColor;
-            x = 3;
+            if (list.IsNullOrEmpty())
+            {
+                page.BackgroundColor = Color.FromRgb(0, 0, 0);
+            }
+            else 
+            {
+                int x = 0;
+                Color backgroundColor = Color.FromRgb(list[x], list[x + 1], list[x + 2]);
+                page.BackgroundColor = backgroundColor;
+                x = 3;
+            }
+
         }
     }
 }
