@@ -13,6 +13,7 @@
         <Button BackgroundColor="Red" TextColor="White" Text="Player?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Clicked"/>
         <Button BackgroundColor="Red" TextColor="White" Text="Player Import?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Import"/>
 
+        <Button BackgroundColor="Red" TextColor="White" Text="Settings" WidthRequest="1000" HorizontalOptions="Start" Clicked="Settings_Page"/>
     </StackLayout>
 
 </ContentPage>

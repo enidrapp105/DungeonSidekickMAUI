@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.Settings_Page"
+             Title="Settings_Page">
+    <StackLayout BackgroundColor="Black">
+        <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        </Frame>
+        <Button BackgroundColor="Red" TextColor="White" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" /> <!--Clicked="Player_Clicked"/>-->
+        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+    </StackLayout>
+</ContentPage>
+    
+    
