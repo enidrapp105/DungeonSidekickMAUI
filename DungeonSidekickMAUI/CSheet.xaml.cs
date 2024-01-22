@@ -5,12 +5,6 @@ namespace DungeonSidekickMAUI;
 public partial class CSheet : ContentPage
 {
     private CharacterSheet CharacterSheetcurrent;
-    private string DexterityRolled;
-    private string IntelligenceRolled;
-    private string CharismaRolled;
-    private string StrengthRolled;
-    private string WisdomRolled;
-    private string ConstitutionRolled;
     public DndClass CharacterClass;
 
 
@@ -19,7 +13,14 @@ public partial class CSheet : ContentPage
         InitializeComponent();
         CharacterSheetcurrent = new CharacterSheet();
     }
-    
+    /* Function Name: CSheet one arg constructor
+     * Purpose:
+     * to allow navigation to the csheet page with predetermined class elements
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
     public CSheet(CharacterSheet characterSheet)
     {
         InitializeComponent();
@@ -30,6 +31,15 @@ public partial class CSheet : ContentPage
             ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
         }
     }
+    /* Function Name: LoadCharacterSheetPage
+     * Purpose:
+     * to assign all of the values that are in the text fields from the passed in
+     * character sheet class to the csheet page
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
         PName.Text = characterSheet.playername;
@@ -55,6 +65,14 @@ public partial class CSheet : ContentPage
         Constitution.Text = characterSheet.constitution;
         Charisma.Text = characterSheet.charisma;
     }
+    /* Function Name: LoadCharacterSheetClass
+     * Purpose:
+     * to assign all of the values that are in the text fields to the character sheet object
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetClass()
     {
         CharacterSheetcurrent.playername = PName.Text;
@@ -80,22 +98,26 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.constitution = Constitution.Text;
         CharacterSheetcurrent.charisma = Charisma.Text;
     }
-    /*
-     * Function: RollForStats
-     * Author: Kenny Rapp
-     * Purpose: Navigate to the RollForStats
-     * last Modified : 11/19/2023 3:25pm
+    /* Function Name: RollforStats
+     * Purpose:
+     * to navigate to the roll for stats page
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
      */
     private void RollForStats(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
         Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
     }
-    /*
-     * Function: RollForStats
-     * Author: Kenny Rapp
-     * Purpose: Navigate to the ClassPicker
-     * last Modified : 12/04/2023 3:20pm
+    /* Function Name: ClassPickerPage
+     * Purpose:
+     * to navigate to the class picker page
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
      */
     private void ClassPickerPage(object sender, EventArgs e)
     {
@@ -103,7 +125,14 @@ public partial class CSheet : ContentPage
         Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
     }
 
-
+    /* Function Name: Submitstats
+     * Purpose:
+     * to submit the charcter data to our database
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
+     */
     private void SubmitStats(object sender, EventArgs e)
     {
 
@@ -128,7 +157,7 @@ public partial class CSheet : ContentPage
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
                         cmd.Parameters.AddWithValue("@Race", Race.Text);
-                        cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
+                        cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.characterclass.ClassName);                        
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
                         cmd.Parameters.AddWithValue("@PersonalityTraits", PTraits.Text);
