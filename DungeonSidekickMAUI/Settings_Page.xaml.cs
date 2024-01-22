@@ -10,4 +10,8 @@ public partial class Settings_Page : ContentPage
     {
         Navigation.PushAsync(new MainPage());
     }
+    private void LayoutDesigner(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new LayoutDesigner());
+    }
 }
