@@ -3,11 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LayoutDesigner"
              Title="LayoutDesigner">
-    <StackLayout BackgroundColor="Black">
+    <StackLayout x:Name="stackLayout" BackgroundColor="Black">
         <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
             <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Button BackgroundColor="Red" TextColor="White" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" />
-        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        
+        <!-- RGB Sliders for Colors -->
+        <StackLayout Orientation="Horizontal" Padding="20">
+            <Label Text="R  " TextColor="White" VerticalOptions="Center"/>
+            <Slider x:Name="redSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+            <Label x:Name="redValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Padding="20">
+            <Label Text="G  " TextColor="White" VerticalOptions="Center"/>
+            <Slider x:Name="greenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+            <Label x:Name="greenValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal" Padding="20">
+            <Label Text="B  " TextColor="White" VerticalOptions="Center"/>
+            <Slider x:Name="blueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+            <Label x:Name="blueValueLabel" Text="0" TextColor="White" VerticalOptions="Center"/>
+        </StackLayout>
+
+        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SettingsPage" />
     </StackLayout>
 </ContentPage>
