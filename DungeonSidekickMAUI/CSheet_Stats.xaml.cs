@@ -14,12 +14,25 @@ namespace DungeonSidekickMAUI
 	public partial class CSheet_Stats : ContentPage
 	{
         private CharacterSheet CharacterSheetcurrent;
+        /*
+         * Function: RollForStats
+         * Author: Kenny Rapp
+         * Purpose: Navigate to the RollForStats
+         * last Modified : 11/19/2023 3:25pm
+         */
+        private void RollForStats(object sender, EventArgs e)
+        {
+            LoadCharacterSheetClass();
+            Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
+        }
         public CSheet_Stats (CharacterSheet characterSheet)
 		{
 			InitializeComponent ();
             CharacterSheetcurrent = characterSheet;
         }
+        
 
+        //Loads the character sheet to the user's viewable page
         private void LoadCharacterSheetPage(CharacterSheet characterSheet)
         {
             Strength.Text = characterSheet.strength;

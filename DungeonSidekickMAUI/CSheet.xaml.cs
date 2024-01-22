@@ -44,7 +44,6 @@ public partial class CSheet : ContentPage
         Flaws.Text = characterSheet.flaws;
         Traits.Text = characterSheet.featurestraits;
         Inventory.Text = characterSheet.equipment;
-        Proficiencies.Text = characterSheet.proficiencies;
         Attacks.Text = characterSheet.attacks;
         Spells.Text = characterSheet.spells;
     }
@@ -62,21 +61,11 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.flaws = Flaws.Text;
         CharacterSheetcurrent.featurestraits = Traits.Text;
         CharacterSheetcurrent.equipment = Inventory.Text;
-        CharacterSheetcurrent.proficiencies = Proficiencies.Text;
         CharacterSheetcurrent.attacks = Attacks.Text;
         CharacterSheetcurrent.spells = Spells.Text;
     }
-    /*
-     * Function: RollForStats
-     * Author: Kenny Rapp
-     * Purpose: Navigate to the RollForStats
-     * last Modified : 11/19/2023 3:25pm
-     */
-    private void RollForStats(object sender, EventArgs e)
-    {
-        LoadCharacterSheetClass();
-        Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
-    }
+    
+    
     /*
      * Function: RollForStats
      * Author: Kenny Rapp
