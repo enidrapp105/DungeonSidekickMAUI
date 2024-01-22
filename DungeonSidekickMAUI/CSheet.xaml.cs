@@ -122,5 +122,6 @@ public partial class CSheet : ContentPage
         {
             Debug.WriteLine("Exception: " + eSql.Message);
         }
+        Navigation.PushAsync(new CSheet_Stats(CharacterSheetcurrent));
     }
 }
