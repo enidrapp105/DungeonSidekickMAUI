@@ -29,5 +29,6 @@ namespace DungeonSidekickMAUI
         public string? intelligence { get; set; }
         public string? wisdom { get; set; }
         public string? charisma { get; set; }
+        public bool exists { get; set; }
     }
 }

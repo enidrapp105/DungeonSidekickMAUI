@@ -9,6 +9,8 @@ namespace DungeonSidekickMAUI;
     Modifications:  11/19/23 - Created sheet and added functionality.
                     11/20/23 - Got import function to work properly.
                     12/02/23 - Changed background to black and text to white
+                    01/17/23 - Added edit button
+                    01/21/23 - Updated variable names
  */
 
 using System.Diagnostics;
@@ -122,7 +124,8 @@ public partial class CSheet_Import : ContentPage
                                             sheet.intelligence = IntelligenceVal.Text;
                                             sheet.wisdom = WisdomVal.Text;
                                             sheet.charisma = CharismaVal.Text;
-                                            Navigation.PushAsync(new CSheet(sheet, true));
+                                            sheet.exists = true;
+                                            Navigation.PushAsync(new CSheet(sheet));
                                         }
                                     )
                                 };
