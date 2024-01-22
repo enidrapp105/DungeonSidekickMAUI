@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls;
+using Newtonsoft.Json.Linq;
 namespace DungeonSidekickMAUI;
 
 public partial class LayoutDesigner : ContentPage
@@ -7,6 +8,16 @@ public partial class LayoutDesigner : ContentPage
 	{
 		InitializeComponent();
 	}
+    private void SaveAndReturn(object sender, EventArgs e)
+    {
+        DesignStateService designSave = new DesignStateService();
+        String BG = (redValueLabel.Text + " " + greenValueLabel.Text + " " + blueValueLabel.Text);
+        String HBG = (redValueLabel.Text + " " + greenValueLabel.Text + " " + blueValueLabel.Text);
+        String FRC = (redValueLabel.Text + " " + greenValueLabel.Text + " " + blueValueLabel.Text);
+        String FC = (redValueLabel.Text + " " + greenValueLabel.Text + " " + blueValueLabel.Text);
+        designSave.SaveDesign(BG, HBG, FRC, FC);
+        Navigation.PushAsync(new Settings_Page());
+    }
     private void SettingsPage(object sender, EventArgs e)
     {
         Navigation.PushAsync(new Settings_Page());

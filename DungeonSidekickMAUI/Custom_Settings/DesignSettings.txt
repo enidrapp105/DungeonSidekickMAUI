@@ -1,4 +1,0 @@
-﻿BackgroundColor=
-HeaderBackgroundColor=
-FrameColor=
-FontColor=

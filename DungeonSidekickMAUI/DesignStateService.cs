@@ -10,37 +10,47 @@ namespace DungeonSidekickMAUI
 {
     public class DesignStateService
     {
-        private const string FilePath = "DesignSettings.txt";
+        private static string fileName = "DesignSettings.txt";
+        string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-        public Color? BackgroundColor { get; set; }
 
-        public void SaveState()
+        public void SaveDesign(string BG, string HBG, string FRC, string FC)
         {
             try
             {
-                string hexColor = BackgroundColor.ToHex();
-                File.WriteAllText(FilePath, hexColor);
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions, e.g., log or display an error message
-                Console.WriteLine($"Error saving state: {ex.Message}");
-            }
-        }
-
-        public void LoadState()
-        {
-            try
-            {
-                if (File.Exists(FilePath))
+                var states = new Dictionary<string, string>
                 {
-                    string hexColor = File.ReadAllText(FilePath);
-                    BackgroundColor = Color.FromHex(hexColor);
+                    { "BackgroundColor", BG },
+                    { "HeaderBackgroundColor", HBG },
+                    { "FrameColor", FRC },
+                    { "FontColor", FC }
+                };
+
+                var newLines = new List<string>();
+                foreach (var option in states)
+                {
+                    newLines.Add($"{option.Key}= {option.Value}");
                 }
+                File.WriteAllLines(filePath, newLines);
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading state: {ex.Message}");
+            }
+        }
+
+        public void LoadDesign()
+        {
+            try
+            {
+                foreach (string line in File.ReadLines(filePath))
+                {
+    
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading: {ex.Message}");
             }
         }
     }

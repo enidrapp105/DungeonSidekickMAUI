@@ -27,6 +27,6 @@
             <Slider x:Name="blueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
         </StackLayout>
 
-        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SettingsPage" />
+        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SaveAndReturn" />
     </StackLayout>
 </ContentPage>
