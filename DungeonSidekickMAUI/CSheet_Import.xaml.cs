@@ -46,64 +46,64 @@ public partial class CSheet_Import : ContentPage
                                 Label CName = new Label();
                                 CName.TextColor = Color.FromRgb(255, 255, 255);
                                 CName.Text = "Character Name";
-                                Label CName2 = new Label();
-                                CName2.TextColor = Color.FromRgb(255, 255, 255);
-                                CName2.Text = reader.GetString(0);
+                                Label CNameVal = new Label();
+                                CNameVal.TextColor = Color.FromRgb(255, 255, 255);
+                                CNameVal.Text = reader.GetString(0);
 
                                 CharacterStack.Children.Add(CName);
-                                CharacterStack.Children.Add(CName2);
+                                CharacterStack.Children.Add(CNameVal);
 
                                 Label Strength = new Label();
                                 Strength.TextColor = Color.FromRgb(255, 255, 255);
                                 Strength.Text = "Strength";
-                                Label Strength2 = new Label();
-                                Strength2.TextColor = Color.FromRgb(255, 255, 255);
-                                Strength2.Text = reader.GetInt32(1).ToString();
+                                Label StrengthVal = new Label();
+                                StrengthVal.TextColor = Color.FromRgb(255, 255, 255);
+                                StrengthVal.Text = reader.GetInt32(1).ToString();
                                 CharacterStack.Children.Add(Strength);
-                                CharacterStack.Children.Add(Strength2);
+                                CharacterStack.Children.Add(StrengthVal);
 
                                 Label Dexterity = new Label();
                                 Dexterity.TextColor = Color.FromRgb(255, 255, 255);
                                 Dexterity.Text = "Dexterity";
-                                Label Dexterity2 = new Label();
-                                Dexterity2.TextColor = Color.FromRgb(255, 255, 255);
-                                Dexterity2.Text = reader.GetInt32(2).ToString();
+                                Label DexterityVal = new Label();
+                                DexterityVal.TextColor = Color.FromRgb(255, 255, 255);
+                                DexterityVal.Text = reader.GetInt32(2).ToString();
                                 CharacterStack.Children.Add(Dexterity);
-                                CharacterStack.Children.Add(Dexterity2);
+                                CharacterStack.Children.Add(DexterityVal);
 
                                 Label Constitution = new Label();
                                 Constitution.TextColor = Color.FromRgb(255, 255, 255);
                                 Constitution.Text = "Constitution";
-                                Label Constitution2 = new Label();
-                                Constitution2.TextColor = Color.FromRgb(255, 255, 255);
-                                Constitution2.Text = reader.GetInt32(3).ToString();
+                                Label ConstitutionVal = new Label();
+                                ConstitutionVal.TextColor = Color.FromRgb(255, 255, 255);
+                                ConstitutionVal.Text = reader.GetInt32(3).ToString();
 
                                 Label Intelligence = new Label();
                                 Intelligence.TextColor = Color.FromRgb(255, 255, 255);
                                 Intelligence.Text = "Intelligence";
-                                Label Intelligence2 = new Label();
-                                Intelligence2.TextColor = Color.FromRgb(255, 255, 255);
-                                Intelligence2.Text = reader.GetInt32(4).ToString();
+                                Label IntelligenceVal = new Label();
+                                IntelligenceVal.TextColor = Color.FromRgb(255, 255, 255);
+                                IntelligenceVal.Text = reader.GetInt32(4).ToString();
                                 CharacterStack.Children.Add(Constitution);
-                                CharacterStack.Children.Add(Constitution2);
+                                CharacterStack.Children.Add(ConstitutionVal);
 
                                 Label Wisdom = new Label();
                                 Wisdom.TextColor = Color.FromRgb(255, 255, 255);
                                 Wisdom.Text = "Wisdom";
-                                Label Wisdom2 = new Label();
-                                Wisdom2.TextColor = Color.FromRgb(255, 255, 255);
-                                Wisdom2.Text = reader.GetInt32(5).ToString();
+                                Label WisdomVal = new Label();
+                                WisdomVal.TextColor = Color.FromRgb(255, 255, 255);
+                                WisdomVal.Text = reader.GetInt32(5).ToString();
                                 CharacterStack.Children.Add(Wisdom);
-                                CharacterStack.Children.Add(Wisdom2);
+                                CharacterStack.Children.Add(WisdomVal);
 
                                 Label Charisma = new Label();
                                 Charisma.TextColor = Color.FromRgb(255, 255, 255);
                                 Charisma.Text = "Charisma";
-                                Label Charisma2 = new Label();
-                                Charisma2.TextColor = Color.FromRgb(255, 255, 255);
-                                Charisma2.Text = reader.GetInt32(6).ToString();
+                                Label CharismaVal = new Label();
+                                CharismaVal.TextColor = Color.FromRgb(255, 255, 255);
+                                CharismaVal.Text = reader.GetInt32(6).ToString();
                                 CharacterStack.Children.Add(Charisma);
-                                CharacterStack.Children.Add(Charisma2);
+                                CharacterStack.Children.Add(CharismaVal);
 
                                 Button Edit = new Button {
                                     TextColor = Color.FromRgb(0, 0, 0),
@@ -115,13 +115,13 @@ public partial class CSheet_Import : ContentPage
                                         {
                                             CharacterSheet sheet = new CharacterSheet();
                                             sheet.playername = PName.Text;
-                                            sheet.charactername = CName2.Text;
-                                            sheet.strength = Strength2.Text;
-                                            sheet.dexterity = Dexterity2.Text;
-                                            sheet.constitution = Constitution2.Text;
-                                            sheet.intelligence = Intelligence2.Text;
-                                            sheet.wisdom = Wisdom2.Text;
-                                            sheet.charisma = Charisma2.Text;
+                                            sheet.charactername = CNameVal.Text;
+                                            sheet.strength = StrengthVal.Text;
+                                            sheet.dexterity = DexterityVal.Text;
+                                            sheet.constitution = ConstitutionVal.Text;
+                                            sheet.intelligence = IntelligenceVal.Text;
+                                            sheet.wisdom = WisdomVal.Text;
+                                            sheet.charisma = CharismaVal.Text;
                                             Navigation.PushAsync(new CSheet(sheet, true));
                                         }
                                     )
