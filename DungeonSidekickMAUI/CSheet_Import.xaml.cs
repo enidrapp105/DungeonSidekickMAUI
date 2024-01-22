@@ -147,6 +147,7 @@ public partial class CSheet_Import : ContentPage
         }
         catch (Exception eSql)
         {
+            DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
     }

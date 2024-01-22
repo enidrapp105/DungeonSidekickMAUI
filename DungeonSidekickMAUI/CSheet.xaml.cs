@@ -190,9 +190,11 @@ public partial class CSheet : ContentPage
                     }
                 }
             }
+            DisplayAlert("Success","Character Sheet Saved!","OK");
         }
         catch (Exception eSql)
         {
+            DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
     }
