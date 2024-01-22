@@ -18,19 +18,15 @@ namespace DungeonSidekickMAUI
         {
             try
             {
-                var states = new Dictionary<string, string>
-                {
-                    { "BackgroundColor", BG },
-                    { "HeaderBackgroundColor", HBG },
-                    { "FrameColor", FRC },
-                    { "FontColor", FC }
-                };
+
 
                 var newLines = new List<string>();
-                foreach (var option in states)
-                {
-                    newLines.Add($"{option.Key}= {option.Value}");
-                }
+
+                newLines.Add(BG);
+                newLines.Add(HBG);
+                newLines.Add(FRC);
+                newLines.Add(FC);
+
                 File.WriteAllLines(filePath, newLines);
             }
             catch (Exception ex)
@@ -39,19 +35,44 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void LoadDesign()
+        public List<int> LoadDesign()
         {
+            var numbersList = new List<int>();
             try
             {
-                foreach (string line in File.ReadLines(filePath))
+                var lines = File.ReadAllLines(filePath);
+                foreach (var line in lines)
                 {
-    
+                    string[] numbersStr = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (string numStr in numbersStr)
+                    {
+                        if (int.TryParse(numStr, out int num))
+                        {
+                            numbersList.Add(num);
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Failed to parse '{numStr}' as an integer.");
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error loading: {ex.Message}");
             }
+            return numbersList;
+        }
+    }
+    public static class DesignAdjust
+    {
+        public static void ChangeDesign(Page page, List<int> list)
+        {
+            int x = 0;
+            Color backgroundColor = Color.FromRgb(list[x], list[x+1], list[x+2]);
+            page.BackgroundColor = backgroundColor;
+            x = 3;
         }
     }
 }
