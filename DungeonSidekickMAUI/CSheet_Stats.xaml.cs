@@ -106,6 +106,7 @@ namespace DungeonSidekickMAUI
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
+            Navigation.PushAsync(new CSheet_Inventory(CharacterSheetcurrent));
         }
     }
 }
