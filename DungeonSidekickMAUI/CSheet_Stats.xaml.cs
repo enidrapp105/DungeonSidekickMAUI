@@ -29,6 +29,7 @@ namespace DungeonSidekickMAUI
 		{
 			InitializeComponent ();
             CharacterSheetcurrent = characterSheet;
+            LoadCharacterSheetPage(CharacterSheetcurrent);
         }
         
 
@@ -108,7 +109,9 @@ namespace DungeonSidekickMAUI
                                 flag = 1;
 
                             if (flag == 0)
+                            {
                                 cmd.ExecuteNonQuery();
+                            }
                             else
                                 Console.WriteLine("One of your stats is either below 0 or above 20, please move it to between this range.");
                         }
