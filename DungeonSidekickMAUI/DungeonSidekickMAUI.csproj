@@ -78,6 +78,12 @@
 	  <MauiXaml Update="CSheet_Import.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="CSheet_Inventory.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CSheet_Stats.xaml">
+	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Info_For_Stats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
