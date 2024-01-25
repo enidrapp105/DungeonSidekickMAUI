@@ -4,9 +4,12 @@
              x:Class="DungeonSidekickMAUI.LoginPage"
              Title="LoginPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Label Text="Login Page" TextColor="White" FontSize="Title" Padding="30,10,30,10"/>
+        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="UName"
+            WidthRequest="1000" HorizontalOptions="Start" />
+        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Pass"
+            WidthRequest="1000" HorizontalOptions="Start" />
+        <Button BackgroundColor="Red" TextColor="White"  Text="Log In" Clicked="Login"
+            WidthRequest="1000" HorizontalOptions="Start"/>
     </VerticalStackLayout>
 </ContentPage>
