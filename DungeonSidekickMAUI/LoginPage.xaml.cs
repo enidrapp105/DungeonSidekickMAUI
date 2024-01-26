@@ -19,4 +19,9 @@ public partial class LoginPage : ContentPage
 	{
 		Navigation.PushAsync(new SignupPage());
 	}
+    private void DebugbuttonButtonClicked(object sender, EventArgs e)
+    {
+        
+        Navigation.PushAsync(new MainPage());
+    }
 }

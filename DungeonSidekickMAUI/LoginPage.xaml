@@ -13,6 +13,7 @@
             WidthRequest="1000" HorizontalOptions="Start" IsPassword="True"/>
         <Button BackgroundColor="Red" TextColor="White"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
-        
+        <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
+
     </VerticalStackLayout>
 </ContentPage>
