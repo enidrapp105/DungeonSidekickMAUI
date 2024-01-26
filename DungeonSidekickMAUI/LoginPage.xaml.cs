@@ -6,4 +6,10 @@ public partial class LoginPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+	private void loginButtonClicked(object sender, EventArgs e)
+	{
+        Navigation.PushAsync(new MainPage());
+    }
+
 }

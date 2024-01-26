@@ -5,8 +5,14 @@
              Title="LoginPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="Login"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="Username"/>
+        <Entry x:Name="usernamebox"/>
+        <Label Text="Password"/>
+        <Entry x:Name="passwordbox"/>
+        <Button Text="Login" Clicked="loginButtonClicked"/>
+
     </VerticalStackLayout>
 </ContentPage>
