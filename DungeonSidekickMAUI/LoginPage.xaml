@@ -5,14 +5,15 @@
              Title="LoginPage">
     <VerticalStackLayout>
         <Label 
-            Text="Login"
+            Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Label Text="Username"/>
-        <Entry x:Name="usernamebox"/>
-        <Label Text="Password"/>
-        <Entry x:Name="passwordbox"/>
-        <Button Text="Login" Clicked="loginButtonClicked"/>
-
+        <Label Text="Login Page" TextColor="White" FontSize="Title" Padding="30,10,30,10"/>
+        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="UName"
+            WidthRequest="1000" HorizontalOptions="Start" />
+        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Pass"
+            WidthRequest="1000" HorizontalOptions="Start" />
+        <Button BackgroundColor="Red" TextColor="White"  Text="Log In" Clicked="loginButtonClicked"
+            WidthRequest="1000" HorizontalOptions="Start"/>
     </VerticalStackLayout>
 </ContentPage>
