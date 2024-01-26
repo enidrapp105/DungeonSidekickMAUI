@@ -5,11 +5,14 @@
              Title="LoginPage">
     <VerticalStackLayout>
         <Label Text="Login Page" TextColor="White" FontSize="Title" Padding="30,10,30,10"/>
+        <Button BackgroundColor="Red" TextColor="White"  Text="Don't have an account?" Clicked="signupButtonClicked"
+            WidthRequest="1000" HorizontalOptions="Start"/>
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="UName"
             WidthRequest="1000" HorizontalOptions="Start" />
         <Entry Placeholder="Password" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Pass"
-            WidthRequest="1000" HorizontalOptions="Start" />
-        <Button BackgroundColor="Red" TextColor="White"  Text="Log In" Clicked="Login"
+            WidthRequest="1000" HorizontalOptions="Start" IsPassword="True"/>
+        <Button BackgroundColor="Red" TextColor="White"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
+        
     </VerticalStackLayout>
 </ContentPage>

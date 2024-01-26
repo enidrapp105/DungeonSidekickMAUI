@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.SignupPage"
+             Title="SignupPage">
+    <VerticalStackLayout>
+        <Label Text="Sign up"/>
+        <Label Text="username"/>
+        <Entry x:Name="usernamebox"/>
+        <Label Text="password"/>
+        <Entry x:Name="passwordbox" IsPassword="true"/>
+        <Label Text="password(again)"/>
+        <Entry x:Name="passwordbox2" IsPassword="true"/>
+        <Button Text="Submit" Clicked="signupButtonClicked"/>
+    </VerticalStackLayout>
+</ContentPage>
