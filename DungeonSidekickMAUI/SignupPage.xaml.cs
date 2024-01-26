@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using System.Security.Cryptography;
+
 namespace DungeonSidekickMAUI;
 
 public partial class SignupPage : ContentPage
@@ -7,7 +10,7 @@ public partial class SignupPage : ContentPage
 		InitializeComponent();
 	}
 
-	private void signupButtonClicked(object sender, EventArgs e)
+    private void signupButtonClicked(object sender, EventArgs e)
 	{
 		bool validlogin = true;
 		if(usernamebox.Text == null || usernamebox.Text.Length < 8)
@@ -27,7 +30,8 @@ public partial class SignupPage : ContentPage
         }
 		if(validlogin) 
 		{
-            //do some database stuff
+			Password_Hasher password_Hasher = new Password_Hasher(usernamebox.Text);
+			password_Hasher.HashPassword(passwordbox.Text); //HashPassword should handle the saving itself therefore removing the db need here
             Navigation.PushAsync(new LoginPage());
         }
     }
