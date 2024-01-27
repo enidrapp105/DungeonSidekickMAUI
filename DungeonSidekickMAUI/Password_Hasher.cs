@@ -26,6 +26,11 @@ namespace DungeonSidekickMAUI
             this.username = username;
         }
 
+        /*****************
+         * Purpose: This function will salt the password using a consistent buffer to make it identifiable
+         * Modifiable: 
+         ****************/
+
         public string HashPassword(string password)
         {
             var prf = KeyDerivationPrf.HMACSHA256; //Currently runs a more secure 256. Turns out 512 alone is not more secure
@@ -45,7 +50,10 @@ namespace DungeonSidekickMAUI
             //QueryUserData(this.username,Convert.ToBase64String(outputBytes),salt);
             return Convert.ToBase64String(outputBytes);
         }
-
+        /*****************
+         * Purpose: This will verify that the password is correct with an inputted password
+         * Modified: 
+         *****************/
         public bool VerifyHashedPassword(string hashedPassword, string providedPassword)
         {
             var decodedHashedPassword = Convert.FromBase64String(hashedPassword);
@@ -95,6 +103,12 @@ namespace DungeonSidekickMAUI
                 | ((uint)(buffer[offset + 2]) << 8)
                 | ((uint)(buffer[offset + 3]));
         }
+        /**************
+         * Author: Brendon Williams
+         * Date: 1/27/2024
+         * Purpose: This is a helper function to query user data so that we don't need to have a bunch of db calls open
+         * Modified: 
+         **************/
 
         private static void QueryUserData(string username, string salted_password, byte[] salt)
         {
