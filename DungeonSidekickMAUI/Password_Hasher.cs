@@ -81,7 +81,7 @@ namespace DungeonSidekickMAUI
             return actualSubkey.SequenceEqual(expectedSubkey);
         }
 
-        private static void WriteNetworkByteOrder(byte[] buffer, int offset, uint value)
+        private static void WriteNetworkByteOrder(byte[] buffer, int offset, uint value) //These two functions might be removable, will need testing
         {
             buffer[offset + 0] = (byte)(value >> 24);
             buffer[offset + 1] = (byte)(value >> 16);
