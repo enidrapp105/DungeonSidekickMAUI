@@ -19,9 +19,8 @@ namespace DungeonSidekickMAUI
          ********/
         private string username;
         private const int iterCount = 10000;
-        private const int saltSize = 128 / 8;
-        private const int numBytesRequested = 256 / 8; //I will test with 512/8 at a later time, since SHA512 is "more complex" however not exactly more secure
-
+        private const int saltSize = 16;
+        private const int numBytesRequested = 32; 
         public Password_Hasher(string username)
         {
             this.username = username;
@@ -97,7 +96,7 @@ namespace DungeonSidekickMAUI
                 | ((uint)(buffer[offset + 3]));
         }
 
-        private static void QueryUserData(string username, string hashed_password, byte[] salt)
+        private static void QueryUserData(string username, string salted_password, byte[] salt)
         {
             //Here is for querying user data into the DB. All functions that will be messing with this data will call this function
         }
