@@ -76,6 +76,9 @@
 	  <MauiXaml Update="CSheet_Import.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="CustomResources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Info_For_Stats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

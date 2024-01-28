@@ -10,7 +10,7 @@ public partial class LayoutDesigner : ContentPage
 	}
     private void SaveAndReturn(object sender, EventArgs e)
     {
-        DesignStateService designSave = new DesignStateService();
+        CustomResources designSave = new CustomResources();
         String BG = (BredValueLabel.Text + " " + BgreenValueLabel.Text + " " + BblueValueLabel.Text);
         String HBG = (HredValueLabel.Text + " " + HgreenValueLabel.Text + " " + HblueValueLabel.Text);
         String FRC = (FRredValueLabel.Text + " " + FRgreenValueLabel.Text + " " + FRblueValueLabel.Text);
