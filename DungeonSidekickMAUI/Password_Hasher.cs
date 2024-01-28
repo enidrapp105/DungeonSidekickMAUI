@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
@@ -21,7 +23,8 @@ namespace DungeonSidekickMAUI
         private string username;
         private const int iterCount = 10000;
         private const int saltSize = 16;
-        private const int numBytesRequested = 32; 
+        private const int numBytesRequested = 32;
+        private const string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         public Password_Hasher(string username)
         {
             this.username = username;
@@ -50,8 +53,41 @@ namespace DungeonSidekickMAUI
             Buffer.BlockCopy(subkey, 0, outputBytes, 13 + saltSize, subkey.Length);
             string output = Convert.ToBase64String(outputBytes);
             string saltstring = Convert.ToBase64String(salt);
-            //QueryUserData(this.username,output,saltstring);
+            QueryUserData(this.username,output,saltstring);
             return output;
+        }
+        public bool VerifyHashedPassword(string providedPassword)
+        {
+            string query = "SELECT SaltedPassword FROM dbo.Users" +
+                " WHERE Username = '" + this.username + "';";
+
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            if (cmd.ExecuteScalar() == null)
+                            {
+                               return false;
+                            }
+                            string saltedpassword = (string)cmd.ExecuteScalar();
+                            return VerifyHashedPassword(saltedpassword, providedPassword);
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+                return false;
+            }
+            return false;
         }
         /*****************
          * Purpose: This will verify that the password is correct with an inputted password
@@ -114,7 +150,33 @@ namespace DungeonSidekickMAUI
          **************/
         private static void QueryUserData(string username, string salted_password, string salt)
         {
-            //Here is for querying user data into the DB. All functions that will be messing with this data will call this function
+            
+
+            string query = "INSERT INTO dbo.Users (Username,SaltedPassword, Salt)" +
+                "VALUES (@username,@saltedpassword,@salt);";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@username", username);
+                            cmd.Parameters.AddWithValue("@saltedpassword", salted_password);
+                            cmd.Parameters.AddWithValue("@salt", salt);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
         }
 
     }
