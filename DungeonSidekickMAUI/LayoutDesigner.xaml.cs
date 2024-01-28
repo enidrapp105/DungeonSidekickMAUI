@@ -78,11 +78,26 @@ public partial class LayoutDesigner : ContentPage
         }
 
         // Updates the background color based on the RGB values
-        double red = BredSlider.Value;
-        double green = BgreenSlider.Value;
-        double blue = BblueSlider.Value;
+        double bred = BredSlider.Value;
+        double bgreen = BgreenSlider.Value;
+        double bblue = BblueSlider.Value;
 
-        stackLayout.BackgroundColor = Color.FromRgb((int)red, (int)green, (int)blue);
+        double hred = HredSlider.Value;
+        double hgreen = HgreenSlider.Value;
+        double hblue = HblueSlider.Value;
+
+        double frred = FRredSlider.Value;
+        double frgreen = FRgreenSlider.Value;
+        double frblue = FRblueSlider.Value;
+
+        double fred = FredSlider.Value;
+        double fgreen = FgreenSlider.Value;
+        double fblue = FblueSlider.Value;
+
+        BackgroundBox.BackgroundColor = Color.FromRgb((int)bred, (int)bgreen, (int)bblue);
+        HeaderBox.BackgroundColor = Color.FromRgb((int)hred, (int)hgreen, (int)hblue);
+        FrameBox.BackgroundColor = Color.FromRgb((int)frred, (int)frgreen, (int)frblue);
+        FontBox.BackgroundColor = Color.FromRgb((int)fred, (int)fgreen, (int)fblue);
     }
 
 

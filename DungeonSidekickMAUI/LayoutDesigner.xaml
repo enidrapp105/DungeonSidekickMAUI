@@ -31,6 +31,7 @@
                     <Label x:Name="BblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
                     <Slider x:Name="BblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
+                <BoxView x:Name="BackgroundBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <!-- RGB Sliders for HeaderBackground -->
                 <Label Text="HeaderBackground" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
@@ -51,6 +52,7 @@
                     <Label x:Name="HblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
                     <Slider x:Name="HblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
+                <BoxView x:Name="HeaderBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <!-- RGB Sliders for FrameColor -->
                 <Label Text="FrameBackground" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
@@ -71,6 +73,7 @@
                     <Label x:Name="FRblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
                     <Slider x:Name="FRblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
+                <BoxView x:Name="FrameBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <!-- RGB Sliders for Font -->
                 <Label Text="Font" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
@@ -91,6 +94,7 @@
                     <Label x:Name="FblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
                     <Slider x:Name="FblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
+                <BoxView x:Name="FontBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
 
 

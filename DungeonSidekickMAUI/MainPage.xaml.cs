@@ -5,6 +5,8 @@
         public MainPage()
         {
             InitializeComponent();
+            DesignStateService designLoad = new DesignStateService();
+            DesignAdjust.ChangeDesign(this, designLoad.LoadDesign());
         }
 
         private void Player_Clicked(object sender, EventArgs e)
