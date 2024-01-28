@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,8 +48,10 @@ namespace DungeonSidekickMAUI
             WriteNetworkByteOrder(outputBytes, 9, saltSize);
             Buffer.BlockCopy(salt, 0, outputBytes, 13, salt.Length);
             Buffer.BlockCopy(subkey, 0, outputBytes, 13 + saltSize, subkey.Length);
-            //QueryUserData(this.username,Convert.ToBase64String(outputBytes),salt);
-            return Convert.ToBase64String(outputBytes);
+            string output = Convert.ToBase64String(outputBytes);
+            string saltstring = Convert.ToBase64String(salt);
+            //QueryUserData(this.username,output,saltstring);
+            return output;
         }
         /*****************
          * Purpose: This will verify that the password is correct with an inputted password
@@ -72,7 +75,7 @@ namespace DungeonSidekickMAUI
                 return false;
             }
             var salt = new byte[saltLength];
-            Buffer.BlockCopy(decodedHashedPassword, 13, salt, 0, salt.Length); //Likely not functioning code for our app. Need to pull from db
+            Buffer.BlockCopy(decodedHashedPassword, 13, salt, 0, salt.Length);
 
             // Read the subkey (the rest of the payload): must be >= 128 bits
             var subkeyLength = decodedHashedPassword.Length - 13 - salt.Length;
@@ -109,8 +112,7 @@ namespace DungeonSidekickMAUI
          * Purpose: This is a helper function to query user data so that we don't need to have a bunch of db calls open
          * Modified: 
          **************/
-
-        private static void QueryUserData(string username, string salted_password, byte[] salt)
+        private static void QueryUserData(string username, string salted_password, string salt)
         {
             //Here is for querying user data into the DB. All functions that will be messing with this data will call this function
         }
