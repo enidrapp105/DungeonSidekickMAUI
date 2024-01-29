@@ -61,14 +61,12 @@ public partial class RacePickerPage : ContentPage
             DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
-
-        //this.Classpagestack.Children.Add(classButtonContainer);
     }
     /*
-     * Function: RollForStats
-     * Author: Kenny Rapp
-     * Purpose: Navigate to the ClassPicker
-     * last Modified : 12/04/2023 3:20pm
+     * Function: OnRaceButtonClicked
+     * Author: Anthony Rielly
+     * Purpose: Navigate to the SelectedRace
+     * last Modified : 1/28/2024 6:00pm
      */
     private void OnRaceButtonClicked(object sender, EventArgs e)
     {

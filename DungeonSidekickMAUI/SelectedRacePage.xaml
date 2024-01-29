@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectedRacePage"
              Title="SelectedRacePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ContentPage.Content>
+        <StackLayout x:Name="MainPanel" BackgroundColor="Black">
+            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+            </Frame>
+            <Button BackgroundColor="Red" TextColor="White" Text="Select Race" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>
+
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
