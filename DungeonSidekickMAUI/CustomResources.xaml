@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CustomResources">
 
-    <Color x:Key="BackgroundC"></Color>
-    <Color x:Key="HeaderC"></Color>
-    <Color x:Key="FrameC"></Color>
-    <Color x:Key="FontC"></Color>
-    
+    <Color x:Key="BackgroundC"> #FF0000 </Color>
+    <Color x:Key="HeaderC">#FF0000</Color>
+    <Color x:Key="FrameC">#FF0000</Color>
+    <Color x:Key="FontC">#FF0000</Color>
+
 
 </ResourceDictionary>

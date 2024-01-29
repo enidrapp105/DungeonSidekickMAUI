@@ -4,6 +4,11 @@ namespace DungeonSidekickMAUI;
 
 public partial class CustomResources : ResourceDictionary
 {
+    public CustomResources()
+    {
+        InitializeComponent();
+    }
+
     private static string fileName = "DesignSettings.txt";
     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
@@ -26,12 +31,13 @@ public partial class CustomResources : ResourceDictionary
         }
     }
 
-    public List<int> LoadDesign()
+    public static List<int> LoadDesign()
     {
+
         var numbersList = new List<int>();
         try
         {
-            var lines = File.ReadAllLines(filePath);
+            var lines = File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DesignSettings.txt"));
             foreach (var line in lines)
             {
                 string[] numbersStr = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -54,6 +60,15 @@ public partial class CustomResources : ResourceDictionary
             Console.WriteLine($"Error loading: {ex.Message}");
         }
         return numbersList;
+    }
+
+    public static void GetColors(/*List<int> list*/)
+    {
+        List<int> list = LoadDesign();
+        if (list.IsNullOrEmpty())
+        {
+            Application.Current.Resources["BackgroundC"] = Color.FromRgb(list[0], list[1], list[2]);
+        }
     }
 }
 public static class DesignAdjust

@@ -5,7 +5,7 @@
              Title="LayoutDesigner">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="stackLayout" BackgroundColor="Black">
+            <StackLayout x:Name="stackLayout" BackgroundColor="{StaticResource BackgroundC}">
 
                 <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
                     <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>

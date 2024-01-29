@@ -5,7 +5,7 @@
         public App()
         {
             InitializeComponent();
-
+            CustomResources.GetColors();
             MainPage = new AppShell();
         }
     }
