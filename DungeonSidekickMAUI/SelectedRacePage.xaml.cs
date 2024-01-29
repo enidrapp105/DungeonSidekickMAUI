@@ -4,6 +4,7 @@ using Microsoft.Maui.Graphics.Text;
 using Microsoft.Maui;
 using static System.Net.Mime.MediaTypeNames;
 using CommunityToolkit.Maui;
+using System.Runtime.CompilerServices;
 namespace DungeonSidekickMAUI;
 
 public partial class SelectedRacePage : ContentPage
@@ -94,6 +95,14 @@ public partial class SelectedRacePage : ContentPage
                             }
                             
                         }
+
+                        BoxView line = new BoxView
+                        {
+                            Color = Color.FromRgb(255, 255, 255),
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line);
                         query = "SELECT Bonus, AbilityName FROM dbo.AbilityBonuses" +
                                 " WHERE RaceID = @RaceID2;";
                         cmd.CommandText = query;
@@ -112,6 +121,14 @@ public partial class SelectedRacePage : ContentPage
                                 RaceStack.Children.Add(AbilityName);
                             }
                         }
+
+                        BoxView line2 = new BoxView
+                        {
+                            Color = Color.FromRgb(255, 255, 255),
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line2);
                         query = "SELECT Bonus, AbilityName, Choice FROM dbo.AbilityBonusOptions" +
                             " WHERE RaceID = @RaceID3;";
                         cmd.CommandText = query;
@@ -137,6 +154,13 @@ public partial class SelectedRacePage : ContentPage
                             RaceStack.Children.Add(Choice);
                         }
 
+                        BoxView line3 = new BoxView
+                        {
+                            Color = Color.FromRgb(255, 255, 255),
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line3);
                         query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
                                 " WHERE RaceID = @RaceID4;";
                         cmd.CommandText = query;
@@ -156,6 +180,13 @@ public partial class SelectedRacePage : ContentPage
                             }
                         }
 
+                        BoxView line4 = new BoxView
+                        {
+                            Color = Color.FromRgb(255, 255, 255),
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line4);
                         query = "SELECT StartProfOptName, Choice FROM dbo.StartingProficienciesOptions" +
                                 " WHERE RaceID = @RaceID5;";
                         cmd.CommandText = query;
@@ -181,6 +212,14 @@ public partial class SelectedRacePage : ContentPage
                             RaceStack.Children.Add(Choice);
                         }
                     }
+                    Button submit = new Button()
+                    {
+                        BackgroundColor = Color.FromRgb(255, 0, 0),
+                        TextColor = Color.FromRgb(255, 255, 255),
+                        Text = "Submit"
+                    };
+                    submit.Clicked += Submit;
+                    RaceStack.Children.Add(submit);
                     MainPanel.Children.Add(RaceStack);
                 }
             }
