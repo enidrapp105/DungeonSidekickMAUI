@@ -65,9 +65,14 @@ public partial class CustomResources : ResourceDictionary
     public static void GetColors(/*List<int> list*/)
     {
         List<int> list = LoadDesign();
-        if (list.IsNullOrEmpty())
+        var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2];
+        if (!colors.IsNullOrEmpty())
         {
-            Application.Current.Resources["BackgroundC"] = Color.FromRgb(list[0], list[1], list[2]);
+            //colors.Remove("PrimaryColor");
+            //colors.Add("PrimaryColor", new Color(1.0f, 0.0f, 0.0f));
+            colors.Remove("BackgroundC");
+            colors.Add("BackgroundC", Color.FromRgb(list[0], list[1], list[2]));
+            //Application.Current.Resources["BackgroundC"] = Color.FromRgb(list[0], list[1], list[2]);
         }
     }
 }
