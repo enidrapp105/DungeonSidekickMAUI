@@ -1,4 +1,5 @@
 using Microsoft.IdentityModel.Tokens;
+using UIKit;
 
 namespace DungeonSidekickMAUI;
 
@@ -12,7 +13,7 @@ public partial class CustomResources : ResourceDictionary
     private static string fileName = "DesignSettings.txt";
     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-    public void SaveDesign(string BG, string HBG, string FRC, string FC)
+    public void SaveColors(string BG, string HBG, string FRC, string FC)
     {
         try
         {
@@ -27,11 +28,11 @@ public partial class CustomResources : ResourceDictionary
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading design: {ex.Message}");
+            Console.WriteLine("Failed to save colors. Error: " + ex);
         }
     }
 
-    public static List<int> LoadDesign()
+    public static List<int> LoadColors()
     {
 
         var numbersList = new List<int>();
@@ -50,26 +51,27 @@ public partial class CustomResources : ResourceDictionary
                     }
                     else
                     {
-                        Console.WriteLine("Failed to get design data.");
+                        Console.WriteLine("Failed to get color data.");
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error loading: {ex.Message}");
+            Console.WriteLine("Failed to load colors. Error: " + ex);
         }
         return numbersList;
     }
 
-    public static void GetColors(/*List<int> list*/)
+    public static void GetColors()
     {
-        List<int> list = LoadDesign();
+        List<int> list = LoadColors();
         var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2]; // need to find a better why to dynamically recall the dictionary
 
         // Replaces all colors in dictionary with stored values
         if (!colors.IsNullOrEmpty())
         {
+            // need to find a better way to handle the number sequences for this, it looks messy
             colors.Remove("BackgroundC");
             colors.Add("BackgroundC", Color.FromRgb(list[0], list[1], list[2]));
             colors.Remove("HeaderC");
