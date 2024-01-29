@@ -79,6 +79,17 @@ public partial class CSheet : ContentPage
         Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
     }
 
+    /*
+     * Function: RacePickerPage
+     * Author: Anthony Rielly
+     * Purpose: Navigate to the RacePicker
+     * last Modified : 01/28/2024 5:00pm
+     */
+    private void RacePickerPage(object sender, EventArgs e)
+    {
+        LoadCharacterSheetClass();
+        Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent));
+    }
 
     private void SubmitStats(object sender, EventArgs e)
     {
