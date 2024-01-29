@@ -12,7 +12,7 @@ public partial class CSheet : ContentPage
     private string WisdomRolled;
     private string ConstitutionRolled;
     public DndClass CharacterClass;
-
+    public string Race;
 
     public CSheet()
     {
@@ -35,7 +35,7 @@ public partial class CSheet : ContentPage
     {
         PName.Text = characterSheet.playername;
         CName.Text = characterSheet.charactername ;
-        Race.Text = characterSheet.race;
+        Race = characterSheet.race;
         CharacterClass = characterSheet.characterclass;
         Background.Text = characterSheet.background;
         Allignment.Text = characterSheet.alignment;
@@ -52,7 +52,7 @@ public partial class CSheet : ContentPage
     {
         CharacterSheetcurrent.playername = PName.Text;
         CharacterSheetcurrent.charactername = CName.Text;
-        CharacterSheetcurrent.race = Race.Text;
+        CharacterSheetcurrent.race = Race;
         CharacterSheetcurrent.characterclass = CharacterClass;
         CharacterSheetcurrent.background = Background.Text;
         CharacterSheetcurrent.alignment = Allignment.Text;
@@ -124,7 +124,7 @@ public partial class CSheet : ContentPage
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
-                        cmd.Parameters.AddWithValue("@Race", Race.Text);
+                        cmd.Parameters.AddWithValue("@Race", Race);
                         cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);

@@ -17,7 +17,7 @@ public partial class RacePickerPage : ContentPage
             VerticalOptions = LayoutOptions.StartAndExpand
         };
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        string query = "SELECT Race FROM dbo.RaceLookup";
+        string query = "SELECT RaceID, Race FROM dbo.RaceLookup";
         RaceButtonContainer = this.FindByName<StackLayout>("RaceButtonContainer");
         Color color = new Color(255, 0, 0);
         try
@@ -34,10 +34,11 @@ public partial class RacePickerPage : ContentPage
                         {
                             while (reader.Read())
                             {
+                                var id = reader.GetInt32(0);
                                 var RaceButton = new Button
                                 {
-                                    CommandParameter = reader.GetInt32(0), // Set the RaceID as a parameter for the command
-                                    Text = reader.GetString(0),
+                                    Text = reader.GetString(1),
+                                    CommandParameter = id,
                                     FontSize = 12,
                                     HeightRequest = 50,
                                     WidthRequest = 100,
@@ -71,10 +72,9 @@ public partial class RacePickerPage : ContentPage
      */
     private void OnRaceButtonClicked(object sender, EventArgs e)
     {
-        if (sender is Button classButton && classButton.CommandParameter is int selectedRace)
+        if (sender is Button RaceButton && RaceButton.CommandParameter is int id)
         {
-            //Navigation.PushAsync(new SelectedRacePage(characterSheet, selectedRace));
+            Navigation.PushAsync(new SelectedRacePage(characterSheet, id));
         }
     }
-}
 }

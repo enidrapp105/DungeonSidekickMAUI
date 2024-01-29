@@ -2,8 +2,10 @@ namespace DungeonSidekickMAUI;
 
 public partial class SelectedRacePage : ContentPage
 {
-	public SelectedRacePage()
-	{
-		InitializeComponent();
-	}
+    CharacterSheet characterSheet;
+    public SelectedRacePage(CharacterSheet characterSheet, int selectedRace)
+    {
+        this.characterSheet = characterSheet;
+        
+    }
 }
