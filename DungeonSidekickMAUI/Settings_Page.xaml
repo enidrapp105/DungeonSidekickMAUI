@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.Settings_Page"
              Title="Settings_Page">
     <StackLayout>
-        <Frame BackgroundColor="{StaticResource BackgroundC}" Padding="24" CornerRadius="0">
+        <Frame BackgroundColor="{DynamicResource BackgroundC}" Padding="24" CornerRadius="0">
             <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
         <Button BackgroundColor="Red" TextColor="White" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />

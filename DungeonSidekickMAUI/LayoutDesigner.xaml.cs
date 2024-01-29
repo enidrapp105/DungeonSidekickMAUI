@@ -16,6 +16,7 @@ public partial class LayoutDesigner : ContentPage
         String FRC = (FRredValueLabel.Text + " " + FRgreenValueLabel.Text + " " + FRblueValueLabel.Text);
         String FC = (FredValueLabel.Text + " " + FgreenValueLabel.Text + " " + FblueValueLabel.Text);
         designSave.SaveDesign(BG, HBG, FRC, FC);
+        CustomResources.GetColors();
         Navigation.PushAsync(new Settings_Page());
     }
     private void SettingsPage(object sender, EventArgs e)
