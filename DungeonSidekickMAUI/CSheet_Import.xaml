@@ -5,8 +5,8 @@
              Title="CSheet_Import">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="MainPanel" BackgroundColor="Black">
-                <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource BackgroundC}">
+                <Frame BackgroundColor="{DynamicResource FrameC}" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
                 <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="PName"/>

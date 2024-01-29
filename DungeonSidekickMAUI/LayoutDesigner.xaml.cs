@@ -78,7 +78,7 @@ public partial class LayoutDesigner : ContentPage
                 break;
         }
 
-        // Updates the background color based on the RGB values
+        // Updates the colors based on the RGB values
         double bred = BredSlider.Value;
         double bgreen = BgreenSlider.Value;
         double bblue = BblueSlider.Value;
@@ -95,6 +95,7 @@ public partial class LayoutDesigner : ContentPage
         double fgreen = FgreenSlider.Value;
         double fblue = FblueSlider.Value;
 
+        // Applies colors to visual boxes for user
         BackgroundBox.BackgroundColor = Color.FromRgb((int)bred, (int)bgreen, (int)bblue);
         HeaderBox.BackgroundColor = Color.FromRgb((int)hred, (int)hgreen, (int)hblue);
         FrameBox.BackgroundColor = Color.FromRgb((int)frred, (int)frgreen, (int)frblue);

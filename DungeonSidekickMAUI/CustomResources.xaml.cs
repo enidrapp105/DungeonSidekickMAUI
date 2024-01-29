@@ -65,32 +65,19 @@ public partial class CustomResources : ResourceDictionary
     public static void GetColors(/*List<int> list*/)
     {
         List<int> list = LoadDesign();
-        var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2];
+        var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2]; // need to find a better why to dynamically recall the dictionary
+
+        // Replaces all colors in dictionary with stored values
         if (!colors.IsNullOrEmpty())
         {
-            //colors.Remove("PrimaryColor");
-            //colors.Add("PrimaryColor", new Color(1.0f, 0.0f, 0.0f));
             colors.Remove("BackgroundC");
             colors.Add("BackgroundC", Color.FromRgb(list[0], list[1], list[2]));
-            //Application.Current.Resources["BackgroundC"] = Color.FromRgb(list[0], list[1], list[2]);
+            colors.Remove("HeaderC");
+            colors.Add("HeaderC", Color.FromRgb(list[3], list[4], list[5]));
+            colors.Remove("FrameC");
+            colors.Add("FrameC", Color.FromRgb(list[6], list[7], list[8]));
+            colors.Remove("FontC");
+            colors.Add("FontC", Color.FromRgb(list[9], list[10], list[11]));
         }
-    }
-}
-public static class DesignAdjust
-{
-    public static void ChangeDesign(Page page, List<int> list)
-    {
-        if (list.IsNullOrEmpty())
-        {
-            page.BackgroundColor = Color.FromRgb(0, 0, 0);
-        }
-        else
-        {
-            int x = 0;
-            Color backgroundColor = Color.FromRgb(list[x], list[x + 1], list[x + 2]);
-            page.BackgroundColor = backgroundColor;
-            x = 3;
-        }
-
     }
 }

@@ -5,10 +5,10 @@
              Title="Settings_Page">
     <StackLayout>
         <Frame BackgroundColor="{DynamicResource BackgroundC}" Padding="24" CornerRadius="0">
-            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
-        <Button BackgroundColor="Red" TextColor="White" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
-        <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
     </StackLayout>
 </ContentPage>
     
