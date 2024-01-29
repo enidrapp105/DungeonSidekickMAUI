@@ -5,10 +5,6 @@
              Title="SelectedRacePage">
     <ContentPage.Content>
         <StackLayout x:Name="MainPanel" BackgroundColor="Black">
-            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
-            </Frame>
-            <Button BackgroundColor="Red" TextColor="White" Text="Select Race" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

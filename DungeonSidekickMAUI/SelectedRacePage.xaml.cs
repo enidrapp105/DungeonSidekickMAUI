@@ -16,6 +16,7 @@ public partial class SelectedRacePage : ContentPage
         InitializeComponent();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
+
         string query = "SELECT Race, Description, MoveSpeed, Age, Size, SizeDescription, Languages, LanguageDescription FROM dbo.RaceLookup" +
             " WHERE RaceID = @RaceID;";
         try
@@ -25,6 +26,9 @@ public partial class SelectedRacePage : ContentPage
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
+                    StackLayout RaceStack = new StackLayout();
+                    RaceStack.BackgroundColor = Color.FromRgb(0, 0, 0);
+
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -33,19 +37,24 @@ public partial class SelectedRacePage : ContentPage
                         {
                             while (reader.Read())
                             {
-                                StackLayout RaceStack = new StackLayout();
-                                RaceStack.BackgroundColor = Color.FromRgb(0,0,0);
                                 Label Race = new Label();
                                 Race.FontSize = 36;
                                 Race.HorizontalTextAlignment = TextAlignment.Center;
                                 Race.TextColor = Color.FromRgb(255, 255, 255);
                                 raceName = reader.GetString(0);
-                                Race.Text = "Race: " + raceName;
-                                
+                                Race.Text = raceName;
+
+                                Frame frame = new Frame()
+                                {
+                                    BackgroundColor = Color.FromRgb(139, 0, 0),
+                                    Padding = 24,
+                                    CornerRadius = 0,
+                                    Content = Race
+                                };
 
                                 Label Speed = new Label();
-                                Race.TextColor = Color.FromRgb(255, 255, 255);
-                                Race.Text = "Move Speed: " + reader.GetInt32(2);
+                                Speed.TextColor = Color.FromRgb(255, 255, 255);
+                                Speed.Text = "Move Speed: " + reader.GetInt32(2);
 
                                 Label Desc = new Label();
                                 Desc.TextColor = Color.FromRgb(255, 255, 255);
@@ -71,7 +80,7 @@ public partial class SelectedRacePage : ContentPage
                                 LangDesc.TextColor = Color.FromRgb(255, 255, 255);
                                 LangDesc.Text = reader.GetString(1);
 
-                                RaceStack.Children.Add(Race);
+                                RaceStack.Children.Add(frame);
                                 RaceStack.Children.Add(Speed);
                                 RaceStack.Children.Add(Desc);
                                 RaceStack.Children.Add(Age);
@@ -79,10 +88,56 @@ public partial class SelectedRacePage : ContentPage
                                 RaceStack.Children.Add(SizeDesc);
                                 RaceStack.Children.Add(Lang);
                                 RaceStack.Children.Add(LangDesc);
-                                MainPanel.Children.Add(RaceStack);
+
+                                
+                                
+                            }
+                            
+                        }
+                        query = "SELECT Bonus, AbilityName FROM dbo.AbilityBonuses" +
+                                " WHERE RaceID = @RaceID2;";
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@RaceID2", selectedRace);
+                        using (SqlDataReader reader2 = cmd.ExecuteReader())
+                        {
+                            Label Bonus = new Label();
+                            Bonus.TextColor = Color.FromRgb(255, 255, 255);
+                            Bonus.Text = "Bonuses: ";
+                            RaceStack.Children.Add(Bonus);
+                            while (reader2.Read())
+                            {
+                                Label AbilityName = new Label();
+                                AbilityName.TextColor = Color.FromRgb(255, 255, 255);
+                                AbilityName.Text = reader2.GetString(1) + " " + reader2.GetInt32(0);
+                                RaceStack.Children.Add(AbilityName);
                             }
                         }
+                        query = "SELECT Bonus, AbilityName, Choice FROM dbo.AbilityBonusOptions" +
+                            " WHERE RaceID = @RaceID3;";
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@RaceID3", selectedRace);
+                        using (SqlDataReader reader3 = cmd.ExecuteReader())
+                        {
+                            Label Bonus = new Label();
+                            Bonus.TextColor = Color.FromRgb(255, 255, 255);
+                            Bonus.Text = "Optional Bonuses: ";
+                            RaceStack.Children.Add(Bonus);
+                            int choice = 0;
+                            while (reader3.Read())
+                            {
+                                Label AbilityName = new Label();
+                                AbilityName.TextColor = Color.FromRgb(255, 255, 255);
+                                AbilityName.Text = reader3.GetString(1) + " " + reader3.GetInt32(0);
+                                RaceStack.Children.Add(AbilityName);
+                                choice = reader3.GetInt32(2);
+                            }
+                            Label Choice = new Label();
+                            Choice.TextColor = Color.FromRgb(255, 255, 255);
+                            Choice.Text = "Choose " + choice;
+                            RaceStack.Children.Add(Choice);
+                        }
                     }
+                    MainPanel.Children.Add(RaceStack);
                 }
             }
         }
