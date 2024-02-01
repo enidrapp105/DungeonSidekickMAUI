@@ -3,18 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CSheet_Inventory">
     <ContentPage.Content>
-        <StackLayout>
-            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
-                <Label Text="Character's Inventory and Proficiencies" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
+            <Frame BackgroundColor="{DynamicResource FrameC}" Padding="24" CornerRadius="0">
+                <Label Text="Character's Inventory and Proficiencies" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
 
-            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Inventory"
+            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
             VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
 
-            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Proficiencies"
+            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
             VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="100"/>
 
-            <Button BackgroundColor="Red" TextColor="White"  Text="Submit Form" Clicked="SubmitStats"
+            <Button BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="1000" HorizontalOptions="Start"/>
         </StackLayout>
     </ContentPage.Content>

@@ -69,7 +69,7 @@ public partial class CustomResources : ResourceDictionary
         var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2]; // need to find a better why to dynamically recall the dictionary
 
         // Replaces all colors in dictionary with stored values
-        if (!colors.IsNullOrEmpty())
+        if (!colors.IsNullOrEmpty() && list.Count == 12)
         {
             // need to find a better way to handle the number sequences for this, it looks messy
             colors.Remove("BackgroundC");
