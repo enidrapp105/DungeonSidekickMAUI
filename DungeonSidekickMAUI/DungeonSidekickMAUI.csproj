@@ -79,8 +79,9 @@
 	  <MauiXaml Update="CSheet_Import.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="CustomResources.xaml">
-	    <Generator>MSBuild:Compile</Generator>
+		<MauiXaml Update="CustomResources.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	  <MauiXaml Update="CSheet_Inventory.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </MauiXaml>
@@ -90,8 +91,12 @@
 	  <MauiXaml Update="Info_For_Stats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="LayoutDesigner.xaml">
-	  <MauiXaml Update="LoginPage.xaml">
+		  <MauiXaml Update="LayoutDesigner.xaml">
+			  <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
+		  <MauiXaml Update="LoginPage.xaml">
+			  <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -101,8 +106,12 @@
 	  <MauiXaml Update="SelectedClassPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Settings_Page.xaml">
-	  <MauiXaml Update="SignupPage.xaml">
+		  <MauiXaml Update="Settings_Page.xaml">
+			  <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
+		  <MauiXaml Update="SignupPage.xaml">
+			  <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
 	  <MauiXaml Update="SelectedRacePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

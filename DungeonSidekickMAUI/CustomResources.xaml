@@ -6,7 +6,7 @@
     <Color x:Key="BackgroundC"> #FF0000 </Color>
     <Color x:Key="HeaderC">#FF0000</Color>
     <Color x:Key="FrameC">#FF0000</Color>
-    <Color x:Key="FontC">#FF0000</Color>
+    <Color x:Key="FontC">#FFFFFF</Color>
 
 
 </ResourceDictionary>
