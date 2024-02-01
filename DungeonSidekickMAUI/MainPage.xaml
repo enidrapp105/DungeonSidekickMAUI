@@ -3,16 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MainPage">
 
-    <StackLayout BackgroundColor="Black">
-        <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
-            <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+    <StackLayout>
+        <Frame BackgroundColor="{DynamicResource BackgroundC}" Padding="24" CornerRadius="0">
+            <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
-        <Label Text="Dungeoning made easy!" TextColor="White" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Who are you?" TextColor="White"  FontSize="16" Padding="30,0,30,0"/>
-        <Button BackgroundColor="Red" TextColor="White" Text="Dungeon Master(DM)?" WidthRequest="1000" HorizontalOptions="Start"/>
-        <Button BackgroundColor="Red" TextColor="White" Text="Player?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Clicked"/>
-        <Button BackgroundColor="Red" TextColor="White" Text="Player Import?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Import"/>
+        <Label Text="Dungeoning made easy!" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0"/>
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="1000" HorizontalOptions="Start"/>
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Clicked"/>
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Import"/>
 
+        <Button BackgroundColor="Red" TextColor="{DynamicResource FontC}" Text="Settings" WidthRequest="1000" HorizontalOptions="Start" Clicked="Settings_Page"/>
     </StackLayout>
 
 </ContentPage>

@@ -15,6 +15,10 @@
         {
             Navigation.PushAsync(new CSheet_Import());
         }
+        private void Settings_Page(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Settings_Page());
+        }
     }
 
 }
