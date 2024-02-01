@@ -30,7 +30,8 @@ public partial class ClassPickerPage : ContentPage
 
 
         var classList = JsonConvert.DeserializeObject<List<DndClass>>(jsonData);
-
+        CustomResources resources = new CustomResources();
+        
 
         classButtonContainer = this.FindByName<StackLayout>("classButtonContainer");
         Color color = new Color(255, 0, 0);

@@ -43,16 +43,16 @@
                VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="100"/>
             <!--'&' doesnt work?-->
 
-            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Inventory"
+            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
                VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
 
-            <Entry Placeholder="Attacks" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Attacks"
+            <Entry Placeholder="Attacks" FontSize="Body" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" x:Name="Attacks"
                VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
 
-            <Entry Placeholder="Spells" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Spells"
+            <Entry Placeholder="Spells" FontSize="Body" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" x:Name="Spells"
                VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
 
-            <Button BackgroundColor="Red" TextColor="White"  Text="Submit Form" Clicked="SubmitStats"
+            <Button BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
                WidthRequest="1000" HorizontalOptions="Start"/>
 
 
