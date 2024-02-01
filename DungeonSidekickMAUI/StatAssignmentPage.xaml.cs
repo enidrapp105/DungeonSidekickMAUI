@@ -95,7 +95,7 @@ public partial class StatAssignmentPage : ContentPage
             this.characterSheet.strength = STR;
             this.characterSheet.wisdom = WIS;
             this.characterSheet.constitution = CON;
-            Navigation.PushAsync(new CSheet(characterSheet));
+            Navigation.PushAsync(new CSheet_Stats(characterSheet));
         }
     }
     /*

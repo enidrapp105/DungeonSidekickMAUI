@@ -4,6 +4,7 @@ public partial class SelectedClassPage : ContentPage
 {
     public DndClass SelectedClass;
     CharacterSheet characterSheet;
+
     public SelectedClassPage(CharacterSheet characterSheet, DndClass selectedclass)
     {
         this.characterSheet = characterSheet;

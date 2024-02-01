@@ -4,6 +4,7 @@ namespace DungeonSidekickMAUI;
 public partial class ClassPickerPage : ContentPage
 {
     CharacterSheet characterSheet;
+    
     /*
      * Function: ClassPicker default Constructor
      * Author: Kenny Rapp

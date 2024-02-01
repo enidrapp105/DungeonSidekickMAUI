@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.CSheet_Stats">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="Black">
+            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+                <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+
+            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Strength"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Dexterity"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Constitution"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Intelligence"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Wisdom"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Charisma"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Button BackgroundColor="Red" TextColor="White" Text="Roll for Stats" Clicked="RollForStats"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+
+            <Button BackgroundColor="Red" TextColor="White"  Text="Submit Form" Clicked="SubmitStats"
+            WidthRequest="1000" HorizontalOptions="Start"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
