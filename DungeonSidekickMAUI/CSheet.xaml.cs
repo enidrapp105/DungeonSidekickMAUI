@@ -5,27 +5,25 @@ namespace DungeonSidekickMAUI;
 public partial class CSheet : ContentPage
 {
     private CharacterSheet CharacterSheetcurrent;
-    private string DexterityRolled;
-    private string IntelligenceRolled;
-    private string CharismaRolled;
-    private string StrengthRolled;
-    private string WisdomRolled;
-    private string ConstitutionRolled;
     public DndClass CharacterClass;
-    private bool exists;
-
+    public string Race;
 
     public CSheet()
     {
-        exists = false;
         InitializeComponent();
         CharacterSheetcurrent = new CharacterSheet();
         
     }
-    
-    public CSheet(CharacterSheet characterSheet, bool edit = false)
+    /* Function Name: CSheet one arg constructor
+     * Purpose:
+     * to allow navigation to the csheet page with predetermined class elements
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
+    public CSheet(CharacterSheet characterSheet)
     {
-        exists = edit;
         InitializeComponent();
         CharacterSheetcurrent = characterSheet;
         LoadCharacterSheetPage(characterSheet);
@@ -34,11 +32,20 @@ public partial class CSheet : ContentPage
             ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
         }
     }
+    /* Function Name: LoadCharacterSheetPage
+     * Purpose:
+     * to assign all of the values that are in the text fields from the passed in
+     * character sheet class to the csheet page
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
         PName.Text = characterSheet.playername;
         CName.Text = characterSheet.charactername ;
-        Race.Text = characterSheet.race;
+        Race = characterSheet.race;
         CharacterClass = characterSheet.characterclass;
         Background.Text = characterSheet.background;
         Allignment.Text = characterSheet.alignment;
@@ -48,22 +55,22 @@ public partial class CSheet : ContentPage
         Flaws.Text = characterSheet.flaws;
         Traits.Text = characterSheet.featurestraits;
         Inventory.Text = characterSheet.equipment;
-        Proficiencies.Text = characterSheet.proficiencies;
         Attacks.Text = characterSheet.attacks;
         Spells.Text = characterSheet.spells;
-        Strength.Text = characterSheet.strength;
-        Dexterity.Text = characterSheet.dexterity;
-        Constitution.Text = characterSheet.constitution;
-        Intelligence.Text = characterSheet.intelligence;
-        Wisdom.Text = characterSheet.wisdom;
-        Constitution.Text = characterSheet.constitution;
-        Charisma.Text = characterSheet.charisma;
     }
+    /* Function Name: LoadCharacterSheetClass
+     * Purpose:
+     * to assign all of the values that are in the text fields to the character sheet object
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetClass()
     {
         CharacterSheetcurrent.playername = PName.Text;
         CharacterSheetcurrent.charactername = CName.Text;
-        CharacterSheetcurrent.race = Race.Text;
+        CharacterSheetcurrent.race = Race;
         CharacterSheetcurrent.characterclass = CharacterClass;
         CharacterSheetcurrent.background = Background.Text;
         CharacterSheetcurrent.alignment = Allignment.Text;
@@ -73,28 +80,9 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.flaws = Flaws.Text;
         CharacterSheetcurrent.featurestraits = Traits.Text;
         CharacterSheetcurrent.equipment = Inventory.Text;
-        CharacterSheetcurrent.proficiencies = Proficiencies.Text;
         CharacterSheetcurrent.attacks = Attacks.Text;
         CharacterSheetcurrent.spells = Spells.Text;
-        CharacterSheetcurrent.strength = Strength.Text;
-        CharacterSheetcurrent.dexterity = Dexterity.Text;
-        CharacterSheetcurrent.constitution = Constitution.Text;
-        CharacterSheetcurrent.intelligence = Intelligence.Text;
-        CharacterSheetcurrent.wisdom = Wisdom.Text;
-        CharacterSheetcurrent.constitution = Constitution.Text;
-        CharacterSheetcurrent.charisma = Charisma.Text;
-    }
-    /*
-     * Function: RollForStats
-     * Author: Kenny Rapp
-     * Purpose: Navigate to the RollForStats
-     * last Modified : 11/19/2023 3:25pm
-     */
-    private void RollForStats(object sender, EventArgs e)
-    {
-        LoadCharacterSheetClass();
-        Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
-    }
+    } 
     /*
      * Function: RollForStats
      * Author: Kenny Rapp
@@ -104,10 +92,22 @@ public partial class CSheet : ContentPage
     private void ClassPickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent, exists));
+        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
     }
 
 
+    /*
+     * Function: RacePickerPage
+     * Author: Anthony Rielly
+     * Purpose: Navigate to the RacePicker
+     * last Modified : 01/28/2024 5:00pm
+     */
+    private void RacePickerPage(object sender, EventArgs e)
+    {
+        LoadCharacterSheetClass();
+        Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent));
+    }
+    
     private void SubmitStats(object sender, EventArgs e)
     {
 
@@ -120,7 +120,7 @@ public partial class CSheet : ContentPage
             "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
         
         // Used for updating existing character sheets
-        if (exists == true)
+        if (CharacterSheetcurrent.exists == true)
         {
             // This will need changed to a ID of some sort when our DB is finalized
             query = "UPDATE dbo.CharacterSheet " +
@@ -141,7 +141,7 @@ public partial class CSheet : ContentPage
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
-                        cmd.Parameters.AddWithValue("@Race", Race.Text);
+                        cmd.Parameters.AddWithValue("@Race", Race);
                         cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
@@ -151,52 +151,18 @@ public partial class CSheet : ContentPage
                         cmd.Parameters.AddWithValue("@Flaws", Flaws.Text);
                         cmd.Parameters.AddWithValue("@FeaturesTraits", Traits.Text);
                         cmd.Parameters.AddWithValue("@Equipment", Inventory.Text);
-                        cmd.Parameters.AddWithValue("@Proficiencies", Proficiencies.Text);
                         cmd.Parameters.AddWithValue("@Attacks", Attacks.Text);
                         cmd.Parameters.AddWithValue("@Spells", Spells.Text);
-                        int flag = 0;
-
-                        if (int.Parse(Strength.Text) >= 0 && int.Parse(Strength.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Strength", int.Parse(Strength.Text));
-                        else
-                            flag = 1;
-
-                        if (int.Parse(Dexterity.Text) >= 0 && int.Parse(Dexterity.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Dexterity", int.Parse(Dexterity.Text));
-                        else
-                            flag = 1;
-
-                        if (int.Parse(Constitution.Text) >= 0 && int.Parse(Constitution.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Constitution", int.Parse(Constitution.Text));
-                        else
-                            flag = 1;
-
-                        if (int.Parse(Intelligence.Text) >= 0 && int.Parse(Intelligence.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Intelligence", int.Parse(Intelligence.Text));
-                        else
-                            flag = 1;
-
-                        if (int.Parse(Wisdom.Text) >= 0 && int.Parse(Wisdom.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Wisdom", int.Parse(Wisdom.Text));
-                        else
-                            flag = 1;
-
-                        if (int.Parse(Charisma.Text) >= 0 && int.Parse(Charisma.Text) <= 18)
-                            cmd.Parameters.AddWithValue("@Charisma", int.Parse(Charisma.Text));
-                        else
-                            flag = 1;
-
-                        if (flag == 0)
-                            cmd.ExecuteNonQuery();
-                        else
-                            Console.WriteLine("One of your stats is either below 0 or above 20, please move it to between this range.");
                     }
                 }
             }
+            DisplayAlert("Success","Character Sheet Saved!","OK");
         }
         catch (Exception eSql)
         {
+            DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
+        Navigation.PushAsync(new CSheet_Stats(CharacterSheetcurrent));
     }
 }
