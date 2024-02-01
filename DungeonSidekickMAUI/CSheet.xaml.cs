@@ -5,12 +5,6 @@ namespace DungeonSidekickMAUI;
 public partial class CSheet : ContentPage
 {
     private CharacterSheet CharacterSheetcurrent;
-    private string DexterityRolled;
-    private string IntelligenceRolled;
-    private string CharismaRolled;
-    private string StrengthRolled;
-    private string WisdomRolled;
-    private string ConstitutionRolled;
     public DndClass CharacterClass;
     public string Race;
 
@@ -20,7 +14,14 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent = new CharacterSheet();
         
     }
-    
+    /* Function Name: CSheet one arg constructor
+     * Purpose:
+     * to allow navigation to the csheet page with predetermined class elements
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
     public CSheet(CharacterSheet characterSheet)
     {
         InitializeComponent();
@@ -31,6 +32,15 @@ public partial class CSheet : ContentPage
             ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
         }
     }
+    /* Function Name: LoadCharacterSheetPage
+     * Purpose:
+     * to assign all of the values that are in the text fields from the passed in
+     * character sheet class to the csheet page
+     * Precondition:
+     * pass in a charactersheet object
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
         PName.Text = characterSheet.playername;
@@ -48,6 +58,14 @@ public partial class CSheet : ContentPage
         Attacks.Text = characterSheet.attacks;
         Spells.Text = characterSheet.spells;
     }
+    /* Function Name: LoadCharacterSheetClass
+     * Purpose:
+     * to assign all of the values that are in the text fields to the character sheet object
+     * Precondition:
+     * nothing
+     * Returns:
+     * nothing
+     */
     private void LoadCharacterSheetClass()
     {
         CharacterSheetcurrent.playername = PName.Text;
@@ -64,9 +82,7 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.equipment = Inventory.Text;
         CharacterSheetcurrent.attacks = Attacks.Text;
         CharacterSheetcurrent.spells = Spells.Text;
-    }
-    
-    
+    } 
     /*
      * Function: RollForStats
      * Author: Kenny Rapp
@@ -79,6 +95,7 @@ public partial class CSheet : ContentPage
         Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
     }
 
+
     /*
      * Function: RacePickerPage
      * Author: Anthony Rielly
@@ -90,7 +107,7 @@ public partial class CSheet : ContentPage
         LoadCharacterSheetClass();
         Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent));
     }
-
+    
     private void SubmitStats(object sender, EventArgs e)
     {
 
