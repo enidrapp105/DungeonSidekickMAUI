@@ -5,10 +5,10 @@ namespace DungeonSidekickMAUI;
 
 public partial class CustomResources : ResourceDictionary
 {
-    public string BG = "0 0 0";
-    public string HBG = "0 0 150";
-    public string FRC = "0 0 90";
-    public string FC = "255 255 255";
+    public string BG;
+    public string HBG;
+    public string FRC;
+    public string FC;
 
 
     public CustomResources()

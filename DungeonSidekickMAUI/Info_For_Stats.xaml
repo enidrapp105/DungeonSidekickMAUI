@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
-                <Frame BackgroundColor="{DynamicResource FrameC}" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation Information" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 <Frame BackgroundColor="{DynamicResource FrameC}" Padding="6">
@@ -27,7 +27,7 @@
                     <Label Text="Charisma determines your ability to talk with others so that you can get what you want. Charisma also tends to affect spell strength for many classes that use them. Classes that use charisma are Paladins, Warlocks, Sorcerers, and Bards." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
 
-                <Button BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
+                <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
     WidthRequest="1000" HorizontalOptions="Start"/>
             </StackLayout>
         </ScrollView>

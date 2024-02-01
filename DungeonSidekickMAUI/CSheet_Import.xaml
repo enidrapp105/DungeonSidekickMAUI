@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource BackgroundC}">
-                <Frame BackgroundColor="{DynamicResource FrameC}" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
                 <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
