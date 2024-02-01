@@ -15,10 +15,10 @@
             <Entry Placeholder="Character Name" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="CName"
                 WidthRequest="1000" HorizontalOptions="Start"/>
             <!--Color is temp-->
-
-            <Entry Placeholder="Race" FontSize="Body" BackgroundColor="OrangeRed" TextColor="White" x:Name="Race"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start"/>
-
+            
+            <Button BackgroundColor="Red" TextColor="White" Text="Pick your Race" Clicked="RacePickerPage"
+                WidthRequest="1000" HorizontalOptions="Start" x:Name="RaceButton"/>
+            
             <Button BackgroundColor="Red" TextColor="White" Text="Pick your Class" Clicked="ClassPickerPage"
                WidthRequest="1000" HorizontalOptions="Start" x:Name="ClassButton"/>
 
