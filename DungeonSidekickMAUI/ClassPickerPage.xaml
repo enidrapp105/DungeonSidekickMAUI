@@ -4,10 +4,10 @@
              x:Class="DungeonSidekickMAUI.ClassPickerPage"
              Title="ClassPickerPage">
     <ContentPage.Content>
-        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="black">
+        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource BackgroundC}">
             <StackLayout x:Name="Classpagestack">
                 <StackLayout x:Name="classButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
-                    <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+                    <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                         <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                     </Frame>
                     <!-- Dynamically created buttons will be added here -->

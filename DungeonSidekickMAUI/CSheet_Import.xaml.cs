@@ -41,76 +41,78 @@ public partial class CSheet_Import : ContentPage
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
+                            var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+                            var hasValue2 = Application.Current.Resources.TryGetValue("FrameC", out object frameColor);
                             while (reader.Read())
                             {
                                 StackLayout CharacterStack = new StackLayout();
 
                                 Label CName = new Label();
-                                CName.TextColor = Color.FromRgb(255, 255, 255);
+                                CName.TextColor = (Color)fontColor;
                                 CName.Text = "Character Name";
                                 Label CNameVal = new Label();
-                                CNameVal.TextColor = Color.FromRgb(255, 255, 255);
+                                CNameVal.TextColor = (Color)fontColor;
                                 CNameVal.Text = reader.GetString(0);
 
                                 CharacterStack.Children.Add(CName);
                                 CharacterStack.Children.Add(CNameVal);
 
                                 Label Strength = new Label();
-                                Strength.TextColor = Color.FromRgb(255, 255, 255);
+                                Strength.TextColor = (Color)fontColor;
                                 Strength.Text = "Strength";
                                 Label StrengthVal = new Label();
-                                StrengthVal.TextColor = Color.FromRgb(255, 255, 255);
+                                StrengthVal.TextColor = (Color)fontColor;
                                 StrengthVal.Text = reader.GetInt32(1).ToString();
                                 CharacterStack.Children.Add(Strength);
                                 CharacterStack.Children.Add(StrengthVal);
 
                                 Label Dexterity = new Label();
-                                Dexterity.TextColor = Color.FromRgb(255, 255, 255);
+                                Dexterity.TextColor = (Color)fontColor;
                                 Dexterity.Text = "Dexterity";
                                 Label DexterityVal = new Label();
-                                DexterityVal.TextColor = Color.FromRgb(255, 255, 255);
+                                DexterityVal.TextColor = (Color)fontColor;
                                 DexterityVal.Text = reader.GetInt32(2).ToString();
                                 CharacterStack.Children.Add(Dexterity);
                                 CharacterStack.Children.Add(DexterityVal);
 
                                 Label Constitution = new Label();
-                                Constitution.TextColor = Color.FromRgb(255, 255, 255);
+                                Constitution.TextColor = (Color)fontColor   ;
                                 Constitution.Text = "Constitution";
                                 Label ConstitutionVal = new Label();
-                                ConstitutionVal.TextColor = Color.FromRgb(255, 255, 255);
+                                ConstitutionVal.TextColor = (Color)fontColor;
                                 ConstitutionVal.Text = reader.GetInt32(3).ToString();
 
                                 Label Intelligence = new Label();
-                                Intelligence.TextColor = Color.FromRgb(255, 255, 255);
+                                Intelligence.TextColor = (Color)fontColor;
                                 Intelligence.Text = "Intelligence";
                                 Label IntelligenceVal = new Label();
-                                IntelligenceVal.TextColor = Color.FromRgb(255, 255, 255);
+                                IntelligenceVal.TextColor = (Color)fontColor;
                                 IntelligenceVal.Text = reader.GetInt32(4).ToString();
                                 CharacterStack.Children.Add(Constitution);
                                 CharacterStack.Children.Add(ConstitutionVal);
 
                                 Label Wisdom = new Label();
-                                Wisdom.TextColor = Color.FromRgb(255, 255, 255);
+                                Wisdom.TextColor = (Color)fontColor;
                                 Wisdom.Text = "Wisdom";
                                 Label WisdomVal = new Label();
-                                WisdomVal.TextColor = Color.FromRgb(255, 255, 255);
+                                WisdomVal.TextColor = (Color)fontColor;
                                 WisdomVal.Text = reader.GetInt32(5).ToString();
                                 CharacterStack.Children.Add(Wisdom);
                                 CharacterStack.Children.Add(WisdomVal);
 
                                 Label Charisma = new Label();
-                                Charisma.TextColor = Color.FromRgb(255, 255, 255);
+                                Charisma.TextColor = (Color)fontColor;
                                 Charisma.Text = "Charisma";
                                 Label CharismaVal = new Label();
-                                CharismaVal.TextColor = Color.FromRgb(255, 255, 255);
+                                CharismaVal.TextColor = (Color)fontColor;
                                 CharismaVal.Text = reader.GetInt32(6).ToString();
                                 CharacterStack.Children.Add(Charisma);
                                 CharacterStack.Children.Add(CharismaVal);
 
                                 Button Edit = new Button {
-                                    TextColor = Color.FromRgb(0, 0, 0),
+                                    TextColor = (Color)fontColor,
                                     Text = "Edit",
-                                    BackgroundColor = Color.FromRgb(255, 255, 255),
+                                    BackgroundColor = (Color)frameColor,
                                     Command = new Command
                                     (
                                         execute: async() =>

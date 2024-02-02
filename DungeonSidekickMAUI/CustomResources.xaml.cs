@@ -5,6 +5,12 @@ namespace DungeonSidekickMAUI;
 
 public partial class CustomResources : ResourceDictionary
 {
+    public string BG;
+    public string HBG;
+    public string FRC;
+    public string FC;
+
+
     public CustomResources()
     {
         InitializeComponent();

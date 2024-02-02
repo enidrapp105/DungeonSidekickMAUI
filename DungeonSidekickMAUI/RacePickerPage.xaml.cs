@@ -30,6 +30,8 @@ public partial class RacePickerPage : ContentPage
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
+                        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+                        var hasValue2 = Application.Current.Resources.TryGetValue("FrameC", out object frameColor);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -38,13 +40,14 @@ public partial class RacePickerPage : ContentPage
                                 var RaceButton = new Button
                                 {
                                     Text = reader.GetString(1),
+                                    TextColor = (Color)fontColor,
                                     CommandParameter = id,
                                     FontSize = 12,
                                     HeightRequest = 50,
                                     WidthRequest = 100,
                                     MinimumHeightRequest = 50,
                                     MinimumWidthRequest = 50,
-                                    BackgroundColor = color
+                                    BackgroundColor = (Color)frameColor
 
                                 };
                                 RaceButton.Clicked += OnRaceButtonClicked;

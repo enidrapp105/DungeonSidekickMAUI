@@ -4,32 +4,32 @@
              x:Class="DungeonSidekickMAUI.CSheet_Stats">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
-            <Frame BackgroundColor="{DynamicResource FrameC}" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
 
-            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Strength"
+            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Strength"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
+            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
+            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
+            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
+            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource BackgroundC}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
+            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Button BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
+            <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
             WidthRequest="1000" HorizontalOptions="Start"/>
 
-            <Button BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
+            <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="1000" HorizontalOptions="Start"/>
         </StackLayout>
     </ContentPage.Content>

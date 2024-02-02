@@ -4,36 +4,36 @@
              x:Class="DungeonSidekickMAUI.StatAssignmentPage"
              Title="StatAssignmentPage">
     <ContentPage.Content >
-        <StackLayout BackgroundColor="Black">
-            <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
-                <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+        <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
+            <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+                <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel1"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker1" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel1"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker1" WidthRequest="100"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White"  WidthRequest="200" Text="PlaceHolder" x:Name="totallabel2"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker2" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  WidthRequest="200" Text="PlaceHolder" x:Name="totallabel2"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker2" WidthRequest="100"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel3"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker3" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel3"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker3" WidthRequest="100"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel4"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker4" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel4"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker4" WidthRequest="100"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel5"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker5" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel5"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker5" WidthRequest="100"/>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="Red" TextColor="White" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel6"/>
-                    <Picker BackgroundColor="Red" x:Name="StatPicker6" WidthRequest="100"/>
+                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel6"/>
+                    <Picker BackgroundColor="{DynamicResource FrameC}" x:Name="StatPicker6" WidthRequest="100"/>
                 </StackLayout>
-                <Button BackgroundColor="Red" TextColor="White" Text="Submit" WidthRequest="100" Clicked="AssignStats"/>
+                <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Submit" WidthRequest="100" Clicked="AssignStats"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

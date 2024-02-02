@@ -30,10 +30,13 @@ public partial class ClassPickerPage : ContentPage
 
 
         var classList = JsonConvert.DeserializeObject<List<DndClass>>(jsonData);
-
+        CustomResources resources = new CustomResources();
+        
 
         classButtonContainer = this.FindByName<StackLayout>("classButtonContainer");
-        Color color = new Color(255, 0, 0);
+        
+        var hasValue = Application.Current.Resources.TryGetValue("FrameC", out object color);
+        //Color color = new Color(primaryColor);
         foreach (var dndClass in classList)
         {
             var classButton = new Button
@@ -45,7 +48,7 @@ public partial class ClassPickerPage : ContentPage
                 WidthRequest = 100,
                 MinimumHeightRequest = 50,
                 MinimumWidthRequest = 50,
-                BackgroundColor = color
+                BackgroundColor = (Color)color
 
             };
             classButton.Clicked += OnClassButtonClicked;

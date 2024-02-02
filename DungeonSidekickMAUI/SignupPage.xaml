@@ -4,13 +4,13 @@
              x:Class="DungeonSidekickMAUI.SignupPage"
              Title="SignupPage">
     <VerticalStackLayout>
-        <Label Text="Sign up"/>
-        <Label Text="username"/>
-        <Entry x:Name="usernamebox"/>
-        <Label Text="password"/>
-        <Entry x:Name="passwordbox" IsPassword="true"/>
-        <Label Text="password(again)"/>
-        <Entry x:Name="passwordbox2" IsPassword="true"/>
-        <Button Text="Submit" Clicked="signupButtonClicked"/>
+        <Label Text="Sign up" TextColor="{DynamicResource FontC}"/>
+        <Label Text="username" TextColor="{DynamicResource FontC}"/>
+        <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
+        <Label Text="password" TextColor="{DynamicResource FontC}"/>
+        <Entry x:Name="passwordbox" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
+        <Label Text="password(again)" TextColor="{DynamicResource FontC}"/>
+        <Entry x:Name="passwordbox2" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
+        <Button TextColor="{DynamicResource FontC}" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource FrameC}"/>
     </VerticalStackLayout>
 </ContentPage>
