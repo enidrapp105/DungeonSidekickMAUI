@@ -111,6 +111,8 @@ public partial class CSheet : ContentPage
     private void SubmitStats(object sender, EventArgs e)
     {
 
+        LoadCharacterSheetClass();
+
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
         string query = "INSERT INTO dbo.CharacterSheet" +

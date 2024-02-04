@@ -15,7 +15,7 @@ public partial class LandingPage : ContentPage
         else
         {
             DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok");
-            Navigation.PushAsync(new MainPage());
+            Navigation.PushAsync(new MainPage(currentcharacterSheet.playername));
         }
 	}
 
@@ -27,8 +27,9 @@ public partial class LandingPage : ContentPage
         int intmod = (int.Parse(characterSheet.intelligence) - 10) / 2;
         int wismod = (int.Parse(characterSheet.wisdom) - 10) / 2;
         int charmod = (int.Parse(characterSheet.charisma) - 10) / 2;
-        
-        
+
+        if (characterSheet.charactername != null)
+            User_Disp.Text = "Welcome to Your Character Sheet " + characterSheet.charactername;
         Str_Mod.Text = strmod.ToString();
         Dex_Mod.Text = dexmod.ToString();
         Const_Mod.Text = constmod.ToString();

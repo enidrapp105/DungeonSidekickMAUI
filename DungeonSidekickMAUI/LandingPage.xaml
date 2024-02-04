@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LandingPage">
     <VerticalStackLayout>
-        <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
-            <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+        <Frame BackgroundColor="{DynamicResource HeaderC}" CornerRadius="0">
+            <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp"/>
         </Frame>
-        <StackLayout HorizontalOptions="Start" MaximumWidthRequest="700" HeightRequest="1000" Background="Black">
+        <StackLayout HorizontalOptions="Start" MaximumWidthRequest="700" HeightRequest="1000" Background="{DynamicResource HeaderC}">
             <Label Text="Str Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
             <Label Text="Str Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Str_Mod"/>
             <Label Text="Dex Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
