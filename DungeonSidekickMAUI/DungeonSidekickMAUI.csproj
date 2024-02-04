@@ -91,6 +91,9 @@
 	  <MauiXaml Update="Info_For_Stats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="LandingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 		  <MauiXaml Update="LayoutDesigner.xaml">
 			  <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
