@@ -5,59 +5,59 @@
              Title="RollForStatsPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource BackgroundC}" >
-                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+            <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource PrimaryColor}" >
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
-                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource BackgroundC}">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource PrimaryColor}">
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
 
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total1"/>-->
                 <StackLayout Orientation="Horizontal" x:Name="stack2" ClassId="2">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total2"/>-->
                 <StackLayout Orientation="Horizontal" x:Name="stack3" ClassId="3">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total3"/>-->
                 <StackLayout Orientation="Horizontal" x:Name="stack4" ClassId="4">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total4"/>-->
                 <StackLayout Orientation="Horizontal" x:Name="stack5" ClassId="5">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total5"/>-->
                 <StackLayout Orientation="Horizontal" x:Name="stack6" ClassId="6">
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF1" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF2" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF3" Clicked="OnButtonClicked"/>
-                    <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF4" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF1" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF2" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF3" Clicked="OnButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total1"/>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total2"/>
@@ -65,7 +65,7 @@
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total4"/>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total5"/>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total6"/>
-                <Button BackgroundColor="{DynamicResource FrameC}" TextColor="White" Text="Submit" WidthRequest="100" Clicked="SubmitStats"/>
+                <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="White" Text="Submit" WidthRequest="100" Clicked="SubmitStats"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -35,7 +35,7 @@ public partial class ClassPickerPage : ContentPage
 
         classButtonContainer = this.FindByName<StackLayout>("classButtonContainer");
         
-        var hasValue = Application.Current.Resources.TryGetValue("FrameC", out object color);
+        var hasValue = Application.Current.Resources.TryGetValue("TrinaryColor", out object color);
         //Color color = new Color(primaryColor);
         foreach (var dndClass in classList)
         {
