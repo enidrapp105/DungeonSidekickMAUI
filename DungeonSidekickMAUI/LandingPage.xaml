@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DungeonSidekickMAUI.LandingPage"
-             Title="LandingPage">
+             x:Class="DungeonSidekickMAUI.LandingPage">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+            <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+        </Frame>
+        <StackLayout HorizontalOptions="Start" MaximumWidthRequest="700" HeightRequest="1000" Background="Black">
+            <Label Text="Str Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Str Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Str_Mod"/>
+            <Label Text="Dex Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Dex Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Dex_Mod"/>
+            <Label Text="Const Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Const Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Const_Mod"/>
+            <Label Text="Int Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Int Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Int_Mod"/>
+            <Label Text="Wis Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Wis Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Wis_Mod"/>
+            <Label Text="Char Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            <Label Text="Char Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Char_Mod"/>
+        </StackLayout>
     </VerticalStackLayout>
 </ContentPage>
