@@ -21,6 +21,10 @@
                 <Label Text="Char Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 <Label Text="Char Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Char_Mod"/>
             </StackLayout>
+            <StackLayout>
+                <Entry Placeholder="Input" Background="{DynamicResource HeaderC}" x:Name="inputentry"/>
+                <Button Text="Roll" Background="{DynamicResource HeaderC}" Clicked="RollButtonClicked" x:Name="rollbutton" TextColor="{DynamicResource FontC}"/>
+            </StackLayout>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
