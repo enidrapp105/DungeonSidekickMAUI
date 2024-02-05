@@ -2,17 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LoginPage">
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Label Text="Login Page" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
-        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
-        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
+    <VerticalStackLayout BackgroundColor="LightSlateGray">
+        <Label Text="Login" BackgroundColor="Black" TextColor="White" FontSize="Title" Padding="30,10,30,10" HorizontalTextAlignment="Center"/>
+
+        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="White" TextColor="Black" x:Name="UName"
             WidthRequest="1000" HorizontalOptions="FillAndExpand" />
-        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
+        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="White" TextColor="Black" x:Name="Pass"
             WidthRequest="1000" HorizontalOptions="FillAndExpand" IsPassword="True"/>
-        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
+        <Button BackgroundColor="Blue" TextColor="White"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
-        <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
+        <Button BackgroundColor="Blue" TextColor="White"  Text="Don't have an account?" Clicked="signupButtonClicked"
+            WidthRequest="1000" HorizontalOptions="FillAndExpand" Margin="5"/>
+        <Button BackgroundColor="OrangeRed" Text="Continue without account" Clicked="DebugbuttonButtonClicked" WidthRequest="1000"/>
 
     </VerticalStackLayout>
 </ContentPage>

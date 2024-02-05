@@ -5,9 +5,9 @@ namespace DungeonSidekickMAUI;
 
 public partial class CustomResources : ResourceDictionary
 {
-    public string BG;
-    public string HBG;
-    public string FRC;
+    public string Primary;
+    public string Secondary;
+    public string Trinary;
     public string FC;
 
 
@@ -19,15 +19,15 @@ public partial class CustomResources : ResourceDictionary
     private static string fileName = "DesignSettings.txt";
     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-    public void SaveColors(string BG, string HBG, string FRC, string FC)
+    public void SaveColors(string Primary, string Secondary, string Trinary, string FC)
     {
         try
         {
             var newLines = new List<string>();
 
-            newLines.Add(BG);
-            newLines.Add(HBG);
-            newLines.Add(FRC);
+            newLines.Add(Primary);
+            newLines.Add(Secondary);
+            newLines.Add(Trinary);
             newLines.Add(FC);
 
             File.WriteAllLines(filePath, newLines);

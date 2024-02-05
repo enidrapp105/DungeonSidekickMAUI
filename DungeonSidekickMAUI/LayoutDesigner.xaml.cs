@@ -11,11 +11,11 @@ public partial class LayoutDesigner : ContentPage
     private void SaveAndReturn(object sender, EventArgs e)
     {
         CustomResources designSave = new CustomResources();
-        String BG = (BredValueLabel.Text + " " + BgreenValueLabel.Text + " " + BblueValueLabel.Text);
-        String HBG = (HredValueLabel.Text + " " + HgreenValueLabel.Text + " " + HblueValueLabel.Text);
-        String FRC = (FRredValueLabel.Text + " " + FRgreenValueLabel.Text + " " + FRblueValueLabel.Text);
+        String Primary = (PredValueLabel.Text + " " + PgreenValueLabel.Text + " " + PblueValueLabel.Text);
+        String Secondary = (SredValueLabel.Text + " " + SgreenValueLabel.Text + " " + SblueValueLabel.Text);
+        String Trinary = (TredValueLabel.Text + " " + TgreenValueLabel.Text + " " + TblueValueLabel.Text);
         String FC = (FredValueLabel.Text + " " + FgreenValueLabel.Text + " " + FblueValueLabel.Text);
-        designSave.SaveColors(BG, HBG, FRC, FC);
+        designSave.SaveColors(Primary, Secondary, Trinary, FC);
         CustomResources.GetColors();
         Navigation.PushAsync(new Settings_Page());
     }
@@ -31,38 +31,38 @@ public partial class LayoutDesigner : ContentPage
         // Updates the labels based on the slider number
         switch (slider)
         {
-            case var _ when slider == BredSlider:
-                BredValueLabel.Text = value.ToString("F0");
+            case var _ when slider == PredSlider:
+                PredValueLabel.Text = value.ToString("F0");
                 break;
-            case var _ when slider == BgreenSlider:
-                BgreenValueLabel.Text = value.ToString("F0");
+            case var _ when slider == PgreenSlider:
+                PgreenValueLabel.Text = value.ToString("F0");
                 break;
-            case var _ when slider == BblueSlider:
-                BblueValueLabel.Text = value.ToString("F0");
-                break;
-        }
-        switch (slider)
-        {
-            case var _ when slider == HredSlider:
-                HredValueLabel.Text = value.ToString("F0");
-                break;
-            case var _ when slider == HgreenSlider:
-                HgreenValueLabel.Text = value.ToString("F0");
-                break;
-            case var _ when slider == HblueSlider:
-                HblueValueLabel.Text = value.ToString("F0");
+            case var _ when slider == PblueSlider:
+                PblueValueLabel.Text = value.ToString("F0");
                 break;
         }
         switch (slider)
         {
-            case var _ when slider == FRredSlider:
-                FRredValueLabel.Text = value.ToString("F0");
+            case var _ when slider == SredSlider:
+                SredValueLabel.Text = value.ToString("F0");
                 break;
-            case var _ when slider == FRgreenSlider:
-                FRgreenValueLabel.Text = value.ToString("F0");
+            case var _ when slider == SgreenSlider:
+                SgreenValueLabel.Text = value.ToString("F0");
                 break;
-            case var _ when slider == FRblueSlider:
-                FRblueValueLabel.Text = value.ToString("F0");
+            case var _ when slider == SblueSlider:
+                SblueValueLabel.Text = value.ToString("F0");
+                break;
+        }
+        switch (slider)
+        {
+            case var _ when slider == TredSlider:
+                TredValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == TgreenSlider:
+                TgreenValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == TblueSlider:
+                TblueValueLabel.Text = value.ToString("F0");
                 break;
         }
         switch (slider)
@@ -79,26 +79,26 @@ public partial class LayoutDesigner : ContentPage
         }
 
         // Updates the colors based on the RGB values
-        double bred = BredSlider.Value;
-        double bgreen = BgreenSlider.Value;
-        double bblue = BblueSlider.Value;
+        double pred = PredSlider.Value;
+        double pgreen = PgreenSlider.Value;
+        double pblue = PblueSlider.Value;
 
-        double hred = HredSlider.Value;
-        double hgreen = HgreenSlider.Value;
-        double hblue = HblueSlider.Value;
+        double sred = SredSlider.Value;
+        double sgreen = SgreenSlider.Value;
+        double sblue = SblueSlider.Value;
 
-        double frred = FRredSlider.Value;
-        double frgreen = FRgreenSlider.Value;
-        double frblue = FRblueSlider.Value;
+        double tred = TredSlider.Value;
+        double tgreen = TgreenSlider.Value;
+        double tblue = TblueSlider.Value;
 
         double fred = FredSlider.Value;
         double fgreen = FgreenSlider.Value;
         double fblue = FblueSlider.Value;
 
         // Applies colors to visual boxes for user
-        BackgroundBox.BackgroundColor = Color.FromRgb((int)bred, (int)bgreen, (int)bblue);
-        HeaderBox.BackgroundColor = Color.FromRgb((int)hred, (int)hgreen, (int)hblue);
-        FrameBox.BackgroundColor = Color.FromRgb((int)frred, (int)frgreen, (int)frblue);
+        PrimaryBox.BackgroundColor = Color.FromRgb((int)pred, (int)pgreen, (int)pblue);
+        SecondaryBox.BackgroundColor = Color.FromRgb((int)sred, (int)sgreen, (int)sblue);
+        TrinaryBox.BackgroundColor = Color.FromRgb((int)tred, (int)tgreen, (int)tblue);
         FontBox.BackgroundColor = Color.FromRgb((int)fred, (int)fgreen, (int)fblue);
     }
 
