@@ -21,18 +21,21 @@ public partial class LandingPage : ContentPage
         else
         {
             DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok");
-            Navigation.PushAsync(new MainPage(currentcharacterSheet.playername));
+            Navigation.PushAsync(new MainPage(" "));
         }
 	}
 
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
         int strmod = (int.Parse(characterSheet.strength) - 10) / 2; //Doing math externally
-        int dexmod = (int.Parse(characterSheet.dexterity) - 10) / 2; //Using int to drop decimal / round down
+        int dexmod = (int.Parse(characterSheet.dexterity) - 10) / 2; //Using int to drop decimal
         int constmod = (int.Parse(characterSheet.constitution) - 10) / 2;
         int intmod = (int.Parse(characterSheet.intelligence) - 10) / 2;
         int wismod = (int.Parse(characterSheet.wisdom) - 10) / 2;
         int charmod = (int.Parse(characterSheet.charisma) - 10) / 2;
+
+        if(currentcharacterSheet.playername != null)
+            User_Disp.Text = "Welcome " + currentcharacterSheet.playername;
 
         Str_Mod.Text = strmod.ToString();
         Dex_Mod.Text = dexmod.ToString();
@@ -106,6 +109,6 @@ public partial class LandingPage : ContentPage
      */
     private void RollButtonClicked(object sender, EventArgs e) 
     {
-        rollbutton.Text = ParseAndRoll(inputentry.Text).ToString();
+        //rollbutton.Text = ParseAndRoll(inputentry.Text).ToString();
     }
 }
