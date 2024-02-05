@@ -1,4 +1,6 @@
 using Newtonsoft.Json;
+using System.Diagnostics;
+using Microsoft.Data.SqlClient;
 namespace DungeonSidekickMAUI;
 
 public partial class ClassPickerPage : ContentPage
@@ -9,18 +11,68 @@ public partial class ClassPickerPage : ContentPage
      * Function: ClassPicker default Constructor
      * Author: Kenny Rapp
      * Purpose: Initilizes all of the class choises based on the json file
-     * last Modified : 12/04/2023 3:20pm
+     * last Modified : 02/04/2023 9:00pm
+     * Modified By Anthony Rielly
+     * Modifications: Removed json string and switched to creating the buttons from a DB lookup, rather than hard coded.
      */
     public ClassPickerPage(CharacterSheet CharacterSheet)
     {
         InitializeComponent();
         this.characterSheet = CharacterSheet;
-        classButtonContainer = new StackLayout()
+        ClassButtonContainer = new StackLayout()
         {
             HorizontalOptions = LayoutOptions.CenterAndExpand,
             VerticalOptions = LayoutOptions.StartAndExpand
         };
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        string query = "SELECT ClassID, Class FROM dbo.ClassLookup";
+        ClassButtonContainer = this.FindByName<StackLayout>("ClassButtonContainer");
+        Color color = new Color(255, 0, 0);
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+                        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+                        var hasValue2 = Application.Current.Resources.TryGetValue("FrameC", out object frameColor);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var id = reader.GetInt32(0);
+                                var ClassButton = new Button
+                                {
+                                    Text = reader.GetString(1),
+                                    TextColor = (Color)fontColor,
+                                    CommandParameter = id,
+                                    FontSize = 12,
+                                    HeightRequest = 50,
+                                    WidthRequest = 100,
+                                    MinimumHeightRequest = 50,
+                                    MinimumWidthRequest = 50,
+                                    BackgroundColor = (Color)frameColor
 
+                                };
+                                ClassButton.Clicked += OnClassButtonClicked;
+
+                                ClassButtonContainer.Children.Add(ClassButton);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+        /*
         //couldn't get the json to work
         //C:\Users\Wolfl\source\repos\DungeonSidekick\DungeonSidekick\DungeonSidekick\ClassInfo.json
         //string jsonFilePath = "C:\\Users\\Wolfl\\source\\repos\\DungeonSidekick\\DungeonSidekick\\DungeonSidekick\\ClassInfo.json";
@@ -55,7 +107,7 @@ public partial class ClassPickerPage : ContentPage
 
             classButtonContainer.Children.Add(classButton);
         }
-
+        */
         //this.Classpagestack.Children.Add(classButtonContainer);
     }
     /*

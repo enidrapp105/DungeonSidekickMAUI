@@ -10,9 +10,9 @@ public partial class SelectedClassPage : ContentPage
         this.characterSheet = characterSheet;
         this.SelectedClass = selectedclass;
         InitializeComponent();
-        Classlabel.Text = SelectedClass.ClassName;
-        ClassDescLabel.Text = SelectedClass.ClassDesc;
-        ClassHitDieLabel.Text = "Hit Die:" + SelectedClass.HitDie;
+        //Classlabel.Text = SelectedClass.ClassName;
+        //ClassDescLabel.Text = SelectedClass.ClassDesc;
+        //ClassHitDieLabel.Text = "Hit Die:" + SelectedClass.HitDie;
     }
     private void Submit(object sender, EventArgs e)
     {
