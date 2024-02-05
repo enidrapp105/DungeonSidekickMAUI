@@ -5,7 +5,8 @@ namespace DungeonSidekickMAUI;
 public partial class CSheet : ContentPage
 {
     private CharacterSheet CharacterSheetcurrent;
-    public DndClass CharacterClass;
+    //public DndClass CharacterClass;
+    public string Class;
     public string Race;
 
     public CSheet()
@@ -29,7 +30,7 @@ public partial class CSheet : ContentPage
         LoadCharacterSheetPage(characterSheet);
         if (characterSheet.characterclass != null)
         {
-            ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
+            ClassButton.Text = "Selected Class: " + characterSheet.characterclass;
         }
         if (characterSheet.race != null)
         {
@@ -50,7 +51,7 @@ public partial class CSheet : ContentPage
         PName.Text = characterSheet.playername;
         CName.Text = characterSheet.charactername ;
         Race = characterSheet.race;
-        CharacterClass = characterSheet.characterclass;
+        Class = characterSheet.characterclass;
         Background.Text = characterSheet.background;
         Allignment.Text = characterSheet.alignment;
         PTraits.Text = characterSheet.personalitytraits;
@@ -75,7 +76,7 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.playername = PName.Text;
         CharacterSheetcurrent.charactername = CName.Text;
         CharacterSheetcurrent.race = Race;
-        CharacterSheetcurrent.characterclass = CharacterClass;
+        CharacterSheetcurrent.characterclass = Class;
         CharacterSheetcurrent.background = Background.Text;
         CharacterSheetcurrent.alignment = Allignment.Text;
         CharacterSheetcurrent.personalitytraits = PTraits.Text;
@@ -146,7 +147,7 @@ public partial class CSheet : ContentPage
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
                         cmd.Parameters.AddWithValue("@Race", Race);
-                        cmd.Parameters.AddWithValue("@Class", CharacterClass.ClassName);                        
+                        cmd.Parameters.AddWithValue("@Class", Class);                        
                         cmd.Parameters.AddWithValue("@Background", Background.Text);
                         cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
                         cmd.Parameters.AddWithValue("@PersonalityTraits", PTraits.Text);

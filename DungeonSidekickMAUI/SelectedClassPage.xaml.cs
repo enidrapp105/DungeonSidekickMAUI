@@ -6,10 +6,9 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedClassPage : ContentPage
 {
     CharacterSheet characterSheet;
-    DndClass m_class;
+    string ClassName;
     public SelectedClassPage(CharacterSheet characterSheet, int selectedClass)
     {
-        string ClassName;
         this.characterSheet = characterSheet;
         //this.SelectedClass = selectedclass;
         //Classlabel.Text = SelectedClass.ClassName;
@@ -61,56 +60,57 @@ public partial class SelectedClassPage : ContentPage
                                 Label HitDie = new Label();
                                 HitDie.HorizontalTextAlignment = TextAlignment.Center;
                                 HitDie.TextColor = (Color)fontColor;
-                                int hit = 0;
                                 HitDie.Text = "Hit Die: " + reader.GetInt32(1);
                                 ClassStack.Children.Add(Class);
                                 ClassStack.Children.Add(HitDie);
                             }
-
+                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
 
                         query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
-                                " WHERE ClassID = @ClassID4;";
+                                " WHERE ClassID = @ClassID2;";
                         cmd.CommandText = query;
-                        cmd.Parameters.AddWithValue("@ClassID4", selectedClass);
-                        using (SqlDataReader reader4 = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             Label StartProf = new Label();
                             StartProf.TextColor = (Color)fontColor;
                             StartProf.Text = "Starting Proficiencies: ";
                             ClassStack.Children.Add(StartProf);
-                            while (reader4.Read())
+                            while (reader.Read())
                             {
                                 Label ProfName = new Label();
                                 ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader4.GetString(0);
+                                ProfName.Text = reader.GetString(0);
                                 ClassStack.Children.Add(ProfName);
                             }
+                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
 
                         query = "SELECT StartProfOptName, Choice FROM dbo.StartingProficienciesOptions" +
-                                " WHERE ClassID = @ClassID5;";
+                                " WHERE ClassID = @ClassID3;";
                         cmd.CommandText = query;
-                        cmd.Parameters.AddWithValue("@ClassID5", selectedClass);
-                        using (SqlDataReader reader5 = cmd.ExecuteReader())
+                        cmd.Parameters.AddWithValue("@ClassID3", selectedClass);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             Label StartProf = new Label();
                             StartProf.TextColor = (Color)fontColor;
                             StartProf.Text = "Choose Optional Starting Proficiencies: ";
                             ClassStack.Children.Add(StartProf);
                             int choice = 0;
-                            while (reader5.Read())
+                            while (reader.Read())
                             {
                                 Label ProfName = new Label();
                                 ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader5.GetString(0);
+                                ProfName.Text = reader.GetString(0);
                                 ClassStack.Children.Add(ProfName);
-                                choice = reader5.GetInt32(1);
+                                choice = reader.GetInt32(1);
                             }
                             Label Choice = new Label();
                             Choice.TextColor = (Color)fontColor;
                             Choice.Text = "Choose " + choice;
                             ClassStack.Children.Add(Choice);
+                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
                     }
                     Button submit = new Button()
@@ -133,7 +133,7 @@ public partial class SelectedClassPage : ContentPage
     }
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.characterclass = m_class;
+        characterSheet.characterclass = ClassName;
         Navigation.PushAsync(new CSheet(characterSheet));
     }
 
