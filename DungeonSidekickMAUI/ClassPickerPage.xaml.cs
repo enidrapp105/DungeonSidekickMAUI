@@ -118,7 +118,7 @@ public partial class ClassPickerPage : ContentPage
      */
     private void OnClassButtonClicked(object sender, EventArgs e)
     {
-        if (sender is Button classButton && classButton.CommandParameter is DndClass selectedClass)
+        if (sender is Button classButton && classButton.CommandParameter is int selectedClass)
         {
             Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass));
         }
