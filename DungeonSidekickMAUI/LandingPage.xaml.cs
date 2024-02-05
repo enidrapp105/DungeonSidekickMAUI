@@ -8,6 +8,7 @@ namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
     CharacterSheet currentcharacterSheet;
+    static Random random = new Random();
     public LandingPage(CharacterSheet passedCharacterSheet)
 	{
         currentcharacterSheet = passedCharacterSheet;
@@ -39,5 +40,72 @@ public partial class LandingPage : ContentPage
         Int_Mod.Text = intmod.ToString();
         Wis_Mod.Text = wismod.ToString();
         Char_Mod.Text = charmod.ToString();
+    }
+    /*
+     * Function: RollDice
+     * Author: Kenny Rapp
+     * Purpose: to roll dice and return the rolled sum
+     * last Modified: 2/4/2024 6:21pm By Kenny Rapp
+     */
+    public int RollDice(int numberOfDice, int numberOfFaces)
+    {
+        int totalSum = 0;
+
+        for (int i = 0; i < numberOfDice; i++)
+        {
+            int rollResult = random.Next(1, numberOfFaces + 1);
+            totalSum += rollResult;
+        }
+
+        return totalSum;
+    }
+    /*
+     * Function: ParseAndRoll
+     * Author: Kenny Rapp
+     * Purpose: to parse the input string and return the rolled sum
+     * last Modified: 2/4/2024 6:21pm By Kenny Rapp
+     */
+    public int ParseAndRoll(string input)
+    {
+        try
+        {
+            string[] parts = input.Split(new char[] { '+', '-' }, StringSplitOptions.RemoveEmptyEntries);
+
+            int totalResult = 0;
+
+            foreach (var part in parts)
+            {
+                if (part.Contains("d"))
+                {
+                    string[] dicePart = part.Split('d');
+                    int numberOfDice = int.Parse(dicePart[0]);
+                    int numberOfFaces = int.Parse(dicePart[1]);
+
+                    totalResult += RollDice(numberOfDice, numberOfFaces);
+                }
+                else
+                {
+                    int modifier = int.Parse(part);
+                    totalResult += modifier;
+                }
+            }
+
+            return totalResult;
+        }
+        catch (Exception ex)
+        {
+            DisplayAlert("Error", $"Invalid input: {ex.Message}", "OK");
+            return 0; // or any default value
+        }
+    }
+    /*
+     * Function: RollButtonClicked
+     * Author: Kenny Rapp
+     * Purpose: to call the ParseAndRoll function and set its text to the rolled sum
+     * last Modified: 2/4/2024 6:21pm By Kenny Rapp
+     */
+    private void RollButtonClicked(object sender, EventArgs e) 
+    {
+        rollbutton.Text = ParseAndRoll(inputentry.Text).ToString();
     }
 }
