@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectedClassPage"
-             Title="SelectedClassPage">
+             >
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
             <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
-            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassDescLabel"/>
-            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassHitDieLabel"/>
-            <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>
+            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="FillAndExpand" x:Name="ClassDescLabel"/>
+            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="FillAndExpand" x:Name="ClassHitDieLabel"/>
+            <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Submit"/>
 
         </StackLayout>
     </ContentPage.Content>

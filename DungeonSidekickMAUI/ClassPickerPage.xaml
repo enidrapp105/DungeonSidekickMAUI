@@ -2,11 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.ClassPickerPage"
-             Title="ClassPickerPage">
+             >
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="Classpagestack">
-                <StackLayout x:Name="classButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
+                <StackLayout x:Name="classButtonContainer" Orientation="Vertical" HorizontalOptions="FillAndExpand">
                     <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                         <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                     </Frame>

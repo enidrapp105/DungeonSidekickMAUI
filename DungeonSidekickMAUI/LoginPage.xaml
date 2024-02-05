@@ -5,13 +5,13 @@
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Label Text="Login Page" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
         <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
-            WidthRequest="1000" HorizontalOptions="Start"/>
+            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
-            WidthRequest="1000" HorizontalOptions="Start" />
+            WidthRequest="1000" HorizontalOptions="FillAndExpand" />
         <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
-            WidthRequest="1000" HorizontalOptions="Start" IsPassword="True"/>
+            WidthRequest="1000" HorizontalOptions="FillAndExpand" IsPassword="True"/>
         <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
-            WidthRequest="1000" HorizontalOptions="Start"/>
+            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
         <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
 
     </VerticalStackLayout>

@@ -28,7 +28,7 @@
                 </Frame>
 
                 <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
-    WidthRequest="1000" HorizontalOptions="Start"/>
+    WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

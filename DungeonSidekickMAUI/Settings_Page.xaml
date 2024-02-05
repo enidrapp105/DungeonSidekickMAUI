@@ -2,12 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.Settings_Page">
-    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
-            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+    <StackLayout BackgroundColor="LightSlateGray">
+        <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
+            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
-        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        <Button BackgroundColor="LightSlateGray" TextColor="White" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="LayoutDesigner" />
+        <Button BackgroundColor="LightSlateGray" TextColor="White" Text="Save and Return" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="MainPage" />
     </StackLayout>
 </ContentPage>
     
