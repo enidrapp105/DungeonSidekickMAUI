@@ -13,6 +13,5 @@
         <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
         <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
-
     </VerticalStackLayout>
 </ContentPage>

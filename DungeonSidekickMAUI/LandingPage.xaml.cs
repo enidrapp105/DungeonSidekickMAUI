@@ -1,5 +1,10 @@
 namespace DungeonSidekickMAUI;
 
+/*
+ * 
+ *  
+ *  Safe keeping in case a header makes more sense in the .xaml of this file
+ * */
 public partial class LandingPage : ContentPage
 {
     CharacterSheet currentcharacterSheet;
@@ -28,8 +33,6 @@ public partial class LandingPage : ContentPage
         int wismod = (int.Parse(characterSheet.wisdom) - 10) / 2;
         int charmod = (int.Parse(characterSheet.charisma) - 10) / 2;
 
-        if (characterSheet.charactername != null)
-            User_Disp.Text = "Welcome to Your Character Sheet " + characterSheet.charactername;
         Str_Mod.Text = strmod.ToString();
         Dex_Mod.Text = dexmod.ToString();
         Const_Mod.Text = constmod.ToString();
