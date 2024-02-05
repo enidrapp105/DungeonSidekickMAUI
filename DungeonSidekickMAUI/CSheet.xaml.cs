@@ -31,6 +31,10 @@ public partial class CSheet : ContentPage
         {
             ClassButton.Text = "Selected Class: " + CharacterClass.ClassName;
         }
+        if (characterSheet.race != null)
+        {
+            RaceButton.Text = "Selected Race: " + characterSheet.race;
+        }
     }
     /* Function Name: LoadCharacterSheetPage
      * Purpose:
