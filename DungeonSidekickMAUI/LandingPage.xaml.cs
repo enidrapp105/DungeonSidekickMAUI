@@ -64,26 +64,36 @@ public partial class LandingPage : ContentPage
      */
     public int ParseAndRoll(string input)
     {
-        string[] parts = input.Split(new char[] { 'd', '+', '-' }, StringSplitOptions.RemoveEmptyEntries);
-
-        if (parts.Length < 2 || parts.Length > 3)
+        try
         {
-            DisplayAlert("input string does not conform with expected input", "The expected input form is XdY [+ Z]", "OK");
+            string[] parts = input.Split(new char[] { '+', '-' }, StringSplitOptions.RemoveEmptyEntries);
 
+            int totalResult = 0;
+
+            foreach (var part in parts)
+            {
+                if (part.Contains("d"))
+                {
+                    string[] dicePart = part.Split('d');
+                    int numberOfDice = int.Parse(dicePart[0]);
+                    int numberOfFaces = int.Parse(dicePart[1]);
+
+                    totalResult += RollDice(numberOfDice, numberOfFaces);
+                }
+                else
+                {
+                    int modifier = int.Parse(part);
+                    totalResult += modifier;
+                }
+            }
+
+            return totalResult;
         }
-
-        int numberOfDice = int.Parse(parts[0]);
-        int numberOfFaces = int.Parse(parts[1]);
-
-        int modifier = 0;
-        if (parts.Length == 3)
+        catch (Exception ex)
         {
-            modifier = int.Parse(parts[2]);
+            DisplayAlert("Error", $"Invalid input: {ex.Message}", "OK");
+            return 0; // or any default value
         }
-
-        int diceRollResult = RollDice(numberOfDice, numberOfFaces);
-
-        return diceRollResult + modifier;
     }
     /*
      * Function: RollButtonClicked
