@@ -3,15 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LoginPage">
     <VerticalStackLayout BackgroundColor="{DynamicResource BackgroundC}">
-        <Label Text="Login Page" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
-            WidthRequest="1000" HorizontalOptions="Start"/>
+        <Label Text="Login Page" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10" Margin="4"/>
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="UName"
-            WidthRequest="1000" HorizontalOptions="Start" />
+            WidthRequest="1000" HorizontalOptions="Center" Margin="7"/>
+        <Label Text="Username" HorizontalOptions="Center" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="20"/>
         <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Pass"
-            WidthRequest="1000" HorizontalOptions="Start" IsPassword="True"/>
+            WidthRequest="1000" HorizontalOptions="Center" IsPassword="True" Margin="7"/>
+        <Label Text="Password" HorizontalOptions="Center" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="20"/>
         <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
-            WidthRequest="1000" HorizontalOptions="Start"/>
+            WidthRequest="1000" HorizontalOptions="Center" Margin="5"/>
+        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
+            WidthRequest="1000" HorizontalOptions="Center"/>
         <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
     </VerticalStackLayout>
 </ContentPage>
