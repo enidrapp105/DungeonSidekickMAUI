@@ -11,7 +11,7 @@ namespace DungeonSidekickMAUI
     /*
      * Class: Inventory
      * Author: Thomas Hewitt
-     * Purpose: Handling the intermediate tables for the items, weapons, and equipment tables.
+     * Purpose: Handling the intermediate tables for the items table.
      * last Modified: 2/7/2024 by Thomas Hewitt
      */
     public class Inventory
@@ -21,8 +21,6 @@ namespace DungeonSidekickMAUI
 
         public Inventory(int CharacterID) // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
-            string query = "SELECT * FROM dbo.Inventory" +
-                " WHERE InventoryID = @IID;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -32,14 +30,24 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
+                            // Preliminary checks to see if Inventory exists
+                            string query = "SELECT InventoryID from dbo.CharacterSheet" +
+                            " WHERE CharacterID = @CID;";
+
                             cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@IID", InventoryID);
+                            cmd.Parameters.AddWithValue("@CID", CharacterID);
                             int exists = (int)cmd.ExecuteScalar(); // This will check to see if this inventory exists in the database. Returns null if there is no inventory was found.
-                            if(exists > 0)
+                            if (exists > 0) // found it
                             {
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    InventoryID = reader.GetInt32(0); // Grabs the ID of the found inventory.
+                                }
                                 // Grab the information from the DB, inventory exists.
+                                GetIInterStuff();
+
                             }
-                            else
+                            else // didn't find it
                             {
                                 // Create a new inventory in the DB, inventory doesn't exist. Then, assign the ID to the member variable.
 
@@ -64,11 +72,16 @@ namespace DungeonSidekickMAUI
             }
             // Populate the class with data from the database.
         }
-        public void GetIInterStuff(int IID) // Query the database and present the data from the IInter table. Shows your items + quantities.
+        public void GetIInterStuff() // Query the database and present the data from the IInter table. Shows your items + quantities.
         {
             string query = "SELECT * FROM dbo.IInter" +
                 " WHERE InventoryID = @IID";
             // Do something with IInter.
+        }
+
+        public void AddItem(int ItemID)
+        {
+
         }
 
         public void UpdateDB()
@@ -77,6 +90,8 @@ namespace DungeonSidekickMAUI
         }
 
         public required int InventoryID { get; set; } // Stores the ID of the current Inventory.
+
+        public required List<int> IInter { get; set; } // Stores the data of the IInter table. Reduces the number of queries we'll need to use.
 
     }
 }
