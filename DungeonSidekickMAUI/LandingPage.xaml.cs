@@ -20,11 +20,12 @@ public partial class LandingPage : ContentPage
             Navigation.PushAsync(new MainPage(" "));
         }
 	}
-
+    
+    //This loads the CharacterSheet class we passed into the ctor. Also handles math for the modifiers 
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
-        int strmod = (int.Parse(characterSheet.strength) - 10) / 2; //Doing math externally
-        int dexmod = (int.Parse(characterSheet.dexterity) - 10) / 2; //Using int to drop decimal
+        int strmod = (int.Parse(characterSheet.strength) - 10) / 2; 
+        int dexmod = (int.Parse(characterSheet.dexterity) - 10) / 2; //Using int to drop decimal (technically incorrect WIP, but floor and round are haters)
         int constmod = (int.Parse(characterSheet.constitution) - 10) / 2;
         int intmod = (int.Parse(characterSheet.intelligence) - 10) / 2;
         int wismod = (int.Parse(characterSheet.wisdom) - 10) / 2;
