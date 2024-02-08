@@ -37,17 +37,16 @@ namespace DungeonSidekickMAUI
                             cmd.CommandText = query;
                             cmd.Parameters.AddWithValue("@CID", CharacterID);
                             int exists = (int)cmd.ExecuteScalar(); // This will check to see if this inventory exists in the database. Returns null if there is no inventory was found.
-                            if (exists > 0) // found it
+                            if (exists > 0) // Found it. Grab the information from the DB, inventory exists.
                             {
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
                                     InventoryID = reader.GetInt32(0); // Grabs the ID of the found inventory.
                                 }
-                                // Grab the information from the DB, inventory exists.
                                 GetIInterStuff();
 
                             }
-                            else // didn't find it
+                            else // Didn't find it.
                             {
                                 // Create a new inventory in the DB, inventory doesn't exist. Then, assign the ID to the member variable.
 
@@ -77,6 +76,7 @@ namespace DungeonSidekickMAUI
             string query = "SELECT ItemID, Quantity FROM dbo.IInter" +
             " WHERE InventoryID = @IID";
 
+            IInter.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -111,12 +111,11 @@ namespace DungeonSidekickMAUI
 
         public void AddItem(int ItemID)
         {
-
+            // Work on this once we get items sorted out.
         }
 
-        public void UpdateDB()
+        public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
-            // Mass updates the DB with any changes made to this inventory.
             string query = "INSERT INTO dbo.IInter(ItemID, Quantity, InventoryID)" +
             " VALUES(@ItemID, @Quantity, @InventoryID);";
 
@@ -139,7 +138,6 @@ namespace DungeonSidekickMAUI
                                     cmd.Parameters.AddWithValue("@Quantity", stuff[1]);
                                     cmd.ExecuteNonQuery();
                                 }
-
                             }
                         }
                     }
