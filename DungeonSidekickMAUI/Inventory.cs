@@ -72,11 +72,41 @@ namespace DungeonSidekickMAUI
             }
             // Populate the class with data from the database.
         }
-        public void GetIInterStuff() // Query the database and present the data from the IInter table. Shows your items + quantities.
+        public void GetIInterStuff() // Query the database and populate the list responsible for storing the data found in the IInter table. Shows your items + quantities.
         {
-            string query = "SELECT * FROM dbo.IInter" +
-                " WHERE InventoryID = @IID";
-            // Do something with IInter.
+            string query = "SELECT ItemID, Quantity FROM dbo.IInter" +
+            " WHERE InventoryID = @IID";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@IID", InventoryID);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
+                                while (reader.Read()) // Iterate through results of the query
+                                {
+                                    temp.Clear();
+                                    temp.Add(reader.GetInt32(0));
+                                    temp.Add(reader.GetInt32(1));
+                                    IInter.Add(temp); // Puts the list of data into IInter. This makes UpdateDB easier, in theory.
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
         }
 
         public void AddItem(int ItemID)
@@ -87,11 +117,43 @@ namespace DungeonSidekickMAUI
         public void UpdateDB()
         {
             // Mass updates the DB with any changes made to this inventory.
+            string query = "INSERT INTO dbo.IInter(ItemID, Quantity, InventoryID)" +
+            " VALUES(@ItemID, @Quantity, @InventoryID);";
+
+            if(IInter.Count > 0) // Checks if IInter is empty. If not, proceed.
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+                                cmd.Parameters.AddWithValue("@InventoryID", InventoryID);
+                                foreach (List<int> stuff in IInter) // Should iterate through every element of IInter and correctly input the necessary data into the query.
+                                {
+                                    cmd.Parameters.AddWithValue("@ItemID", stuff[0]);
+                                    cmd.Parameters.AddWithValue("@Quantity", stuff[1]);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
         }
 
         public required int InventoryID { get; set; } // Stores the ID of the current Inventory.
 
-        public required List<int> IInter { get; set; } // Stores the data of the IInter table. Reduces the number of queries we'll need to use.
+        public required List<List<int>> IInter { get; set; } // Stores the data of the IInter table. Reduces the number of queries we'll need to use.
 
     }
 }
