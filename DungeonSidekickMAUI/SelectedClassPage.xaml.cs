@@ -7,18 +7,20 @@ public partial class SelectedClassPage : ContentPage
 {
     CharacterSheet characterSheet;
     string ClassName;
+    /*
+     * Function: SelectedClassPage Constructor
+     * Author: Kenny Rapp
+     * Purpose: Print out information about your selected class
+     * last Modified : 02/04/2023 9:00pm
+     * Modified By Anthony Rielly
+     * Modifications: Pulls from the database lookup table to print out the information
+     */
     public SelectedClassPage(CharacterSheet characterSheet, int selectedClass)
     {
         this.characterSheet = characterSheet;
-        //this.SelectedClass = selectedclass;
-        //Classlabel.Text = SelectedClass.ClassName;
-        //ClassDescLabel.Text = SelectedClass.ClassDesc;
-        //ClassHitDieLabel.Text = "Hit Die:" + SelectedClass.HitDie;
-        //this.characterSheet = characterSheet;
         InitializeComponent();
+
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-
-
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
@@ -113,6 +115,8 @@ public partial class SelectedClassPage : ContentPage
                             reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
                     }
+
+                    // Creates the submit button
                     Button submit = new Button()
                     {
                         BackgroundColor = (Color)frameColor,
@@ -127,10 +131,17 @@ public partial class SelectedClassPage : ContentPage
         }
         catch (Exception eSql)
         {
-            DisplayAlert("Error!", eSql.Message, "OK");
+            DisplayAlert("Error!", eSql.Message, "OK"); // Should be removed and replaced before final product
             Debug.WriteLine("Exception: " + eSql.Message);
         }
     }
+
+    /*
+     * Function: Submit button function
+     * Author: Anthony Rielly
+     * Purpose: Sends the selected class back to the character sheet creation.
+     * last Modified : 02/04/2023 9:00pm
+     */
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.characterclass = ClassName;
