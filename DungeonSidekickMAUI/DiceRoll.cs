@@ -4,7 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/*
+ * Class: DiceRoll
+ * Author: Kenny Rapp
+ * Purpose: Because almost all of our data in our dat base being strings
+ * we need a function to handle data that is stored like "1d20" and add modifiers to it like "+2"
+ * deliminated by a ","
+ * Last Modified: 2/7/2024
+ */
 namespace DungeonSidekickMAUI
 {
     class DiceRoll
@@ -38,7 +45,7 @@ namespace DungeonSidekickMAUI
             {
                 for (int i = 0; i < numberOfDice; i++)
                 {
-                    int rollResult = random.Next(1, numberOfFaces + 1);
+                    int rollResult = random.Next(1, numberOfFaces+1);
                     totalSum += rollResult;
                 }
             }
@@ -53,7 +60,7 @@ namespace DungeonSidekickMAUI
          */
         private int ParseAndRoll(string input)
         {
-            string[] parts = input.Split(new char[] { '+', '-' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] parts = input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             int totalResult = 0;
 
@@ -61,21 +68,27 @@ namespace DungeonSidekickMAUI
             {
                 if (part.Contains("d"))
                 {
+                    // This part contains a dice roll
                     string[] dicePart = part.Split('d');
                     int numberOfDice = int.Parse(dicePart[0]);
                     int numberOfFaces = int.Parse(dicePart[1]);
 
-                    totalResult += RollDice(numberOfDice, numberOfFaces);
+                    int rollResult = RollDice(numberOfDice, numberOfFaces);
+                    totalResult += rollResult;
                 }
-                else
+                else if (part.Contains("-") || part.Contains("+"))
                 {
+                    // This part is a modifier
                     int modifier = int.Parse(part);
                     totalResult += modifier;
+
                 }
             }
 
             return totalResult;
         }
+
+
     }
 
 }
