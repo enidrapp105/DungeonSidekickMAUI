@@ -4,13 +4,13 @@
              x:Class="DungeonSidekickMAUI.SelectedClassPage"
              Title="SelectedClassPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
-            <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+        <StackLayout BackgroundColor="{DynamicResource BackgroundC}" x:Name="mainPanel">
+            <!--<Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassDescLabel"/>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassHitDieLabel"/>
-            <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>
+            <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>-->
 
         </StackLayout>
     </ContentPage.Content>

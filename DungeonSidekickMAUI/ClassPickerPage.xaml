@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource BackgroundC}">
             <StackLayout x:Name="Classpagestack">
-                <StackLayout x:Name="classButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
+                <StackLayout x:Name="ClassButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
                     <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                         <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                     </Frame>
