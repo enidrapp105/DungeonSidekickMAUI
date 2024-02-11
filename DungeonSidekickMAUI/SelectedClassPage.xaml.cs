@@ -20,7 +20,7 @@ public partial class SelectedClassPage : ContentPage
         this.characterSheet = characterSheet;
         InitializeComponent();
 
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False; MultipleActiveResultSets=true;";
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
@@ -69,7 +69,27 @@ public partial class SelectedClassPage : ContentPage
                             reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
 
-                        query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
+                        //query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
+                        //        " WHERE ClassID = @ClassID2;";
+                        //cmd.CommandText = query;
+                        //cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
+                        //using (SqlDataReader reader = cmd.ExecuteReader())
+                        //{
+                        //    Label StartProf = new Label();
+                        //    StartProf.TextColor = (Color)fontColor;
+                        //    StartProf.Text = "Starting Proficiencies: ";
+                        //    ClassStack.Children.Add(StartProf);
+                        //    while (reader.Read())
+                        //    {
+                        //        Label ProfName = new Label();
+                        //        ProfName.TextColor = (Color)fontColor;
+                        //        ProfName.Text = reader.GetString(0);
+                        //        ClassStack.Children.Add(ProfName);
+                        //    }
+                        //    reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
+                        //}
+
+                        query = "SELECT ProfID, Optional, Choice FROM dbo.ClassProficienciesLookup" +
                                 " WHERE ClassID = @ClassID2;";
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
@@ -77,41 +97,57 @@ public partial class SelectedClassPage : ContentPage
                         {
                             Label StartProf = new Label();
                             StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Starting Proficiencies: ";
-                            ClassStack.Children.Add(StartProf);
-                            while (reader.Read())
-                            {
-                                Label ProfName = new Label();
-                                ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader.GetString(0);
-                                ClassStack.Children.Add(ProfName);
-                            }
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
-                        }
-
-                        query = "SELECT StartProfOptName, Choice FROM dbo.StartingProficienciesOptions" +
-                                " WHERE ClassID = @ClassID3;";
-                        cmd.CommandText = query;
-                        cmd.Parameters.AddWithValue("@ClassID3", selectedClass);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
                             StartProf.Text = "Choose Optional Starting Proficiencies: ";
                             ClassStack.Children.Add(StartProf);
-                            int choice = 0;
+                            int newOption = 0;
                             while (reader.Read())
                             {
-                                Label ProfName = new Label();
-                                ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader.GetString(0);
-                                ClassStack.Children.Add(ProfName);
-                                choice = reader.GetInt32(1);
+                                int Id =  reader.GetInt32(0);
+                                int optional = reader.GetInt32(1);
+                                int choice = reader.GetInt32(2);
+                                if (optional != newOption && optional != 0)
+                                {
+                                    Label Choice = new Label();
+                                    Choice.TextColor = (Color)fontColor;
+                                    Choice.Text = "Choose " + choice;
+                                    ClassStack.Children.Add(Choice);
+                                }
+                                newOption = optional;
+
+                                string innerQuery = "SELECT ProfName FROM dbo.ProficienciesLookup" +
+                                " WHERE ProfID = @ProfID;";
+                                try
+                                {
+                                    
+                                    using (SqlConnection conn2 = new SqlConnection(connectionString))
+                                    {
+                                        using (SqlCommand cmd2 = conn2.CreateCommand())
+                                        {
+                                            cmd2.CommandText = innerQuery;
+                                            cmd2.Parameters.AddWithValue("@ProfID", Id);
+                                            conn2.Open();
+                                            if (conn2.State == System.Data.ConnectionState.Open)
+                                            {
+                                                using (SqlDataReader reader2 = cmd2.ExecuteReader())
+                                                {
+                                                    while (reader2.Read())
+                                                    {
+                                                        Label ProfName = new Label();
+                                                        ProfName.TextColor = (Color)fontColor;
+                                                        ProfName.Text = reader2.GetString(0);
+                                                        ClassStack.Children.Add(ProfName);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception eSql)
+                                {
+                                    DisplayAlert("Error!", eSql.Message, "OK"); // Should be removed and replaced before final product
+                                    Debug.WriteLine("Exception: " + eSql.Message);
+                                }
                             }
-                            Label Choice = new Label();
-                            Choice.TextColor = (Color)fontColor;
-                            Choice.Text = "Choose " + choice;
-                            ClassStack.Children.Add(Choice);
                             reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
                         }
                     }
