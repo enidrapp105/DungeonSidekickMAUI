@@ -128,7 +128,6 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
-                            reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
                         }
                     }
 
