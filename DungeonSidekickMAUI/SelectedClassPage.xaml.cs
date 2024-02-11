@@ -75,10 +75,7 @@ public partial class SelectedClassPage : ContentPage
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                            ClassStack.Children.Add(StartProf);
+
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -87,6 +84,13 @@ public partial class SelectedClassPage : ContentPage
                                 int choice = reader.GetInt32(2);
                                 if (optional != newOption && optional != 0)
                                 {
+                                    if(optional == 1)
+                                    {
+                                        Label StartProf = new Label();
+                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.Text = "Choose Optional Starting Proficiencies: ";
+                                        ClassStack.Children.Add(StartProf);
+                                    }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;

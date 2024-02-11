@@ -103,10 +103,6 @@ public partial class SelectedRacePage : ContentPage
                         cmd.Parameters.AddWithValue("@RaceID2", selectedRace);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                            RaceStack.Children.Add(StartProf);
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -115,6 +111,13 @@ public partial class SelectedRacePage : ContentPage
                                 int choice = reader.GetInt32(2);
                                 if (optional != newOption && optional != 0)
                                 {
+                                    if (optional == 1)
+                                    {
+                                        Label StartProf = new Label();
+                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.Text = "Choose Optional Starting Proficiencies: ";
+                                        RaceStack.Children.Add(StartProf);
+                                    }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
@@ -163,10 +166,7 @@ public partial class SelectedRacePage : ContentPage
                         cmd.Parameters.AddWithValue("@RaceID3", selectedRace);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Choose Optional Ability Bonuses: ";
-                            RaceStack.Children.Add(StartProf);
+                            
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -176,6 +176,13 @@ public partial class SelectedRacePage : ContentPage
                                 int choice = reader.GetInt32(3);
                                 if (optional != newOption && optional != 0 && choice != 0)
                                 {
+                                    if (optional == 1)
+                                    {
+                                        Label StartProf = new Label();
+                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.Text = "Choose Optional Ability Bonuses: ";
+                                        RaceStack.Children.Add(StartProf);
+                                    }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
