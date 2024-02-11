@@ -2,18 +2,16 @@ namespace DungeonSidekickMAUI;
 
 public partial class Settings_Page : ContentPage
 {
-    string username;
-	public Settings_Page(string Given_Username)
+	public Settings_Page()
 	{
-        username = Given_Username;
 		InitializeComponent();
     }
     private void MainPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage(username));
+        Navigation.PushAsync(new MainPage());
     }
     private void LayoutDesigner(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LayoutDesigner(username));
+        Navigation.PushAsync(new LayoutDesigner());
     }
 }

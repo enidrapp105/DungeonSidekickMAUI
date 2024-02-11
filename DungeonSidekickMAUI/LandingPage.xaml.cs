@@ -17,7 +17,7 @@ public partial class LandingPage : ContentPage
         else
         {
             DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok");
-            Navigation.PushAsync(new MainPage(" "));
+            Navigation.PushAsync(new MainPage());
         }
 	}
     /*

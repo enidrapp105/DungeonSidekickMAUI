@@ -2,12 +2,10 @@
 {
     public partial class MainPage : ContentPage
     {
-        string username;
-        public MainPage(string Given_Username)
+        public MainPage()
         {
-            username = Given_Username;
             InitializeComponent();
-            User_Disp.Text = "Welcome " + username;
+            User_Disp.Text = "Welcome " + User.UserName;
         }
 
         private void Player_Clicked(object sender, EventArgs e)
@@ -20,7 +18,7 @@
         }
         private void Settings_Page(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new Settings_Page(username));
+            Navigation.PushAsync(new Settings_Page());
         }
     }
 
