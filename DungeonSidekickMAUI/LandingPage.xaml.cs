@@ -23,7 +23,7 @@ public partial class LandingPage : ContentPage
     /*
      * Function: CalcStatMod
      * Author: Brendon Williams
-     * Purpose: Does the math to calculate a stat mod
+     * Purpose: Does the math to calculate a stat's modifier
      * Last Modified: 2/10/2024 12:04pm by Author
      */
     private string CalcStatMod(int stat)

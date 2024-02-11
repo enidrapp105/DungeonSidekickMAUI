@@ -9,7 +9,7 @@
             </Frame>
             <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Start" MaximumWidthRequest="600" Background="{DynamicResource HeaderC}" Grid.Column="0" Grid.Row="1" > <!--This stack layout handles the stat modifiers -->
                 <Label Text="STR Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontAutoScalingEnabled="True" FontSize="30"/> 
-                <Label Text="Str Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblStr_Mod"/> <!--Using lbl to mean label-->
+                <Label Text="Str Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblStr_Mod"/> <!--lbl means label-->
                 <Label Text="DEX Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
                 <Label Text="Dex Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblDex_Mod"/>
                 <Label Text="CON Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
