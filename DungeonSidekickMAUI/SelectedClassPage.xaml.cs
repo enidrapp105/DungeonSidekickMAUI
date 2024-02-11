@@ -66,28 +66,8 @@ public partial class SelectedClassPage : ContentPage
                                 ClassStack.Children.Add(Class);
                                 ClassStack.Children.Add(HitDie);
                             }
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
+                            reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
                         }
-
-                        //query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
-                        //        " WHERE ClassID = @ClassID2;";
-                        //cmd.CommandText = query;
-                        //cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
-                        //using (SqlDataReader reader = cmd.ExecuteReader())
-                        //{
-                        //    Label StartProf = new Label();
-                        //    StartProf.TextColor = (Color)fontColor;
-                        //    StartProf.Text = "Starting Proficiencies: ";
-                        //    ClassStack.Children.Add(StartProf);
-                        //    while (reader.Read())
-                        //    {
-                        //        Label ProfName = new Label();
-                        //        ProfName.TextColor = (Color)fontColor;
-                        //        ProfName.Text = reader.GetString(0);
-                        //        ClassStack.Children.Add(ProfName);
-                        //    }
-                        //    reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
-                        //}
 
                         query = "SELECT ProfID, Optional, Choice FROM dbo.ClassProficienciesLookup" +
                                 " WHERE ClassID = @ClassID2;";
@@ -119,22 +99,22 @@ public partial class SelectedClassPage : ContentPage
                                 try
                                 {
                                     
-                                    using (SqlConnection conn2 = new SqlConnection(connectionString))
+                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
                                     {
-                                        using (SqlCommand cmd2 = conn2.CreateCommand())
+                                        using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
-                                            cmd2.CommandText = innerQuery;
-                                            cmd2.Parameters.AddWithValue("@ProfID", Id);
-                                            conn2.Open();
-                                            if (conn2.State == System.Data.ConnectionState.Open)
+                                            innerCmd.CommandText = innerQuery;
+                                            innerCmd.Parameters.AddWithValue("@ProfID", Id);
+                                            innerConn.Open();
+                                            if (innerConn.State == System.Data.ConnectionState.Open)
                                             {
-                                                using (SqlDataReader reader2 = cmd2.ExecuteReader())
+                                                using (SqlDataReader innerReader = innerCmd.ExecuteReader())
                                                 {
-                                                    while (reader2.Read())
+                                                    while (innerReader.Read())
                                                     {
                                                         Label ProfName = new Label();
                                                         ProfName.TextColor = (Color)fontColor;
-                                                        ProfName.Text = reader2.GetString(0);
+                                                        ProfName.Text = innerReader.GetString(0);
                                                         ClassStack.Children.Add(ProfName);
                                                     }
                                                 }
@@ -148,7 +128,7 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
+                            reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
                         }
                     }
 
