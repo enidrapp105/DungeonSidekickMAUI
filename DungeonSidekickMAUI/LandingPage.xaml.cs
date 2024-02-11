@@ -20,26 +20,37 @@ public partial class LandingPage : ContentPage
             Navigation.PushAsync(new MainPage(" "));
         }
 	}
-    
-    //This loads the CharacterSheet class we passed into the ctor. Also handles math for the modifiers 
+    /*
+     * Function: CalcStatMod
+     * Author: Brendon Williams
+     * Purpose: Does the math to calculate a stat mod
+     * Last Modified: 2/10/2024 12:04pm by Author
+     */
+    private string CalcStatMod(int stat)
+    {
+        int mod = stat - 10;
+        double truemod = Math.Floor(mod / 2.0); //Double.Floor kind of sucks. Math.Floor is the only way I could get correct negative rounding
+        return truemod.ToString();
+    }
+
+    /*
+     * Function: LoadCharacterSheetPage
+     * Author: Brendon Williams
+     * Purpose: Helper Function that fills in the various text boxes on the landingpage.xaml
+     * Last Modified: 2/10/2024 10:35pm by Author
+     */
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
-        int strmod = (int.Parse(characterSheet.strength) - 10) / 2; 
-        int dexmod = (int.Parse(characterSheet.dexterity) - 10) / 2; //Using int to drop decimal (technically incorrect WIP, but floor and round are haters)
-        int constmod = (int.Parse(characterSheet.constitution) - 10) / 2;
-        int intmod = (int.Parse(characterSheet.intelligence) - 10) / 2;
-        int wismod = (int.Parse(characterSheet.wisdom) - 10) / 2;
-        int charmod = (int.Parse(characterSheet.charisma) - 10) / 2;
 
         if(currentcharacterSheet.charactername != null)
             User_Disp.Text = "Welcome " + currentcharacterSheet.charactername;
 
-        Str_Mod.Text = strmod.ToString();
-        Dex_Mod.Text = dexmod.ToString();
-        Const_Mod.Text = constmod.ToString();
-        Int_Mod.Text = intmod.ToString();
-        Wis_Mod.Text = wismod.ToString();
-        Char_Mod.Text = charmod.ToString();
+        lblStr_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.strength)); //For each stat, CalcStatMod calculates the modifier based on
+        lblDex_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.dexterity)); //the stat that gets passed.
+        lblConst_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.constitution));
+        lblInt_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.intelligence));
+        lblWis_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.wisdom));
+        lblChar_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.charisma));
     }
     /*
      * Function: RollDice
