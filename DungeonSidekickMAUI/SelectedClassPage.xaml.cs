@@ -36,7 +36,8 @@ public partial class SelectedClassPage : ContentPage
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("HeaderC", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("BackgroundC", out object backgroundColor);
                     ClassStack.BackgroundColor = (Color)backgroundColor;
-                    Frame optionProf = new Frame();
+                    Frame optionalSkillsFrame = new Frame();
+                    Frame savingThrowsFrame = new Frame();
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -75,8 +76,12 @@ public partial class SelectedClassPage : ContentPage
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            StackLayout optionProfLayout = new StackLayout();
-                            optionProfLayout.BackgroundColor = (Color)headerColor;
+                            StackLayout savingThrows = new StackLayout();
+                            savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = (Color)fontColor });
+                            StackLayout optionalSkills = new StackLayout();
+                            savingThrows.BackgroundColor = (Color)frameColor;
+                            optionalSkills.BackgroundColor = (Color)frameColor;
+
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -91,13 +96,13 @@ public partial class SelectedClassPage : ContentPage
                                         StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Starting Skills: ";
                                         //ClassStack.Children.Add(StartProf);
-                                        optionProfLayout.Add(StartProf);
+                                        optionalSkills.Add(StartProf);
                                     }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
-                                    Choice.Text = "Choose " + choice + " (for normal purposes)";
+                                    Choice.Text = "Choose " + choice + " (for standard games)";
                                     //ClassStack.Children.Add(Choice);
-                                    optionProfLayout.Add(Choice);
+                                    optionalSkills.Add(Choice);
                                 }
                                 newOption = optional;
 
@@ -124,7 +129,11 @@ public partial class SelectedClassPage : ContentPage
                                                         ProfName.Text = innerReader.GetString(0);
                                                         if ((innerReader.GetString(0)).Contains("Skill"))
                                                         {
-                                                            optionProfLayout.Children.Add(ProfName);
+                                                            optionalSkills.Children.Add(ProfName);
+                                                        }
+                                                        else if ((innerReader.GetString(0)).Contains("Saving Throw"))
+                                                        {
+                                                            savingThrows.Children.Add(ProfName);
                                                         }
                                                         else
                                                         {
@@ -142,7 +151,8 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
-                            optionProf.Content = optionProfLayout;
+                            savingThrowsFrame.Content = savingThrows;
+                            optionalSkillsFrame.Content = optionalSkills;
                         }
                     }
 
@@ -154,7 +164,8 @@ public partial class SelectedClassPage : ContentPage
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
-                    ClassStack.Children.Add(optionProf);
+                    ClassStack.Children.Add(savingThrowsFrame);
+                    ClassStack.Children.Add(optionalSkillsFrame);
                     ClassStack.Children.Add(submit);
                     mainPanel.Children.Add(ClassStack);
                 }
