@@ -36,7 +36,7 @@ public partial class SelectedClassPage : ContentPage
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("HeaderC", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("BackgroundC", out object backgroundColor);
                     ClassStack.BackgroundColor = (Color)backgroundColor;
-
+                    Frame optionProf = new Frame();
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -75,7 +75,8 @@ public partial class SelectedClassPage : ContentPage
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-
+                            StackLayout optionProfLayout = new StackLayout();
+                            optionProfLayout.BackgroundColor = (Color)headerColor;
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -89,11 +90,12 @@ public partial class SelectedClassPage : ContentPage
                                         Label StartProf = new Label();
                                         StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                                        ClassStack.Children.Add(StartProf);
+                                        //ClassStack.Children.Add(StartProf);
+                                        optionProfLayout.Add(StartProf);
                                     }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
-                                    Choice.Text = "Choose " + choice;
+                                    Choice.Text = "Choose " + choice + " (for normal purposes)";
                                     ClassStack.Children.Add(Choice);
                                 }
                                 newOption = optional;
@@ -132,6 +134,7 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
+
                         }
                     }
 
@@ -143,6 +146,7 @@ public partial class SelectedClassPage : ContentPage
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
+                    ClassStack.Children.Add(optionProf);
                     ClassStack.Children.Add(submit);
                     mainPanel.Children.Add(ClassStack);
                 }
