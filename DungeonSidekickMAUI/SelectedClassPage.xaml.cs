@@ -89,14 +89,15 @@ public partial class SelectedClassPage : ContentPage
                                     {
                                         Label StartProf = new Label();
                                         StartProf.TextColor = (Color)fontColor;
-                                        StartProf.Text = "Choose Optional Starting Proficiencies: ";
+                                        StartProf.Text = "Choose Optional Starting Skills: ";
                                         //ClassStack.Children.Add(StartProf);
                                         optionProfLayout.Add(StartProf);
                                     }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice + " (for normal purposes)";
-                                    ClassStack.Children.Add(Choice);
+                                    //ClassStack.Children.Add(Choice);
+                                    optionProfLayout.Add(Choice);
                                 }
                                 newOption = optional;
 
@@ -121,7 +122,14 @@ public partial class SelectedClassPage : ContentPage
                                                         Label ProfName = new Label();
                                                         ProfName.TextColor = (Color)fontColor;
                                                         ProfName.Text = innerReader.GetString(0);
-                                                        ClassStack.Children.Add(ProfName);
+                                                        if ((innerReader.GetString(0)).Contains("Skill"))
+                                                        {
+                                                            optionProfLayout.Children.Add(ProfName);
+                                                        }
+                                                        else
+                                                        {
+                                                            ClassStack.Children.Add(ProfName);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -134,7 +142,7 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
-
+                            optionProf.Content = optionProfLayout;
                         }
                     }
 
