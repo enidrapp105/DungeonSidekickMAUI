@@ -12,7 +12,7 @@ public partial class LoginPage : ContentPage
 	{
 		Password_Hasher password_Hasher = new Password_Hasher(UName.Text);
 		if(password_Hasher.VerifyHashedPassword(Pass.Text)) //checks the db and returns true or false if it checks out
-            Navigation.PushAsync(new MainPage());
+            Navigation.PushAsync(new MainPage(UName.Text));
 		else
 			DisplayAlert("Your username or password are incorrect", "Please try a different username or password", "Ok");
     }
@@ -23,6 +23,6 @@ public partial class LoginPage : ContentPage
     private void DebugbuttonButtonClicked(object sender, EventArgs e)
     {
         
-        Navigation.PushAsync(new MainPage());
+        Navigation.PushAsync(new MainPage(" "));
     }
 }

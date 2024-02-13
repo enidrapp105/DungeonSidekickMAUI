@@ -13,6 +13,7 @@
         <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Player_Clicked"/>
         <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Player_Import"/>
 
+
         <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
     </StackLayout>
 
