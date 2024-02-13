@@ -11,7 +11,6 @@
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="FillAndExpand" x:Name="ClassDescLabel"/>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="FillAndExpand" x:Name="ClassHitDieLabel"/>
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Submit"/>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

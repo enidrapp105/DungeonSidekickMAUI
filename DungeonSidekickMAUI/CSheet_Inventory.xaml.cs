@@ -17,7 +17,7 @@ namespace DungeonSidekickMAUI
         {
             CharacterSheetcurrent = sheet;
             InitializeComponent();
-            Inventory.Text = CharacterSheetcurrent.characterclass.ClassDesc;
+            Inventory.Text = CharacterSheetcurrent.characterclass;
         }
         private void SubmitStats(object sender, EventArgs e)
         {
@@ -50,6 +50,7 @@ namespace DungeonSidekickMAUI
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
+            Navigation.PushAsync(new LandingPage(CharacterSheetcurrent));
         }
     }
 }
