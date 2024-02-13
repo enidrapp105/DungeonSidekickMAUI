@@ -2,15 +2,15 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SignupPage"
-             Title="SignupPage">
+             >
     <VerticalStackLayout>
         <Label Text="Sign up" TextColor="{DynamicResource FontC}"/>
         <Label Text="username" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
+        <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
         <Label Text="password" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="passwordbox" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
+        <Entry x:Name="passwordbox" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
         <Label Text="password(again)" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="passwordbox2" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource FrameC}"/>
-        <Button TextColor="{DynamicResource FontC}" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource FrameC}"/>
+        <Entry x:Name="passwordbox2" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
+        <Button TextColor="{DynamicResource FontC}" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource TrinaryColor}"/>
     </VerticalStackLayout>
 </ContentPage>

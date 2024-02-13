@@ -24,6 +24,7 @@ public partial class ClassPickerPage : ContentPage
             HorizontalOptions = LayoutOptions.CenterAndExpand,
             VerticalOptions = LayoutOptions.StartAndExpand
         };
+
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         string query = "SELECT ClassID, Class FROM dbo.ClassLookup";
         ClassButtonContainer = this.FindByName<StackLayout>("ClassButtonContainer");

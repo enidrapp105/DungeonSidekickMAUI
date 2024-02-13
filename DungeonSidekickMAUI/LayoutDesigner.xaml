@@ -2,78 +2,77 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LayoutDesigner"
-             Title="LayoutDesigner">
+             >
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="stackLayout" BackgroundColor="Black">
+            <StackLayout x:Name="stackLayout" BackgroundColor="LightSlateGray">
 
-                <Frame BackgroundColor="DarkRed" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
                     <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
 
-                <!-- RGB Sliders for Background -->
-                <Label Text="Background" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <!-- RGB Sliders for PrimaryColor -->
+                <Label Text="Primary" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="BredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="BredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-                </StackLayout>
-
-
-                <StackLayout Orientation="Horizontal" Padding="20">
-                    <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="BgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="BgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-                </StackLayout>
-
-                <StackLayout Orientation="Horizontal" Padding="20">
-                    <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="BblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="BblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
-                </StackLayout>
-                <BoxView x:Name="BackgroundBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
-
-                <!-- RGB Sliders for HeaderBackground -->
-                <Label Text="HeaderBackground" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-                <StackLayout Orientation="Horizontal" Padding="20">
-                    <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="HredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="HredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="PredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="PredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="HgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="HgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="PgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="PgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="HblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="HblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="PblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="PblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
-                <BoxView x:Name="HeaderBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
+                <BoxView x:Name="PrimaryBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
-                <!-- RGB Sliders for FrameColor -->
-                <Label Text="FrameBackground" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <!-- RGB Sliders for SecondaryColor -->
+                <Label Text="Secondary" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="FRredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="FRredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="SredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="SredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="FRgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="FRgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="SgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="SgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
 
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
-                    <Label x:Name="FRblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
-                    <Slider x:Name="FRblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                    <Label x:Name="SblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="SblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
                 </StackLayout>
-                <BoxView x:Name="FrameBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
+                <BoxView x:Name="SecondaryBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
+
+                <!-- RGB Sliders for TrinaryColor -->
+                <Label Text="Trinary" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="TredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="TredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="TgreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="TgreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="TblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="TblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+                <BoxView x:Name="TrinaryBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <!-- RGB Sliders for Font -->
                 <Label Text="Font" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
@@ -98,7 +97,7 @@
 
 
 
-                <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SaveAndReturn" />
+                <Button BackgroundColor="Blue" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SaveAndReturn" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
