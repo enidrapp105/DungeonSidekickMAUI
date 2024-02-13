@@ -4,13 +4,13 @@
              x:Class="DungeonSidekickMAUI.CSheet_Import">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource BackgroundC}">
-                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
-                <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
+                <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
                 <!--PName = Player Name, CName = Character Name-->
-                <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
+                <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
 
             </StackLayout>
         </ScrollView>
