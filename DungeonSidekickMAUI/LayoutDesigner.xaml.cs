@@ -4,10 +4,8 @@ namespace DungeonSidekickMAUI;
 
 public partial class LayoutDesigner : ContentPage
 {
-    string username;
-    public LayoutDesigner(string Given_Username)
+    public LayoutDesigner()
 	{
-        username = Given_Username;
 		InitializeComponent();
 	}
 
@@ -29,11 +27,11 @@ public partial class LayoutDesigner : ContentPage
         String FC = (FredValueLabel.Text + " " + FgreenValueLabel.Text + " " + FblueValueLabel.Text);
         designSave.SaveColors(Primary, Secondary, Trinary, FC);
         CustomResources.GetColors();
-        Navigation.PushAsync(new Settings_Page(username));
+        Navigation.PushAsync(new Settings_Page());
     }
     private void SettingsPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new Settings_Page(username));
+        Navigation.PushAsync(new Settings_Page());
     }
     
     /*
