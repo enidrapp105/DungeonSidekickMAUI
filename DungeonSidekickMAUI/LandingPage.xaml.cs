@@ -57,15 +57,15 @@ public partial class LandingPage : ContentPage
      * Purpose: to call the ParseAndRoll function and set its text to the rolled sum
      * last Modified: 2/4/2024 6:21pm By Kenny Rapp
      */
-    private void RollButtonClicked(object sender, EventArgs e)
-    {
-        try
-        {
-            rollbutton.Text = diceroller.Roll(inputentry.Text).ToString();
-        }
-        catch (Exception ex) 
-        {
-            DisplayAlert("invalid input(s)", "Please fix your input string", "OK");
-        }
-    }
+    //private void RollButtonClicked(object sender, EventArgs e)
+    //{
+    //    try
+    //    {
+    //        rollbutton.Text = diceroller.Roll(inputentry.Text).ToString();
+    //    }
+    //    catch (Exception ex) 
+    //    {
+    //        DisplayAlert("invalid input(s)", "Please fix your input string", "OK");
+    //    }
+    //}
 }
