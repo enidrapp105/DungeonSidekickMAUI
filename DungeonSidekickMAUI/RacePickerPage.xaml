@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.RacePickerPage">
     <ContentPage.Content>
-        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource BackgroundC}">
+        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="RacePageStack">
-                <StackLayout x:Name="RaceButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
-                    <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+                <StackLayout x:Name="RaceButtonContainer" Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                         <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                     </Frame>
                     <!-- Dynamically created buttons will be added here -->

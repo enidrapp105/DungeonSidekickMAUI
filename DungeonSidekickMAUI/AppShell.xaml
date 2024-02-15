@@ -5,10 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DungeonSidekickMAUI"
     Shell.FlyoutBehavior="Disabled"
-    Title="DungeonSidekickMAUI">
+    >
 
     <ShellContent
-        Title="Home"
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage"/>
 

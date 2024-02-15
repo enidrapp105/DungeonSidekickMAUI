@@ -3,17 +3,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MainPage">
 
-    <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
-        <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+        <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
             <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
         <Label Text="Dungeoning made easy!" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="1000" HorizontalOptions="Start"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Clicked"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="1000" HorizontalOptions="Start" Clicked="Player_Import"/>
+        <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0"/>
+        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Player_Clicked"/>
+        <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="Player_Import"/>
 
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Settings" WidthRequest="1000" HorizontalOptions="Start" Clicked="Settings_Page"/>
+
+        <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
     </StackLayout>
 
 </ContentPage>
