@@ -8,7 +8,7 @@ public partial class Settings_Page : ContentPage
     }
     private void MainPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        Navigation.PushAsync(new MainPage(username));
     }
 
     private void LightTheme(object sender, EventArgs e)
@@ -42,6 +42,6 @@ public partial class Settings_Page : ContentPage
 
     private void LayoutDesigner(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LayoutDesigner());
+        Navigation.PushAsync(new LayoutDesigner(username));
     }
 }
