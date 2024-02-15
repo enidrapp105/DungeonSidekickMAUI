@@ -8,5 +8,8 @@
     <Color x:Key="FrameC">#FF0000</Color>
     <Color x:Key="FontC">#FFFFFF</Color>
 
-
+    <Frame x:Key="PageSection" BackgroundColor="{DynamicResource BackgroundC}" Padding="5" >
+        <StackLayout BackgroundColor="{DynamicResource FrameC}" Padding="5">
+        </StackLayout>
+    </Frame>
 </ResourceDictionary>
