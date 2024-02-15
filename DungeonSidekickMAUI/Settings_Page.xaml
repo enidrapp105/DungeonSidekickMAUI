@@ -8,6 +8,7 @@
         </Frame>
         <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
         <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        <ContentPresenter Content="{StaticResource PageSection}"/>
     </StackLayout>
 </ContentPage>
     
