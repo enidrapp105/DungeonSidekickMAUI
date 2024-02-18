@@ -11,8 +11,8 @@ namespace DungeonSidekickMAUI
     /*
      * Class: Inventory
      * Author: Thomas Hewitt
-     * Purpose: Handling the intermediate tables for the items table.
-     * last Modified: 2/7/2024 by Thomas Hewitt
+     * Purpose: Handling all tasks related to the inventory table.
+     * last Modified: 2/18/2024 by Thomas Hewitt
      */
     public class Inventory
     {
@@ -41,9 +41,9 @@ namespace DungeonSidekickMAUI
                             {
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
-                                    InventoryID = reader.GetInt32(0); // Grabs the ID of the found inventory.
+                                    m_CharacterID = reader.GetInt32(0); // Grabs the ID of the found inventory.
                                 }
-                                GetIInterStuff();
+                                PullItems();
 
                             }
                             else // Didn't find it.
@@ -58,7 +58,7 @@ namespace DungeonSidekickMAUI
                                 cmd.CommandText = newQuery;
                                 using (SqlDataReader reader = cmd.ExecuteReader())
                                 {
-                                    InventoryID = reader.GetInt32(0); // Assigns the freshly generated ID to this inventory for later use.
+                                    CharacterID = reader.GetInt32(0); // Assigns the freshly generated ID to this inventory for later use.
                                 }
                             }
                         }
@@ -71,12 +71,12 @@ namespace DungeonSidekickMAUI
             }
             // Populate the class with data from the database.
         }
-        public void GetIInterStuff() // Query the database and populate the list responsible for storing the data found in the IInter table. Shows your items + quantities.
+        public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
-            string query = "SELECT ItemID, Quantity FROM dbo.IInter" +
+            string query = "SELECT ItemID, Quantity FROM dbo.Items" +
             " WHERE InventoryID = @IID";
 
-            IInter.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -87,7 +87,7 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@IID", InventoryID);
+                            cmd.Parameters.AddWithValue("@IID", m_CharacterID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
@@ -96,7 +96,7 @@ namespace DungeonSidekickMAUI
                                     temp.Clear();
                                     temp.Add(reader.GetInt32(0));
                                     temp.Add(reader.GetInt32(1));
-                                    IInter.Add(temp); // Puts the list of data into IInter. This makes UpdateDB easier, in theory.
+                                    Items.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
                                 }
                             }
                         }
@@ -109,17 +109,17 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void AddItem(int ItemID)
+        public void AddItem(int ItemID, int ETypeID)
         {
             // Work on this once we get items sorted out.
         }
 
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
-            string query = "INSERT INTO dbo.IInter(ItemID, Quantity, InventoryID)" +
-            " VALUES(@ItemID, @Quantity, @InventoryID);";
+            string query = "INSERT INTO dbo.Inventory(ItemDetailsID, Quantity, ETypeID, CharacterID)" +
+            " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
 
-            if(IInter.Count > 0) // Checks if IInter is empty. If not, proceed.
+            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
             {
                 try
                 {
@@ -131,11 +131,28 @@ namespace DungeonSidekickMAUI
                             using (SqlCommand cmd = conn.CreateCommand())
                             {
                                 cmd.CommandText = query;
-                                cmd.Parameters.AddWithValue("@InventoryID", InventoryID);
-                                foreach (List<int> stuff in IInter) // Should iterate through every element of IInter and correctly input the necessary data into the query.
+                                cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                                cmd.Parameters.AddWithValue("@Etype", ITEM);
+                                foreach (List<int> item in Items) // Should iterate through every element of Items and correctly input the necessary data into the query.
                                 {
-                                    cmd.Parameters.AddWithValue("@ItemID", stuff[0]);
-                                    cmd.Parameters.AddWithValue("@Quantity", stuff[1]);
+                                    cmd.Parameters.AddWithValue("@ItemID", item[0]);
+                                    cmd.Parameters.AddWithValue("@Quantity", item[1]);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                cmd.Parameters.AddWithValue("@Etype", WEAPON);
+                                foreach (List<int> weapon in Weapons)
+                                {
+                                    cmd.Parameters.AddWithValue("@ItemID", weapon[0]);
+                                    cmd.Parameters.AddWithValue("@Quantity", weapon[1]);
+                                    cmd.ExecuteNonQuery();
+                                }
+
+                                cmd.Parameters.AddWithValue("@Etype", EQUIPMENT);
+                                foreach (List<int> equipment in Equipment)
+                                {
+                                    cmd.Parameters.AddWithValue("@ItemID", equipment[0]);
+                                    cmd.Parameters.AddWithValue("@Quantity", equipment[1]);
                                     cmd.ExecuteNonQuery();
                                 }
                             }
@@ -149,9 +166,18 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public required int InventoryID { get; set; } // Stores the ID of the current Inventory.
+        public required int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
 
-        public required List<List<int>> IInter { get; set; } // Stores the data of the IInter table. Reduces the number of queries we'll need to use.
+        public required List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
+
+        public required List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
+
+        public required List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
+
+        // These lable the ETypeID we use in the DB.
+        public const int WEAPON = 0;
+        public const int EQUIPMENT = 1;
+        public const int ITEM = 2;
 
     }
 }
