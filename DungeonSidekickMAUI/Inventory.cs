@@ -21,60 +21,14 @@ namespace DungeonSidekickMAUI
 
         public Inventory(int CharacterID) // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    if (conn.State == System.Data.ConnectionState.Open)
-                    {
-                        using (SqlCommand cmd = conn.CreateCommand())
-                        {
-                            // Preliminary checks to see if Inventory exists
-                            string query = "SELECT InventoryID from dbo.CharacterSheet" +
-                            " WHERE CharacterID = @CID;";
-
-                            cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@CID", CharacterID);
-                            int exists = (int)cmd.ExecuteScalar(); // This will check to see if this inventory exists in the database. Returns null if there is no inventory was found.
-                            if (exists > 0) // Found it. Grab the information from the DB, inventory exists.
-                            {
-                                using (SqlDataReader reader = cmd.ExecuteReader())
-                                {
-                                    m_CharacterID = reader.GetInt32(0); // Grabs the ID of the found inventory.
-                                }
-                                PullItems();
-
-                            }
-                            else // Didn't find it.
-                            {
-                                // Create a new inventory in the DB, inventory doesn't exist. Then, assign the ID to the member variable.
-
-                                string newQuery = "INSERT INTO dbo.Inventory DEFAULT VALUES;"; // Handy trick, since Inventory only contains a PK, DEFAULT VALUES just increments the ID.
-                                cmd.CommandText = newQuery;
-                                cmd.ExecuteNonQuery();
-
-                                newQuery = "SELECT InventoryID=IDENT_CURRENT('dbo.Inventory');"; // This will grab the latest InventoryID that was created.
-                                cmd.CommandText = newQuery;
-                                using (SqlDataReader reader = cmd.ExecuteReader())
-                                {
-                                    CharacterID = reader.GetInt32(0); // Assigns the freshly generated ID to this inventory for later use.
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception eSql)
-            {
-                Debug.WriteLine("Exception: " + eSql.Message);
-            }
-            // Populate the class with data from the database.
+            // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
+            m_CharacterID = CharacterID;
+            PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
-            string query = "SELECT ItemID, Quantity FROM dbo.Items" +
-            " WHERE InventoryID = @IID";
+            string query = "SELECT ItemDetailsID, Quantity, ETypeID FROM dbo.Inventory" +
+            " WHERE CharacterID = @CharacterID";
 
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
@@ -87,7 +41,7 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@IID", m_CharacterID);
+                            cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
@@ -96,7 +50,22 @@ namespace DungeonSidekickMAUI
                                     temp.Clear();
                                     temp.Add(reader.GetInt32(0));
                                     temp.Add(reader.GetInt32(1));
-                                    Items.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
+                                    temp.Add(reader.GetInt32(2));
+
+                                    // These if statements will help determine what type of item we are storing. Should store the data in the correct lists.
+                                    if (temp[2] == ITEM)
+                                    {
+                                        Items.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
+                                    }
+                                    if (temp[2] == WEAPON)
+                                    {
+                                        Weapons.Add(temp);
+                                    }
+                                    if (temp[2] == EQUIPMENT)
+                                    {
+                                        Equipment.Add(temp);
+                                    }
+                                    
                                 }
                             }
                         }
@@ -109,9 +78,16 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void AddItem(int ItemID, int ETypeID)
+        public void AddItem(int ItemID, int Quantity, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
         {
-            // Work on this once we get items sorted out.
+            if(ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
+            {
+                return;
+            }
+            else // EType was valid, proceed.
+            {
+
+            }
         }
 
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
