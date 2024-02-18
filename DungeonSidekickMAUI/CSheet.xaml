@@ -8,52 +8,53 @@
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
             <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="PName"
-                WidthRequest="1000" HorizontalOptions="FillAndExpand" />
+                WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource FontC}"/>
+
             <!--PName = Player Name, CName = Character Name-->
 
             <Entry Placeholder="Character Name" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="CName"
-                WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+                WidthRequest="400" HorizontalOptions="FillAndExpand" PlaceholderColor="{DynamicResource FontC}"/>
             <!--Color is temp-->
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Race" Clicked="RacePickerPage"
-                WidthRequest="1000" HorizontalOptions="FillAndExpand" x:Name="RaceButton"/>
+                WidthRequest="400" HorizontalOptions="FillAndExpand" x:Name="RaceButton"/>
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Class" Clicked="ClassPickerPage"
-               WidthRequest="1000" HorizontalOptions="FillAndExpand" x:Name="ClassButton"/>
+               WidthRequest="400" HorizontalOptions="FillAndExpand" x:Name="ClassButton"/>
 
             <Entry Placeholder="Background" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Background"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="50"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="50" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Allignment" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Personality Traits" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="PTraits"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Ideals" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Ideals"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Bonds" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Bonds"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Flaws" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Flaws"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Features and Traits" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Traits"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="100"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="100" PlaceholderColor="{DynamicResource FontC}"/>
             <!--'&' doesnt work?-->
 
             <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Attacks" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Attacks"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Entry Placeholder="Spells" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Spells"
-               VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
-               WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+               WidthRequest="400" HorizontalOptions="FillAndExpand" />
 
 
         </StackLayout>

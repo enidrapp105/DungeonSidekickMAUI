@@ -20,6 +20,7 @@
         
         <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
             MinimumWidthRequest="400" HorizontalOptions="Center"/> <!--For some reason, 400 is different for this button-->
-        <!--<Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>--> <!--Debug button-->
+        <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
+        <!--Debug button-->
     </VerticalStackLayout>
 </ContentPage>

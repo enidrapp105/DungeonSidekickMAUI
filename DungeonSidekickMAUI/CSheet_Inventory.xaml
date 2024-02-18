@@ -9,13 +9,13 @@
             </Frame>
 
             <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
-            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
 
-            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
-            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="100"/>
+            <Entry Placeholder="Proficiencies (this is placeholder text)" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
+            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="FillAndExpand" HeightRequest="100" PlaceholderColor="{DynamicResource FontC}"/>
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

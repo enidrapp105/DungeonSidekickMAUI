@@ -20,6 +20,7 @@ public partial class Settings_Page : ContentPage
         String Trinary = (100 + " " + 255 + " " + 255);
         String FC = (0 + " " + 0 + " " + 0);
 
+
         designSave.SaveColors(Primary, Secondary, Trinary, FC);
         CustomResources.GetColors();
 

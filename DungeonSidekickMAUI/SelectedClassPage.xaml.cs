@@ -167,7 +167,7 @@ public partial class SelectedClassPage : ContentPage
                     ClassStack.Children.Add(savingThrowsFrame);
                     ClassStack.Children.Add(optionalSkillsFrame);
                     ClassStack.Children.Add(submit);
-                    mainPanel.Children.Add(ClassStack);
+                    //mainPanel.Children.Add(ClassStack);
                 }
             }
         }

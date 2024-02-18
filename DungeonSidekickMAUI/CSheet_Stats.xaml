@@ -9,28 +9,28 @@
             </Frame>
 
             <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
 
             <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

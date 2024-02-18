@@ -7,6 +7,7 @@
     <Color x:Key="SecondaryColor">#FF0000</Color>
     <Color x:Key="TrinaryColor">#FF0000</Color>
     <Color x:Key="FontC">#FFFFFF</Color>
+    <Color x:Key="FontSecondary">#000000</Color>
 
 
 </ResourceDictionary>
