@@ -32,7 +32,7 @@ namespace DungeonSidekickMAUI
 
         /*****************
          * Purpose: This function will salt the password using a consistent buffer to make it identifiable
-         * Modifiable: 
+         * Modified: 
          ****************/
 
         public string HashPassword(string password)
@@ -56,11 +56,16 @@ namespace DungeonSidekickMAUI
             QueryUserData(this.username,output,saltstring);
             return output;
         }
+        /*
+        * Function: VerifyHashedPassword (takes 1 string)
+        * Author: Brendon Williams
+        * Purpose: Takes the password a user inputs, and then correctly calls the verify hashed password function
+        * Last Modified: 2/11/2024 2:17pm by Author
+        */
         public bool VerifyHashedPassword(string providedPassword)
         {
             string query = "SELECT SaltedPassword FROM dbo.Users" +
-                " WHERE Username = '" + this.username + "';";
-
+                " WHERE Username =  @Username;";
 
             try
             {
@@ -72,12 +77,19 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@Username", username);
                             if (cmd.ExecuteScalar() == null)
                             {
                                return false;
                             }
                             string saltedpassword = (string)cmd.ExecuteScalar();
-                            return VerifyHashedPassword(saltedpassword, providedPassword);
+                            if (VerifyHashedPassword(saltedpassword, providedPassword))
+                            {
+                                User.UserName = username;
+                                UpdateUserId();
+                                return true;
+                            }
+                            else return false;
                         }
                     }
                 }
@@ -142,12 +154,12 @@ namespace DungeonSidekickMAUI
                 | ((uint)(buffer[offset + 2]) << 8)
                 | ((uint)(buffer[offset + 3]));
         }
-        /**************
-         * Author: Brendon Williams
-         * Date: 1/27/2024
-         * Purpose: This is a helper function to query user data so that we don't need to have a bunch of db calls open
-         * Modified: 
-         **************/
+        /*
+        * Function: QueryUserData
+        * Author: Brendon Williams
+        * Purpose: This function queries all the users data in one bunch
+        * Last Modified: 1/27/2024 by Author
+        */
         private static void QueryUserData(string username, string salted_password, string salt)
         {
             
@@ -169,6 +181,40 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@saltedpassword", salted_password);
                             cmd.Parameters.AddWithValue("@salt", salt);
                             cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+        /*
+        * Function: GrabUserId
+        * Author: Brendon Williams
+        * Purpose: Updates our static class's UserId. Only called if password matches
+        * Last Modified: 2/11/2024 2:33pm by Author
+        */
+        private void UpdateUserId()
+        {
+
+
+            string query = "SELECT UID from dbo.Users" +
+                "WHERE Username = @Username";
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@Username", username);
+                            User.UserId = (int)cmd.ExecuteScalar();
                         }
                     }
                 }

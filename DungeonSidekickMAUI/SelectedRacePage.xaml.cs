@@ -29,9 +29,9 @@ public partial class SelectedRacePage : ContentPage
                 {
                     StackLayout RaceStack = new StackLayout();
                     var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FrameC", out object frameColor);
-                    var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("HeaderC", out object headerColor);
-                    var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("BackgroundC", out object backgroundColor);
+                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object frameColor);
+                    var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object headerColor);
+                    var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
                     RaceStack.BackgroundColor = (Color)backgroundColor;
 
                     using (SqlCommand cmd = conn.CreateCommand())
@@ -93,140 +93,129 @@ public partial class SelectedRacePage : ContentPage
                                 RaceStack.Children.Add(SizeDesc);
                                 RaceStack.Children.Add(Lang);
                                 RaceStack.Children.Add(LangDesc);
+
+                                
+                                
                             }
-                            reader.Close();
+                            
                         }
 
-                        query = "SELECT ProfID, Optional, Choice FROM dbo.RaceProficienciesLookup" +
-                                    " WHERE RaceID = @RaceID2;";
+                        BoxView line = new BoxView
+                        {
+                            Color = (Color)fontColor,
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line);
+                        query = "SELECT Bonus, AbilityName FROM dbo.AbilityBonuses" +
+                                " WHERE RaceID = @RaceID2;";
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@RaceID2", selectedRace);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader2 = cmd.ExecuteReader())
                         {
-                            int newOption = 0;
-                            while (reader.Read())
+                            Label Bonus = new Label();
+                            Bonus.TextColor = (Color)fontColor;
+                            Bonus.Text = "Bonuses: ";
+                            RaceStack.Children.Add(Bonus);
+                            while (reader2.Read())
                             {
-                                int Id = reader.GetInt32(0);
-                                int optional = reader.GetInt32(1);
-                                int choice = reader.GetInt32(2);
-                                if (optional != newOption && optional != 0)
-                                {
-                                    if (optional == 1)
-                                    {
-                                        Label StartProf = new Label();
-                                        StartProf.TextColor = (Color)fontColor;
-                                        StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                                        RaceStack.Children.Add(StartProf);
-                                    }
-                                    Label Choice = new Label();
-                                    Choice.TextColor = (Color)fontColor;
-                                    Choice.Text = "Choose " + choice;
-                                    RaceStack.Children.Add(Choice);
-                                }
-                                newOption = optional;
-
-                                string innerQuery = "SELECT ProfName FROM dbo.ProficienciesLookup" +
-                                " WHERE ProfID = @ProfID;";
-                                try
-                                {
-
-                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
-                                    {
-                                        using (SqlCommand innerCmd = innerConn.CreateCommand())
-                                        {
-                                            innerCmd.CommandText = innerQuery;
-                                            innerCmd.Parameters.AddWithValue("@ProfID", Id);
-                                            innerConn.Open();
-                                            if (innerConn.State == System.Data.ConnectionState.Open)
-                                            {
-                                                using (SqlDataReader innerReader = innerCmd.ExecuteReader())
-                                                {
-                                                    while (innerReader.Read())
-                                                    {
-                                                        Label ProfName = new Label();
-                                                        ProfName.TextColor = (Color)fontColor;
-                                                        ProfName.Text = innerReader.GetString(0);
-                                                        RaceStack.Children.Add(ProfName);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                catch (Exception eSql)
-                                {
-                                    DisplayAlert("Error!", eSql.Message, "OK"); // Should be removed and replaced before final product
-                                    Debug.WriteLine("Exception: " + eSql.Message);
-                                }
+                                Label AbilityName = new Label();
+                                AbilityName.TextColor = (Color)fontColor;
+                                AbilityName.Text = reader2.GetString(1) + " " + reader2.GetInt32(0);
+                                RaceStack.Children.Add(AbilityName);
                             }
                         }
-                        query = "SELECT BonusID, Bonus, Optional, Choice FROM dbo.RaceBonusLookup" +
-                                " WHERE RaceID = @RaceID3;";
+
+                        BoxView line2 = new BoxView
+                        {
+                            Color = (Color)fontColor,
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line2);
+                        query = "SELECT Bonus, AbilityName, Choice FROM dbo.AbilityBonusOptions" +
+                            " WHERE RaceID = @RaceID3;";
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@RaceID3", selectedRace);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        using (SqlDataReader reader3 = cmd.ExecuteReader())
                         {
-                            
-                            int newOption = 0;
-                            while (reader.Read())
+                            Label Bonus = new Label();
+                            Bonus.TextColor = (Color)fontColor;
+                            Bonus.Text = "Choose Optional Bonuses: ";
+                            RaceStack.Children.Add(Bonus);
+                            int choice = 0;
+                            while (reader3.Read())
                             {
-                                int Id = reader.GetInt32(0);
-                                int bonus = reader.GetInt32(1);
-                                int optional = reader.GetInt32(2);
-                                int choice = reader.GetInt32(3);
-                                if (optional != newOption && optional != 0 && choice != 0)
-                                {
-                                    if (optional == 1)
-                                    {
-                                        Label StartProf = new Label();
-                                        StartProf.TextColor = (Color)fontColor;
-                                        StartProf.Text = "Choose Optional Ability Bonuses: ";
-                                        RaceStack.Children.Add(StartProf);
-                                    }
-                                    Label Choice = new Label();
-                                    Choice.TextColor = (Color)fontColor;
-                                    Choice.Text = "Choose " + choice;
-                                    RaceStack.Children.Add(Choice);
-                                }
-                                newOption = optional;
+                                Label AbilityName = new Label();
+                                AbilityName.TextColor = (Color)fontColor;
+                                AbilityName.Text = reader3.GetString(1) + " " + reader3.GetInt32(0);
+                                RaceStack.Children.Add(AbilityName);
+                                choice = reader3.GetInt32(2);
+                            }
+                            Label Choice = new Label();
+                            Choice.TextColor = (Color)fontColor;
+                            Choice.Text = "Choose " + choice;
+                            RaceStack.Children.Add(Choice);
+                        }
 
-                                string innerQuery = "SELECT BonusName FROM dbo.AbilityBonusLookup" +
-                                " WHERE BonusID = @BonusID;";
-                                try
-                                {
-
-                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
-                                    {
-                                        using (SqlCommand innerCmd = innerConn.CreateCommand())
-                                        {
-                                            innerCmd.CommandText = innerQuery;
-                                            innerCmd.Parameters.AddWithValue("@BonusID", Id);
-                                            innerConn.Open();
-                                            if (innerConn.State == System.Data.ConnectionState.Open)
-                                            {
-                                                using (SqlDataReader innerReader = innerCmd.ExecuteReader())
-                                                {
-                                                    while (innerReader.Read())
-                                                    {
-                                                        Label BonusName = new Label();
-                                                        BonusName.TextColor = (Color)fontColor;
-                                                        BonusName.Text = innerReader.GetString(0) + " " + bonus;
-                                                        RaceStack.Children.Add(BonusName);
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                catch (Exception eSql)
-                                {
-                                    DisplayAlert("Error!", eSql.Message, "OK"); // Should be removed and replaced before final product
-                                    Debug.WriteLine("Exception: " + eSql.Message);
-                                }
+                        BoxView line3 = new BoxView
+                        {
+                            Color = (Color)fontColor,
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line3);
+                        query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
+                                " WHERE RaceID = @RaceID4;";
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@RaceID4", selectedRace);
+                        using (SqlDataReader reader4 = cmd.ExecuteReader())
+                        {
+                            Label StartProf = new Label();
+                            StartProf.TextColor = (Color)fontColor;
+                            StartProf.Text = "Starting Proficiencies: ";
+                            RaceStack.Children.Add(StartProf);
+                            while (reader4.Read())
+                            {
+                                Label ProfName = new Label();
+                                ProfName.TextColor = (Color)fontColor;
+                                ProfName.Text = reader4.GetString(0);
+                                RaceStack.Children.Add(ProfName);
                             }
                         }
-                    }
 
+                        BoxView line4 = new BoxView
+                        {
+                            Color = (Color)fontColor,
+                            HeightRequest = 1,
+                            HorizontalOptions = LayoutOptions.FillAndExpand
+                        };
+                        RaceStack.Children.Add(line4);
+                        query = "SELECT StartProfOptName, Choice FROM dbo.StartingProficienciesOptions" +
+                                " WHERE RaceID = @RaceID5;";
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@RaceID5", selectedRace);
+                        using (SqlDataReader reader5 = cmd.ExecuteReader())
+                        {
+                            Label StartProf = new Label();
+                            StartProf.TextColor = (Color)fontColor;
+                            StartProf.Text = "Choose Optional Starting Proficiencies: ";
+                            RaceStack.Children.Add(StartProf);
+                            int choice = 0;
+                            while (reader5.Read())
+                            {
+                                Label ProfName = new Label();
+                                ProfName.TextColor = (Color)fontColor;
+                                ProfName.Text = reader5.GetString(0);
+                                RaceStack.Children.Add(ProfName);
+                                choice = reader5.GetInt32(1);
+                            }
+                            Label Choice = new Label();
+                            Choice.TextColor = (Color)fontColor;
+                            Choice.Text = "Choose " + choice;
+                            RaceStack.Children.Add(Choice);
+                        }
+                    }
                     Button submit = new Button()
                     {
                         BackgroundColor = (Color)frameColor,
