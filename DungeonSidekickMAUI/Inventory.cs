@@ -57,15 +57,19 @@ namespace DungeonSidekickMAUI
                                     {
                                         Items.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
                                     }
-                                    if (temp[2] == WEAPON)
+                                    else if (temp[2] == WEAPON)
                                     {
                                         Weapons.Add(temp);
                                     }
-                                    if (temp[2] == EQUIPMENT)
+                                    else if (temp[2] == EQUIPMENT)
                                     {
                                         Equipment.Add(temp);
                                     }
-                                    
+                                    // If all else fails, do nothing.
+                                    else
+                                    {
+                                        // You done messed up now. How did we get here?
+                                    }
                                 }
                             }
                         }
@@ -78,15 +82,34 @@ namespace DungeonSidekickMAUI
             }
         }
 
+        // This function should grab an item/weapon/equipment from the appropriate tables in the DB, based on the values brought in.
         public void AddItem(int ItemID, int Quantity, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
         {
             if(ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
             {
-                return;
+                return; // Quick exit.
             }
             else // EType was valid, proceed.
             {
+                List<int> temp = new List<int>();
+                temp.Add(ItemID);
+                temp.Add(Quantity);
 
+                // Checking which list to put the data into.
+                if (ETypeID == ITEM)
+                {
+                    Items.Add(temp);
+                }
+
+                else if(ETypeID == WEAPON)
+                {
+                    Weapons.Add(temp);
+                }
+
+                else if(ETypeID == EQUIPMENT)
+                {
+                    Equipment.Add(temp);
+                }
             }
         }
 
