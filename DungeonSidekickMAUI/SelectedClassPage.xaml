@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectedClassPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
             <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
