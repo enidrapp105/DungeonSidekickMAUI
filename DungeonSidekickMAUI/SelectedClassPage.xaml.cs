@@ -20,7 +20,7 @@ public partial class SelectedClassPage : ContentPage
         this.characterSheet = characterSheet;
         InitializeComponent();
 
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False; MultipleActiveResultSets=true;";
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
@@ -36,7 +36,8 @@ public partial class SelectedClassPage : ContentPage
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("HeaderC", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("BackgroundC", out object backgroundColor);
                     ClassStack.BackgroundColor = (Color)backgroundColor;
-
+                    Frame optionalSkillsFrame = new Frame();
+                    Frame savingThrowsFrame = new Frame();
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -66,53 +67,92 @@ public partial class SelectedClassPage : ContentPage
                                 ClassStack.Children.Add(Class);
                                 ClassStack.Children.Add(HitDie);
                             }
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
+                            reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
                         }
 
-                        query = "SELECT StartProfName FROM dbo.StartingProficiencies" +
+                        query = "SELECT ProfID, Optional, Choice FROM dbo.ClassProficienciesLookup" +
                                 " WHERE ClassID = @ClassID2;";
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Starting Proficiencies: ";
-                            ClassStack.Children.Add(StartProf);
-                            while (reader.Read())
-                            {
-                                Label ProfName = new Label();
-                                ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader.GetString(0);
-                                ClassStack.Children.Add(ProfName);
-                            }
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
-                        }
+                            StackLayout savingThrows = new StackLayout();
+                            savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = (Color)fontColor });
+                            StackLayout optionalSkills = new StackLayout();
+                            savingThrows.BackgroundColor = (Color)frameColor;
+                            optionalSkills.BackgroundColor = (Color)frameColor;
 
-                        query = "SELECT StartProfOptName, Choice FROM dbo.StartingProficienciesOptions" +
-                                " WHERE ClassID = @ClassID3;";
-                        cmd.CommandText = query;
-                        cmd.Parameters.AddWithValue("@ClassID3", selectedClass);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            Label StartProf = new Label();
-                            StartProf.TextColor = (Color)fontColor;
-                            StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                            ClassStack.Children.Add(StartProf);
-                            int choice = 0;
+                            int newOption = 0;
                             while (reader.Read())
                             {
-                                Label ProfName = new Label();
-                                ProfName.TextColor = (Color)fontColor;
-                                ProfName.Text = reader.GetString(0);
-                                ClassStack.Children.Add(ProfName);
-                                choice = reader.GetInt32(1);
+                                int Id =  reader.GetInt32(0);
+                                int optional = reader.GetInt32(1);
+                                int choice = reader.GetInt32(2);
+                                if (optional != newOption && optional != 0)
+                                {
+                                    if(optional == 1)
+                                    {
+                                        Label StartProf = new Label();
+                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.Text = "Choose Optional Starting Skills: ";
+                                        //ClassStack.Children.Add(StartProf);
+                                        optionalSkills.Add(StartProf);
+                                    }
+                                    Label Choice = new Label();
+                                    Choice.TextColor = (Color)fontColor;
+                                    Choice.Text = "Choose " + choice + " (for standard games)";
+                                    //ClassStack.Children.Add(Choice);
+                                    optionalSkills.Add(Choice);
+                                }
+                                newOption = optional;
+
+                                string innerQuery = "SELECT ProfName FROM dbo.ProficienciesLookup" +
+                                " WHERE ProfID = @ProfID;";
+                                try
+                                {
+                                    
+                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
+                                    {
+                                        using (SqlCommand innerCmd = innerConn.CreateCommand())
+                                        {
+                                            innerCmd.CommandText = innerQuery;
+                                            innerCmd.Parameters.AddWithValue("@ProfID", Id);
+                                            innerConn.Open();
+                                            if (innerConn.State == System.Data.ConnectionState.Open)
+                                            {
+                                                using (SqlDataReader innerReader = innerCmd.ExecuteReader())
+                                                {
+                                                    while (innerReader.Read())
+                                                    {
+                                                        Label ProfName = new Label();
+                                                        ProfName.TextColor = (Color)fontColor;
+                                                        ProfName.Text = innerReader.GetString(0);
+                                                        if ((innerReader.GetString(0)).Contains("Skill"))
+                                                        {
+                                                            optionalSkills.Children.Add(ProfName);
+                                                        }
+                                                        else if ((innerReader.GetString(0)).Contains("Saving Throw"))
+                                                        {
+                                                            savingThrows.Children.Add(ProfName);
+                                                        }
+                                                        else
+                                                        {
+                                                            ClassStack.Children.Add(ProfName);
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                catch (Exception eSql)
+                                {
+                                    DisplayAlert("Error!", eSql.Message, "OK"); // Should be removed and replaced before final product
+                                    Debug.WriteLine("Exception: " + eSql.Message);
+                                }
                             }
-                            Label Choice = new Label();
-                            Choice.TextColor = (Color)fontColor;
-                            Choice.Text = "Choose " + choice;
-                            ClassStack.Children.Add(Choice);
-                            reader.Close(); // allows reader to be used again instead of creating reader2, 3, etc
+                            savingThrowsFrame.Content = savingThrows;
+                            optionalSkillsFrame.Content = optionalSkills;
                         }
                     }
 
@@ -124,6 +164,8 @@ public partial class SelectedClassPage : ContentPage
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
+                    ClassStack.Children.Add(savingThrowsFrame);
+                    ClassStack.Children.Add(optionalSkillsFrame);
                     ClassStack.Children.Add(submit);
                     mainPanel.Children.Add(ClassStack);
                 }
