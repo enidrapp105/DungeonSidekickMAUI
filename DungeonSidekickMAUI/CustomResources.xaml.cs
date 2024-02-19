@@ -5,10 +5,12 @@ namespace DungeonSidekickMAUI;
 
 public partial class CustomResources : ResourceDictionary
 {
-    public string BG;
-    public string HBG;
-    public string FRC;
+    public string PRIMARY;
+    public string SECONDARY;
+    public string TRINARY;
     public string FC;
+    public string ACCENT;
+    public string ACCESSORY;
 
 
     public CustomResources()
@@ -19,15 +21,15 @@ public partial class CustomResources : ResourceDictionary
     private static string fileName = "DesignSettings.txt";
     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-    public void SaveColors(string BG, string HBG, string FRC, string FC, string ACCENT, string ACCESSORY)
+    public void SaveColors(string PRIMARY, string SECONDARY, string TRINARY, string FC, string ACCENT, string ACCESSORY)
     {
         try
         {
             var newLines = new List<string>();
 
-            newLines.Add(BG);
-            newLines.Add(HBG);
-            newLines.Add(FRC);
+            newLines.Add(PRIMARY);
+            newLines.Add(SECONDARY);
+            newLines.Add(TRINARY);
             newLines.Add(FC);
             newLines.Add(ACCENT);
             newLines.Add(ACCESSORY);
@@ -77,7 +79,7 @@ public partial class CustomResources : ResourceDictionary
         var colors = Application.Current.Resources.MergedDictionaries.ToArray()[2]; // need to find a better why to dynamically recall the dictionary
 
         // Replaces all colors in dictionary with stored values
-        if (!colors.IsNullOrEmpty() && list.Count == 12)
+        if (!colors.IsNullOrEmpty() && list.Count == 18)
         {
             // need to find a better way to handle the number sequences for this, it looks messy
             colors.Remove("PrimaryColor");

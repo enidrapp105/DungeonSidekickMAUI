@@ -17,7 +17,7 @@ public partial class LayoutDesigner : ContentPage
         String FC = (FredValueLabel.Text + " " + FgreenValueLabel.Text + " " + FblueValueLabel.Text);
         String Accent = (AccentredValueLabel.Text + " " + AccentgreenValueLabel.Text + " " + AccentblueValueLabel.Text);
         String Accessory = (AccessoryredValueLabel.Text + " " + AccessorygreenValueLabel.Text + " " + AccessoryblueValueLabel.Text);
-        designSave.SaveColors(Primary, Secondary, Trinary, FC);
+        designSave.SaveColors(Primary, Secondary, Trinary, FC, Accent, Accessory);
         CustomResources.GetColors();
         Navigation.PushAsync(new Settings_Page());
     }
@@ -131,8 +131,8 @@ public partial class LayoutDesigner : ContentPage
 
         // Applies colors to visual boxes for user
         PrimaryBox.BackgroundColor = Color.FromRgb((int)pred, (int)pgreen, (int)pblue);
-        TrinaryBox.BackgroundColor = Color.FromRgb((int)sred, (int)sgreen, (int)sblue);
-        SecondaryBox.BackgroundColor = Color.FromRgb((int)tred, (int)tgreen, (int)tblue);
+        SecondaryBox.BackgroundColor = Color.FromRgb((int)sred, (int)sgreen, (int)sblue);
+        TrinaryBox.BackgroundColor = Color.FromRgb((int)tred, (int)tgreen, (int)tblue);
         FontBox.BackgroundColor = Color.FromRgb((int)fred, (int)fgreen, (int)fblue);
         AccentBox.BackgroundColor = Color.FromRgb((int)Accentred, (int)Accentgreen, (int)Accentblue);
         AccessoryBox.BackgroundColor = Color.FromRgb((int)Accessoryred, (int)Accessorygreen, (int)Accessoryblue);
