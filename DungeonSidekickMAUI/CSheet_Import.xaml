@@ -8,9 +8,9 @@
                 <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
-                <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
+                <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
                 <!--PName = Player Name, CName = Character Name-->
-                <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
 
             </StackLayout>
         </ScrollView>

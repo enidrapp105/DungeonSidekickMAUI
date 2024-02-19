@@ -10,7 +10,7 @@
             </Frame>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassDescLabel"/>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassHitDieLabel"/>
-            <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>-->
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>-->
 
         </StackLayout>
     </ContentPage.Content>

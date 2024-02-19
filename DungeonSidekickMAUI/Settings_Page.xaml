@@ -6,8 +6,8 @@
         <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
             <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
     </StackLayout>
 </ContentPage>
     

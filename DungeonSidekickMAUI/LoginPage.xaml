@@ -4,13 +4,13 @@
              x:Class="DungeonSidekickMAUI.LoginPage">
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Label Text="Login Page" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
-        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="UName"
+        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
             WidthRequest="1000" HorizontalOptions="Start" />
-        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="Pass"
+        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
             WidthRequest="1000" HorizontalOptions="Start" IsPassword="True"/>
-        <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
         <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
 

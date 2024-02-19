@@ -32,7 +32,7 @@ public partial class SelectedClassPage : ContentPage
                 {
                     StackLayout ClassStack = new StackLayout();
                     var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FrameC", out object frameColor);
+                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("HeaderC", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
                     ClassStack.BackgroundColor = (Color)backgroundColor;

@@ -5,7 +5,7 @@
 
     <Color x:Key="PrimaryColor"> #FF0000 </Color>
     <Color x:Key="HeaderC">#FF0000</Color>
-    <Color x:Key="FrameC">#FF0000</Color>
+    <Color x:Key="SecondaryColor">#FF0000</Color>
     <Color x:Key="FontC">#FFFFFF</Color>
 
 </ResourceDictionary>
