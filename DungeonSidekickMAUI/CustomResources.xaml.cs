@@ -19,7 +19,7 @@ public partial class CustomResources : ResourceDictionary
     private static string fileName = "DesignSettings.txt";
     string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
-    public void SaveColors(string BG, string HBG, string FRC, string FC)
+    public void SaveColors(string BG, string HBG, string FRC, string FC, string ACCENT, string ACCESSORY)
     {
         try
         {
@@ -29,6 +29,8 @@ public partial class CustomResources : ResourceDictionary
             newLines.Add(HBG);
             newLines.Add(FRC);
             newLines.Add(FC);
+            newLines.Add(ACCENT);
+            newLines.Add(ACCESSORY);
 
             File.WriteAllLines(filePath, newLines);
         }
@@ -86,6 +88,10 @@ public partial class CustomResources : ResourceDictionary
             colors.Add("SecondaryColor", Color.FromRgb(list[6], list[7], list[8]));
             colors.Remove("FontC");
             colors.Add("FontC", Color.FromRgb(list[9], list[10], list[11]));
+            colors.Remove("AccentColor");
+            colors.Add("AccentColor", Color.FromRgb(list[12], list[13], list[14]));
+            colors.Remove("AccessoryColor");
+            colors.Add("AccessoryColor", Color.FromRgb(list[15], list[16], list[17]));
         }
     }
 }
