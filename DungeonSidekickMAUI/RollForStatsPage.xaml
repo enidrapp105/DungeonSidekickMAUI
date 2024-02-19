@@ -5,11 +5,11 @@
              Title="RollForStatsPage">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource BackgroundC}" >
+            <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource PrimaryColor}" >
                 <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
-                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource BackgroundC}">
+                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource PrimaryColor}">
                     <Button BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
 

@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.ClassPickerPage"
              Title="ClassPickerPage">
     <ContentPage.Content>
-        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource BackgroundC}">
+        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="Classpagestack">
                 <StackLayout x:Name="ClassButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
                     <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">

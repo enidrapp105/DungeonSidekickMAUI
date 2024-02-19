@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.StatAssignmentPage"
              Title="StatAssignmentPage">
     <ContentPage.Content >
-        <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
             <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>

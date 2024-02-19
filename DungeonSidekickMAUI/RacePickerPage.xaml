@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.RacePickerPage"
              Title="RacePickerPage">
     <ContentPage.Content>
-        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource BackgroundC}">
+        <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="RacePageStack">
                 <StackLayout x:Name="RaceButtonContainer" Orientation="Vertical" HorizontalOptions="Start">
                     <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">

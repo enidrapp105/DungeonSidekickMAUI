@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.SelectedClassPage"
              Title="SelectedClassPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource BackgroundC}" x:Name="mainPanel">
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
             <!--<Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>

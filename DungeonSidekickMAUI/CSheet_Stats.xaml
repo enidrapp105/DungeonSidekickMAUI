@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CSheet_Stats">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource BackgroundC}">
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
             <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>

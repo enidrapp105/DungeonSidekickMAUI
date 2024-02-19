@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.CSheet_Import">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource BackgroundC}">
+            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
                 <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
                     <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>
