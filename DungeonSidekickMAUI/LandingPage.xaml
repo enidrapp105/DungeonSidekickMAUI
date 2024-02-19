@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LandingPage">
-    <ScrollView Background="{DynamicResource BackgroundC}">
+    <ScrollView Background="{DynamicResource PrimaryColor}">
         <Grid RowDefinitions="auto,auto" ColumnDefinitions="auto,50,auto"> <!--I have discovered this won't work for phone implementation, unfortunate-->
             <Frame BackgroundColor="{DynamicResource HeaderC}" CornerRadius="0" Grid.Row="0" Grid.Column="2"> <!--This label handles the title-->
                 <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp" Grid.Row="0" Grid.Column="1"/>

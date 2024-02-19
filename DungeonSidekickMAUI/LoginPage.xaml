@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LoginPage">
-    <VerticalStackLayout BackgroundColor="{DynamicResource BackgroundC}">
+    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Label Text="Login Page" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10" Margin="4"/>
         
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource FrameC}" TextColor="{DynamicResource FontC}" x:Name="UName"
