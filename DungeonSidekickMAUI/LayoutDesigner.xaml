@@ -76,7 +76,7 @@
                 <BoxView x:Name="TrinaryBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <!-- RGB Sliders for Font -->
-                <Label Text="Font" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <Label Text="Font Color" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 <StackLayout Orientation="Horizontal" Padding="20">
                     <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
                     <Label x:Name="FredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
@@ -117,6 +117,26 @@
                 </StackLayout>
                 <BoxView x:Name="AccentBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
+                <!-- RGB Sliders for AccessoryColor -->
+                <Label Text="Accessory Color" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="R" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="AccessoryredValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="AccessoryredSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="G" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="AccessorygreenValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="AccessorygreenSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal" Padding="20">
+                    <Label Text="B" TextColor="White" WidthRequest="15" VerticalOptions="Center"/>
+                    <Label x:Name="AccessoryblueValueLabel" Text="0" TextColor="White" WidthRequest="25" VerticalOptions="Center"/>
+                    <Slider x:Name="AccessoryblueSlider" Maximum="255" HorizontalOptions="FillAndExpand" ValueChanged="Slider_ValueChanged" />
+                </StackLayout>
+                <BoxView x:Name="AccessoryBox" WidthRequest="100" HeightRequest="100" Margin="0,20,0,100" />
 
                 <Button BackgroundColor="Red" TextColor="White" Text="Save and Return" HorizontalOptions="FillAndExpand" Clicked="SaveAndReturn" />
             </StackLayout>
