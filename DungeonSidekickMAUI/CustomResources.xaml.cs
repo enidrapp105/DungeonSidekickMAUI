@@ -80,8 +80,8 @@ public partial class CustomResources : ResourceDictionary
             // need to find a better way to handle the number sequences for this, it looks messy
             colors.Remove("PrimaryColor");
             colors.Add("PrimaryColor", Color.FromRgb(list[0], list[1], list[2]));
-            colors.Remove("HeaderC");
-            colors.Add("HeaderC", Color.FromRgb(list[3], list[4], list[5]));
+            colors.Remove("TrinaryColor");
+            colors.Add("TrinaryColor", Color.FromRgb(list[3], list[4], list[5]));
             colors.Remove("SecondaryColor");
             colors.Add("SecondaryColor", Color.FromRgb(list[6], list[7], list[8]));
             colors.Remove("FontC");

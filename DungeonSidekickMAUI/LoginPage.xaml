@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LoginPage">
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Label Text="Login Page" BackgroundColor="{DynamicResource HeaderC}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
+        <Label Text="Login Page" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"

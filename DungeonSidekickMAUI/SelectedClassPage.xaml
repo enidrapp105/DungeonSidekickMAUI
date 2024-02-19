@@ -5,7 +5,7 @@
              Title="SelectedClassPage">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
-            <!--<Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+            <!--<Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassDescLabel"/>

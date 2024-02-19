@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation Information" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">

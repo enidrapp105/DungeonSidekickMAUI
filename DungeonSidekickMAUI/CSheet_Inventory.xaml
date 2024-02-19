@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.CSheet_Inventory">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-            <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Inventory and Proficiencies" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
 

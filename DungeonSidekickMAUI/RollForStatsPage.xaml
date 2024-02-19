@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource PrimaryColor}" >
-                <Frame BackgroundColor="{DynamicResource HeaderC}" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource PrimaryColor}">
