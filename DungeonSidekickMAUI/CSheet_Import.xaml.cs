@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
+using System.Collections.Generic;
 
 namespace DungeonSidekickMAUI;
 /*
@@ -43,6 +44,16 @@ public partial class CSheet_Import : ContentPage
                 {
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
+                        cmd.CommandText = CListQuery;
+                        cmd.Parameters.AddWithValue("@UserId", Preferences.Default.Get("UserId", -1));
+                        LinkedList<int> CharacterIDs = new LinkedList<int>();
+                        using(SqlDataReader CListreader = cmd.ExecuteReader())
+                        {
+                            while(CListreader.Read()) 
+                            {
+                                CharacterIDs.AddFirst(CListreader.GetInt32(0));
+                            }
+                        }
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         using (SqlDataReader reader = cmd.ExecuteReader())
