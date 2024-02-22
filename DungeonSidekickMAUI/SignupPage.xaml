@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SignupPage">
     <VerticalStackLayout>
-        <Label Text="Sign up" TextColor="{DynamicResource FontC}"/>
+        <Label Text="Sign up" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource P}"/>
         <Label Text="username" TextColor="{DynamicResource FontC}"/>
         <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
         <Label Text="password" TextColor="{DynamicResource FontC}"/>

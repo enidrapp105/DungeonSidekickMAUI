@@ -5,6 +5,7 @@
         public AppShell()
         {
             InitializeComponent();
+            tabbar.FlyoutItemIsVisible = true;
         }
     }
 }

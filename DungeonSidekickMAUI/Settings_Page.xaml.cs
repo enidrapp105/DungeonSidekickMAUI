@@ -8,7 +8,7 @@ public partial class Settings_Page : ContentPage
     }
     private void MainPage(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MainPage());
+        
     }
 
     private void LightTheme(object sender, EventArgs e)
