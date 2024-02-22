@@ -5,7 +5,7 @@
         public MainPage()
         {
             InitializeComponent();
-            User_Disp.Text = "Welcome " + User.UserName;
+            User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
         }
 
         private void Player_Clicked(object sender, EventArgs e)

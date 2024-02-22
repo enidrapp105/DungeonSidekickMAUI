@@ -85,7 +85,7 @@ namespace DungeonSidekickMAUI
                             string saltedpassword = (string)cmd.ExecuteScalar();
                             if (VerifyHashedPassword(saltedpassword, providedPassword))
                             {
-                                User.UserName = username;
+                                Preferences.Default.Set("Username", username);
                                 UpdateUserId();
                                 return true;
                             }
@@ -214,7 +214,7 @@ namespace DungeonSidekickMAUI
                         {
                             cmd.CommandText = query;
                             cmd.Parameters.AddWithValue("@Username", username);
-                            User.UserId = (int)cmd.ExecuteScalar();
+                            Preferences.Default.Set("UserId",(int)cmd.ExecuteScalar());
                         }
                     }
                 }
