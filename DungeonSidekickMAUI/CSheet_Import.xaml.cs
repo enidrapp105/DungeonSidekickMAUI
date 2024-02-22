@@ -59,7 +59,9 @@ public partial class CSheet_Import : ContentPage
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                            var hasValue2 = Application.Current.Resources.TryGetValue("TrinaryColor", out object frameColor);
+
+                            var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+
                             while (reader.Read())
                             {
                                 StackLayout CharacterStack = new StackLayout();

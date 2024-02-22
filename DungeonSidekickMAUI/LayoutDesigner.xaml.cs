@@ -25,7 +25,9 @@ public partial class LayoutDesigner : ContentPage
         String Secondary = (SredValueLabel.Text + " " + SgreenValueLabel.Text + " " + SblueValueLabel.Text);
         String Trinary = (TredValueLabel.Text + " " + TgreenValueLabel.Text + " " + TblueValueLabel.Text);
         String FC = (FredValueLabel.Text + " " + FgreenValueLabel.Text + " " + FblueValueLabel.Text);
-        designSave.SaveColors(Primary, Secondary, Trinary, FC);
+        String Accent = (AccentredValueLabel.Text + " " + AccentgreenValueLabel.Text + " " + AccentblueValueLabel.Text);
+        String Accessory = (AccessoryredValueLabel.Text + " " + AccessorygreenValueLabel.Text + " " + AccessoryblueValueLabel.Text);
+        designSave.SaveColors(Primary, Secondary, Trinary, FC, Accent, Accessory);
         CustomResources.GetColors();
         Navigation.PushAsync(new Settings_Page());
     }
@@ -96,6 +98,30 @@ public partial class LayoutDesigner : ContentPage
                 FblueValueLabel.Text = value.ToString("F0");
                 break;
         }
+        switch (slider)
+        {
+            case var _ when slider == AccentredSlider:
+                AccentredValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == AccentgreenSlider:
+                AccentgreenValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == AccentblueSlider:
+                AccentblueValueLabel.Text = value.ToString("F0");
+                break;
+        }
+        switch (slider)
+        {
+            case var _ when slider == AccessoryredSlider:
+                AccessoryredValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == AccessorygreenSlider:
+                AccessorygreenValueLabel.Text = value.ToString("F0");
+                break;
+            case var _ when slider == AccessoryblueSlider:
+                AccessoryblueValueLabel.Text = value.ToString("F0");
+                break;
+        }
 
         // Updates the colors based on the RGB values
         double pred = PredSlider.Value;
@@ -114,10 +140,20 @@ public partial class LayoutDesigner : ContentPage
         double fgreen = FgreenSlider.Value;
         double fblue = FblueSlider.Value;
 
+        double Accentred = AccentredSlider.Value;
+        double Accentgreen = AccentgreenSlider.Value;
+        double Accentblue = AccentblueSlider.Value;
+
+        double Accessoryred = AccentredSlider.Value;
+        double Accessorygreen = AccentgreenSlider.Value;
+        double Accessoryblue = AccentblueSlider.Value;
+
         // Applies colors to visual boxes for user
         PrimaryBox.BackgroundColor = Color.FromRgb((int)pred, (int)pgreen, (int)pblue);
         SecondaryBox.BackgroundColor = Color.FromRgb((int)sred, (int)sgreen, (int)sblue);
         TrinaryBox.BackgroundColor = Color.FromRgb((int)tred, (int)tgreen, (int)tblue);
         FontBox.BackgroundColor = Color.FromRgb((int)fred, (int)fgreen, (int)fblue);
+        AccentBox.BackgroundColor = Color.FromRgb((int)Accentred, (int)Accentgreen, (int)Accentblue);
+        AccessoryBox.BackgroundColor = Color.FromRgb((int)Accessoryred, (int)Accessorygreen, (int)Accessoryblue);
     }
 }

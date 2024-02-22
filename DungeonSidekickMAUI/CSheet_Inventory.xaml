@@ -4,18 +4,18 @@
              x:Class="DungeonSidekickMAUI.CSheet_Inventory">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-            <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Inventory and Proficiencies" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
 
-            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
-            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="75"/>
+            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
+            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="75"/>
 
-            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
-            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="FillAndExpand" HeightRequest="100"/>
+            <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
+            VerticalTextAlignment="Start" WidthRequest="1000" HorizontalOptions="Start" HeightRequest="100"/>
 
-            <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
-            WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
+            WidthRequest="1000" HorizontalOptions="Start"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
