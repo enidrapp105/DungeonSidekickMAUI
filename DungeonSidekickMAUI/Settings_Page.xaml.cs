@@ -19,8 +19,10 @@ public partial class Settings_Page : ContentPage
         String Secondary = (190 + " " + 190 + " " + 190);
         String Trinary = (100 + " " + 255 + " " + 255);
         String FC = (0 + " " + 0 + " " + 0);
+        String ACCENT = (200 + " " + 200 + " " + 255);
+        String ACCESSORY = (200 + " " + 255 + " " + 200);
 
-        designSave.SaveColors(Primary, Secondary, Trinary, FC);
+        designSave.SaveColors(Primary, Secondary, Trinary, FC, ACCENT, ACCESSORY);
         CustomResources.GetColors();
 
         MainPage(sender, e);
@@ -33,8 +35,10 @@ public partial class Settings_Page : ContentPage
         String Secondary = (100 + " " + 100 + " " + 100);
         String Trinary = (0 + " " + 0 + " " + 255);
         String FC = (255 + " " + 255 + " " + 255);
+        String ACCENT = (200 + " " + 0 + " " + 0);
+        String ACCESSORY = (0 + " " + 255 + " " + 0);
 
-        designSave.SaveColors(Primary, Secondary, Trinary, FC);
+        designSave.SaveColors(Primary, Secondary, Trinary, FC, ACCENT, ACCESSORY);
         CustomResources.GetColors();
 
         MainPage(sender, e);
