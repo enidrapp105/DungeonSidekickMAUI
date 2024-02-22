@@ -33,7 +33,7 @@ public partial class Settings_Page : ContentPage
 
         String Primary = (0 + " " + 0 + " " + 0);
         String Secondary = (100 + " " + 100 + " " + 100);
-        String Trinary = (0 + " " + 0 + " " + 255);
+        String Trinary = (20 + " " + 20 + " " + 150);
         String FC = (255 + " " + 255 + " " + 255);
         String ACCENT = (200 + " " + 0 + " " + 0);
         String ACCESSORY = (0 + " " + 255 + " " + 0);

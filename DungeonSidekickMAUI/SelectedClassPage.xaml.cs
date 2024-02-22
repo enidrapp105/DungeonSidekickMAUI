@@ -31,11 +31,15 @@ public partial class SelectedClassPage : ContentPage
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
                     StackLayout ClassStack = new StackLayout();
-                    var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
-                    var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object headerColor);
-                    var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
-                    ClassStack.BackgroundColor = (Color)backgroundColor;
+                    Color PrimaryColor = (Color)Application.Current.Resources["PrimaryColor"];
+                    Color SecondaryColor = (Color)Application.Current.Resources["SecondaryColor"];
+                    Color TrinaryColor = (Color)Application.Current.Resources["TrinaryColor"];
+                    Color fontColor = (Color)Application.Current.Resources["FontC"];
+                    //var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+                    //var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object SecondaryColor);
+                    //var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object TrinaryColor);
+                    //var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object PrimaryColor);
+                    ClassStack.BackgroundColor = PrimaryColor;
                     Frame optionalSkillsFrame = new Frame();
                     Frame savingThrowsFrame = new Frame();
                     using (SqlCommand cmd = conn.CreateCommand())
@@ -49,20 +53,20 @@ public partial class SelectedClassPage : ContentPage
                                 Label Class = new Label();
                                 Class.FontSize = 36;
                                 Class.HorizontalTextAlignment = TextAlignment.Center;
-                                Class.TextColor = (Color)fontColor;
+                                Class.TextColor = fontColor;
                                 ClassName = reader.GetString(0);
                                 Class.Text = ClassName;
 
                                 Frame frame = new Frame()
                                 {
-                                    BackgroundColor = (Color)headerColor,
+                                    BackgroundColor = SecondaryColor,
                                     Padding = 24,
                                     CornerRadius = 0,
                                     Content = Class
                                 };
                                 Label HitDie = new Label();
                                 HitDie.HorizontalTextAlignment = TextAlignment.Center;
-                                HitDie.TextColor = (Color)fontColor;
+                                HitDie.TextColor = fontColor;
                                 HitDie.Text = "Hit Die: " + reader.GetInt32(1);
                                 ClassStack.Children.Add(Class);
                                 ClassStack.Children.Add(HitDie);
@@ -77,11 +81,11 @@ public partial class SelectedClassPage : ContentPage
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             StackLayout savingThrows = new StackLayout();
-                            savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = (Color)fontColor });
+                            savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = fontColor });
                             StackLayout optionalSkills = new StackLayout();
-                            savingThrows.BackgroundColor = (Color)backgroundColor;
-                            optionalSkills.BackgroundColor = (Color)backgroundColor;
-
+                            savingThrowsFrame.BackgroundColor = SecondaryColor;
+                            optionalSkillsFrame.BackgroundColor = SecondaryColor;
+                            
                             int newOption = 0;
                             while (reader.Read())
                             {
@@ -93,14 +97,14 @@ public partial class SelectedClassPage : ContentPage
                                     if(optional == 1)
                                     {
                                         Label StartProf = new Label();
-                                        StartProf.TextColor = (Color)fontColor;
-                                        StartProf.BackgroundColor = (Color)backgroundColor;
+                                        StartProf.TextColor = fontColor;
+                                        //StartProf.BackgroundColor = PrimaryColor;
                                         StartProf.Text = "Choose Optional Starting Skills: ";
                                         //ClassStack.Children.Add(StartProf);
                                         optionalSkills.Add(StartProf);
                                     }
                                     Label Choice = new Label();
-                                    Choice.TextColor = (Color)fontColor;
+                                    Choice.TextColor = fontColor;
                                     Choice.Text = "Choose " + choice + " (for standard games)";
                                     //ClassStack.Children.Add(Choice);
                                     optionalSkills.Add(Choice);
@@ -126,7 +130,7 @@ public partial class SelectedClassPage : ContentPage
                                                     while (innerReader.Read())
                                                     {
                                                         Label ProfName = new Label();
-                                                        ProfName.TextColor = (Color)fontColor;
+                                                        ProfName.TextColor = fontColor;
                                                         ProfName.Text = innerReader.GetString(0);
                                                         if ((innerReader.GetString(0)).Contains("Skill"))
                                                         {
@@ -160,8 +164,8 @@ public partial class SelectedClassPage : ContentPage
                     // Creates the submit button
                     Button submit = new Button()
                     {
-                        BackgroundColor = (Color)backgroundColor,
-                        TextColor = (Color)fontColor,
+                        BackgroundColor = SecondaryColor,
+                        TextColor = fontColor,
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
