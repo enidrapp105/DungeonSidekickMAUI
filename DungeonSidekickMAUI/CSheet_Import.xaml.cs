@@ -1,4 +1,5 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
+using System.Collections.Generic;
 
 namespace DungeonSidekickMAUI;
 /*
@@ -11,6 +12,7 @@ namespace DungeonSidekickMAUI;
                     12/02/23 - Changed background to black and text to white
                     01/17/23 - Added edit button
                     01/21/23 - Updated variable names
+                    02/18/24 - Use Preference.Default instead of hardcoded values
  */
 
 using System.Diagnostics;
@@ -26,8 +28,13 @@ public partial class CSheet_Import : ContentPage
     {
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
+        string CListQuery = "SELECT CharacterID FROM dbo.CharacterList WHERE UID = @UserId;"; //This is to check the lookup for correct tables
+
         string query = "SELECT CharacterName,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma FROM dbo.CharacterSheet" +
             " WHERE PlayerName = @PlayerName;";
+
+        int UserId = Preferences.Default.Get("UserId", -1);
+        if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -37,12 +44,24 @@ public partial class CSheet_Import : ContentPage
                 {
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
+                        cmd.CommandText = CListQuery;
+                        cmd.Parameters.AddWithValue("@UserId", Preferences.Default.Get("UserId", -1));
+                        LinkedList<int> CharacterIDs = new LinkedList<int>();
+                        using(SqlDataReader CListreader = cmd.ExecuteReader())
+                        {
+                            while(CListreader.Read()) 
+                            {
+                                CharacterIDs.AddFirst(CListreader.GetInt32(0));
+                            }
+                        }
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                            var hasValue2 = Application.Current.Resources.TryGetValue("TrinaryColor", out object frameColor);
+
+                            var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+
                             while (reader.Read())
                             {
                                 StackLayout CharacterStack = new StackLayout();

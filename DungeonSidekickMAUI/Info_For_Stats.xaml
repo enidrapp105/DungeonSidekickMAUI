@@ -5,30 +5,31 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation Information" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Strength determines how your character reacts where strength is needed like swinging a weapon or lifting something heavy. Classes that consistently use STR is barbarians,paladins, and maybe fighters." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Dexterity determines your agility in your reactions and movements. It also dictates your stealth and ability to use ranged or agile weapons. Classes that use this are monks,rangers,rogues and maybe fighters." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Constitution determines your character's physical resistance and stamina. No classes use it as a primary stat, but all classes benefit from high constitution." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Intelligence determines your smarts,for things like recollection of facts or their ability to reason. Wizards are the only class that rely on intelligence." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Wisdom is more related to your ability to observe your surroundings, someone with high wisdom would have a better time spotting traps but might fail a simple puzzle. Clerics, Druids, Monks, and Ranger all use wisdom." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="6">
+                <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6">
                     <Label Text="Charisma determines your ability to talk with others so that you can get what you want. Charisma also tends to affect spell strength for many classes that use them. Classes that use charisma are Paladins, Warlocks, Sorcerers, and Bards." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
                 </Frame>
 
-                <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
-    WidthRequest="1000" HorizontalOptions="FillAndExpand"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
+    WidthRequest="1000" HorizontalOptions="Start"/>
+
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -4,33 +4,32 @@
              x:Class="DungeonSidekickMAUI.CSheet_Stats">
     <ContentPage.Content>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-            <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="24" CornerRadius="0">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
+            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
+            WidthRequest="400" HorizontalOptions="Start" PlaceholderColor="{DynamicResource FontC}"/>
 
-            <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
+            WidthRequest="400" HorizontalOptions="Start"/>
 
-            <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
-
-            <Button BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
-            WidthRequest="400" HorizontalOptions="FillAndExpand"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
+            WidthRequest="400" HorizontalOptions="Start"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
