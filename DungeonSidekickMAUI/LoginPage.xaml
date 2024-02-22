@@ -13,21 +13,5 @@
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
             WidthRequest="1000" HorizontalOptions="Start"/>
         <Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>
-
-        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
-             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="7"/>
-
-        <!--<Label Text="Username" HorizontalOptions="Center" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" FontSize="20"/>--> <!--Don't know if I like these or not, keeping them out-->
-
-        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
-            MinimumWidthRequest="400" HorizontalOptions="Center" IsPassword="True" Margin="7"/>
-
-        <!--<Label Text="Password" HorizontalOptions="Center" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" FontSize="20"/>-->
-
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
-            MinimumWidthRequest="400" HorizontalOptions="Center" Margin="5"/>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
-            MinimumWidthRequest="400" HorizontalOptions="Center"/> <!--For some reason, 400 is different for this button-->
-        <!--<Button Text="Continue without account" Clicked="DebugbuttonButtonClicked"/>--> <!--Debug button-->
     </VerticalStackLayout>
 </ContentPage>
