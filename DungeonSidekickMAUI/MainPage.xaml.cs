@@ -5,6 +5,7 @@
         public MainPage()
         {
             InitializeComponent();
+            ((AppShell)Shell.Current).FlyoutIsPresented = true;
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
         }
 
