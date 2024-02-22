@@ -8,6 +8,16 @@ public partial class LayoutDesigner : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    /*
+    Author: Jonathan Raffaelly
+    Date created: 1/19/24
+    Function name: SaveAndReturn
+    Purpose: Saves slider values to a string consisting of rgb values to a text document to store thematics.
+    Modifications:  1/26/24 - 1/28/24 Overhauled to work with new storage system
+                    2/3/24 Made adjustments to handle new color names.
+
+    */
     private void SaveAndReturn(object sender, EventArgs e)
     {
         CustomResources designSave = new CustomResources();
@@ -25,6 +35,15 @@ public partial class LayoutDesigner : ContentPage
     {
         Navigation.PushAsync(new Settings_Page());
     }
+    
+    /*
+    Author: Jonathan Raffaelly
+    Date created: 1/19/24
+    Function name: Slider_ValueChanged
+    Purpose: Updates colors during runtime for storing for color values. UPDATED: Also updates color example boxes in real time.
+    Modifications:  1/27/24 - 1/28/24 Major adjustments to code, added multiple sliders, and color example boxes.
+                    2/4/24  Adjusted value names to match new storage descriptions.
+    */
     private void Slider_ValueChanged(object sender, ValueChangedEventArgs e)
     {
         var slider = (Slider)sender;
@@ -137,6 +156,4 @@ public partial class LayoutDesigner : ContentPage
         AccentBox.BackgroundColor = Color.FromRgb((int)Accentred, (int)Accentgreen, (int)Accentblue);
         AccessoryBox.BackgroundColor = Color.FromRgb((int)Accessoryred, (int)Accessorygreen, (int)Accessoryblue);
     }
-
-
 }

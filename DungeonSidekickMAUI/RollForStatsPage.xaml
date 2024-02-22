@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DungeonSidekickMAUI.RollForStatsPage"
-             Title="RollForStatsPage">
+             x:Class="DungeonSidekickMAUI.RollForStatsPage">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="RollPage" BackgroundColor="{DynamicResource PrimaryColor}" >
@@ -58,6 +57,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF2" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF3" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF4" Clicked="OnButtonClicked"/>
+
                 </StackLayout>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total1"/>
                 <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total2"/>

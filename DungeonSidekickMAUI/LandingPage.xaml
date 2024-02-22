@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DungeonSidekickMAUI.LandingPage"
-             Title="LandingPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             x:Class="DungeonSidekickMAUI.LandingPage">
+    <ScrollView Background="{DynamicResource PrimaryColor}">
+        <Grid RowDefinitions="auto,auto" ColumnDefinitions="auto,50,auto"> <!--I have discovered this won't work for phone implementation, unfortunate-->
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0" Grid.Row="0" Grid.Column="2"> <!--This label handles the title-->
+                <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp" Grid.Row="0" Grid.Column="1"/>
+            </Frame>
+            <VerticalStackLayout HorizontalOptions="Start" VerticalOptions="Start" MaximumWidthRequest="600" Background="{DynamicResource TrinaryColor}" Grid.Column="0" Grid.Row="1" > <!--This stack layout handles the stat modifiers -->
+                <Label Text="STR Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontAutoScalingEnabled="True" FontSize="30"/> 
+                <Label Text="Str Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblStr_Mod"/> <!--lbl means label-->
+                <Label Text="DEX Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
+                <Label Text="Dex Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblDex_Mod"/>
+                <Label Text="CON Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
+                <Label Text="Const Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblConst_Mod"/>
+                <Label Text="INT Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
+                <Label Text="Int Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblInt_Mod"/>
+                <Label Text="WIS Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
+                <Label Text="Wis Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblWis_Mod"/>
+                <Label Text="CHA Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="30"/>
+                <Label Text="Char Mod" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="lblChar_Mod"/>
+            </VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start" Background="{DynamicResource TrinaryColor}" Grid.Column="2" Grid.Row="2"> <!--This stack layout tackles the AC/HP. It is not fully implemented yet-->
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
+                    <Label Text="AC:15" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+                </Frame>
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
+                    <Label Text="HP:25" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+                </Frame>
+            </HorizontalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

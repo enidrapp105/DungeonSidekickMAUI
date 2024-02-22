@@ -2,12 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.Settings_Page">
-    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+    <StackLayout BackgroundColor="LightSlateGray">
+        <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
+            <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Change Layout Design" WidthRequest="1000" HorizontalOptions="Start" Clicked="LayoutDesigner" />
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Save and Return" WidthRequest="1000" HorizontalOptions="Start" Clicked="MainPage" />
+        
+        <Button BackgroundColor="Blue" TextColor="White" Text="Change to Light Theme" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="LightTheme" Margin="5"/>
+        <Button BackgroundColor="Blue" TextColor="White" Text="Change to Dark Theme" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="DarkTheme" Margin="5"/>
+        
+        <Button BackgroundColor="Blue" TextColor="White" Text="Customize theme" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="LayoutDesigner" Margin="5"/>
+        <Button BackgroundColor="Blue" TextColor="White" Text="Save and Return" WidthRequest="1000" HorizontalOptions="FillAndExpand" Clicked="MainPage" />
     </StackLayout>
 </ContentPage>
     

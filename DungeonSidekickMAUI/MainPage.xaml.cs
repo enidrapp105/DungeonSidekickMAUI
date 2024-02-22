@@ -5,6 +5,7 @@
         public MainPage()
         {
             InitializeComponent();
+            User_Disp.Text = "Welcome " + User.UserName;
         }
 
         private void Player_Clicked(object sender, EventArgs e)

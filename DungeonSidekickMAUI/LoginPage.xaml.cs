@@ -1,4 +1,5 @@
 namespace DungeonSidekickMAUI;
+ 
 
 public partial class LoginPage : ContentPage
 {
@@ -11,8 +12,10 @@ public partial class LoginPage : ContentPage
     private void loginButtonClicked(object sender, EventArgs e)
 	{
 		Password_Hasher password_Hasher = new Password_Hasher(UName.Text);
-		if(password_Hasher.VerifyHashedPassword(Pass.Text)) //checks the db and returns true or false if it checks out
-            Navigation.PushAsync(new MainPage());
+		if (password_Hasher.VerifyHashedPassword(Pass.Text)) //checks the db and returns true or false if it checks out
+		{
+			Navigation.PushAsync(new MainPage());
+		}
 		else
 			DisplayAlert("Your username or password are incorrect", "Please try a different username or password", "Ok");
     }
