@@ -6,17 +6,7 @@
     xmlns:local="clr-namespace:DungeonSidekickMAUI"
     Shell.FlyoutBehavior="Disabled"
     >
-    <TabBar x:Name="tabbar">
-        <Tab Title="Login">
-            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
-        </Tab>
-        <Tab Title="Create a character">
-            <ShellContent ContentTemplate="{DataTemplate local:Info_For_Stats}" />
-        </Tab>
-        <Tab Title="Settings" Icon="settings.png">
-            <ShellContent ContentTemplate="{DataTemplate local:Settings_Page}" />
-        </Tab>
-    </TabBar>
+
     <ShellContent
         ContentTemplate="{DataTemplate local:LoginPage}"
         Route="LoginPage"/>
