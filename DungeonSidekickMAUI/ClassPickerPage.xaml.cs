@@ -53,9 +53,8 @@ public partial class ClassPickerPage : ContentPage
                                     Text = reader.GetString(1),
                                     TextColor = (Color)fontColor,
                                     CommandParameter = id,
-                                    FontSize = 12,
                                     HeightRequest = 50,
-                                    WidthRequest = 100,
+                                    WidthRequest = 400,
                                     MinimumHeightRequest = 50,
                                     MinimumWidthRequest = 50,
                                     BackgroundColor = (Color)frameColor

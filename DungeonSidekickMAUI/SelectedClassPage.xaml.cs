@@ -79,8 +79,8 @@ public partial class SelectedClassPage : ContentPage
                             StackLayout savingThrows = new StackLayout();
                             savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = (Color)fontColor });
                             StackLayout optionalSkills = new StackLayout();
-                            savingThrows.BackgroundColor = (Color)primaryColor;
-                            optionalSkills.BackgroundColor = (Color)primaryColor;
+                            savingThrows.BackgroundColor = (Color)backgroundColor;
+                            optionalSkills.BackgroundColor = (Color)backgroundColor;
 
                             int newOption = 0;
                             while (reader.Read())
@@ -160,7 +160,7 @@ public partial class SelectedClassPage : ContentPage
                     // Creates the submit button
                     Button submit = new Button()
                     {
-                        BackgroundColor = (Color)primaryColor,
+                        BackgroundColor = (Color)backgroundColor,
                         TextColor = (Color)fontColor,
                         Text = "Submit"
                     };

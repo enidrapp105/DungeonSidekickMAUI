@@ -7,9 +7,9 @@
             <!--<Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
-            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassDescLabel"/>
-            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Start" x:Name="ClassHitDieLabel"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="1000" HorizontalOptions="Start" Clicked="Submit"/>-->
+            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassDescLabel"/>
+            <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassHitDieLabel"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="400" HorizontalOptions="Center" Clicked="Submit"/>-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
