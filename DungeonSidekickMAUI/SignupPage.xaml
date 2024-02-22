@@ -5,11 +5,11 @@
     <VerticalStackLayout>
         <Label Text="Sign up" TextColor="{DynamicResource FontC}"/>
         <Label Text="username" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
+        <Entry x:Name="usernamebox" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
         <Label Text="password" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="passwordbox" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
+        <Entry x:Name="passwordbox" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
         <Label Text="password(again)" TextColor="{DynamicResource FontC}"/>
-        <Entry x:Name="passwordbox2" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource TrinaryColor}"/>
-        <Button TextColor="{DynamicResource FontC}" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource TrinaryColor}"/>
+        <Entry x:Name="passwordbox2" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
+        <Button TextColor="{DynamicResource FontC}" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource SecondaryColor}"/>
     </VerticalStackLayout>
 </ContentPage>

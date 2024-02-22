@@ -31,7 +31,7 @@ public partial class RacePickerPage : ContentPage
                     {
                         cmd.CommandText = query;
                         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                        var hasValue2 = Application.Current.Resources.TryGetValue("TrinaryColor", out object frameColor);
+                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
