@@ -36,7 +36,7 @@ namespace DungeonSidekickMAUI
         //Loads the character sheet to the user's viewable page
         private void LoadCharacterSheetPage(CharacterSheet characterSheet)
         {
-            Strength.Text = characterSheet.strength;
+            Strength.Text = int.Parse(characterSheet.strength);
             Dexterity.Text = characterSheet.dexterity;
             Constitution.Text = characterSheet.constitution;
             Intelligence.Text = characterSheet.intelligence;

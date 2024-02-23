@@ -6,6 +6,7 @@
         {
             InitializeComponent();
             ((AppShell)Shell.Current).FlyoutIsPresented = true;
+            CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
         }
 

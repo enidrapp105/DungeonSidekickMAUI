@@ -4,37 +4,31 @@ namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
 {
-    private CharacterSheet CharacterSheetcurrent;
+    private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
     //public DndClass CharacterClass;
     public string Class;
     public string Race;
 
-    public CSheet()
-    {
-        InitializeComponent();
-        CharacterSheetcurrent = new CharacterSheet();
-        
-    }
-    /* Function Name: CSheet one arg constructor
+
+    /* Function Name: CSheet constructor
      * Purpose:
-     * to allow navigation to the csheet page with predetermined class elements
+     * Creates the CSheet page
      * Precondition:
-     * pass in a charactersheet object
+     * N/A
      * Returns:
      * nothing
      */
-    public CSheet(CharacterSheet characterSheet)
+    public CSheet()
     {
         InitializeComponent();
-        CharacterSheetcurrent = characterSheet;
-        LoadCharacterSheetPage(characterSheet);
-        if (characterSheet.characterclass != null)
+        LoadCharacterSheetPage(CharacterSheetcurrent);
+        if (CharacterSheetcurrent.characterclass != null)
         {
-            ClassButton.Text = "Selected Class: " + characterSheet.characterclass;
+            ClassButton.Text = "Selected Class: " + CharacterSheetcurrent.characterclass;
         }
-        if (characterSheet.race != null)
+        if (CharacterSheetcurrent.race != null)
         {
-            RaceButton.Text = "Selected Race: " + characterSheet.race;
+            RaceButton.Text = "Selected Race: " + CharacterSheetcurrent.race;
         }
     }
     /* Function Name: LoadCharacterSheetPage
@@ -48,7 +42,6 @@ public partial class CSheet : ContentPage
      */
     private void LoadCharacterSheetPage(CharacterSheet characterSheet)
     {
-        PName.Text = characterSheet.playername;
         CName.Text = characterSheet.charactername ;
         Race = characterSheet.race;
         Class = characterSheet.characterclass;
@@ -59,9 +52,7 @@ public partial class CSheet : ContentPage
         Bonds.Text = characterSheet.bonds;
         Flaws.Text = characterSheet.flaws;
         Traits.Text = characterSheet.featurestraits;
-        Inventory.Text = characterSheet.equipment;
         Attacks.Text = characterSheet.attacks;
-        Spells.Text = characterSheet.spells;
     }
     /* Function Name: LoadCharacterSheetClass
      * Purpose:
@@ -73,7 +64,6 @@ public partial class CSheet : ContentPage
      */
     private void LoadCharacterSheetClass()
     {
-        CharacterSheetcurrent.playername = PName.Text;
         CharacterSheetcurrent.charactername = CName.Text;
         CharacterSheetcurrent.race = Race;
         CharacterSheetcurrent.characterclass = Class;
@@ -84,9 +74,7 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.bonds = Bonds.Text;
         CharacterSheetcurrent.flaws = Flaws.Text;
         CharacterSheetcurrent.featurestraits = Traits.Text;
-        CharacterSheetcurrent.equipment = Inventory.Text;
         CharacterSheetcurrent.attacks = Attacks.Text;
-        CharacterSheetcurrent.spells = Spells.Text;
     } 
     /*
      * Function: RollForStats

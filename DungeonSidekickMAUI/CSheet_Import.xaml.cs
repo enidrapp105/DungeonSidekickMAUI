@@ -136,8 +136,7 @@ public partial class CSheet_Import : ContentPage
                                     (
                                         execute: async() =>
                                         {
-                                            CharacterSheet sheet = new CharacterSheet();
-                                            sheet.playername = PName.Text;
+                                            CharacterSheet sheet = CharacterSheet.Instance;
                                             sheet.charactername = CNameVal.Text;
                                             sheet.strength = StrengthVal.Text;
                                             sheet.dexterity = DexterityVal.Text;
