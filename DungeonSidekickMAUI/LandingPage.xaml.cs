@@ -51,6 +51,11 @@ public partial class LandingPage : ContentPage
         lblChar_Mod.Text = CalcStatMod(currentcharacterSheet.charisma);
     }
 
+    // Anthony
+    private void AddItem(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddToInventory());
+    }
     /*
      * Function: RollButtonClicked
      * Author: Kenny Rapp

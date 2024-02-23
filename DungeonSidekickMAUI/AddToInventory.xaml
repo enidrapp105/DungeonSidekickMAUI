@@ -12,9 +12,10 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="LightGray">
-                            <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}" TextColor="Black"/>
-                            <Label VerticalOptions="CenterAndExpand" Text="{Binding Address}" TextColor="Black"/>
+                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
+                            <Frame BackgroundColor="{DynamicResource SecondaryColor}">
+                                <Label VerticalOptions="CenterAndExpand" Text="{Binding Name}" TextColor="{DynamicResource FontC}"/>
+                            </Frame>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

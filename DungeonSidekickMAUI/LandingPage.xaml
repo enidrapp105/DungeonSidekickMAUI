@@ -29,6 +29,8 @@
                     <Label Text="HP:25" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
             </HorizontalStackLayout>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem"
+   WidthRequest="400" HorizontalOptions="Center"/>
         </Grid>
     </ScrollView>
 </ContentPage>

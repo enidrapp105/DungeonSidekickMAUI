@@ -14,6 +14,6 @@ public partial class AddToInventory : ContentPage
         if (string.IsNullOrWhiteSpace(e.NewTextValue))
             MyCollectionViews.ItemsSource = addItemViewModel.UserItems;
         else
-            MyCollectionViews.ItemsSource = addItemViewModel.UserItems.Where(i => i.Name.ToLower().Contains(e.NewTextValue.ToLower()));
+            MyCollectionViews.ItemsSource = addItemViewModel.UserItems.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
     }
 }
