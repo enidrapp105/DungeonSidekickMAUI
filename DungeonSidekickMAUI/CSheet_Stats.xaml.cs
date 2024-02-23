@@ -28,21 +28,33 @@ namespace DungeonSidekickMAUI
         public CSheet_Stats ()
 		{
 			InitializeComponent ();
-            LoadCharacterSheetPage(CharacterSheetcurrent);
+            LoadCharacterSheetPage();
         }
-        
 
-        //Loads the character sheet to the user's viewable page
-        private void LoadCharacterSheetPage(CharacterSheet characterSheet)
+
+        /*
+         * Function: LoadCharacterSheetPage
+         * Author: Brendon Williams
+         * Purpose: Loads the current character sheet to the text boxes on the screen
+         * last Modified : 2/22/2024 8:49 pm
+         */
+        private void LoadCharacterSheetPage()
         {
-            Strength.Text = characterSheet.strength.ToString();
-            Dexterity.Text = characterSheet.dexterity.ToString();
-            Constitution.Text = characterSheet.constitution.ToString();
-            Intelligence.Text = characterSheet.intelligence.ToString();
-            Wisdom.Text = characterSheet.wisdom.ToString();
-            Constitution.Text = characterSheet.constitution.ToString();
-            Charisma.Text = characterSheet.charisma.ToString();
+            Strength.Text = CharacterSheetcurrent.strength.ToString();
+            Dexterity.Text = CharacterSheetcurrent.dexterity.ToString();
+            Constitution.Text = CharacterSheetcurrent.constitution.ToString();
+            Intelligence.Text = CharacterSheetcurrent.intelligence.ToString();
+            Wisdom.Text = CharacterSheetcurrent.wisdom.ToString();
+            Constitution.Text = CharacterSheetcurrent.constitution.ToString();
+            Charisma.Text = CharacterSheetcurrent.charisma.ToString();
         }
+
+        /*
+         * Function: LoadCharacterSheetClass
+         * Author: Brendon Williams
+         * Purpose: Takes the text currently on the screen and puts it in the character sheet class
+         * last Modified : 2/22/2024 8:49 pm
+         */
         private void LoadCharacterSheetClass()
         {
             CharacterSheetcurrent.strength = int.Parse(Strength.Text);
@@ -54,19 +66,21 @@ namespace DungeonSidekickMAUI
             CharacterSheetcurrent.charisma = int.Parse(Charisma.Text);
         }
 
+        /*
+         * Function: SubmitStats
+         * Author: Brendon Williams
+         * Purpose: Updates the character sheet class, then moves to next page
+         * last Modified : 2/22/2024 8:49 pm
+         */
         private void SubmitStats(object sender, EventArgs e)
         {
-
-            LoadCharacterSheetClass();
-
-            string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+            string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
                 "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
                 "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
                 "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
                 "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -77,53 +91,18 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            int flag = 0;
-
-                            if (int.Parse(Strength.Text) >= 0 && int.Parse(Strength.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Strength", int.Parse(Strength.Text));
-                            else
-                                flag = 1;
-
-                            if (int.Parse(Dexterity.Text) >= 0 && int.Parse(Dexterity.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Dexterity", int.Parse(Dexterity.Text));
-                            else
-                                flag = 1;
-
-                            if (int.Parse(Constitution.Text) >= 0 && int.Parse(Constitution.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Constitution", int.Parse(Constitution.Text));
-                            else
-                                flag = 1;
-
-                            if (int.Parse(Intelligence.Text) >= 0 && int.Parse(Intelligence.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Intelligence", int.Parse(Intelligence.Text));
-                            else
-                                flag = 1;
-
-                            if (int.Parse(Wisdom.Text) >= 0 && int.Parse(Wisdom.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Wisdom", int.Parse(Wisdom.Text));
-                            else
-                                flag = 1;
-
-                            if (int.Parse(Charisma.Text) >= 0 && int.Parse(Charisma.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Charisma", int.Parse(Charisma.Text));
-                            else
-                                flag = 1;
-
-                            if (flag == 0)
-                            {
-                                cmd.ExecuteNonQuery();
-                            }
-                            else
-                                Console.WriteLine("One of your stats is either below 0 or above 20, please move it to between this range.");
+                            cmd.ExecuteNonQuery();
+                            LoadCharacterSheetClass();
                         }
                     }
+                    conn.Close();
                 }
             }
             catch (Exception eSql)
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-            Navigation.PushAsync(new CSheet_Inventory());
+            Navigation.PushAsync(new LandingPage());
         }
     }
 }

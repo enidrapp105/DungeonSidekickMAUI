@@ -1,11 +1,10 @@
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
-    CharacterSheet currentcharacterSheet;
+    CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
     DiceRoll diceroller;
-    public LandingPage(CharacterSheet passedCharacterSheet)
+    public LandingPage()
 	{
-        currentcharacterSheet = passedCharacterSheet;
 		InitializeComponent();
         diceroller = new DiceRoll();
         if (currentcharacterSheet != null ) 
