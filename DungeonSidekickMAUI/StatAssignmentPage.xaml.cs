@@ -89,13 +89,13 @@ public partial class StatAssignmentPage : ContentPage
             totallabel5.Text = $"{selectedStat5} {total5}";
             totallabel6.Text = $"{selectedStat6} {total6}";
             AssignValue(totallabel1.Text, totallabel2.Text, totallabel3.Text, totallabel4.Text, totallabel5.Text, totallabel6.Text);
-            this.characterSheet.dexterity = DEX;
-            this.characterSheet.intelligence = INT;
-            this.characterSheet.charisma = CHA;
-            this.characterSheet.strength = STR;
-            this.characterSheet.wisdom = WIS;
-            this.characterSheet.constitution = CON;
-            Navigation.PushAsync(new CSheet_Stats(characterSheet));
+            this.characterSheet.dexterity = int.Parse(DEX);
+            this.characterSheet.intelligence = int.Parse(INT);
+            this.characterSheet.charisma = int.Parse(CHA);
+            this.characterSheet.strength = int.Parse(STR);
+            this.characterSheet.wisdom = int.Parse(WIS);
+            this.characterSheet.constitution = int.Parse(CON);
+            Navigation.PushAsync(new CSheet_Stats());
         }
     }
     /*

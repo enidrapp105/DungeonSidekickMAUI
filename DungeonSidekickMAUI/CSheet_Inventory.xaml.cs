@@ -12,10 +12,9 @@ namespace DungeonSidekickMAUI
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CSheet_Inventory : ContentPage
     {
-        private CharacterSheet CharacterSheetcurrent;
-        public CSheet_Inventory(CharacterSheet sheet)
+        private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
+        public CSheet_Inventory()
         {
-            CharacterSheetcurrent = sheet;
             InitializeComponent();
             Inventory.Text = CharacterSheetcurrent.characterclass;
         }

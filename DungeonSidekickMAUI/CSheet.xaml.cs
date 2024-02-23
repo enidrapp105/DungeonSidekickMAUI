@@ -158,6 +158,6 @@ public partial class CSheet : ContentPage
             DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
-        Navigation.PushAsync(new CSheet_Stats(CharacterSheetcurrent));
+        Navigation.PushAsync(new CSheet_Stats());
     }
 }

@@ -25,10 +25,9 @@ namespace DungeonSidekickMAUI
             LoadCharacterSheetClass();
             Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
         }
-        public CSheet_Stats (CharacterSheet characterSheet)
+        public CSheet_Stats ()
 		{
 			InitializeComponent ();
-            CharacterSheetcurrent = characterSheet;
             LoadCharacterSheetPage(CharacterSheetcurrent);
         }
         
@@ -124,7 +123,7 @@ namespace DungeonSidekickMAUI
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-            Navigation.PushAsync(new CSheet_Inventory(CharacterSheetcurrent));
+            Navigation.PushAsync(new CSheet_Inventory());
         }
     }
 }
