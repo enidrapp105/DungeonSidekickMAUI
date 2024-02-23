@@ -138,14 +138,14 @@ public partial class CSheet_Import : ContentPage
                                         {
                                             CharacterSheet sheet = CharacterSheet.Instance;
                                             sheet.charactername = CNameVal.Text;
-                                            sheet.strength = StrengthVal.Text;
-                                            sheet.dexterity = DexterityVal.Text;
-                                            sheet.constitution = ConstitutionVal.Text;
-                                            sheet.intelligence = IntelligenceVal.Text;
-                                            sheet.wisdom = WisdomVal.Text;
-                                            sheet.charisma = CharismaVal.Text;
+                                            sheet.strength = int.Parse(StrengthVal.Text);
+                                            sheet.dexterity = int.Parse(DexterityVal.Text);
+                                            sheet.constitution = int.Parse(ConstitutionVal.Text);
+                                            sheet.intelligence = int.Parse(IntelligenceVal.Text);
+                                            sheet.wisdom = int.Parse(WisdomVal.Text);
+                                            sheet.charisma = int.Parse(CharismaVal.Text);
                                             sheet.exists = true;
-                                            Navigation.PushAsync(new CSheet(sheet));
+                                            Navigation.PushAsync(new CSheet());
                                         }
                                     )
                                 };

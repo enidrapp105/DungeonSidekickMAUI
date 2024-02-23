@@ -249,6 +249,6 @@ public partial class SelectedRacePage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.race = raceName;
-        Navigation.PushAsync(new CSheet(characterSheet));
+        Navigation.PushAsync(new CSheet());
     }
 }

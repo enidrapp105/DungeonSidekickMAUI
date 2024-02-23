@@ -13,7 +13,7 @@ namespace DungeonSidekickMAUI
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CSheet_Stats : ContentPage
 	{
-        private CharacterSheet CharacterSheetcurrent;
+        private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
         /*
          * Function: RollForStats
          * Author: Kenny Rapp
@@ -36,23 +36,23 @@ namespace DungeonSidekickMAUI
         //Loads the character sheet to the user's viewable page
         private void LoadCharacterSheetPage(CharacterSheet characterSheet)
         {
-            Strength.Text = int.Parse(characterSheet.strength);
-            Dexterity.Text = characterSheet.dexterity;
-            Constitution.Text = characterSheet.constitution;
-            Intelligence.Text = characterSheet.intelligence;
-            Wisdom.Text = characterSheet.wisdom;
-            Constitution.Text = characterSheet.constitution;
-            Charisma.Text = characterSheet.charisma;
+            Strength.Text = characterSheet.strength.ToString();
+            Dexterity.Text = characterSheet.dexterity.ToString();
+            Constitution.Text = characterSheet.constitution.ToString();
+            Intelligence.Text = characterSheet.intelligence.ToString();
+            Wisdom.Text = characterSheet.wisdom.ToString();
+            Constitution.Text = characterSheet.constitution.ToString();
+            Charisma.Text = characterSheet.charisma.ToString();
         }
         private void LoadCharacterSheetClass()
         {
-            CharacterSheetcurrent.strength = Strength.Text;
-            CharacterSheetcurrent.dexterity = Dexterity.Text;
-            CharacterSheetcurrent.constitution = Constitution.Text;
-            CharacterSheetcurrent.intelligence = Intelligence.Text;
-            CharacterSheetcurrent.wisdom = Wisdom.Text;
-            CharacterSheetcurrent.constitution = Constitution.Text;
-            CharacterSheetcurrent.charisma = Charisma.Text;
+            CharacterSheetcurrent.strength = int.Parse(Strength.Text);
+            CharacterSheetcurrent.dexterity = int.Parse(Dexterity.Text);
+            CharacterSheetcurrent.constitution = int.Parse(Constitution.Text);
+            CharacterSheetcurrent.intelligence = int.Parse(Intelligence.Text);
+            CharacterSheetcurrent.wisdom = int.Parse(Wisdom.Text);
+            CharacterSheetcurrent.constitution = int.Parse(Constitution.Text);
+            CharacterSheetcurrent.charisma = int.Parse(Charisma.Text);
         }
 
         private void SubmitStats(object sender, EventArgs e)

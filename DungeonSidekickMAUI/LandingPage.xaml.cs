@@ -43,12 +43,12 @@ public partial class LandingPage : ContentPage
         if(currentcharacterSheet.charactername != null)
             User_Disp.Text = "Welcome " + currentcharacterSheet.charactername;
 
-        lblStr_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.strength)); //For each stat, CalcStatMod calculates the modifier based on
-        lblDex_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.dexterity)); //the stat that gets passed.
-        lblConst_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.constitution));
-        lblInt_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.intelligence));
-        lblWis_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.wisdom));
-        lblChar_Mod.Text = CalcStatMod(int.Parse(currentcharacterSheet.charisma));
+        lblStr_Mod.Text = CalcStatMod(currentcharacterSheet.strength); //For each stat, CalcStatMod calculates the modifier based on
+        lblDex_Mod.Text = CalcStatMod(currentcharacterSheet.dexterity); //the stat that gets passed.
+        lblConst_Mod.Text = CalcStatMod(currentcharacterSheet.constitution);
+        lblInt_Mod.Text = CalcStatMod(currentcharacterSheet.intelligence);
+        lblWis_Mod.Text = CalcStatMod(currentcharacterSheet.wisdom);
+        lblChar_Mod.Text = CalcStatMod(currentcharacterSheet.charisma);
     }
 
     /*
