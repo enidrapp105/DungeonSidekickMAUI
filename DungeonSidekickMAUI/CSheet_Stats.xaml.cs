@@ -74,6 +74,7 @@ namespace DungeonSidekickMAUI
          */
         private void SubmitStats(object sender, EventArgs e)
         {
+            LoadCharacterSheetClass();
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
@@ -107,8 +108,39 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@Intelligence", CharacterSheetcurrent.intelligence);
                             cmd.Parameters.AddWithValue("@Wisdom", CharacterSheetcurrent.wisdom);
                             cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.charisma);
+                            int flag = 0;
+
+                            if (int.Parse(Strength.Text) >= 0 && int.Parse(Strength.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Strength", CharacterSheetcurrent.strength);
+                            else
+                                flag = 1;
+
+                            if (int.Parse(Dexterity.Text) >= 0 && int.Parse(Dexterity.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Dexterity", CharacterSheetcurrent.dexterity);
+                            else
+                                flag = 1;
+
+                            if (int.Parse(Constitution.Text) >= 0 && int.Parse(Constitution.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Constitution", CharacterSheetcurrent.constitution);
+                            else
+                                flag = 1;
+
+                            if (int.Parse(Intelligence.Text) >= 0 && int.Parse(Intelligence.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Intelligence", CharacterSheetcurrent.intelligence);
+                            else
+                                flag = 1;
+
+                            if (int.Parse(Wisdom.Text) >= 0 && int.Parse(Wisdom.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Wisdom", CharacterSheetcurrent.wisdom);
+                            else
+                                flag = 1;
+
+                            if (int.Parse(Charisma.Text) >= 0 && int.Parse(Charisma.Text) <= 18)
+                                cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.charisma);
+                            else
+                                flag = 1;
                             cmd.ExecuteNonQuery();
-                            LoadCharacterSheetClass();
+                            
                         }
                     }
                     conn.Close();
