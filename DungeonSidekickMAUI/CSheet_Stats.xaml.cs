@@ -77,10 +77,10 @@ namespace DungeonSidekickMAUI
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
-                "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
-                "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
-                "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
+                "(CharacterName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
+                "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
+                "(@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -91,6 +91,22 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.charactername);
+                            cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.race);
+                            cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.characterclass);
+                            cmd.Parameters.AddWithValue("@Background", CharacterSheetcurrent.background);
+                            cmd.Parameters.AddWithValue("@Alignment", CharacterSheetcurrent.alignment);
+                            cmd.Parameters.AddWithValue("@PersonalityTraits", CharacterSheetcurrent.personalitytraits);
+                            cmd.Parameters.AddWithValue("@Ideals", CharacterSheetcurrent.ideals);
+                            cmd.Parameters.AddWithValue("@Bonds", CharacterSheetcurrent.bonds);
+                            cmd.Parameters.AddWithValue("@Flaws", CharacterSheetcurrent.flaws);
+                            cmd.Parameters.AddWithValue("@FeaturesTraits", CharacterSheetcurrent.featurestraits);
+                            cmd.Parameters.AddWithValue("@Strength", CharacterSheetcurrent.strength);
+                            cmd.Parameters.AddWithValue("@Dexterity", CharacterSheetcurrent.dexterity);
+                            cmd.Parameters.AddWithValue("@Constitution", CharacterSheetcurrent.constitution);
+                            cmd.Parameters.AddWithValue("@Intelligence", CharacterSheetcurrent.intelligence);
+                            cmd.Parameters.AddWithValue("@Wisdom", CharacterSheetcurrent.wisdom);
+                            cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.charisma);
                             cmd.ExecuteNonQuery();
                             LoadCharacterSheetClass();
                         }
