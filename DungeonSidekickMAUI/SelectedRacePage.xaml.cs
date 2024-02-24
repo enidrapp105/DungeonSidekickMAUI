@@ -20,6 +20,10 @@ public partial class SelectedRacePage : ContentPage
 
         string query = "SELECT Race, Description, MoveSpeed, Age, Size, SizeDescription, Languages, LanguageDescription FROM dbo.RaceLookup" +
             " WHERE RaceID = @RaceID;";
+        var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+        var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
+        var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
+        var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -29,11 +33,8 @@ public partial class SelectedRacePage : ContentPage
                 {
                     StackLayout RaceStack = new StackLayout();
 
-                    var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                    var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
-                    var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object headerColor);
-                    var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
-                    RaceStack.BackgroundColor = (Color)backgroundColor;
+                    
+                    RaceStack.BackgroundColor = (Color)primaryColor;
                     raceId = selectedRace;
 
                     using (SqlCommand cmd = conn.CreateCommand())
@@ -55,38 +56,38 @@ public partial class SelectedRacePage : ContentPage
 
                                 Frame frame = new Frame()
                                 {
-                                    BackgroundColor = TrinaryColor,
+                                    BackgroundColor = (Color)trinaryColor,
                                     Padding = 24,
                                     CornerRadius = 0,
                                     Content = Race
                                 };
 
                                 Label Speed = new Label();
-                                Speed.TextColor = fontColor;
+                                Speed.TextColor = (Color)fontColor;
                                 Speed.Text = "Move Speed: " + reader.GetInt32(2);
 
                                 Label Desc = new Label();
-                                Desc.TextColor = fontColor;
+                                Desc.TextColor = (Color)fontColor;
                                 Desc.Text = reader.GetString(1);
 
                                 Label Age = new Label();
-                                Age.TextColor = fontColor;
+                                Age.TextColor = (Color)fontColor;
                                 Age.Text = reader.GetString(3);
 
                                 Label Size = new Label();
-                                Size.TextColor = fontColor;
+                                Size.TextColor = (Color)fontColor;
                                 Size.Text = "Size: " + reader.GetString(4);
 
                                 Label SizeDesc = new Label();
-                                SizeDesc.TextColor = fontColor;
+                                SizeDesc.TextColor = (Color)fontColor;
                                 SizeDesc.Text = reader.GetString(5);
 
                                 Label Lang = new Label();
-                                Lang.TextColor = fontColor;
+                                Lang.TextColor = (Color)fontColor;
                                 Lang.Text = "Languages: " + reader.GetString(6);
 
                                 Label LangDesc = new Label();
-                                LangDesc.TextColor = fontColor;
+                                LangDesc.TextColor = (Color)fontColor;
                                 LangDesc.Text = reader.GetString(1);
 
                                 RaceStack.Children.Add(frame);
@@ -118,12 +119,12 @@ public partial class SelectedRacePage : ContentPage
                                     if (optional == 1)
                                     {
                                         Label StartProf = new Label();
-                                        StartProf.TextColor = fontColor;
+                                        StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Starting Proficiencies: ";
                                         RaceStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
-                                    Choice.TextColor = fontColor;
+                                    Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
                                     RaceStack.Children.Add(Choice);
                                 }
@@ -148,7 +149,7 @@ public partial class SelectedRacePage : ContentPage
                                                     while (innerReader.Read())
                                                     {
                                                         Label ProfName = new Label();
-                                                        ProfName.TextColor = fontColor;
+                                                        ProfName.TextColor = (Color)fontColor;
                                                         ProfName.Text = innerReader.GetString(0);
                                                         RaceStack.Children.Add(ProfName);
                                                     }
@@ -183,12 +184,12 @@ public partial class SelectedRacePage : ContentPage
                                     if (optional == 1)
                                     {
                                         Label StartProf = new Label();
-                                        StartProf.TextColor = fontColor;
+                                        StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Ability Bonuses: ";
                                         RaceStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
-                                    Choice.TextColor = fontColor;
+                                    Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
                                     RaceStack.Children.Add(Choice);
                                 }
@@ -213,7 +214,7 @@ public partial class SelectedRacePage : ContentPage
                                                     while (innerReader.Read())
                                                     {
                                                         Label BonusName = new Label();
-                                                        BonusName.TextColor = fontColor;
+                                                        BonusName.TextColor = (Color)fontColor;
                                                         BonusName.Text = innerReader.GetString(0) + " " + bonus;
                                                         RaceStack.Children.Add(BonusName);
                                                     }
@@ -233,8 +234,8 @@ public partial class SelectedRacePage : ContentPage
 
                     Button submit = new Button()
                     {
-                        BackgroundColor = SecondaryColor,
-                        TextColor = fontColor,
+                        BackgroundColor = (Color)secondaryColor,
+                        TextColor = (Color)fontColor,
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
