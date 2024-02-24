@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MainPage">
 
-    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
         <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
             <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
@@ -13,8 +13,8 @@
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Clicked"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Import"/>
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Settings" WidthRequest="400" Clicked="Settings_Page"/>
 
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Settings" WidthRequest="400" HorizontalOptions="Center" Clicked="Settings_Page"/>
     </StackLayout>
-
+    
 </ContentPage>
