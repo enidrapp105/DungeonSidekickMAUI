@@ -26,14 +26,16 @@ namespace DungeonSidekickMAUI
             Items = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
-            PullItems(); // Should pull what the character currently has in their inventory from the DB.
+            //PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
-            string query = "SELECT ItemDetailsID, Quantity, ETypeID FROM dbo.Inventory" +
+            string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
             " WHERE CharacterID = @CharacterID";
 
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Weapons.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -118,22 +120,21 @@ namespace DungeonSidekickMAUI
 
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
-            string query = "INSERT INTO dbo.Inventory(ItemDetailsID, Quantity, ETypeID, CharacterID)" +
+            string query = "INSERT INTO dbo.Inventory(ItemID, Quantity, eTypeID, CharacterID)" +
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
-
-            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
+            try
             {
-                try
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
                     {
-                        conn.Open();
-                        if (conn.State == System.Data.ConnectionState.Open)
+                        using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            using (SqlCommand cmd = conn.CreateCommand())
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
                             {
-                                cmd.CommandText = query;
-                                cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                                 cmd.Parameters.AddWithValue("@Etype", ITEM);
                                 foreach (List<int> item in Items) // Should iterate through every element of Items and correctly input the necessary data into the query.
                                 {
@@ -141,7 +142,9 @@ namespace DungeonSidekickMAUI
                                     cmd.Parameters.AddWithValue("@Quantity", item[1]);
                                     cmd.ExecuteNonQuery();
                                 }
-
+                            }
+                            if (Weapons.Count > 0) // Checks if Weapons is empty. If not, proceed.
+                            {
                                 cmd.Parameters.AddWithValue("@Etype", WEAPON);
                                 foreach (List<int> weapon in Weapons)
                                 {
@@ -149,7 +152,9 @@ namespace DungeonSidekickMAUI
                                     cmd.Parameters.AddWithValue("@Quantity", weapon[1]);
                                     cmd.ExecuteNonQuery();
                                 }
-
+                            }
+                            if (Equipment.Count > 0) // Checks if Equipment is empty. If not, proceed.
+                            {
                                 cmd.Parameters.AddWithValue("@Etype", EQUIPMENT);
                                 foreach (List<int> equipment in Equipment)
                                 {
@@ -161,11 +166,13 @@ namespace DungeonSidekickMAUI
                         }
                     }
                 }
-                catch (Exception eSql)
-                {
-                    Debug.WriteLine("Exception: " + eSql.Message);
-                }
             }
+            catch (Exception eSql)
+            {
+
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+
         }
         //***************************
         // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.

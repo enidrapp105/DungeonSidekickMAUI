@@ -134,7 +134,7 @@ namespace DungeonSidekickMAUI
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-            Navigation.PushAsync(new CSheet_Inventory());
+            Navigation.PushAsync(new LandingPage(CharacterSheet.Instance));
         }
     }
 }

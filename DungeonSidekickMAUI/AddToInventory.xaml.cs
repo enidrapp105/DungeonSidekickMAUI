@@ -3,11 +3,13 @@ using Microsoft.Maui.Controls;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+//using HomeKit;
 
 public partial class AddToInventory : ContentPage
 {
-    public int quant;
+    //public int quant = -999;
     AddItemViewModel addItemViewModel;
+    private TaskCompletionSource<int> task;
     public AddToInventory()
 	{
 		InitializeComponent();
@@ -22,10 +24,11 @@ public partial class AddToInventory : ContentPage
             MyCollectionViews.ItemsSource = addItemViewModel.UserItems.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
     }
 
-    private async void ShowNumberInputPopup()
+    private async Task<int> ShowNumberInputPopup()
     {
         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+
         // Create entry for number input
         var numberEntry = new Entry
         {
@@ -33,8 +36,7 @@ public partial class AddToInventory : ContentPage
             Keyboard = Keyboard.Numeric,
             WidthRequest = 350,
             TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor,
-
+            BackgroundColor = (Color)frameColor
         };
 
         // Create button for submission
@@ -43,7 +45,7 @@ public partial class AddToInventory : ContentPage
             Text = "Enter",
             WidthRequest = 350,
             TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor,
+            BackgroundColor = (Color)frameColor
         };
 
         // Create layout for popup contents
@@ -58,9 +60,11 @@ public partial class AddToInventory : ContentPage
         // Create the popup
         var popup = new Popup
         {
-            Content = layout,
+            Content = layout
         };
-        //popup.Content = layout;
+
+        // TaskCompletionSource to represent waiting for button click
+        task = new TaskCompletionSource<int>();
 
         // Subscribe to button click event
         enterButton.Clicked += async (sender, e) =>
@@ -68,7 +72,8 @@ public partial class AddToInventory : ContentPage
             // Retrieve input number
             if (int.TryParse(numberEntry.Text, out int number))
             {
-                quant = number;
+                // Set the result of the TaskCompletionSource
+                task.SetResult(number);
             }
             else
             {
@@ -81,12 +86,20 @@ public partial class AddToInventory : ContentPage
 
         // Show the popup
         this.ShowPopup(popup);
+
+        // Wait for the button click and return the entered number
+        return await task.Task;
     }
 
-    private void AddItems(object sender, EventArgs e)
+    private async void AddItems(object sender, EventArgs e)
     {
-        ShowNumberInputPopup();
-        Inventory inv = new Inventory(0); // HARD CODED TO 0 RIGHT NOW
+
+        // Call ShowNumberInputPopup asynchronously and block synchronously until it completes
+        int quant = await ShowNumberInputPopup();
+
+        // waiting for quantity to be entered
+
+        Inventory inv = new Inventory(1); // HARD CODED TO 0 RIGHT NOW
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
