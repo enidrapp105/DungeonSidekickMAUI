@@ -12,7 +12,10 @@ namespace DungeonSidekickMAUI
         private static CharacterSheet instance;
 
         // Private constructor to prevent instantiation
-        private CharacterSheet() { }
+        private CharacterSheet() 
+        {
+            this.Purge();
+        }
 
         // Public static method to access the singleton instance
         public static CharacterSheet Instance
@@ -24,7 +27,6 @@ namespace DungeonSidekickMAUI
                 if (instance == null)
                 {
                     instance = new CharacterSheet();
-                    instance.Purge();
                 }
                 return instance;
             }

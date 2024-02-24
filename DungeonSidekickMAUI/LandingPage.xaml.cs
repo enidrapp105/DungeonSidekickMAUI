@@ -43,17 +43,17 @@ public partial class LandingPage : ContentPage
             User_Disp.Text = "Welcome " + currentcharacterSheet.charactername;
 
         Preferences.Default.Set("StrMod",CalcStatMod(currentcharacterSheet.strength));
-        lblStr_Mod.Text = Preferences.Default.Get("StrMod", 0).ToString(); //For each stat, CalcStatMod calculates the modifier based on
+        lblStr_Mod.Text = CalcStatMod(currentcharacterSheet.strength).ToString(); //For each stat, CalcStatMod calculates the modifier based on
         Preferences.Default.Set("DexMod", CalcStatMod(currentcharacterSheet.dexterity));//the stat that gets passed.
-        lblDex_Mod.Text = Preferences.Default.Get("DexMod", 0).ToString();
+        lblDex_Mod.Text = CalcStatMod(currentcharacterSheet.dexterity).ToString();
         Preferences.Default.Set("ConMod", CalcStatMod(currentcharacterSheet.constitution));
-        lblConst_Mod.Text = Preferences.Default.Get("ConMod", 0).ToString(); //Using preferences to save the various mods
+        lblConst_Mod.Text = CalcStatMod(currentcharacterSheet.constitution).ToString(); //Using preferences to save the various mods
         Preferences.Default.Set("IntMod", CalcStatMod(currentcharacterSheet.intelligence)); //when they are calculated
-        lblInt_Mod.Text = Preferences.Default.Get("IntMod", 0).ToString();
+        lblInt_Mod.Text = CalcStatMod(currentcharacterSheet.intelligence).ToString();
         Preferences.Default.Set("WisMod", CalcStatMod(currentcharacterSheet.wisdom));
-        lblWis_Mod.Text = Preferences.Default.Get("WisMod", 0).ToString();
+        lblWis_Mod.Text = CalcStatMod(currentcharacterSheet.wisdom).ToString();
         Preferences.Default.Set("ChaMod", CalcStatMod(currentcharacterSheet.charisma));
-        lblChar_Mod.Text = Preferences.Default.Get("ChaMod", 0).ToString();
+        lblChar_Mod.Text = CalcStatMod(currentcharacterSheet.charisma).ToString();
     }
 
     /*

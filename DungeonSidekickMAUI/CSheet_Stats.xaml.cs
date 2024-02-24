@@ -23,7 +23,7 @@ namespace DungeonSidekickMAUI
         private void RollForStats(object sender, EventArgs e)
         {
             LoadCharacterSheetClass();
-            Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
+            Navigation.PushAsync(new RollForStatsPage());
         }
         public CSheet_Stats ()
 		{
