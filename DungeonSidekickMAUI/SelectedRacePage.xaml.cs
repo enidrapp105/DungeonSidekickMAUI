@@ -10,7 +10,7 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedRacePage : ContentPage
 {
     CharacterSheet characterSheet;
-    string raceName;
+    int raceId;
     public SelectedRacePage(CharacterSheet characterSheet, int selectedRace)
     {
         this.characterSheet = characterSheet;
@@ -28,11 +28,13 @@ public partial class SelectedRacePage : ContentPage
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
                     StackLayout RaceStack = new StackLayout();
+
                     var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
                     var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
                     RaceStack.BackgroundColor = (Color)backgroundColor;
+                    raceId = selectedRace;
 
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
@@ -45,44 +47,46 @@ public partial class SelectedRacePage : ContentPage
                                 Label Race = new Label();
                                 Race.FontSize = 36;
                                 Race.HorizontalTextAlignment = TextAlignment.Center;
+
                                 Race.TextColor = (Color)fontColor;
-                                raceName = reader.GetString(0);
+                                string raceName = reader.GetString(0);
+
                                 Race.Text = raceName;
 
                                 Frame frame = new Frame()
                                 {
-                                    BackgroundColor = (Color)headerColor,
+                                    BackgroundColor = TrinaryColor,
                                     Padding = 24,
                                     CornerRadius = 0,
                                     Content = Race
                                 };
 
                                 Label Speed = new Label();
-                                Speed.TextColor = (Color)fontColor;
+                                Speed.TextColor = fontColor;
                                 Speed.Text = "Move Speed: " + reader.GetInt32(2);
 
                                 Label Desc = new Label();
-                                Desc.TextColor = (Color)fontColor;
+                                Desc.TextColor = fontColor;
                                 Desc.Text = reader.GetString(1);
 
                                 Label Age = new Label();
-                                Age.TextColor = (Color)fontColor;
+                                Age.TextColor = fontColor;
                                 Age.Text = reader.GetString(3);
 
                                 Label Size = new Label();
-                                Size.TextColor = (Color)fontColor;
+                                Size.TextColor = fontColor;
                                 Size.Text = "Size: " + reader.GetString(4);
 
                                 Label SizeDesc = new Label();
-                                SizeDesc.TextColor = (Color)fontColor;
+                                SizeDesc.TextColor = fontColor;
                                 SizeDesc.Text = reader.GetString(5);
 
                                 Label Lang = new Label();
-                                Lang.TextColor = (Color)fontColor;
+                                Lang.TextColor = fontColor;
                                 Lang.Text = "Languages: " + reader.GetString(6);
 
                                 Label LangDesc = new Label();
-                                LangDesc.TextColor = (Color)fontColor;
+                                LangDesc.TextColor = fontColor;
                                 LangDesc.Text = reader.GetString(1);
 
                                 RaceStack.Children.Add(frame);
@@ -114,12 +118,12 @@ public partial class SelectedRacePage : ContentPage
                                     if (optional == 1)
                                     {
                                         Label StartProf = new Label();
-                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.TextColor = fontColor;
                                         StartProf.Text = "Choose Optional Starting Proficiencies: ";
                                         RaceStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
-                                    Choice.TextColor = (Color)fontColor;
+                                    Choice.TextColor = fontColor;
                                     Choice.Text = "Choose " + choice;
                                     RaceStack.Children.Add(Choice);
                                 }
@@ -144,7 +148,7 @@ public partial class SelectedRacePage : ContentPage
                                                     while (innerReader.Read())
                                                     {
                                                         Label ProfName = new Label();
-                                                        ProfName.TextColor = (Color)fontColor;
+                                                        ProfName.TextColor = fontColor;
                                                         ProfName.Text = innerReader.GetString(0);
                                                         RaceStack.Children.Add(ProfName);
                                                     }
@@ -179,12 +183,12 @@ public partial class SelectedRacePage : ContentPage
                                     if (optional == 1)
                                     {
                                         Label StartProf = new Label();
-                                        StartProf.TextColor = (Color)fontColor;
+                                        StartProf.TextColor = fontColor;
                                         StartProf.Text = "Choose Optional Ability Bonuses: ";
                                         RaceStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
-                                    Choice.TextColor = (Color)fontColor;
+                                    Choice.TextColor = fontColor;
                                     Choice.Text = "Choose " + choice;
                                     RaceStack.Children.Add(Choice);
                                 }
@@ -209,7 +213,7 @@ public partial class SelectedRacePage : ContentPage
                                                     while (innerReader.Read())
                                                     {
                                                         Label BonusName = new Label();
-                                                        BonusName.TextColor = (Color)fontColor;
+                                                        BonusName.TextColor = fontColor;
                                                         BonusName.Text = innerReader.GetString(0) + " " + bonus;
                                                         RaceStack.Children.Add(BonusName);
                                                     }
@@ -229,8 +233,8 @@ public partial class SelectedRacePage : ContentPage
 
                     Button submit = new Button()
                     {
-                        BackgroundColor = (Color)frameColor,
-                        TextColor = (Color)fontColor,
+                        BackgroundColor = SecondaryColor,
+                        TextColor = fontColor,
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
@@ -248,7 +252,7 @@ public partial class SelectedRacePage : ContentPage
 
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.race = raceName;
+        characterSheet.race = raceId;
         Navigation.PushAsync(new CSheet());
     }
 }

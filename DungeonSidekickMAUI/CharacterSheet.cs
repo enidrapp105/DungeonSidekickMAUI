@@ -34,8 +34,8 @@ namespace DungeonSidekickMAUI
 
         // Properties
         public string? charactername { get; set; }
-        public string? race { get; set; }
-        public string? characterclass { get; set; }
+        public int race { get; set; }
+        public int characterclass { get; set; }
         public string? background { get; set; }
         public string? alignment { get; set; }
         public string? personalitytraits { get; set; }
@@ -61,8 +61,8 @@ namespace DungeonSidekickMAUI
         public void Purge()
         {
             charactername = null;
-            race = null;
-            characterclass = null;
+            race = -1;
+            characterclass = -1;
             background = null;
             alignment = null;
             personalitytraits = null;

@@ -70,6 +70,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AddToInventory.xaml.cs">
+	    <DependentUpon>AddToInventory.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="ClassPickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -98,6 +104,9 @@
 			  <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
 		  <MauiXaml Update="MainPage.xaml">
+		    <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
+		  <MauiXaml Update="AddToInventory.xaml">
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
