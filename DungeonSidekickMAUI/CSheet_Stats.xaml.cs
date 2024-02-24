@@ -139,7 +139,10 @@ namespace DungeonSidekickMAUI
                                 cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.charisma);
                             else
                                 flag = 1;
-                            cmd.ExecuteNonQuery();
+                            if (flag != 1)
+                                cmd.ExecuteNonQuery();
+                            else
+                                DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.","Ok");
                             
                         }
                     }
