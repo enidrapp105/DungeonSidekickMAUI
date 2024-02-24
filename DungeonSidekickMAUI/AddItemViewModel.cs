@@ -10,6 +10,9 @@ public class AddItemViewModel : BindableObject
     public class UserItem
     {
         public string Name { get; set; }
+        public int eTypeId { get; set; }
+
+        public int Id { get; set; }
     }
     public ObservableCollection<UserItem> UserItems
     {
@@ -37,7 +40,9 @@ public class AddItemViewModel : BindableObject
         };
 
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        string query = "SELECT name FROM dbo.Weapon";
+        string query = "SELECT name, eTypeId, weaponId FROM dbo.Weapon";
+        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
         try
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -48,46 +53,48 @@ public class AddItemViewModel : BindableObject
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
-                        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+                        
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 var name = new UserItem();
                                 name.Name = reader.GetString(0);
+                                name.eTypeId = reader.GetInt32(1);
+                                name.Id = reader.GetInt32(2);
+                                UserItems.Add(name);
+                                
+                            }
+                        }
+                    }
+                    query = "SELECT name, eTypeId, armorId FROM dbo.Armor";
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                var name = new UserItem();
+                                name.Name = reader.GetString(0);
+                                name.eTypeId = reader.GetInt32(1);
+                                name.Id = reader.GetInt32(2);
                                 UserItems.Add(name);
                             }
                         }
                     }
-                    query = "SELECT name FROM dbo.Armor";
+                    query = "SELECT name, eTypeId, gearId FROM dbo.Gear";
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
-                        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
                             {
                                 var name = new UserItem();
                                 name.Name = reader.GetString(0);
-                                UserItems.Add(name);
-                            }
-                        }
-                    }
-                    query = "SELECT name FROM dbo.Gear";
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = query;
-                        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                var name = new UserItem();
-                                name.Name = reader.GetString(0);
+                                name.eTypeId = reader.GetInt32(1);
+                                name.Id = reader.GetInt32(2);
                                 UserItems.Add(name);
                             }
                         }
