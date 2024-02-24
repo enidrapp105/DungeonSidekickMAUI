@@ -10,7 +10,7 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedRacePage : ContentPage
 {
     CharacterSheet characterSheet;
-    string raceName;
+    int raceId;
     public SelectedRacePage(CharacterSheet characterSheet, int selectedRace)
     {
         this.characterSheet = characterSheet;
@@ -33,7 +33,7 @@ public partial class SelectedRacePage : ContentPage
                     var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object headerColor);
                     var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object backgroundColor);
                     RaceStack.BackgroundColor = (Color)backgroundColor;
-
+                    raceId = selectedRace;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -46,7 +46,7 @@ public partial class SelectedRacePage : ContentPage
                                 Race.FontSize = 36;
                                 Race.HorizontalTextAlignment = TextAlignment.Center;
                                 Race.TextColor = (Color)fontColor;
-                                raceName = reader.GetString(0);
+                                string raceName = reader.GetString(0);
                                 Race.Text = raceName;
 
                                 Frame frame = new Frame()
@@ -248,7 +248,7 @@ public partial class SelectedRacePage : ContentPage
 
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.race = raceName;
+        characterSheet.race = raceId;
         Navigation.PushAsync(new CSheet());
     }
 }

@@ -4,16 +4,17 @@ using System.Diagnostics;
 //using MapKit;
 namespace DungeonSidekickMAUI;
 
+public class UserItem
+{
+    public string Name { get; set; }
+    public int eTypeId { get; set; }
+
+    public int Id { get; set; }
+}
 public class AddItemViewModel : BindableObject
 {
     private ObservableCollection<UserItem> userItems;
-    public class UserItem
-    {
-        public string Name { get; set; }
-        public int eTypeId { get; set; }
-
-        public int Id { get; set; }
-    }
+    
     public ObservableCollection<UserItem> UserItems
     {
         get
@@ -40,7 +41,7 @@ public class AddItemViewModel : BindableObject
         };
 
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        string query = "SELECT name, eTypeId, weaponId FROM dbo.Weapon";
+        string query = "SELECT name, eTypeId, WeaponId FROM dbo.Weapon";
         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
         try
@@ -83,7 +84,7 @@ public class AddItemViewModel : BindableObject
                             }
                         }
                     }
-                    query = "SELECT name, eTypeId, gearId FROM dbo.Gear";
+                    query = "SELECT name, eTypeId, GearId FROM dbo.Gear";
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;

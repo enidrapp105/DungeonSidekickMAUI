@@ -16,17 +16,17 @@ namespace DungeonSidekickMAUI
         public CSheet_Inventory()
         {
             InitializeComponent();
-            Inventory.Text = CharacterSheetcurrent.characterclass;
+            Inventory.Text = "Placeholder";//CharacterSheetcurrent.characterclass;
         }
         private void SubmitStats(object sender, EventArgs e)
         {
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
-                "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
-                "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
-                "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
+                "(CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
+                "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
+                "(@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -37,9 +37,10 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@Equipment", Inventory.Text);
-                            cmd.Parameters.AddWithValue("@Proficiencies", Proficiencies.Text);
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.charactername);
+
+                            //removing this for now because the previous thing submits everything (I dont think this page is even needed)
+                            //cmd.ExecuteNonQuery();
                         }
                     }
                     conn.Close();
@@ -47,6 +48,7 @@ namespace DungeonSidekickMAUI
             }
             catch (Exception eSql)
             {
+                DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
             Navigation.PushAsync(new LandingPage(CharacterSheetcurrent));

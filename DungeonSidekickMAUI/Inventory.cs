@@ -23,6 +23,9 @@ namespace DungeonSidekickMAUI
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
             m_CharacterID = CharacterID;
+            Items = new List<List<int>>();
+            Weapons = new List<List<int>>();
+            Equipment = new List<List<int>>();
             PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
@@ -164,14 +167,16 @@ namespace DungeonSidekickMAUI
                 }
             }
         }
+        //***************************
+        // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.
+        //***************************
+        public int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
 
-        public required int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
+        public List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
 
-        public required List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
+        public List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
 
-        public required List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
-
-        public required List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
+        public List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
 
         // These lable the ETypeID we use in the DB.
         public const int WEAPON = 0;

@@ -2,6 +2,8 @@ namespace DungeonSidekickMAUI;
 using Microsoft.Maui.Controls;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Data.SqlClient;
+using System.Diagnostics;
+
 public partial class AddToInventory : ContentPage
 {
     public int quant;
@@ -84,7 +86,13 @@ public partial class AddToInventory : ContentPage
     private void AddItems(object sender, EventArgs e)
     {
         ShowNumberInputPopup();
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        
+        Inventory inv = new Inventory(0); // HARD CODED TO 0 RIGHT NOW
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            inv.AddItem(id, quant, eTypeId);
+            inv.UpdateDB();
+        }
     }
 }

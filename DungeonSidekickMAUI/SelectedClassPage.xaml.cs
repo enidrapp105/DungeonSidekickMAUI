@@ -6,7 +6,7 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedClassPage : ContentPage
 {
     CharacterSheet characterSheet;
-    string ClassName;
+    int cId;
     /*
      * Function: SelectedClassPage Constructor
      * Author: Kenny Rapp
@@ -38,6 +38,7 @@ public partial class SelectedClassPage : ContentPage
                     ClassStack.BackgroundColor = (Color)backgroundColor;
                     Frame optionalSkillsFrame = new Frame();
                     Frame savingThrowsFrame = new Frame();
+                    cId = selectedClass;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -50,7 +51,7 @@ public partial class SelectedClassPage : ContentPage
                                 Class.FontSize = 36;
                                 Class.HorizontalTextAlignment = TextAlignment.Center;
                                 Class.TextColor = (Color)fontColor;
-                                ClassName = reader.GetString(0);
+                                string ClassName = reader.GetString(0);
                                 Class.Text = ClassName;
 
                                 Frame frame = new Frame()
@@ -187,7 +188,7 @@ public partial class SelectedClassPage : ContentPage
      */
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.characterclass = ClassName;
+        characterSheet.characterclass = cId;
         Navigation.PushAsync(new CSheet());
     }
 
