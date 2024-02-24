@@ -100,64 +100,17 @@ public partial class CSheet : ContentPage
         LoadCharacterSheetClass();
         Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent));
     }
-    
+
+
+    /*
+     * Function: SubmitStats
+     * Author: Brendon Williams
+     * Purpose: Adds all the data in this page to the character sheet class, then moves to the next page
+     * last Modified : 02/22/2024 8:45pm
+     */
     private void SubmitStats(object sender, EventArgs e)
     {
-
         LoadCharacterSheetClass();
-
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-
-        string query = "INSERT INTO dbo.CharacterSheet" +
-            "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
-            "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
-            "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-            "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
-        
-        // Used for updating existing character sheets
-        if (CharacterSheetcurrent.exists == true)
-        {
-            // This will need changed to a ID of some sort when our DB is finalized
-            query = "UPDATE dbo.CharacterSheet " +
-            "SET Race = @Race, Class = @Class, Background = @Background, Alignment = @Alignment, PersonalityTraits = @PersonalityTraits, Ideals = @Ideals, " +
-            "Bonds = @Bonds, Flaws = @Flaws, FeaturesTraits = @FeaturesTraits, Equipment = @Equipment, Proficiencies = @Proficiencies, Attacks = @Attacks, " +
-            "Spells = @Spells, Strength = @Strength, Dexterity = @Dexterity, Constitution = @Constitution, Intelligence = @Intelligence, Wisdom = @Wisdom, Charisma = @Charisma " +
-            "WHERE CharacterName = @CharacterName;";
-        }
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = query;
-                        cmd.Parameters.AddWithValue("@PlayerName", PName.Text);
-                        cmd.Parameters.AddWithValue("@CharacterName", CName.Text);
-                        cmd.Parameters.AddWithValue("@Race", Race);
-                        cmd.Parameters.AddWithValue("@Class", Class);                        
-                        cmd.Parameters.AddWithValue("@Background", Background.Text);
-                        cmd.Parameters.AddWithValue("@Alignment", Allignment.Text);
-                        cmd.Parameters.AddWithValue("@PersonalityTraits", PTraits.Text);
-                        cmd.Parameters.AddWithValue("@Ideals", Ideals.Text);
-                        cmd.Parameters.AddWithValue("@Bonds", Bonds.Text);
-                        cmd.Parameters.AddWithValue("@Flaws", Flaws.Text);
-                        cmd.Parameters.AddWithValue("@FeaturesTraits", Traits.Text);
-                        cmd.Parameters.AddWithValue("@Equipment", Inventory.Text);
-                        cmd.Parameters.AddWithValue("@Attacks", Attacks.Text);
-                        cmd.Parameters.AddWithValue("@Spells", Spells.Text);
-                    }
-                }
-            }
-            DisplayAlert("Success","Character Sheet Saved!","OK");
-        }
-        catch (Exception eSql)
-        {
-            DisplayAlert("Error!", eSql.Message, "OK");
-            Debug.WriteLine("Exception: " + eSql.Message);
-        }
         Navigation.PushAsync(new CSheet_Stats());
     }
 }
