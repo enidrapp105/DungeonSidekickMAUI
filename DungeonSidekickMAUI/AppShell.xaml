@@ -5,20 +5,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:DungeonSidekickMAUI"
     Shell.FlyoutBehavior="Disabled"
+    x:Name="appshell"
     >
     <TabBar x:Name="tabbar">
-        <Tab Title="Login">
-            <ShellContent ContentTemplate="{DataTemplate local:LoginPage}"/>
+        <Tab Title="Home" IsVisible="true">
+            <ShellContent ContentTemplate="{DataTemplate local:MainPage}"/>
         </Tab>
-        <Tab Title="Create a character">
+        <Tab Title="Create a character" IsVisible="true">
             <ShellContent ContentTemplate="{DataTemplate local:Info_For_Stats}" />
         </Tab>
-        <Tab Title="Settings" Icon="settings.png">
+        <Tab Title="Settings" Icon="settings.png" IsVisible="true">
             <ShellContent ContentTemplate="{DataTemplate local:Settings_Page}" />
         </Tab>
     </TabBar>
     <ShellContent
-        ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage"/>
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"/>
 
 </Shell>

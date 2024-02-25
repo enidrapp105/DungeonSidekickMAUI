@@ -6,7 +6,7 @@
         {
             InitializeComponent();
             CustomResources.GetColors();
-            MainPage = new AppShell();
+            MainPage = new NavigationPage(new LoginPage());
         }
     }
 }
