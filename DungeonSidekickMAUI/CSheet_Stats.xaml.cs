@@ -78,13 +78,14 @@ namespace DungeonSidekickMAUI
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
-                "(CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
+                "(UID,CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
                 "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
-                "(@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);" +
-                "SELECT CAST(scope_identity() AS int)";
+                "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
 
-            string UserCharQuery = "INSERT INTO dbo.CharacterList(UID) VALUES(@UID);";
+            string UIDquery = "SELECT UID from dbo.Users" +
+                "WHERE Username = @Username";
+
 
 
             try
@@ -96,6 +97,13 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
+                            cmd.CommandText = UIDquery;
+                            string UserName = Preferences.Default.Get("Username", "");
+                            if (UserName == null) throw new Exception();
+                            cmd.Parameters.AddWithValue("@Username",UserName);
+                            int UID = (int)cmd.ExecuteScalar();
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@UID", UID);
                             cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.charactername);
                             cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.race);
                             cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.characterclass);
@@ -106,7 +114,6 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@Bonds", CharacterSheetcurrent.bonds);
                             cmd.Parameters.AddWithValue("@Flaws", CharacterSheetcurrent.flaws);
                             cmd.Parameters.AddWithValue("@FeaturesTraits", CharacterSheetcurrent.featurestraits);
-                            cmd.CommandText = query;
                             int flag = 0;
 
                             if (int.Parse(Strength.Text) >= 0 && int.Parse(Strength.Text) <= 18)
@@ -140,13 +147,7 @@ namespace DungeonSidekickMAUI
                                 flag = 1;
                             if (flag != 1)
                             {
-                                int CharacterID = (int)cmd.ExecuteScalar();
-                                if (CharacterID != 0)
-                                {
-                                    cmd.CommandText = UserCharQuery;
-                                    cmd.Parameters.AddWithValue("@UID", Preferences.Default.Get("UserId", 0));
-                                    cmd.ExecuteNonQuery();
-                                }
+                                cmd.ExecuteNonQuery();
                             }
                             else
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
