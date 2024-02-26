@@ -81,12 +81,8 @@ namespace DungeonSidekickMAUI
                 "(UID,CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
                 "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
                 "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
-
-            string UIDquery = "SELECT UID from dbo.Users" +
-                "WHERE Username = @Username";
-
-
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);" +
+                "SELECT CAST(scope_identity() AS int)";
 
             try
             {
@@ -97,13 +93,8 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = UIDquery;
-                            string UserName = Preferences.Default.Get("Username", "");
-                            if (UserName == null) throw new Exception();
-                            cmd.Parameters.AddWithValue("@Username",UserName);
-                            int UID = (int)cmd.ExecuteScalar();
                             cmd.CommandText = query;
-                            cmd.Parameters.AddWithValue("@UID", UID);
+                            cmd.Parameters.AddWithValue("@UID", Preferences.Default.Get("UserId", 0));
                             cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.charactername);
                             cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.race);
                             cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.characterclass);
@@ -147,7 +138,7 @@ namespace DungeonSidekickMAUI
                                 flag = 1;
                             if (flag != 1)
                             {
-                                cmd.ExecuteNonQuery();
+                                Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
                             }
                             else
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");

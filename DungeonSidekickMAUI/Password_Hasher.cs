@@ -200,7 +200,7 @@ namespace DungeonSidekickMAUI
         {
 
 
-            string query = "SELECT UID from dbo.Users" +
+            string query = "SELECT UID from dbo.Users " +
                 "WHERE Username = @Username";
 
             try
