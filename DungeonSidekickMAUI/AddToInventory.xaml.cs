@@ -3,19 +3,26 @@ using Microsoft.Maui.Controls;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
-//using HomeKit;
 
+/*
+* Class: AddToInventory
+* Author: Anthony Rielly
+* Purpose: Display all of the items from the database, the user can search for a specific item, 
+* if they click on it, the item will get added to the inventory table
+* last Modified: 2/22/2024 by Anthony Rielly
+*/
 public partial class AddToInventory : ContentPage
 {
-    //public int quant = -999;
     AddItemViewModel addItemViewModel;
     private TaskCompletionSource<int> task;
+
     public AddToInventory()
 	{
 		InitializeComponent();
         BindingContext = addItemViewModel = new AddItemViewModel();
     }
 
+    // updates what items are visible when the user types something in the search bar
     void Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.NewTextValue))
@@ -26,6 +33,7 @@ public partial class AddToInventory : ContentPage
 
     private async Task<int> ShowNumberInputPopup()
     {
+        // Allows us to use the dynamic colors with the out object
         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
 
@@ -91,6 +99,7 @@ public partial class AddToInventory : ContentPage
         return await task.Task;
     }
 
+    // Adds the selected item to the inventory class and updates the DB
     private async void AddItems(object sender, EventArgs e)
     {
 
@@ -99,7 +108,7 @@ public partial class AddToInventory : ContentPage
 
         // waiting for quantity to be entered
 
-        Inventory inv = new Inventory(1); // HARD CODED TO 0 RIGHT NOW
+        Inventory inv = new Inventory(1); // HARD CODED TO 1 RIGHT NOW
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
