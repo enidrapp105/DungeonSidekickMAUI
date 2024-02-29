@@ -159,7 +159,7 @@ public partial class CSheet_Import : ContentPage
                                 };
                                 CharacterStack.Children.Add(line);
 
-                                MainPanel.Children.Add(CharacterStack);
+                                CharacterPanel.Children.Add(CharacterStack);
                             }
                         }
                     }

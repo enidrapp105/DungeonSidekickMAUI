@@ -3,17 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CSheet_Import">
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
+        <StackLayout>
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                <Label Text="Character Selection" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <ScrollView>
+                <StackLayout x:Name="CharacterPanel" BackgroundColor="{DynamicResource PrimaryColor}">
 
-                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-                    <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-                </Frame>
-                <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
-                <!--PName = Player Name, CName = Character Name-->
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
 
-            </StackLayout>
-        </ScrollView>
+                    <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
+                    <!--PName = Player Name, CName = Character Name-->
+                    <Button BackgroundColor="{DynamicResource AccessoryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

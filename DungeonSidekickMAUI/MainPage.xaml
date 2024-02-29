@@ -2,19 +2,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MainPage">
+    <ScrollView>
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </Frame>
+            <Label Text="Dungeoning made easy!" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
+            <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
 
-    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
-        <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-            <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
-        </Frame>
-        <Label Text="Dungeoning made easy!" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Clicked"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Import"/>
+        
+            <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
 
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Clicked"/>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Import"/>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Settings" WidthRequest="400" Clicked="Settings_Page"/>
-
-    </StackLayout>
-    
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
