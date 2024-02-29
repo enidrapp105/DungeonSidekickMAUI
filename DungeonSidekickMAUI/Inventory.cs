@@ -28,6 +28,14 @@ namespace DungeonSidekickMAUI
             Equipment = new List<List<int>>();
             //PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
+
+        // Just clears the lists, used when adding items
+        public void ClearItems()
+        {
+            Items.Clear();
+            Weapons.Clear();
+            Equipment.Clear();
+        }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
             string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
@@ -49,10 +57,11 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
-                                List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
+                                
                                 while (reader.Read()) // Iterate through results of the query
                                 {
-                                    temp.Clear();
+                                    //temp.Clear();
+                                    List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
                                     temp.Add(reader.GetInt32(0));
                                     temp.Add(reader.GetInt32(1));
                                     temp.Add(reader.GetInt32(2));
