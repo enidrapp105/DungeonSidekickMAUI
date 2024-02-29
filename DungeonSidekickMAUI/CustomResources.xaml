@@ -2,12 +2,22 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CustomResources">
-
+    <!--the colors in here are set in the layout designer class 
+    when the app is first deployed onto a device after being uninstalled these are the 
+    values that are set-->
+    <!--PrimaryColor, generally used for the primary background on a given page-->
     <Color x:Key="PrimaryColor">#FFFFFF</Color>
+    <!--SecondaryColor, generally used for more sectioned off portions of a page such as frames 
+    or nested stack layouts.-->
     <Color x:Key="SecondaryColor">#BEBEBE</Color>
+    <!--TrinaryColor, generally used for header backgrounds but is more flexible than the previous two.-->
     <Color x:Key="TrinaryColor">#64FFFF</Color>
+    <!--FontC (customizable Font Color, not to be confused with FontColor value), 
+    main color for font used throughout application. -->
     <Color x:Key="FontC">#000000</Color>
+    <!--AccentColor, generally used for any extra content that we may need/want to have a color attached to.-->
     <Color x:Key="AccentColor">#C8C8FF</Color>
+    <!--AccessoryColor, primarily used for default text in fill in boxes.-->
     <Color x:Key="AccessoryColor">#C8FFFF</Color>
 
 </ResourceDictionary>
