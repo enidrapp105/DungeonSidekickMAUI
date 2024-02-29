@@ -192,7 +192,7 @@ public
     int c_Survival { get; set; }
 
     // storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
-    List<String> c_Proficiencies;
+    List<String>? c_Proficiencies;
 
     int c_PasWis { get; set; };
 
