@@ -129,78 +129,84 @@ public partial class CustomResources : ResourceDictionary
 }
 
 
-//this is a possibly temporary test for a character sheet that might be used re-access a character between pages without having to connect to the database every time
-public class CharacterSheet
+//this is a test for a replacement of our depreciated Character Sheet class
+public class ImportedCharacterSheet
 {
-public
+    //constructor
+    public ImportedCharacterSheet(int user, int character)
+    {
+        p_UID = user;
+        p_CharacterID = character;
+    }
+
+
     //character flavor text, most likely will have no impact on usability other than for a visual representation.    
-    string? c_Name { get; set; }
-    string? c_Background { get; set; } //may have other uses later on
-    string? c_Alignment { get; set; }
-    string? c_PersonalityTraits { get; set; }
-    string? c_Ideals { get; set; }
-    string? c_Bonds { get; set; }
-    string? c_Flaws { get; set; }
-    string? c_FeaturesTraits { get; set; }
+    public string? c_Name { get; set; }
+    public string? c_Background { get; set; } //may have other uses later on
+    public string? c_Alignment { get; set; }
+    public string? c_PersonalityTraits { get; set; }
+    public string? c_Ideals { get; set; }
+    public string? c_Bonds { get; set; }
+    public string? c_Flaws { get; set; }
+    public string? c_FeaturesTraits { get; set; }
 
     //these are the IDs. may also want to swap to string with actual names instead. this depends on how we want to work with the data. 
-    int c_Class;
-    int c_Race;
+    public int c_Class { get; set; }
+    public int c_Race { get; set; }
 
     //character stats
-    int c_Str { get; set; }
-    int c_Dex { get; set; }
-    int c_Const { get; set; }
-    int c_Int { get; set; }
-    int c_Wis { get; set; }
-    int c_Charisma { get; set; }
+    public int c_Str { get; set; }
+    public int c_Dex { get; set; }
+    public int c_Const { get; set; }
+    public int c_Int { get; set; }
+    public int c_Wis { get; set; }
+    public int c_Charisma { get; set; }
 
     //character combat stats
-    int c_CurrHP { get; set; }
-    int c_TempHP { get; set; }
-    int c_AC { get; set; }
-    int c_Initiative { get; set; }
-    int c_Speed { get; set; }
-    int c_HitDice { get; set; }
+    public int c_CurrHP { get; set; }
+    public int c_TempHP { get; set; }
+    public int c_AC { get; set; }
+    public int c_Initiative { get; set; }
+    public int c_Speed { get; set; }
+    public int c_HitDice { get; set; }
 
     //saves
-    int c_StrSave { get; set; }
-    int c_DexSave { get; set; }
-    int c_ConstSave { get; set; }
-    int c_IntSave { get; set; }
-    int c_WisSave { get; set; }
-    int c_CharismaSave { get; set; }
+    public int c_StrSave { get; set; }
+    public int c_DexSave { get; set; }
+    public int c_ConstSave { get; set; }
+    public int c_IntSave { get; set; }
+    public int c_WisSave { get; set; }
+    public int c_CharismaSave { get; set; }
 
     //skills
-    int c_Acrobatics { get; set; }
-    int c_AnimalHandling { get; set; }
-    int c_Arcana { get; set; }
-    int c_Atheletics { get; set; }
-    int c_Deception { get; set; }
-    int c_History { get; set; }
-    int c_Insight { get; set; }
-    int c_Intimidation { get; set; }
-    int c_Investigation { get; set; }
-    int c_Medicine { get; set; }
-    int c_Nature { get; set; }
-    int c_Perception { get; set; }
-    int c_Performance { get; set; }
-    int c_Persuasion { get; set; }
-    int c_Religion { get; set; }
-    int c_SleightOfHand { get; set; }
-    int c_Stealth { get; set; }
-    int c_Survival { get; set; }
+    public int c_Acrobatics { get; set; }
+    public int c_AnimalHandling { get; set; }
+    public int c_Arcana { get; set; }
+    public int c_Atheletics { get; set; }
+    public int c_Deception { get; set; }
+    public int c_History { get; set; }
+    public int c_Insight { get; set; }
+    public int c_Intimidation { get; set; }
+    public int c_Investigation { get; set; }
+    public int c_Medicine { get; set; }
+    public int c_Nature { get; set; }
+    public int c_Perception { get; set; }
+    public int c_Performance { get; set; }
+    public int c_Persuasion { get; set; }
+    public int c_Religion { get; set; }
+    public int c_SleightOfHand { get; set; }
+    public int c_Stealth { get; set; }
+    public int c_Survival { get; set; }
 
     // storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
-    List<String>? c_Proficiencies;
+    public List<String>? c_Proficiencies;
+    public List<String>? c_Equipment;
 
-    int c_PasWis { get; set; };
+    public int c_PasWis { get; set; }
 
-
-private
     //debateable for keeping
-    int p_UID; 
-    int p_CharacterID;
+    private int p_UID; 
+    private int p_CharacterID;
 
 
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
+//may be replacing this one, as it is depreciated
 namespace DungeonSidekickMAUI
 {
     public class CharacterSheet
