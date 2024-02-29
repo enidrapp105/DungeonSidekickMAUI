@@ -132,65 +132,75 @@ public partial class CustomResources : ResourceDictionary
 //this is a possibly temporary test for a character sheet that might be used re-access a character between pages without having to connect to the database every time
 public class CharacterSheet
 {
-
-    private
-    int p_UID; //debateable for keeping
-
+public
     //character flavor text, most likely will have no impact on usability other than for a visual representation.    
-    string c_Name = "";
-    string c_Background = ""; //may have other uses in the future
-    string c_Alignment = "";
-    string c_PersonalityTraits = "";
-    string c_Ideals = "";
-    string c_Bonds = "";
-    string c_Flaws = "";
-    string c_FeaturesTraits = "";
+    string? c_Name { get; set; }
+    string? c_Background { get; set; } //may have other uses later on
+    string? c_Alignment { get; set; }
+    string? c_PersonalityTraits { get; set; }
+    string? c_Ideals { get; set; }
+    string? c_Bonds { get; set; }
+    string? c_Flaws { get; set; }
+    string? c_FeaturesTraits { get; set; }
 
     //these are the IDs. may also want to swap to string with actual names instead. this depends on how we want to work with the data. 
-    int c_Class; 
+    int c_Class;
     int c_Race;
 
     //character stats
-    int c_Str;
-    int c_Dex;
-    int c_Const;
-    int c_Int;
-    int c_Wis;
-    int c_Charisma;
+    int c_Str { get; set; }
+    int c_Dex { get; set; }
+    int c_Const { get; set; }
+    int c_Int { get; set; }
+    int c_Wis { get; set; }
+    int c_Charisma { get; set; }
 
     //character combat stats
-    int c_CurrHP;
-    int c_TempHP;
-    int c_AC;
-    int c_Initiative;
-    int c_Speed;
-    int c_HitDice;
+    int c_CurrHP { get; set; }
+    int c_TempHP { get; set; }
+    int c_AC { get; set; }
+    int c_Initiative { get; set; }
+    int c_Speed { get; set; }
+    int c_HitDice { get; set; }
 
     //saves
-    int c_StrSave;
-    int c_DexSave;
-    int c_ConstSave;
-    int c_IntSave;
-    int c_WisSave;
-    int c_CharismaSave;
+    int c_StrSave { get; set; }
+    int c_DexSave { get; set; }
+    int c_ConstSave { get; set; }
+    int c_IntSave { get; set; }
+    int c_WisSave { get; set; }
+    int c_CharismaSave { get; set; }
 
     //skills
-    int c_Acrobatics;
-    int c_AnimalHandling;
-    int c_Arcana;
-    int c_Atheletics;
-    int c_Deception;
-    int c_History;
-    int c_Insight;
-    int c_Intimidation;
-    int c_Investigation;
-    int c_Medicine;
-    int c_Nature;
-    int c_Perception;
-    int c_Performance;
-    int c_Persuasion;
-    int c_Religion;
-    int c_SleightOfHand;
-    int c_Stealth;
-    int c_Survival;
+    int c_Acrobatics { get; set; }
+    int c_AnimalHandling { get; set; }
+    int c_Arcana { get; set; }
+    int c_Atheletics { get; set; }
+    int c_Deception { get; set; }
+    int c_History { get; set; }
+    int c_Insight { get; set; }
+    int c_Intimidation { get; set; }
+    int c_Investigation { get; set; }
+    int c_Medicine { get; set; }
+    int c_Nature { get; set; }
+    int c_Perception { get; set; }
+    int c_Performance { get; set; }
+    int c_Persuasion { get; set; }
+    int c_Religion { get; set; }
+    int c_SleightOfHand { get; set; }
+    int c_Stealth { get; set; }
+    int c_Survival { get; set; }
+
+    // storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
+    List<String> c_Proficiencies;
+
+    int c_PasWis { get; set; };
+
+
+private
+    //debateable for keeping
+    int p_UID; 
+    int p_CharacterID;
+
+
 }
