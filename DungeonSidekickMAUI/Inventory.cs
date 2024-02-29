@@ -16,38 +16,25 @@ namespace DungeonSidekickMAUI
      */
     public class Inventory
     {
-        // Making the string a private member so I don't have to keep instantiating it.
-        private string connectionString;
-
         public Inventory(int CharacterID) // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
             m_CharacterID = CharacterID;
-
-            try
-            {
-                connectionString = File.ReadAllText("Conn.txt"); // This should read in the single line of the .txt to construct the connection string.
-            }
-            catch (FileNotFoundException)
-            {
-                Debug.WriteLine("File not found. Please check the file path.");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("An error ocurred: " + ex.Message);
-            }
-
             PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
+            // Access the singleton instance.
+            Connection connection = Connection.connectionSingleton;
+
             string query = "SELECT ItemDetailsID, Quantity, ETypeID FROM dbo.Inventory" +
             " WHERE CharacterID = @CharacterID";
 
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                // Use the singleton to give the connection string.
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -129,6 +116,9 @@ namespace DungeonSidekickMAUI
 
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
+            // Access the singleton instance.
+            Connection connection = Connection.connectionSingleton;
+
             string query = "INSERT INTO dbo.Inventory(ItemDetailsID, Quantity, ETypeID, CharacterID)" +
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
 
@@ -136,7 +126,7 @@ namespace DungeonSidekickMAUI
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
