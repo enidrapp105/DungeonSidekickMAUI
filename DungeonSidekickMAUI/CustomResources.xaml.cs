@@ -127,3 +127,70 @@ public partial class CustomResources : ResourceDictionary
         }
     }
 }
+
+
+//this is a possibly temporary test for a character sheet that might be used re-access a character between pages without having to connect to the database every time
+public class CharacterSheet
+{
+
+    private
+    int p_UID; //debateable for keeping
+
+    //character flavor text, most likely will have no impact on usability other than for a visual representation.    
+    string c_Name = "";
+    string c_Background = ""; //may have other uses in the future
+    string c_Alignment = "";
+    string c_PersonalityTraits = "";
+    string c_Ideals = "";
+    string c_Bonds = "";
+    string c_Flaws = "";
+    string c_FeaturesTraits = "";
+
+    //these are the IDs. may also want to swap to string with actual names instead. this depends on how we want to work with the data. 
+    int c_Class; 
+    int c_Race;
+
+    //character stats
+    int c_Str;
+    int c_Dex;
+    int c_Const;
+    int c_Int;
+    int c_Wis;
+    int c_Charisma;
+
+    //character combat stats
+    int c_CurrHP;
+    int c_TempHP;
+    int c_AC;
+    int c_Initiative;
+    int c_Speed;
+    int c_HitDice;
+
+    //saves
+    int c_StrSave;
+    int c_DexSave;
+    int c_ConstSave;
+    int c_IntSave;
+    int c_WisSave;
+    int c_CharismaSave;
+
+    //skills
+    int c_Acrobatics;
+    int c_AnimalHandling;
+    int c_Arcana;
+    int c_Atheletics;
+    int c_Deception;
+    int c_History;
+    int c_Insight;
+    int c_Intimidation;
+    int c_Investigation;
+    int c_Medicine;
+    int c_Nature;
+    int c_Perception;
+    int c_Performance;
+    int c_Persuasion;
+    int c_Religion;
+    int c_SleightOfHand;
+    int c_Stealth;
+    int c_Survival;
+}
