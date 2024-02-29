@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CustomResources">
 
-    <Color x:Key="PrimaryColor"> #FF0000 </Color>
-    <Color x:Key="TrinaryColor">#FF0000</Color>
-    <Color x:Key="SecondaryColor">#FF0000</Color>
-    <Color x:Key="FontC">#FFFFFF</Color>
-    <Color x:Key="AccentColor">#FF0000</Color>
-    <Color x:Key="AccessoryColor">#FF0000</Color>
+    <Color x:Key="PrimaryColor">#FFFFFF</Color>
+    <Color x:Key="SecondaryColor">#BEBEBE</Color>
+    <Color x:Key="TrinaryColor">#64FFFF</Color>
+    <Color x:Key="FontC">#000000</Color>
+    <Color x:Key="AccentColor">#C8C8FF</Color>
+    <Color x:Key="AccessoryColor">#C8FFFF</Color>
 
 </ResourceDictionary>

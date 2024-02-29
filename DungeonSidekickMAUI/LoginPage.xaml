@@ -6,9 +6,9 @@
         <Label Text="Login Page" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" FontSize="Title" Padding="30,10,30,10" Margin="4" HorizontalTextAlignment="Center"/>
         
         <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
-             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="7"/>
+             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="7" PlaceholderColor="{DynamicResource FontC}"/>
         <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
-            MinimumWidthRequest="400" HorizontalOptions="Center" IsPassword="True" Margin="7"/>
+            MinimumWidthRequest="400" HorizontalOptions="Center" IsPassword="True" Margin="7" PlaceholderColor="{DynamicResource FontC}"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="5"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
