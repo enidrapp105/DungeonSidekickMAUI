@@ -1,3 +1,4 @@
+using CoreNFC;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -139,6 +140,14 @@ public class ImportedCharacterSheet
         p_CharacterID = character;
     }
 
+    public int GetUID()
+    {
+        return p_UID;
+    }
+    public int GetCharacterID()
+    {
+        return p_CharacterID;
+    }
 
     //character flavor text, most likely will have no impact on usability other than for a visual representation.    
     public string? c_Name { get; set; }
@@ -198,9 +207,9 @@ public class ImportedCharacterSheet
     public int c_Stealth { get; set; }
     public int c_Survival { get; set; }
 
-    // storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
+    //storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
     public List<String>? c_Proficiencies;
-    public List<String>? c_Equipment;
+    public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
 
     public int c_PasWis { get; set; }
 
