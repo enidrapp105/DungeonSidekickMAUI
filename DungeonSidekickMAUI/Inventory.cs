@@ -127,7 +127,7 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void RemoveItem(int ItemID, int Quantity, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
+        public void RemoveItem(int ItemID, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
         {
             if (ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
             {
@@ -137,7 +137,7 @@ namespace DungeonSidekickMAUI
             {
 
                 string query = "DELETE FROM dbo.Inventory" +
-                    " WHERE ItemID = @ItemID AND Quantity = @Quantity AND eTypeId = @Etype AND CharacterID = @CharacterID);";
+                    " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID);";
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
@@ -151,7 +151,6 @@ namespace DungeonSidekickMAUI
                                 cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                                 cmd.Parameters.AddWithValue("@Etype", ETypeID);
                                 cmd.Parameters.AddWithValue("@ItemID", ItemID);
-                                cmd.Parameters.AddWithValue("@Quantity", Quantity);
                                 cmd.ExecuteNonQuery();
                             }
                         }

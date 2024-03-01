@@ -181,14 +181,9 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        Command = new Command
-                                   (
-                                       execute: async () =>
-                                       {
 
-                                       }
-                                   )
                                     };
+                                    delete.Clicked += RemoveButton;
                                     layout.Add(delete);
 
                                     InvStack.Add(layout);
@@ -203,6 +198,16 @@ public partial class LandingPage : ContentPage
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
+        }
+    }
+
+    private async void RemoveButton(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            inv.RemoveItem(userItem.Id, userItem.eTypeId);
         }
     }
     /*
