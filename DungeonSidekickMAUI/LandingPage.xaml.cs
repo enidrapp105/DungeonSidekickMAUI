@@ -26,7 +26,7 @@ public partial class LandingPage : ContentPage
             Navigation.PushAsync(new MainPage()); //at some point during the programming process
         }
 
-        inv = new Inventory(1); // TEMP PLACEHOLDER 1
+        inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         foreach (var weapon in inv.Weapons)

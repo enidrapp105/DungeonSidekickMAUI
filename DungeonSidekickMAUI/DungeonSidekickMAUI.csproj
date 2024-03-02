@@ -118,6 +118,9 @@
 	  <MauiXaml Update="SelectedClassPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="SelectMonster.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 		  <MauiXaml Update="Settings_Page.xaml">
 			  <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
