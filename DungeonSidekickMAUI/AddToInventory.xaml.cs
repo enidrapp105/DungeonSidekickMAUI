@@ -99,7 +99,7 @@ public partial class AddToInventory : ContentPage
 
         // waiting for quantity to be entered
 
-        Inventory inv = new Inventory(1); // HARD CODED TO 0 RIGHT NOW
+        Inventory inv = new Inventory(); // HARD CODED TO 0 RIGHT NOW
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;

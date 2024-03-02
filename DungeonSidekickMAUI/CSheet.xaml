@@ -44,15 +44,6 @@
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource FontC}"/>
             <!--'&' doesnt work?-->
 
-            <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
-
-            <Entry Placeholder="Attacks" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Attacks"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
-
-            <Entry Placeholder="Spells" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Spells"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource FontC}"/>
-
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
                WidthRequest="400" HorizontalOptions="Center"/>
 

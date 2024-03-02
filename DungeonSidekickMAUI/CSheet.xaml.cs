@@ -52,7 +52,6 @@ public partial class CSheet : ContentPage
         Bonds.Text = characterSheet.bonds;
         Flaws.Text = characterSheet.flaws;
         Traits.Text = characterSheet.featurestraits;
-        Attacks.Text = characterSheet.attacks;
     }
     /* Function Name: LoadCharacterSheetClass
      * Purpose:
@@ -74,7 +73,6 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.bonds = Bonds.Text;
         CharacterSheetcurrent.flaws = Flaws.Text;
         CharacterSheetcurrent.featurestraits = Traits.Text;
-        CharacterSheetcurrent.attacks = Attacks.Text;
     } 
     /*
      * Function: RollForStats

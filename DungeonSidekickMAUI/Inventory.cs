@@ -19,10 +19,10 @@ namespace DungeonSidekickMAUI
         // Making the string a private member so I don't have to keep instantiating it.
         private string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
-        public Inventory(int CharacterID) // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
+        public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
-            m_CharacterID = CharacterID;
+            m_CharacterID = Preferences.Default.Get("UserId",1); //Calls user ID preference, if it doesn't have one it returns admin default
             Items = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
