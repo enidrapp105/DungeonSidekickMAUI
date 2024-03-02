@@ -1,11 +1,20 @@
+using System.Diagnostics;
+using Microsoft.Data.SqlClient;
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
     CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
     DiceRoll diceroller;
+    Inventory inv;
     public LandingPage()
 	{
-		InitializeComponent();
+        // Allows us to use dynamic colors when creating labels, buttons, etc in this function
+        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+
+        InitializeComponent();
         diceroller = new DiceRoll();
         if (currentcharacterSheet != null ) 
         {
@@ -16,7 +25,191 @@ public partial class LandingPage : ContentPage
             DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok"); //In case the character sheet breaks
             Navigation.PushAsync(new MainPage()); //at some point during the programming process
         }
-	}
+
+        inv = new Inventory(1); // TEMP PLACEHOLDER 1
+        inv.PullItems();
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        foreach (var weapon in inv.Weapons)
+        {
+            string query = "SELECT name FROM dbo.Weapon" +
+            " WHERE WeaponID = @Id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+
+                            // grabs ID from weapon list
+                            cmd.Parameters.AddWithValue("@Id", weapon[0]);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    HorizontalStackLayout layout = new HorizontalStackLayout();
+                                    Label weaponLabel = new Label();
+                                    weaponLabel.TextColor = (Color)fontColor;
+
+                                    // grabs the name from the DB and quantity from weapon list
+                                    string name = reader.GetString(0);
+                                    weaponLabel.Text = name + " x" + weapon[1];
+                                    layout.Add(weaponLabel);
+
+                                    // Button that removes the item from the DB
+                                    Button delete = new Button
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Remove",
+                                        BackgroundColor = TrinaryColor,
+                                        Command = new Command
+                                   (
+                                       execute: async () =>
+                                       {
+                                           
+                                       }
+                                   )
+                                    };
+                                    layout.Add(delete);
+                                    InvStack.Add(layout);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+
+        foreach (var armor in inv.Equipment)
+        {
+            string query = "SELECT name FROM dbo.Armor" +
+            " WHERE ArmorID = @Id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+
+                            // grabs ID from equipment list
+                            cmd.Parameters.AddWithValue("@Id", armor[0]);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    HorizontalStackLayout layout = new HorizontalStackLayout();
+                                    Label armorLabel = new Label();
+                                    armorLabel.TextColor = (Color)fontColor;
+
+                                    // grabs the name from the DB and quantity from equipment list
+                                    armorLabel.Text = reader.GetString(0) + " x" + armor[1];
+                                    layout.Add(armorLabel);
+
+                                    // Button that removes the item from the DB
+                                    Button delete = new Button
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Remove",
+                                        BackgroundColor = TrinaryColor,
+                                        Command = new Command
+                                   (
+                                       execute: async () =>
+                                       {
+
+                                       }
+                                   )
+                                    };
+                                    layout.Add(delete);
+                                    InvStack.Add(layout);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+
+        foreach (var gear in inv.Items)
+        {
+            string query = "SELECT name FROM dbo.Gear" +
+            " WHERE GearId = @Id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+
+                            // grabs ID from items list
+                            cmd.Parameters.AddWithValue("@Id", gear[0]);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    HorizontalStackLayout layout = new HorizontalStackLayout();
+                                    Label gearLabel = new Label();
+                                    gearLabel.TextColor = (Color)fontColor;
+
+                                    // grabs the name from the DB and quantity from items list
+                                    gearLabel.Text = reader.GetString(0) + " x" + gear[1];
+                                    layout.Add(gearLabel);
+
+                                    // Button that removes the item from the DB
+                                    Button delete = new Button
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Remove",
+                                        BackgroundColor = TrinaryColor,
+
+                                    };
+                                    delete.Clicked += RemoveButton;
+                                    layout.Add(delete);
+
+                                    InvStack.Add(layout);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+    }
+
+    private async void RemoveButton(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            inv.RemoveItem(userItem.Id, userItem.eTypeId);
+        }
+    }
     /*
      * Function: CalcStatMod
      * Author: Brendon Williams

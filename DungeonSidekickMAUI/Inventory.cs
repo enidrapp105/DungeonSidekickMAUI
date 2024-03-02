@@ -28,6 +28,14 @@ namespace DungeonSidekickMAUI
             Equipment = new List<List<int>>();
             //PullItems(); // Should pull what the character currently has in their inventory from the DB.
         }
+
+        // Just clears the lists, used when adding items
+        public void ClearItems()
+        {
+            Items.Clear();
+            Weapons.Clear();
+            Equipment.Clear();
+        }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
             string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
@@ -49,10 +57,11 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
-                                List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
+                                
                                 while (reader.Read()) // Iterate through results of the query
                                 {
-                                    temp.Clear();
+                                    //temp.Clear();
+                                    List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
                                     temp.Add(reader.GetInt32(0));
                                     temp.Add(reader.GetInt32(1));
                                     temp.Add(reader.GetInt32(2));
@@ -118,6 +127,44 @@ namespace DungeonSidekickMAUI
             }
         }
 
+        public void RemoveItem(int ItemID, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
+        {
+            if (ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
+            {
+                return; // Quick exit.
+            }
+            else // EType was valid, proceed.
+            {
+
+                string query = "DELETE FROM dbo.Inventory" +
+                    " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID);";
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+                                cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                                cmd.Parameters.AddWithValue("@Etype", ETypeID);
+                                cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+
+            }
+        }
+
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
             string query = "INSERT INTO dbo.Inventory(ItemID, Quantity, eTypeID, CharacterID)" +
@@ -174,6 +221,7 @@ namespace DungeonSidekickMAUI
             }
 
         }
+
         //***************************
         // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.
         //***************************
