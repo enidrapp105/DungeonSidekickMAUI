@@ -8,10 +8,10 @@
                 <Label Text="Character's Inventory and Proficiencies" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
             <Entry Placeholder="Inventory/Equipment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Inventory"
-            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75"/>
+            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}"/>
 
             <Entry Placeholder="Proficiencies" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Proficiencies"
-            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource FontC}"/>
+            VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource AccessoryColor}"/>
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="400" HorizontalOptions="Center"/>

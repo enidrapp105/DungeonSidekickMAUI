@@ -18,7 +18,15 @@
         <Setter Property="StrokeShape" Value="Rectangle"/>
         <Setter Property="StrokeThickness" Value="1"/>
     </Style>
-
+    <!-- This Style is to make the tab bar to conform to our style-->
+    <Style TargetType="TabBar">
+        <Setter Property="Shell.TabBarBackgroundColor"
+            Value="{DynamicResource PrimaryColor}" />
+        <Setter Property="Shell.TabBarTitleColor"
+            Value="{DynamicResource FontC}" />
+        <Setter Property="Shell.TabBarUnselectedColor"
+            Value="{DynamicResource FontC}" />
+    </Style>
     <Style TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
