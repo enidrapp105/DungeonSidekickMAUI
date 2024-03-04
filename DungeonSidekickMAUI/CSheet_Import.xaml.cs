@@ -176,7 +176,7 @@ public partial class CSheet_Import : ContentPage
     }
     private void ImportSheet(object sender, EventArgs e)
     {
-        List<ImportedCharacterSheet> c_List = new List<ImportedCharacterSheet>();
+        List<ImportedCharacterSheet> c_List = new List<ImportedCharacterSheet>(); //might be able to remove
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
         string query = "SELECT CharacterID, RaceID, ClassID, CharacterName, Background, Alignment, PersonalityTraits, Ideals, Bonds, Flaws," +
@@ -209,6 +209,7 @@ public partial class CSheet_Import : ContentPage
 
                             while (reader.Read())
                             {
+                                //creating character sheet with all data
                                 ImportedCharacterSheet Char = new ImportedCharacterSheet(reader.GetInt32(49), reader.GetInt32(0));
                                 Char.c_Race = reader.GetInt32(1);
                                 Char.c_Class = reader.GetInt32(2);
@@ -259,6 +260,80 @@ public partial class CSheet_Import : ContentPage
                                 Char.c_Survival = reader.GetInt32(47);
                                 Char.c_PasWis = reader.GetInt32(48);
                                 Char.c_Level = reader.GetInt32(50);
+
+                                //adds new character to character list MIGHT NOT BE NEEDED
+                                c_List.Add(Char);
+
+                                //creating visual example of new Character sheet for user interface to choose from
+                                StackLayout CharacterStack = new StackLayout();
+
+                                Label CName = new Label();
+                                CName.TextColor = (Color)fontColor;
+                                CName.Text = "Character Name";
+                                Label CNameVal = new Label();
+                                CNameVal.TextColor = (Color)fontColor;
+                                CNameVal.Text = Char.c_Name;
+
+                                CharacterStack.Children.Add(CName);
+                                CharacterStack.Children.Add(CNameVal);
+
+                                Label CRace = new Label();
+                                CRace.TextColor = (Color)fontColor;
+                                CRace.Text = "Race";
+                                Label CRaceVal = new Label();
+                                CRaceVal.TextColor = (Color)fontColor;
+                                CRaceVal.Text = Char.c_Race.ToString();
+
+                                CharacterStack.Children.Add(CRace);
+                                CharacterStack.Children.Add(CRaceVal);
+
+                                Label CClass = new Label();
+                                CClass.TextColor = (Color)fontColor;
+                                CClass.Text = "Class";
+                                Label CClassVal = new Label();
+                                CClassVal.TextColor = (Color)fontColor;
+                                CClassVal.Text = Char.c_Class.ToString();
+
+                                CharacterStack.Children.Add(CClass);
+                                CharacterStack.Children.Add(CClassVal);
+
+                                Label CLevel = new Label();
+                                CLevel.TextColor = (Color)fontColor;
+                                CLevel.Text = "Level";
+                                Label CLevelVal = new Label();
+                                CLevelVal.TextColor = (Color)fontColor;
+                                CLevelVal.Text = Char.c_Level.ToString();
+
+                                CharacterStack.Children.Add(CLevel);
+                                CharacterStack.Children.Add(CLevelVal);
+
+                                Button characterButton = new Button
+                                {
+                                    TextColor = (Color)fontColor,
+                                    Text = "Select Character",
+                                    BackgroundColor = (Color)secondaryColor,
+                                    Command = new Command
+                                    (
+                                        execute: async () =>
+                                        {
+                                            Preferences.Default.Set("UserCharacter", Char);
+                                            //Navigate to next page
+                                        }
+                                    )
+                                };
+
+                                CharacterStack.Children.Add(characterButton);
+
+                                BoxView line = new BoxView
+                                {
+                                    Color = Color.FromRgb(255, 255, 255),
+                                    HeightRequest = 1,
+                                    HorizontalOptions = LayoutOptions.FillAndExpand
+                                };
+                                CharacterStack.Children.Add(line);
+
+                                CharacterPanel.Children.Add(CharacterStack);
+
                             }
                         }
                     }
