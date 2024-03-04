@@ -1,4 +1,4 @@
-using CoreNFC;
+//using CoreNFC;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -160,6 +160,7 @@ public class ImportedCharacterSheet
     public string? c_FeaturesTraits { get; set; }
 
     //these are the IDs. may also want to swap to string with actual names instead. this depends on how we want to work with the data. 
+    public int c_Equipment { get; set; }
     public int c_Class { get; set; }
     public int c_Race { get; set; }
 
@@ -208,10 +209,11 @@ public class ImportedCharacterSheet
     public int c_Survival { get; set; }
 
     //storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
-    public List<String>? c_Proficiencies;
-    public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
+    //public List<String>? c_Proficiencies;
+    //public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
 
     public int c_PasWis { get; set; }
+    public int c_Level { get; set; }
 
     //debateable for keeping
     private int p_UID; 
