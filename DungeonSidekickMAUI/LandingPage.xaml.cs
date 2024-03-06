@@ -254,6 +254,11 @@ public partial class LandingPage : ContentPage
     {
         Navigation.PushAsync(new AddToInventory());
     }
+
+    private void SelectMonster(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new SelectMonster());
+    }
     /*
      * Function: RollButtonClicked
      * Author: Kenny Rapp

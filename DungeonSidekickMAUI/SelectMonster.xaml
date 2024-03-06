@@ -6,7 +6,7 @@
         <Grid RowDefinitions="Auto,Auto" BackgroundColor="{DynamicResource PrimaryColor}">
             <Entry Grid.Row="0" Placeholder="Search" TextChanged="Monster_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
 
-            <CollectionView Grid.Row="1" x:Name="MyCollectionViews" ItemsSource="{Binding UserItems}">
+            <CollectionView Grid.Row="1" x:Name="MyCollectionViews" ItemsSource="{Binding monsterCollection}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout  Orientation="Vertical" Span="1" VerticalItemSpacing="5"></GridItemsLayout>
                 </CollectionView.ItemsLayout>
