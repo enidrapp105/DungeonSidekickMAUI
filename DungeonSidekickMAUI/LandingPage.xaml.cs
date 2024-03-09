@@ -256,9 +256,9 @@ public partial class LandingPage : ContentPage
         Navigation.PushAsync(new AddToInventory());
     }
 
-    private void SelectMonster(object sender, EventArgs e)
+    private void NavigateToCombat(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new SelectMonster());
+        Navigation.PushAsync(new CombatPage());
     }
     /*
      * Function: RollButtonClicked
