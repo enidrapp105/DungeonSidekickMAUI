@@ -65,14 +65,8 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        Command = new Command
-                                   (
-                                       execute: async () =>
-                                       {
-                                           
-                                       }
-                                   )
                                     };
+                                    delete.Clicked += RemoveButton;
                                     layout.Add(delete);
                                     InvStack.Add(layout);
                                 }
@@ -123,14 +117,9 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        Command = new Command
-                                   (
-                                       execute: async () =>
-                                       {
 
-                                       }
-                                   )
                                     };
+                                    delete.Clicked += RemoveButton;
                                     layout.Add(delete);
                                     InvStack.Add(layout);
                                 }

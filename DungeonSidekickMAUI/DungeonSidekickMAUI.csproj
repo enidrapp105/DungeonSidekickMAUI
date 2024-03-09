@@ -79,6 +79,9 @@
 	  <MauiXaml Update="ClassPickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="CombatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="CSheet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
