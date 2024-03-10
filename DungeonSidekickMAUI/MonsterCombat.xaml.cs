@@ -1,11 +1,14 @@
 using CommunityToolkit.Maui.Views;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace DungeonSidekickMAUI;
 
 public partial class MonsterCombat : ContentPage
 {
     private Monster selectedMonster;
+    private string dice;
 	public MonsterCombat()
 	{
 		InitializeComponent();
@@ -68,8 +71,42 @@ public partial class MonsterCombat : ContentPage
 
     private void PullDiceValue()
     {
+
+
         int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
         if (WeaponID == -1) return;
+        string query = "SELECT damageDice FROM dbo.Weapon" +
+            " WHERE WeaponID = @Id;";
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+
+                        // grabs ID from weapon list
+                        cmd.Parameters.AddWithValue("@Id", WeaponID);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                dice = reader.GetString(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
     }
 
     private async void CombatPopup()
@@ -155,8 +192,12 @@ public partial class MonsterCombat : ContentPage
             // Retrieve input number
             if (int.TryParse(numberEntry.Text, out int number))
             {
-                // 
-                
+                PullDiceValue();
+                await DisplayAlert("Dice", dice, "OK");
+                DiceRoll roller = new DiceRoll();
+                int result = roller.Roll(dice);
+                MonsterSelector.Instance.DamageMonster(selectedMonster.Name, result);
+                await DisplayAlert("Damage Dealt", "You dealt " + result + " damage, the monster has " + selectedMonster.HP + " remaining", "OK");
             }
             else
             {
