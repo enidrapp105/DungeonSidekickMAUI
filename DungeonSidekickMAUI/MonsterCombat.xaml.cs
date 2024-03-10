@@ -66,6 +66,11 @@ public partial class MonsterCombat : ContentPage
         }
     }
 
+    private void PullDiceValue()
+    {
+
+    }
+
     private async void CombatPopup()
     {
         // Allows us to use the dynamic colors with the out object
@@ -149,7 +154,7 @@ public partial class MonsterCombat : ContentPage
             // Retrieve input number
             if (int.TryParse(numberEntry.Text, out int number))
             {
-                // Set the result of the TaskCompletionSource
+                // 
                 
             }
             else
