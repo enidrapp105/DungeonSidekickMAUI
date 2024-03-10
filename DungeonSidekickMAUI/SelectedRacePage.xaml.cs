@@ -9,6 +9,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class SelectedRacePage : ContentPage
 {
+    int RaceID;
     CharacterSheet characterSheet;
     string raceName;
     public SelectedRacePage(CharacterSheet characterSheet, int selectedRace)
@@ -16,7 +17,7 @@ public partial class SelectedRacePage : ContentPage
         this.characterSheet = characterSheet;
         InitializeComponent();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-
+        RaceID = selectedRace;
 
         string query = "SELECT Race, Description, MoveSpeed, Age, Size, SizeDescription, Languages, LanguageDescription FROM dbo.RaceLookup" +
             " WHERE RaceID = @RaceID;";
@@ -252,7 +253,7 @@ public partial class SelectedRacePage : ContentPage
 
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.race = raceName;
+        characterSheet.race = RaceID;
         Navigation.PushAsync(new CSheet(characterSheet));
     }
 }
