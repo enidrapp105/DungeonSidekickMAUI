@@ -9,12 +9,12 @@ namespace DungeonSidekickMAUI
     /*
      * Class: MonsterSelector
      * Author: Brendon Williams
-     * Purpose: This has a list of all the monsters the user has selected
+     * Purpose: This has a list of all the monsters the user has selected (Bad name for class IK)
      * Last Modified: 3/9/2024 12:33pm by Author
      */
     class MonsterSelector
     {
-        private List<Monster> m_monsters { get; set; }
+        public List<Monster> m_monsters { get; set; }
 
         private static MonsterSelector instance;
 
@@ -32,8 +32,7 @@ namespace DungeonSidekickMAUI
         {
             get
             {
-                // Lazy initialization: create the instance if it doesn't exist
-                // Not thread safe, but I think that is a bit overkill
+                // Not thread safe (still)
                 if (instance == null)
                 {
                     instance = new MonsterSelector();
@@ -81,7 +80,10 @@ namespace DungeonSidekickMAUI
             foreach (Monster creature in m_monsters)
             {
                 if (creature.Name == mName)
-                    return monster = creature;
+                {
+                    monster = creature; //originally was return monster = creature; don't want potentially undesirable functionality
+                    return monster;
+                }
             }
 
             return monster;
@@ -96,10 +98,9 @@ namespace DungeonSidekickMAUI
         public void DamageMonster(string mName, int dmg)
         {
             Monster monster = FindMonster(mName);
-            /*monster.HP -= dmg;
-              if(monster.HP <= 0)
-                  p_RemoveMonster(monster);
-            */
+            monster.HP -= dmg;
+            if(monster.HP <= 0)
+                p_RemoveMonster(monster);
         }
 
         /*
@@ -112,5 +113,6 @@ namespace DungeonSidekickMAUI
         {
             m_monsters.Add(mName);
         }
+
     }
 }
