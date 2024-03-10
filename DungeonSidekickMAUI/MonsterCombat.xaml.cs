@@ -12,6 +12,12 @@ public partial class MonsterCombat : ContentPage
 		DisplayAllMonsters();
 	}
 
+   /*
+    * Function: DisplayAllMonsters
+    * Author: Brendon Williams
+    * Purpose: Grabs all the monsters the user selected in the last page, and then displays them all to be selected
+    * last Modified : 3/10/2024 4:06pm
+    */
     public void DisplayAllMonsters()
     {
         Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
@@ -30,7 +36,7 @@ public partial class MonsterCombat : ContentPage
             monsterLabel.Text = name + " HP: " + monster.HP;
             layout.Add(monsterLabel);
 
-            // Button that selects the item to be used in combat
+            // Button that selects the monster to be fought in combat
             Button select = new Button
             {
                 CommandParameter = monster,
@@ -44,6 +50,12 @@ public partial class MonsterCombat : ContentPage
         }
     }
 
+    /*
+    * Function: SelectButton
+    * Author: Brendon Williams
+    * Purpose: It makes the selected monster the one the user hits select on last (kinda duh)
+    * last Modified : 3/10/2024 4:07pm
+    */
     private async void SelectButton(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is Monster monster)
