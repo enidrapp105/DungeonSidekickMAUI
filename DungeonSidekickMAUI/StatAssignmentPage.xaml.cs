@@ -1,3 +1,6 @@
+using Microsoft.Data.SqlClient;
+using System.Diagnostics;
+
 namespace DungeonSidekickMAUI;
 
 public partial class StatAssignmentPage : ContentPage
@@ -14,25 +17,37 @@ public partial class StatAssignmentPage : ContentPage
     private string STR;
     private string WIS;
     private string CON;
+    private string preferredstat1;
+    private string preferredstat2;
+    private string preferredstat3;
+    private string preferredstat4;
+    private string preferredstat5;
+    private string preferredstat6;
     private DndClass dndclass;
     CharacterSheet characterSheet;
 
     public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, CharacterSheet characterSheet)
     {
-        this.total1 = total1;
-        this.total2 = total2;
-        this.total3 = total3;
-        this.total4 = total4;
-        this.total5 = total5;
-        this.total6 = total6;
+        List<string> totals = new List<string> { total1, total2, total3, total4, total5, total6 };
+        List<int> sortedTotals = totals.Select(int.Parse).OrderByDescending(x => x).ToList();
+        this.total1 = sortedTotals[0].ToString();
+        this.total2 = sortedTotals[1].ToString();
+        this.total3 = sortedTotals[2].ToString();
+        this.total4 = sortedTotals[3].ToString();
+        this.total5 = sortedTotals[4].ToString();
+        this.total6 = sortedTotals[5].ToString();
         this.characterSheet = characterSheet;
         InitializeComponent();
-        totallabel1.Text = total1;
-        totallabel2.Text = total2;
-        totallabel3.Text = total3;
-        totallabel4.Text = total4;
-        totallabel5.Text = total5;
-        totallabel6.Text = total6;
+        // Convert the totals to integers and sort them
+        
+
+        // Set the text of labels with sorted totals
+        totallabel1.Text = sortedTotals[0].ToString();
+        totallabel2.Text = sortedTotals[1].ToString();
+        totallabel3.Text = sortedTotals[2].ToString();
+        totallabel4.Text = sortedTotals[3].ToString();
+        totallabel5.Text = sortedTotals[4].ToString();
+        totallabel6.Text = sortedTotals[5].ToString();
         SetPickerItems();
         this.characterSheet = characterSheet;
     }
@@ -82,6 +97,7 @@ public partial class StatAssignmentPage : ContentPage
         }
         else
         {
+
             totallabel1.Text = $"{selectedStat1} {total1}";
             totallabel2.Text = $"{selectedStat2} {total2}";
             totallabel3.Text = $"{selectedStat3} {total3}";
@@ -177,5 +193,109 @@ public partial class StatAssignmentPage : ContentPage
                 }
             }
         }
+    }
+    private string MapPreferredStatName(int preferredStatValue)
+    {
+        switch (preferredStatValue)
+        {
+            case 1:
+                return "STR";
+            case 2:
+                return "DEX";
+            case 3:
+                return "CON";
+            case 4:
+                return "INT";
+            case 5:
+                return "WIS";
+            case 6:
+                return "CHA";
+            default:
+                return "UNKNOWN";
+        }
+    }
+    public void AssignStatsbyclass(object sender, EventArgs e)
+    {
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        string querystring = "SELECT PreferredStat1, PreferredStat2, PreferredStat3, PreferredStat4, PreferredStat5, PreferredStat6 " +
+            "FROM dbo.ClassLookup " +
+            "WHERE ClassID = @ClassID";
+        List<int> preferredstats = new List<int>();
+        List<string> preferredstatsstrings = new List<string>();
+        try
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Create a SqlCommand object with the query string and connection
+                using (SqlCommand command = new SqlCommand(querystring, connection))
+                {
+                    // Add parameters to the command (to prevent SQL injection)
+                    command.Parameters.AddWithValue("@ClassID", characterSheet.characterclass);
+
+                    // Open the connection
+                    connection.Open();
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+
+                            while (reader.Read())
+                            {
+                                // Read preferred stats from the reader and add them to the list
+                                for (int i = 0; i < 6; i++)
+                                {
+                                    preferredstats.Add(reader.GetInt32(i));
+                                }
+                            }
+
+                            // Map integer preferred stat values to their corresponding names
+                            foreach (int statValue in preferredstats)
+                            {
+                                preferredstatsstrings.Add(MapPreferredStatName(statValue));
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No rows found.");
+                        }
+                    }
+                }
+                AssignPreferredStatsToPickers(preferredstatsstrings);
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+    }
+    private void AssignPreferredStatsToPickers(List<string> preferredStats)
+    {
+        // Iterate through each picker and set its selected item
+        for (int i = 0; i < 6; i++)
+        {
+            string preferredStat = preferredStats[i];
+            Picker picker = GetPickerByIndex(i + 1); // Index starts from 1, not 0
+
+            // Find the index of the preferred stat in the picker's items
+            int index = picker.Items.IndexOf(preferredStat);
+
+            // Set the selected index of the picker
+            picker.SelectedIndex = index;
+        }
+    }
+    private Picker GetPickerByIndex(int index)
+    {
+        // Find the picker by its name
+        return index switch
+        {
+            1 => StatPicker1,
+            2 => StatPicker2,
+            3 => StatPicker3,
+            4 => StatPicker4,
+            5 => StatPicker5,
+            6 => StatPicker6,
+            _ => null, // Handle error appropriately
+        };
     }
 }

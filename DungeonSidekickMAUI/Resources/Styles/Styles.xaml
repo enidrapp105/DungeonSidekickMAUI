@@ -26,6 +26,8 @@
             Value="{DynamicResource FontC}" />
         <Setter Property="Shell.TabBarUnselectedColor"
             Value="{DynamicResource FontC}" />
+        <Setter Property="Shell.TabBarForegroundColor"
+            Value="{DynamicResource FontC}"/>
     </Style>
     <Style TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />

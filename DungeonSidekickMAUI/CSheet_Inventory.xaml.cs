@@ -17,7 +17,7 @@ namespace DungeonSidekickMAUI
         {
             CharacterSheetcurrent = sheet;
             InitializeComponent();
-            Inventory.Text = CharacterSheetcurrent.characterclass;
+            Inventory.Text = CharacterSheetcurrent.characterclass.ToString();
         }
         private void SubmitStats(object sender, EventArgs e)
         {
