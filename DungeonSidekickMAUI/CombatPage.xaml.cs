@@ -55,6 +55,7 @@ public partial class CombatPage : ContentPage
                                     // Button that selects the item to be used in combat
                                     Button select = new Button
                                     {
+                                        CommandParameter = weapon[0],
                                         TextColor = fontColor,
                                         Text = "Select",
                                         BackgroundColor = TrinaryColor,
@@ -77,9 +78,10 @@ public partial class CombatPage : ContentPage
     }
     private async void SelectButton(object sender, EventArgs e)
     {
-        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        if (sender is Button button && button.CommandParameter is int id)
         {
-            selectedWeaponId = userItem.Id;
+            selectedWeaponId = id;
+            await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
         }
     }
     private void SelectMonster(object sender, EventArgs e)

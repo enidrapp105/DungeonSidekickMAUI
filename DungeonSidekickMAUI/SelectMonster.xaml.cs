@@ -32,11 +32,11 @@ public partial class SelectMonster : ContentPage
     // Adds the selected item to the inventory class and updates the DB
     private async void ChooseMonster(object sender, EventArgs e)
     {
-
         if (sender is Button button && button.CommandParameter is Monster mon)
         {
             string name = mon.Name;
             int ac = mon.AC;
+            MonsterSelector.Instance.AddMonster(mon);
         }
     }
 }
