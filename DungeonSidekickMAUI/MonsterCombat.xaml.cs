@@ -33,7 +33,7 @@ public partial class MonsterCombat : ContentPage
             monsterLabel.Text = name + " HP: " + monster.HP;
             layout.Add(monsterLabel);
 
-            // Button that selects the item to be used in combat
+            // Button that selects the monster to be fought in combat
             Button select = new Button
             {
                 CommandParameter = monster,
