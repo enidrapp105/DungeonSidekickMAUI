@@ -34,8 +34,6 @@ public partial class SelectMonster : ContentPage
     {
         if (sender is Button button && button.CommandParameter is Monster mon)
         {
-            string name = mon.Name;
-            int ac = mon.AC;
             MonsterSelector.Instance.AddMonster(mon);
         }
     }
