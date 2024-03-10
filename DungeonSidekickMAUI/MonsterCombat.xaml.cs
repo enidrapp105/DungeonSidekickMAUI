@@ -16,12 +16,11 @@ public partial class MonsterCombat : ContentPage
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
-        HorizontalStackLayout layout = new HorizontalStackLayout();
-        
         List<Monster> monsters = MonsterSelector.Instance.m_monsters;
 
         foreach (var monster in monsters)
         {
+            HorizontalStackLayout layout = new HorizontalStackLayout();
             Label monsterLabel = new Label();
             monsterLabel.TextColor = (Color)fontColor;
             string name = monster.Name;
