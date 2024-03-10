@@ -17,12 +17,6 @@ public partial class StatAssignmentPage : ContentPage
     private string STR;
     private string WIS;
     private string CON;
-    private string preferredstat1;
-    private string preferredstat2;
-    private string preferredstat3;
-    private string preferredstat4;
-    private string preferredstat5;
-    private string preferredstat6;
     private DndClass dndclass;
     CharacterSheet characterSheet;
 
@@ -284,6 +278,7 @@ public partial class StatAssignmentPage : ContentPage
             picker.SelectedIndex = index;
         }
     }
+    
     private Picker GetPickerByIndex(int index)
     {
         // Find the picker by its name
@@ -295,7 +290,7 @@ public partial class StatAssignmentPage : ContentPage
             4 => StatPicker4,
             5 => StatPicker5,
             6 => StatPicker6,
-            _ => null, // Handle error appropriately
+            _ => null,
         };
     }
 }

@@ -33,7 +33,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel6"/>
                     <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker6" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Assign by Class" WidthRequest="200" Clicked="AssignStatsByClass"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Assign by Class" WidthRequest="200" Clicked="AssignStatsbyclass"/>
                 <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Submit" WidthRequest="100" Clicked="AssignStats"/>
             </StackLayout>
         </StackLayout>
