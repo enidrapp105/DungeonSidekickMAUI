@@ -12,6 +12,11 @@ public partial class CombatPage : ContentPage
 		InitializeComponent();
         PullWeaponInventory();
     }
+
+    void PullSelectedMonsters()
+    {
+
+    }
 	void PullWeaponInventory()
 	{
         Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
