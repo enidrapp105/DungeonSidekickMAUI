@@ -15,6 +15,8 @@ public class Monster
     public int Id { get; set; }
 
     public int AC { get; set; }
+
+    public int HP { get; set; }
 }
 
 /*
@@ -59,7 +61,7 @@ public class MonsterViewModel : BindableObject
 
         // hide connection string in the future
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        string query = "SELECT name, monsterId, armor_value FROM dbo.Monster";
+        string query = "SELECT name, monsterId, armor_value,hit_points FROM dbo.Monster";
 
         // open the connection and pull the data
         try
@@ -83,6 +85,7 @@ public class MonsterViewModel : BindableObject
                                 name.Name = reader.GetString(0);
                                 name.Id = reader.GetInt32(1);
                                 name.AC = reader.GetInt32(2);
+                                name.HP = reader.GetInt32(3);
                                 monsterCollection.Add(name);
 
                             }
