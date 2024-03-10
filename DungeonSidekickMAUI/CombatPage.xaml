@@ -4,9 +4,9 @@
              x:Class="DungeonSidekickMAUI.CombatPage"
              Title="CombatPage">
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monster" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
         <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             <Label Text="Inventory" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </VerticalStackLayout>
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monster" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>

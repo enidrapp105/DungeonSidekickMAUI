@@ -37,6 +37,11 @@ public partial class SelectMonster : ContentPage
             string name = mon.Name;
             int ac = mon.AC;
             MonsterSelector.Instance.AddMonster(mon);
+            await DisplayAlert("Selected Monster", "Successfully selected the monster for combat.", "Ok");
         }
+    }
+    private void SelectedMonsters(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new MonsterCombat());
     }
 }
