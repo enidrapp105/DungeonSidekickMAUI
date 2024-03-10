@@ -1,3 +1,6 @@
+using CommunityToolkit.Maui.Views;
+using System.Threading.Tasks;
+
 namespace DungeonSidekickMAUI;
 
 public partial class MonsterCombat : ContentPage
@@ -45,9 +48,111 @@ public partial class MonsterCombat : ContentPage
     {
         if (sender is Button button && button.CommandParameter is Monster monster)
         {
-                selectedMonster = monster;
-                await DisplayAlert("Selected Monster", "Successfully selected the monster for combat.", "Ok");
+            selectedMonster = monster;
+            CombatPopup();
+            //await DisplayAlert("Selected Monster", "Successfully selected the monster for combat.", "Ok");
         }
+    }
+
+    private async void CombatPopup()
+    {
+        // Allows us to use the dynamic colors with the out object
+        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+
+        bool isPositive = true;
+        Label entryLabel = new Label();
+        entryLabel.TextColor = (Color)fontColor;
+
+        // Create entry for number input
+        var numberEntry = new Entry
+        {
+            Placeholder = "0",
+            Keyboard = Keyboard.Numeric,
+            WidthRequest = 200,
+            TextColor = (Color)fontColor,
+            BackgroundColor = (Color)frameColor
+        };
+
+        // Create button for if the modifier is positive or negative
+        var plusOrMinus = new Button
+        {
+            Text = "+",
+            WidthRequest = 50,
+            TextColor = (Color)fontColor,
+            BackgroundColor = (Color)frameColor
+        };
+
+        // Create button for submission
+        var rollDice = new Button
+        {
+            Text = "Roll Dice",
+            WidthRequest = 350,
+            TextColor = (Color)fontColor,
+            BackgroundColor = (Color)frameColor
+        };
+
+        // Create layout for making it look pretty
+        var horizontalLayout = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
+        // Create layout for popup contents
+        var layout = new StackLayout
+        {
+            Orientation = StackOrientation.Vertical,
+            HorizontalOptions = LayoutOptions.Center
+        };
+        layout.Children.Add(entryLabel);
+        horizontalLayout.Children.Add(numberEntry);
+        horizontalLayout.Children.Add(plusOrMinus);
+        layout.Children.Add(horizontalLayout);
+        layout.Children.Add(rollDice);
+
+        // Create the popup
+        var popup = new Popup
+        {
+            Content = layout
+        };
+
+        plusOrMinus.Clicked += async (sender, e) =>
+        {
+            if (isPositive)
+            {
+                isPositive = false;
+                plusOrMinus.Text = "-";
+            }
+            else
+            {
+                isPositive = true;
+                plusOrMinus.Text = "+";
+            }
+        };
+
+        // Subscribe to button click event
+        rollDice.Clicked += async (sender, e) =>
+        {
+            // Retrieve input number
+            if (int.TryParse(numberEntry.Text, out int number))
+            {
+                // Set the result of the TaskCompletionSource
+                
+            }
+            else
+            {
+                await DisplayAlert("Invalid Input", "Please enter a valid number", "OK");
+            }
+
+            // Close the popup
+            popup.Close();
+        };
+
+        // Show the popup
+        this.ShowPopup(popup);
+
+        // Wait for the button click and return the entered number
     }
 
 }

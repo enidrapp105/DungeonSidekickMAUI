@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MonsterCombat"
              Title="MonsterCombat">
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <VerticalStackLayout x:Name="MonsterStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             <Label Text="Chosen Monsters" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </VerticalStackLayout>
