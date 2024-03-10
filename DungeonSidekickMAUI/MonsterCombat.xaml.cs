@@ -68,7 +68,8 @@ public partial class MonsterCombat : ContentPage
 
     private void PullDiceValue()
     {
-
+        int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
+        if (WeaponID == -1) return;
     }
 
     private async void CombatPopup()
