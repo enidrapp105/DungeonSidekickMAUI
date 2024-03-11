@@ -42,6 +42,10 @@
         {
             Navigation.PushAsync(new Settings_Page());
         }
+        private void Landing_Page(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new LandingPage());
+        }
 
     }
 }

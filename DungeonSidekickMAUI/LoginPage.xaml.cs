@@ -23,22 +23,20 @@ public partial class LoginPage : ContentPage
 		if (password_Hasher.VerifyHashedPassword(Pass.Text))
 		{
 
-            /*if (Character_Count() > 0) 
+            if (Character_Count() > 0) 
             {
                 Navigation.PushAsync(new CSheet_Import());
             }
             else
             {
                 Navigation.PushAsync(new Info_For_Stats());
-            }*/
-            Navigation.PushAsync(new MainPage());
+            }
+            //Navigation.PushAsync(new MainPage());
         }
 		else
 		{
 			DisplayAlert("Your username or password are incorrect", "Please try a different username or password", "Ok");
 		}
-        
-        
     }
 	private void signupButtonClicked(object sender, EventArgs e) 
 	{
