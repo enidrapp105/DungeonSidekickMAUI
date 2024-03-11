@@ -18,8 +18,9 @@ public partial class LoginPage : ContentPage
 		//Where the second quote is the default value if the preference isn't set
         if (password_Hasher.VerifyHashedPassword(Pass.Text))
 		{
-			Navigation.PushAsync(new MainPage());
-		}
+            //Navigation.PushAsync(new MainPage());
+            Navigation.PushAsync(new CSheet_Import());
+        }
 		else
 			DisplayAlert("Your username or password are incorrect", "Please try a different username or password", "Ok");
     }
@@ -31,6 +32,7 @@ public partial class LoginPage : ContentPage
     {
 		Preferences.Default.Set("Username", "Admin");
 		Preferences.Default.Set("UserId", 1);
-        Navigation.PushAsync(new MainPage());
+        //Navigation.PushAsync(new MainPage());
+		Navigation.PushAsync(new CSheet_Import());
     }
 }

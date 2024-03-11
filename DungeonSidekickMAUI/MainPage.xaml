@@ -11,8 +11,8 @@
             <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Clicked"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Player Import?" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Import"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Create a Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Clicked"/>
+            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Change Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Player_Import"/>
         
             <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
 

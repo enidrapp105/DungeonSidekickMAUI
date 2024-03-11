@@ -11,9 +11,9 @@
                 <StackLayout x:Name="CharacterPanel" BackgroundColor="{DynamicResource PrimaryColor}">
 
 
-                    <Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>
+                    <!--<Entry Placeholder="Your Name" FontSize="Body" BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" x:Name="PName"/>-->
                     <!--PName = Player Name, CName = Character Name-->
-                    <Button BackgroundColor="{DynamicResource AccessoryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>
+                    <!--<Button BackgroundColor="{DynamicResource AccessoryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>-->
                 </StackLayout>
             </ScrollView>
         </StackLayout>
