@@ -279,7 +279,7 @@ public partial class MonsterCombat : ContentPage
             else if ((acRoll + hitMod) > selectedMonster.AC)
             {
                 throughAC = true;
-                await DisplayAlert("Hit Roll", "You rolled a " + acRoll + " and got past the monsters AC of " + selectedMonster.AC, "OK");
+                await DisplayAlert("Hit Roll", "You rolled a " + (acRoll + hitMod) + " and got past the monsters AC of " + selectedMonster.AC, "OK");
             }
             else
             {

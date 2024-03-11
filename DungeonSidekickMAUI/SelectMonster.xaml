@@ -13,8 +13,8 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
-                            <Button VerticalOptions="CenterAndExpand" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
+                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center">
+                            <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
                                     Clicked="ChooseMonster" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40" />
                         </VerticalStackLayout>
                     </DataTemplate>

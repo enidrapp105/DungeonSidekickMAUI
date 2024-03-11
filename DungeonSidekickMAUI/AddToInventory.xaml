@@ -4,16 +4,16 @@
              x:Class="DungeonSidekickMAUI.AddToInventory">
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Grid RowDefinitions="Auto,Auto" BackgroundColor="{DynamicResource PrimaryColor}">
-            <Entry Grid.Row="0" Placeholder="Search" TextChanged="Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
+            <Entry Grid.Row="0" Placeholder="Search" HorizontalOptions="Center" TextChanged="Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
 
             <CollectionView Grid.Row="1" x:Name="MyCollectionViews" ItemsSource="{Binding UserItems}">
-                <CollectionView.ItemsLayout>
+                <CollectionView.ItemsLayout HorizontalOptions="Center">
                     <GridItemsLayout  Orientation="Vertical" Span="1" VerticalItemSpacing="5"></GridItemsLayout>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
-                            <Button VerticalOptions="CenterAndExpand" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
+                        <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}">
+                            <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
                                     Clicked="AddItems" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40" />
                         </VerticalStackLayout>
                     </DataTemplate>
