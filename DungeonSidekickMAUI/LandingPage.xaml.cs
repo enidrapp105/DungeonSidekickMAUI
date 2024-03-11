@@ -50,6 +50,7 @@ public partial class LandingPage : ContentPage
                             {
                                 while (reader.Read())
                                 {
+                                    UserItem temp = new UserItem();
                                     HorizontalStackLayout layout = new HorizontalStackLayout();
                                     Label weaponLabel = new Label();
                                     weaponLabel.TextColor = (Color)fontColor;
@@ -57,6 +58,9 @@ public partial class LandingPage : ContentPage
                                     // grabs the name from the DB and quantity from weapon list
                                     string name = reader.GetString(0);
                                     weaponLabel.Text = name + " x" + weapon[1];
+                                    temp.Name = name;
+                                    temp.Id = weapon[0];
+                                    temp.eTypeId = 0;
                                     layout.Add(weaponLabel);
 
                                     // Button that removes the item from the DB
@@ -65,6 +69,7 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
+                                        CommandParameter = temp
                                     };
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
@@ -103,13 +108,18 @@ public partial class LandingPage : ContentPage
                             {
                                 while (reader.Read())
                                 {
+                                    UserItem temp = new UserItem();
                                     HorizontalStackLayout layout = new HorizontalStackLayout();
                                     Label armorLabel = new Label();
                                     armorLabel.TextColor = (Color)fontColor;
 
                                     // grabs the name from the DB and quantity from equipment list
-                                    armorLabel.Text = reader.GetString(0) + " x" + armor[1];
+                                    string name = reader.GetString(0);
+                                    armorLabel.Text = name + " x" + armor[1];
                                     layout.Add(armorLabel);
+                                    temp.Name = name;
+                                    temp.Id = armor[0];
+                                    temp.eTypeId = 1;
 
                                     // Button that removes the item from the DB
                                     Button delete = new Button
@@ -117,8 +127,9 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-
+                                        CommandParameter = temp
                                     };
+                                    
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
                                     InvStack.Add(layout);
@@ -156,13 +167,18 @@ public partial class LandingPage : ContentPage
                             {
                                 while (reader.Read())
                                 {
+                                    UserItem temp = new UserItem();
                                     HorizontalStackLayout layout = new HorizontalStackLayout();
                                     Label gearLabel = new Label();
                                     gearLabel.TextColor = (Color)fontColor;
 
                                     // grabs the name from the DB and quantity from items list
-                                    gearLabel.Text = reader.GetString(0) + " x" + gear[1];
+                                    string name = reader.GetString(0);
+                                    gearLabel.Text = name + " x" + gear[1];
                                     layout.Add(gearLabel);
+                                    temp.Name = name;
+                                    temp.Id = gear[0];
+                                    temp.eTypeId = 2;
 
                                     // Button that removes the item from the DB
                                     Button delete = new Button
@@ -170,6 +186,7 @@ public partial class LandingPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
+                                        CommandParameter = temp
 
                                     };
                                     delete.Clicked += RemoveButton;

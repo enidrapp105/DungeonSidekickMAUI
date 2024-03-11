@@ -138,7 +138,7 @@ namespace DungeonSidekickMAUI
             {
 
                 string query = "DELETE FROM dbo.Inventory" +
-                    " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID);";
+                    " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
