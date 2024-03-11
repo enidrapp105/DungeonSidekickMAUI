@@ -1,3 +1,7 @@
+using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Diagnostics;
+
 namespace DungeonSidekickMAUI;
  
 
@@ -18,8 +22,15 @@ public partial class LoginPage : ContentPage
 		//Where the second quote is the default value if the preference isn't set
 		if (password_Hasher.VerifyHashedPassword(Pass.Text))
 		{
-            //because the login page is outside of the appshell we must create an appshell based on the mainpage
-            App.Current.MainPage = new AppShell();
+
+            if (Character_Count() > 0) 
+            {
+                Navigation.PushAsync(new CSheet_Import());
+            }
+            else
+            {
+                Navigation.PushAsync(new Info_For_Stats());
+            }
         }
 		else
 		{
@@ -36,7 +47,44 @@ public partial class LoginPage : ContentPage
     {
 		Preferences.Default.Set("Username", "Admin");
 		Preferences.Default.Set("UserId", 1);
-		//because the login page is outside of the appshell we must create an appshell based on the mainpage
+
+        //Navigation.PushAsync(new MainPage());
+		Navigation.PushAsync(new CSheet_Import());
+    }
+
+    private int Character_Count()
+    {
+        int result = 0;
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+		string query = "Select CharacterID FROM dbo.CharacterSheet WHERE UID = @UID;";
+        int UserId = Preferences.Default.Get("UserId", -1);
+
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+                        cmd.Parameters.Add("@UID", SqlDbType.Int).Value = UserId;
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                                result++;
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+        return result;
         App.Current.MainPage = new AppShell();
     }
   

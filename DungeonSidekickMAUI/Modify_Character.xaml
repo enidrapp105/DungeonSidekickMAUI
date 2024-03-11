@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.Modify_Character"
+             Title="Modify_Character">
+    <ScrollView>
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </Frame>
+            <StackLayout x:Name="Sheet" BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+
+            </StackLayout>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Cancel" WidthRequest="400" HorizontalOptions="Center" Clicked="Cancel"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Save" WidthRequest="400" HorizontalOptions="Center" Clicked="Save"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
