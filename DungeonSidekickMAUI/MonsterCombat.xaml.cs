@@ -2,6 +2,8 @@ using CommunityToolkit.Maui.Views;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Microsoft.Maui.Graphics.Text;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace DungeonSidekickMAUI;
 
@@ -29,6 +31,12 @@ public partial class MonsterCombat : ContentPage
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
         List<Monster> monsters = MonsterSelector.Instance.m_monsters;
+        Label title = new Label();
+        title.FontSize = 36;
+        title.Text = "Chosen Monsters";
+        title.HorizontalTextAlignment = TextAlignment.Center;
+        title.TextColor = fontColor;
+        MonsterStack.Add(title);
 
         foreach (var monster in monsters)
         {
@@ -71,8 +79,6 @@ public partial class MonsterCombat : ContentPage
 
     private void PullDiceValue()
     {
-
-
         int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
         if (WeaponID == -1) return;
         string query = "SELECT damageDice FROM dbo.Weapon" +
@@ -109,33 +115,56 @@ public partial class MonsterCombat : ContentPage
         }
     }
 
+
     private async void CombatPopup()
     {
         // Allows us to use the dynamic colors with the out object
-        var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
-        bool isPositive = true;
+        bool hitIsPositive = true;
+        bool dmgIsPositive = true;
         Label entryLabel = new Label();
         entryLabel.TextColor = (Color)fontColor;
 
         // Create entry for number input
-        var numberEntry = new Entry
+        var dmgEntry = new Entry
         {
-            Placeholder = "0",
+            Placeholder = "Damage modifier",
             Keyboard = Keyboard.Numeric,
-            WidthRequest = 200,
-            TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor
+            WidthRequest = 250,
+            TextColor = fontColor,
+            BackgroundColor = SecondaryColor
         };
 
         // Create button for if the modifier is positive or negative
-        var plusOrMinus = new Button
+        var dmgPlusOrMinus = new Button
         {
             Text = "+",
-            WidthRequest = 50,
-            TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor
+            WidthRequest = 100,
+            TextColor = fontColor,
+            BackgroundColor = SecondaryColor
+        };
+
+        // Create entry for number input
+        var hitEntry = new Entry
+        {
+            Placeholder = "Hit modifier",
+            Keyboard = Keyboard.Numeric,
+            WidthRequest = 250,
+            TextColor = fontColor,
+            BackgroundColor = SecondaryColor
+        };
+
+        // Create button for if the modifier is positive or negative
+        var hitPlusOrMinus = new Button
+        {
+            Text = "+",
+            WidthRequest = 100,
+            TextColor = fontColor,
+            BackgroundColor = SecondaryColor
         };
 
         // Create button for submission
@@ -143,12 +172,19 @@ public partial class MonsterCombat : ContentPage
         {
             Text = "Roll Dice",
             WidthRequest = 350,
-            TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor
+            TextColor = fontColor,
+            BackgroundColor = SecondaryColor
         };
 
         // Create layout for making it look pretty
-        var horizontalLayout = new StackLayout
+        var dmgHorizontalLayout = new StackLayout
+        {
+            Orientation = StackOrientation.Horizontal,
+            HorizontalOptions = LayoutOptions.Center
+        };
+
+        // Create layout for making it look pretty
+        var hitHorizontalLayout = new StackLayout
         {
             Orientation = StackOrientation.Horizontal,
             HorizontalOptions = LayoutOptions.Center
@@ -161,9 +197,12 @@ public partial class MonsterCombat : ContentPage
             HorizontalOptions = LayoutOptions.Center
         };
         layout.Children.Add(entryLabel);
-        horizontalLayout.Children.Add(numberEntry);
-        horizontalLayout.Children.Add(plusOrMinus);
-        layout.Children.Add(horizontalLayout);
+        hitHorizontalLayout.Children.Add(hitEntry);
+        hitHorizontalLayout.Children.Add(hitPlusOrMinus);
+        dmgHorizontalLayout.Children.Add(dmgEntry);
+        dmgHorizontalLayout.Children.Add(dmgPlusOrMinus);
+        layout.Children.Add(hitHorizontalLayout);
+        layout.Children.Add(dmgHorizontalLayout);
         layout.Children.Add(rollDice);
 
         // Create the popup
@@ -172,17 +211,31 @@ public partial class MonsterCombat : ContentPage
             Content = layout
         };
 
-        plusOrMinus.Clicked += async (sender, e) =>
+        hitPlusOrMinus.Clicked += async (sender, e) =>
         {
-            if (isPositive)
+            if (hitIsPositive)
             {
-                isPositive = false;
-                plusOrMinus.Text = "-";
+                hitIsPositive = false;
+                hitPlusOrMinus.Text = "-";
             }
             else
             {
-                isPositive = true;
-                plusOrMinus.Text = "+";
+                hitIsPositive = true;
+                hitPlusOrMinus.Text = "+";
+            }
+        };
+
+        dmgPlusOrMinus.Clicked += async (sender, e) =>
+        {
+            if (dmgIsPositive)
+            {
+                dmgIsPositive = false;
+                dmgPlusOrMinus.Text = "-";
+            }
+            else
+            {
+                dmgIsPositive = true;
+                dmgPlusOrMinus.Text = "+";
             }
         };
 
@@ -190,28 +243,75 @@ public partial class MonsterCombat : ContentPage
         rollDice.Clicked += async (sender, e) =>
         {
             // Retrieve input number
-            if (int.TryParse(numberEntry.Text, out int number))
+            int dmgMod = 0;
+            int hitMod = 0;
+
+            if (int.TryParse(dmgEntry.Text, out int num))
             {
-                PullDiceValue();
-                await DisplayAlert("Dice", dice, "OK");
-                DiceRoll roller = new DiceRoll();
-                int result = roller.Roll(dice);
-                MonsterSelector.Instance.DamageMonster(selectedMonster.Name, result);
-                await DisplayAlert("Damage Dealt", "You dealt " + result + " damage, the monster has " + selectedMonster.HP + " remaining", "OK");
+                dmgMod = num;
+            }
+
+            if (int.TryParse(dmgEntry.Text, out int num2))
+            {
+                hitMod = num2;
+            }
+
+            if (!hitIsPositive)
+            {
+                hitMod *= -1;
+            }
+            
+            PullDiceValue();
+            //await DisplayAlert("Dice", dice, "OK");
+            DiceRoll roller = new DiceRoll();
+            int acRoll = roller.Roll("1d20");
+            bool throughAC = false;
+            if (acRoll == 20)
+            {
+                throughAC = true;
+                await DisplayAlert("Hit Roll", "You rolled a natural " + acRoll + " and got past the monsters AC", "OK");
+            }
+            else if (acRoll == 1)
+            {
+                throughAC = false;
+                await DisplayAlert("Hit Roll", "You rolled a " + acRoll + " and failed to hit the monster", "OK");
+            }
+            else if ((acRoll + hitMod) > selectedMonster.AC)
+            {
+                throughAC = true;
+                await DisplayAlert("Hit Roll", "You rolled a " + acRoll + " and got past the monsters AC of " + selectedMonster.AC, "OK");
             }
             else
             {
-                await DisplayAlert("Invalid Input", "Please enter a valid number", "OK");
+                throughAC = false;
+                await DisplayAlert("Hit Roll", "You rolled a " + (acRoll + hitMod) + " and fail to get past the monsters AC of " + selectedMonster.AC, "OK");
+            }
+            if (throughAC)
+            {
+                int result = roller.Roll(dice);
+                if (dmgIsPositive)
+                {
+                    result += dmgMod;
+                }
+                else
+                {
+                    result -= dmgMod;
+                }
+                MonsterSelector.Instance.DamageMonster(selectedMonster.Name, result);
+                await DisplayAlert("Damage Dealt", "You dealt " + result + " damage, the monster has " + selectedMonster.HP + " remaining", "OK");
             }
 
             // Close the popup
             popup.Close();
+
+            // clear the stack and re create it to update the HP values
+            MonsterStack.Clear();
+            DisplayAllMonsters();
         };
 
         // Show the popup
         this.ShowPopup(popup);
 
-        // Wait for the button click and return the entered number
     }
 
 }
