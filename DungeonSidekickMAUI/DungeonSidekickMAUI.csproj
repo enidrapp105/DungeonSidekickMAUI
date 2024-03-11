@@ -103,6 +103,9 @@
 		  <MauiXaml Update="MainPage.xaml">
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
+		  <MauiXaml Update="Modify_Character.xaml">
+		    <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

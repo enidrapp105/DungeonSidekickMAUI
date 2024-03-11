@@ -15,6 +15,7 @@ using System.Data;
                     01/17/23 - Added edit button
                     01/21/23 - Updated variable names
                     02/18/24 - Use Preference.Default instead of hardcoded values
+                    02/29/24 - Fully redesigned to handle new character sheet, added new values and functionality
  */
 
 using System.Diagnostics;
@@ -56,6 +57,7 @@ public partial class CSheet_Import : ContentPage
 
                         cmd.CommandText = query;
                         cmd.Parameters.Add("@UID", SqlDbType.Int).Value = UserId;
+
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);

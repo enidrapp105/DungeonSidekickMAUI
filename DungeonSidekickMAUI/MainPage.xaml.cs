@@ -27,17 +27,22 @@
             Level.Text = "Level: " + character.c_Level;
             LoadedChar.Add(Level);
         }
-        private void Player_Clicked(object sender, EventArgs e)
+        private void Create_Character(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Info_For_Stats());
         }
-        private void Player_Import(object sender, EventArgs e)
+        private void Character_Import(object sender, EventArgs e)
         {
             Navigation.PushAsync(new CSheet_Import());
+        }
+        private void Modify_Character(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new Modify_Character());
         }
         private void Settings_Page(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Settings_Page());
         }
+
     }
 }
