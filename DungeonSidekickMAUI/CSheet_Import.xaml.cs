@@ -188,6 +188,7 @@ public partial class CSheet_Import : ContentPage
             " WHERE UID = @UID;";
 
         int UserId = Preferences.Default.Get("UserId", -1);
+
         if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
@@ -199,9 +200,9 @@ public partial class CSheet_Import : ContentPage
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         //cmd.CommandText = CListQuery;
-                        cmd.Parameters.AddWithValue("@UserId", Preferences.Default.Get("UserId", -1));
 
                         cmd.CommandText = query;
+                        cmd.Parameters.Add("@UID", SqlDbType.Int).Value = UserId;
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
@@ -316,7 +317,7 @@ public partial class CSheet_Import : ContentPage
                                     (
                                         execute: async () =>
                                         {
-                                            Preferences.Default.Set("UserCharacter", Char);
+                                            ImportedCharacterSheet.Save(Char);
                                             //Navigate to next page
                                         }
                                     )

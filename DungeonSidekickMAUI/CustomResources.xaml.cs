@@ -1,5 +1,5 @@
-//using CoreNFC;
 using Microsoft.IdentityModel.Tokens;
+using System.Text.Json;
 
 
 namespace DungeonSidekickMAUI;
@@ -133,6 +133,18 @@ public partial class CustomResources : ResourceDictionary
 //this is a test for a replacement of our depreciated Character Sheet class
 public class ImportedCharacterSheet
 {
+    // for storing in preferences
+    public static void Save(ImportedCharacterSheet character)
+    {
+        Preferences.Default.Set("UserCharacter", JsonSerializer.Serialize(character));
+    }
+
+    // for returing to preferences
+    public static ImportedCharacterSheet Load()
+    {
+        return JsonSerializer.Deserialize<ImportedCharacterSheet>(Preferences.Default.Get("UserCharacter", ""));
+    }
+
     //constructor
     public ImportedCharacterSheet(int user, int character)
     {
