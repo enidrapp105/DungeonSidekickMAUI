@@ -24,7 +24,7 @@ public partial class Modify_Character : ContentPage
         foreach (var property in variablesFull)
         {
             //Skips properties that should be invisible
-            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID")
+            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID" || property.Name == "c_Equipment")
             {
                 continue;
             }
@@ -59,28 +59,65 @@ public partial class Modify_Character : ContentPage
 
     private void Save(object sender, EventArgs e)
     {
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-
-        string query = "UPDATE dbo.CharacterSheet" +
-            " SET CharacterName = @CharacterName, RaceID = @RaceID, ClassID = @ClassID, Level = @Level, Background = @Background, Alignment = @Alignment, PersonalityTraits = @PersonalityTraits, Ideals = @Ideals, Bonds = @Bonds, Flaws = @Flaws," +
-            " FeaturesTraits = @FeaturesTraits, Strength = @Strength, Dexterity = @Dexterity, Constitution = @Constitution, Intelligence = @Intelligence, Wisdom = @Wisdom, Charisma = @Charisma, CurrentHP = @CurrentHP, TempHP = @TempHP, AC = @AC, Initiative = @Initiative," +
-            " Speed = @Speed, HitDice = @HitDice, StrSave = @StrSave, DexSave = @DexSave, ConSave = @ConSave, IntSave = @IntSave, WisSave = @WisSave, ChaSave = @ChaSave, Acrobatics = @Acrobatics, AnimalHandling = @AnimalHandling, Arcana = @Arcana, Athletics = @Athletics, Deception = @Deception," +
-            " History = @History, Insight = @Insight, Intimidation = @Intimidation, Investigation = @Investigation, Medicine = @Medicine, Nature = @Nature, Perception = @Perception, Performance = @Performance, Persuasion = @Persuasion, Religion = @Religion, Sleight = @Sleight, Stealth = @Stealth," +
-            " Survival = @Survival, PassiveWisdom = @PassiveWisdom" +
-            " WHERE CharacterID = @CharacterID;";
 
 
-
-
-
+        int i = 0;
         ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
-        Char.c_Name = entries[0].Text;
-        Char.c_Class = int.Parse(entries[1].Text);
-        Char.c_Race = int.Parse(entries[2].Text);
-        Char.c_Level = int.Parse(entries[3].Text);
-        Char.c_Background = entries[4].Text;
-        Char.c_Alignment = entries[5].Text;
+        Char.c_Name = entries[i++].Text;
+        Char.c_Class = int.Parse(entries[i++].Text);
+        Char.c_Race = int.Parse(entries[i++].Text);
+        Char.c_Level = int.Parse(entries[i++].Text);
+        Char.c_Background = entries[i++].Text;
+        Char.c_Alignment = entries[i++].Text;
+        Char.c_PersonalityTraits = entries[i++].Text;
+        Char.c_Ideals = entries[i++].Text;
+        Char.c_Bonds = entries[i++].Text;
+        Char.c_Flaws = entries[i++].Text;
+        Char.c_FeaturesTraits = entries[i++].Text;
 
+        Char.c_Strength = int.Parse(entries[i++].Text);
+        Char.c_Dexterity = int.Parse(entries[i++].Text);
+        Char.c_Constitution = int.Parse(entries[i++].Text);
+        Char.c_Intelligence = int.Parse(entries[i++].Text);
+        Char.c_Wisdom = int.Parse(entries[i++].Text);
+        Char.c_Charisma = int.Parse(entries[i++].Text);
+
+        Char.c_CurrentHealth = int.Parse(entries[i++].Text);
+        Char.c_TemporaryHealth = int.Parse(entries[i++].Text);
+        Char.c_ArmorClass = int.Parse(entries[i++].Text);
+        Char.c_Initiative = int.Parse(entries[i++].Text);
+        Char.c_Speed = int.Parse(entries[i++].Text);
+        Char.c_HitDice = int.Parse(entries[i++].Text);
+
+        Char.c_StrengthSave = int.Parse(entries[i++].Text);
+        Char.c_DexteritySave = int.Parse(entries[i++].Text);
+        Char.c_ConstitutionSave = int.Parse(entries[i++].Text);
+        Char.c_IntelligenceSave = int.Parse(entries[i++].Text);
+        Char.c_WisdomSave = int.Parse(entries[i++].Text);
+        Char.c_CharismaSave = int.Parse(entries[i++].Text);
+
+        Char.c_Acrobatics = int.Parse(entries[i++].Text);
+        Char.c_AnimalHandling = int.Parse(entries[i++].Text);
+        Char.c_Arcana = int.Parse(entries[i++].Text);
+        Char.c_Atheletics = int.Parse(entries[i++].Text);
+        Char.c_Deception = int.Parse(entries[i++].Text);
+        Char.c_History = int.Parse(entries[i++].Text);
+        Char.c_Insight = int.Parse(entries[i++].Text);
+        Char.c_Intimidation = int.Parse(entries[i++].Text);
+        Char.c_Investigation = int.Parse(entries[i++].Text);
+        Char.c_Medicine = int.Parse(entries[i++].Text);
+        Char.c_Nature = int.Parse(entries[i++].Text);
+        Char.c_Perception = int.Parse(entries[i++].Text);
+        Char.c_Performance = int.Parse(entries[i++].Text);
+        Char.c_Persuasion = int.Parse(entries[i++].Text);
+        Char.c_Religion = int.Parse(entries[i++].Text);
+        Char.c_SleightOfHand = int.Parse(entries[i++].Text);
+        Char.c_Stealth = int.Parse(entries[i++].Text);
+        Char.c_Survival = int.Parse(entries[i++].Text);
+
+        Char.c_PassiveWisdom = int.Parse(entries[i++].Text);
+
+        Char.Export();
 
         //Go back to main page after saving
         Navigation.PushAsync(new MainPage());

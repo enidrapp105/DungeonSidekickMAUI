@@ -1,5 +1,7 @@
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Microsoft.Data.SqlClient;
 
 namespace DungeonSidekickMAUI;
 
@@ -18,8 +20,7 @@ using System.Data;
                     02/29/24 - Fully redesigned to handle new character sheet, added new values and functionality
  */
 
-using System.Diagnostics;
-using Microsoft.Data.SqlClient;
+
 public partial class CSheet_Import : ContentPage
 {
     public CSheet_Import()

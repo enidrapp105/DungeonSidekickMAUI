@@ -1,5 +1,10 @@
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
+using System.Diagnostics;
 using System.Text.Json;
+using Microsoft.Maui.Controls.PlatformConfiguration;
+using System.Collections.Generic;
+using Microsoft.Data.SqlClient;
 
 
 namespace DungeonSidekickMAUI;
@@ -145,6 +150,98 @@ public class ImportedCharacterSheet
         return JsonSerializer.Deserialize<ImportedCharacterSheet>(Preferences.Default.Get("UserCharacter", ""));
     }
 
+    public void Export()
+    {
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+
+        string query = "UPDATE dbo.CharacterSheet" +
+            " SET CharacterName = @CharacterName, RaceID = @RaceID, ClassID = @ClassID, Level = @Level, Background = @Background, Alignment = @Alignment, PersonalityTraits = @PersonalityTraits, Ideals = @Ideals, Bonds = @Bonds, Flaws = @Flaws," +
+            " FeaturesTraits = @FeaturesTraits, Strength = @Strength, Dexterity = @Dexterity, Constitution = @Constitution, Intelligence = @Intelligence, Wisdom = @Wisdom, Charisma = @Charisma, CurrentHP = @CurrentHP, TempHP = @TempHP, AC = @AC, Initiative = @Initiative," +
+            " Speed = @Speed, HitDice = @HitDice, StrSave = @StrSave, DexSave = @DexSave, ConSave = @ConSave, IntSave = @IntSave, WisSave = @WisSave, ChaSave = @ChaSave, Acrobatics = @Acrobatics, AnimalHandling = @AnimalHandling, Arcana = @Arcana, Athletics = @Athletics, Deception = @Deception," +
+            " History = @History, Insight = @Insight, Intimidation = @Intimidation, Investigation = @Investigation, Medicine = @Medicine, Nature = @Nature, Perception = @Perception, Performance = @Performance, Persuasion = @Persuasion, Religion = @Religion, Sleight = @Sleight, Stealth = @Stealth," +
+            " Survival = @Survival, PassiveWisdom = @PassiveWisdom" +
+            " WHERE CharacterID = @CharacterID;";
+
+
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        //cmd.Parameters.Add("@UID", SqlDbType.VarChar).Value = string;
+                        //cmd.Parameters.Add("@UID", SqlDbType.Int).Value = int;
+                        cmd.CommandText = query;
+                        cmd.Parameters.Add("@CharacterName", SqlDbType.VarChar).Value = c_Name;
+                        cmd.Parameters.Add("@RaceID", SqlDbType.Int).Value = c_Race;
+                        cmd.Parameters.Add("@ClassID", SqlDbType.Int).Value = c_Class;
+                        cmd.Parameters.Add("@Level", SqlDbType.Int).Value = c_Level;
+
+                        cmd.Parameters.Add("@Background", SqlDbType.VarChar).Value = c_Background;
+                        cmd.Parameters.Add("@Alignment", SqlDbType.VarChar).Value = c_Alignment;
+                        cmd.Parameters.Add("@PersonalityTraits", SqlDbType.VarChar).Value = c_PersonalityTraits;
+                        cmd.Parameters.Add("@Ideals", SqlDbType.VarChar).Value = c_Ideals;
+                        cmd.Parameters.Add("@Bonds", SqlDbType.VarChar).Value = c_Bonds;
+                        cmd.Parameters.Add("@Flaws", SqlDbType.VarChar).Value = c_Flaws;
+                        cmd.Parameters.Add("@FeaturesTraits", SqlDbType.VarChar).Value = c_FeaturesTraits;
+
+                        cmd.Parameters.Add("@Strength", SqlDbType.Int).Value = c_Strength;
+                        cmd.Parameters.Add("@Dexterity", SqlDbType.Int).Value = c_Dexterity;
+                        cmd.Parameters.Add("@Constitution", SqlDbType.Int).Value = c_Constitution;
+                        cmd.Parameters.Add("@Intelligence", SqlDbType.Int).Value = c_Intelligence;
+                        cmd.Parameters.Add("@Wisdom", SqlDbType.Int).Value = c_Wisdom;
+                        cmd.Parameters.Add("@Charisma", SqlDbType.Int).Value = c_Charisma;
+
+                        cmd.Parameters.Add("@CurrentHP", SqlDbType.Int).Value = c_CurrentHealth;
+                        cmd.Parameters.Add("@TempHP", SqlDbType.Int).Value = c_TemporaryHealth;
+                        cmd.Parameters.Add("@AC", SqlDbType.Int).Value = c_ArmorClass;
+                        cmd.Parameters.Add("@Initiative", SqlDbType.Int).Value = c_Initiative;
+                        cmd.Parameters.Add("@Speed", SqlDbType.Int).Value = c_Speed;
+                        cmd.Parameters.Add("@HitDice", SqlDbType.Int).Value = c_HitDice;
+
+                        cmd.Parameters.Add("@StrSave", SqlDbType.Int).Value = c_StrengthSave;
+                        cmd.Parameters.Add("@DexSave", SqlDbType.Int).Value = c_DexteritySave;
+                        cmd.Parameters.Add("@ConSave", SqlDbType.Int).Value = c_ConstitutionSave;
+                        cmd.Parameters.Add("@IntSave", SqlDbType.Int).Value = c_IntelligenceSave;
+                        cmd.Parameters.Add("@WisSave", SqlDbType.Int).Value = c_WisdomSave;
+                        cmd.Parameters.Add("@ChaSave", SqlDbType.Int).Value = c_CharismaSave;
+
+                        cmd.Parameters.Add("@Acrobatics", SqlDbType.Int).Value = c_Acrobatics;
+                        cmd.Parameters.Add("@AnimalHandling", SqlDbType.Int).Value = c_AnimalHandling;
+                        cmd.Parameters.Add("@Arcana", SqlDbType.Int).Value = c_Arcana;
+                        cmd.Parameters.Add("@Atheletics", SqlDbType.Int).Value = c_Atheletics;
+                        cmd.Parameters.Add("@Deception", SqlDbType.Int).Value = c_Deception;
+                        cmd.Parameters.Add("@History", SqlDbType.Int).Value = c_History;
+                        cmd.Parameters.Add("@Insight", SqlDbType.Int).Value = c_Insight;
+                        cmd.Parameters.Add("@Intimidation", SqlDbType.Int).Value = c_Intimidation;
+                        cmd.Parameters.Add("@Investigation", SqlDbType.Int).Value = c_Investigation;
+                        cmd.Parameters.Add("@Medicine", SqlDbType.Int).Value = c_Medicine;
+                        cmd.Parameters.Add("@Nature", SqlDbType.Int).Value = c_Nature;
+                        cmd.Parameters.Add("@Perception", SqlDbType.Int).Value = c_Perception;
+                        cmd.Parameters.Add("@Performance", SqlDbType.Int).Value = c_Performance;
+                        cmd.Parameters.Add("@Persuasion", SqlDbType.Int).Value = c_Persuasion;
+                        cmd.Parameters.Add("@Religion", SqlDbType.Int).Value = c_Religion;
+                        cmd.Parameters.Add("@SleightOfHand", SqlDbType.Int).Value = c_SleightOfHand;
+                        cmd.Parameters.Add("@Stealth", SqlDbType.Int).Value = c_Stealth;
+                        cmd.Parameters.Add("@Survival", SqlDbType.Int).Value = c_Survival;
+
+                        cmd.Parameters.Add("@PassiveWisdom", SqlDbType.Int).Value = c_PassiveWisdom;
+
+                        cmd.Parameters.Add("@CharacterID", SqlDbType.Int).Value = p_CharacterID;
+                    }
+                }
+            }
+        }
+        catch (Exception eSql)
+        {
+            //DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+    }
+
     //constructor
     public ImportedCharacterSheet(int p_UID, int p_CharacterID)
     {
@@ -152,14 +249,14 @@ public class ImportedCharacterSheet
         this.p_CharacterID = p_CharacterID;
     }
 
-    public int GetUID()
-    {
-        return p_UID;
-    }
-    public int GetCharacterID()
-    {
-        return p_CharacterID;
-    }
+    //public int GetUID()
+    //{
+    //    return p_UID;
+    //}
+    //public int GetCharacterID()
+    //{
+    //    return p_CharacterID;
+    //}
 
     public string? c_Name { get; set; }
 
