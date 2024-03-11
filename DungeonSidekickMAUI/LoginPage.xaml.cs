@@ -23,14 +23,15 @@ public partial class LoginPage : ContentPage
 		if (password_Hasher.VerifyHashedPassword(Pass.Text))
 		{
 
-            if (Character_Count() > 0) 
+            /*if (Character_Count() > 0) 
             {
                 Navigation.PushAsync(new CSheet_Import());
             }
             else
             {
                 Navigation.PushAsync(new Info_For_Stats());
-            }
+            }*/
+            Navigation.PushAsync(new MainPage());
         }
 		else
 		{
