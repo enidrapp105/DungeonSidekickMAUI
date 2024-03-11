@@ -23,6 +23,7 @@ namespace DungeonSidekickMAUI
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
             m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
+
             Items = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
