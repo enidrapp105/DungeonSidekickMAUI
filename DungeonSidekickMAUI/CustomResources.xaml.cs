@@ -146,10 +146,10 @@ public class ImportedCharacterSheet
     }
 
     //constructor
-    public ImportedCharacterSheet(int user, int character)
+    public ImportedCharacterSheet(int p_UID, int p_CharacterID)
     {
-        p_UID = user;
-        p_CharacterID = character;
+        this.p_UID = p_UID;
+        this.p_CharacterID = p_CharacterID;
     }
 
     public int GetUID()
@@ -228,8 +228,8 @@ public class ImportedCharacterSheet
     public int c_Level { get; set; }
 
     //debateable for keeping
-    private int p_UID; 
-    private int p_CharacterID;
+    public int p_UID { get; private set; }
+    public int p_CharacterID { get; private set; }
 
 
 }

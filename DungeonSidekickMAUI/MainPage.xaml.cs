@@ -6,9 +6,27 @@
         {
             InitializeComponent();
             ((AppShell)Shell.Current).FlyoutIsPresented = true;
-            User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
+            //User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
+            int userId = Preferences.Default.Get("UserId", 0); // Assuming 0 as the default value for user ID
+            User_Disp.Text = "Welcome " + userId.ToString();
+            AddSelectedChar();
         }
 
+
+        private void AddSelectedChar()
+        {
+            var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+            var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
+            ImportedCharacterSheet character = ImportedCharacterSheet.Load();
+            Label current = new Label();
+            current.TextColor = (Color)fontColor;
+            current.Text = "Current Character: " + character.c_Name;
+            LoadedChar.Add(current);
+            Label Level = new Label();
+            Level.TextColor = (Color)fontColor;
+            Level.Text = "Level: " + character.c_Level;
+            LoadedChar.Add(Level);
+        }
         private void Player_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Info_For_Stats());
@@ -22,5 +40,4 @@
             Navigation.PushAsync(new Settings_Page());
         }
     }
-
 }
