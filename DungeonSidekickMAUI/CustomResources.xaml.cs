@@ -172,8 +172,6 @@ public class ImportedCharacterSheet
                 {
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
-                        //cmd.Parameters.Add("@UID", SqlDbType.VarChar).Value = string;
-                        //cmd.Parameters.Add("@UID", SqlDbType.Int).Value = int;
                         cmd.CommandText = query;
                         cmd.Parameters.Add("@CharacterName", SqlDbType.VarChar).Value = c_Name;
                         cmd.Parameters.Add("@RaceID", SqlDbType.Int).Value = c_Race;
@@ -231,6 +229,8 @@ public class ImportedCharacterSheet
                         cmd.Parameters.Add("@PassiveWisdom", SqlDbType.Int).Value = c_PassiveWisdom;
 
                         cmd.Parameters.Add("@CharacterID", SqlDbType.Int).Value = p_CharacterID;
+
+                        cmd.ExecuteNonQuery();
                     }
                 }
             }
