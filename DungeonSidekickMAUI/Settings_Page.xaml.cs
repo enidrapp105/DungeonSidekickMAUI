@@ -20,7 +20,7 @@ public partial class Settings_Page : ContentPage
         String Trinary = (100 + " " + 255 + " " + 255);
         String FC = (0 + " " + 0 + " " + 0);
         String ACCENT = (200 + " " + 200 + " " + 255);
-        String ACCESSORY = (200 + " " + 255 + " " + 200);
+        String ACCESSORY = (50 + " " + 0 + " " + 255);
 
         designSave.SaveColors(Primary, Secondary, Trinary, FC, ACCENT, ACCESSORY);
         CustomResources.GetColors();
@@ -36,7 +36,8 @@ public partial class Settings_Page : ContentPage
         String Trinary = (20 + " " + 20 + " " + 150);
         String FC = (255 + " " + 255 + " " + 255);
         String ACCENT = (200 + " " + 0 + " " + 0);
-        String ACCESSORY = (0 + " " + 255 + " " + 0);
+        // I changed the accessory color
+        String ACCESSORY = (0 + " " + 200 + " " + 255);
 
         designSave.SaveColors(Primary, Secondary, Trinary, FC, ACCENT, ACCESSORY);
         CustomResources.GetColors();

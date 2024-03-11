@@ -5,6 +5,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class SelectedClassPage : ContentPage
 {
+    int ClassID;
     CharacterSheet characterSheet;
     string ClassName;
     /*
@@ -46,6 +47,7 @@ public partial class SelectedClassPage : ContentPage
                     {
                         cmd.CommandText = query;
                         cmd.Parameters.AddWithValue("@ClassID", selectedClass);
+                        ClassID = selectedClass;
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -191,7 +193,7 @@ public partial class SelectedClassPage : ContentPage
      */
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.characterclass = ClassName;
+        characterSheet.characterclass = ClassID;
         Navigation.PushAsync(new CSheet(characterSheet));
     }
 

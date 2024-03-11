@@ -6,8 +6,8 @@ public partial class CSheet : ContentPage
 {
     private CharacterSheet CharacterSheetcurrent;
     //public DndClass CharacterClass;
-    public string Class;
-    public string Race;
+    public int Class;
+    public int Race;
 
     public CSheet()
     {
