@@ -30,9 +30,10 @@
                     <Label Text="HP:25" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
             </HorizontalStackLayout>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem" WidthRequest="400" HorizontalOptions="Center" Grid.Row="5" Grid.Column="1"/>
-            <VerticalStackLayout HorizontalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" x:Name="InvStack" Grid.Row="1" Grid.Column="1">
-                <Label Text="Inventory" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" />
+            <VerticalStackLayout HorizontalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" x:Name="InvStack">
+
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Go To Combat" Clicked="NavigateToCombat" WidthRequest="400" HorizontalOptions="Center"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem" WidthRequest="400" HorizontalOptions="Center"/>
             </VerticalStackLayout>
         </Grid>
     </ScrollView>

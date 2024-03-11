@@ -22,7 +22,8 @@ namespace DungeonSidekickMAUI
         public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
-            m_CharacterID = 1; //Calls user ID preference, if it doesn't have one it returns admin default
+            m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
+
             Items = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
@@ -158,7 +159,6 @@ namespace DungeonSidekickMAUI
                 }
                 catch (Exception eSql)
                 {
-
                     Debug.WriteLine("Exception: " + eSql.Message);
                 }
 
