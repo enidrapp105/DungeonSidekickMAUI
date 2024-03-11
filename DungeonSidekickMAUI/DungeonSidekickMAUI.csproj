@@ -80,7 +80,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="AddToInventory.xaml.cs">
+	    <DependentUpon>AddToInventory.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="ClassPickerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CombatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="CSheet.xaml">
@@ -92,9 +101,6 @@
 		<MauiXaml Update="CustomResources.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</MauiXaml>
-	  <MauiXaml Update="CSheet_Inventory.xaml">
-	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="CSheet_Stats.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </MauiXaml>
@@ -114,6 +120,12 @@
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
 		  <MauiXaml Update="Modify_Character.xaml">
+		  	<Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
+		  <MauiXaml Update="AddToInventory.xaml">
+		    <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
+		  <MauiXaml Update="MonsterCombat.xaml">
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
@@ -123,6 +135,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SelectedClassPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SelectMonster.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 		  <MauiXaml Update="Settings_Page.xaml">

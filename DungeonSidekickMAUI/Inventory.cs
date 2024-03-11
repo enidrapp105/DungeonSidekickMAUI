@@ -19,18 +19,32 @@ namespace DungeonSidekickMAUI
         // Making the string a private member so I don't have to keep instantiating it.
         private string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
-        public Inventory(int CharacterID) // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
+        public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
-            m_CharacterID = CharacterID;
-            PullItems(); // Should pull what the character currently has in their inventory from the DB.
+            m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
+
+            Items = new List<List<int>>();
+            Weapons = new List<List<int>>();
+            Equipment = new List<List<int>>();
+            //PullItems(); // Should pull what the character currently has in their inventory from the DB.
+        }
+
+        // Just clears the lists, used when adding items
+        public void ClearItems()
+        {
+            Items.Clear();
+            Weapons.Clear();
+            Equipment.Clear();
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
-            string query = "SELECT ItemDetailsID, Quantity, ETypeID FROM dbo.Inventory" +
+            string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
             " WHERE CharacterID = @CharacterID";
 
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Weapons.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -44,10 +58,11 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
-                                List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
+                                
                                 while (reader.Read()) // Iterate through results of the query
                                 {
-                                    temp.Clear();
+                                    //temp.Clear();
+                                    List<int> temp = new List<int>(); // Creating a temporary list to store the individual pieces of data.
                                     temp.Add(reader.GetInt32(0));
                                     temp.Add(reader.GetInt32(1));
                                     temp.Add(reader.GetInt32(2));
@@ -113,13 +128,17 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
+        public void RemoveItem(int ItemID, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
         {
-            string query = "INSERT INTO dbo.Inventory(ItemDetailsID, Quantity, ETypeID, CharacterID)" +
-            " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
-
-            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
+            if (ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
             {
+                return; // Quick exit.
+            }
+            else // EType was valid, proceed.
+            {
+
+                string query = "DELETE FROM dbo.Inventory" +
+                    " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
@@ -131,6 +150,38 @@ namespace DungeonSidekickMAUI
                             {
                                 cmd.CommandText = query;
                                 cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                                cmd.Parameters.AddWithValue("@Etype", ETypeID);
+                                cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+
+            }
+        }
+
+        public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
+        {
+            string query = "INSERT INTO dbo.Inventory(ItemID, Quantity, eTypeID, CharacterID)" +
+            " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
+                            {
                                 cmd.Parameters.AddWithValue("@Etype", ITEM);
                                 foreach (List<int> item in Items) // Should iterate through every element of Items and correctly input the necessary data into the query.
                                 {
@@ -138,7 +189,9 @@ namespace DungeonSidekickMAUI
                                     cmd.Parameters.AddWithValue("@Quantity", item[1]);
                                     cmd.ExecuteNonQuery();
                                 }
-
+                            }
+                            if (Weapons.Count > 0) // Checks if Weapons is empty. If not, proceed.
+                            {
                                 cmd.Parameters.AddWithValue("@Etype", WEAPON);
                                 foreach (List<int> weapon in Weapons)
                                 {
@@ -146,7 +199,9 @@ namespace DungeonSidekickMAUI
                                     cmd.Parameters.AddWithValue("@Quantity", weapon[1]);
                                     cmd.ExecuteNonQuery();
                                 }
-
+                            }
+                            if (Equipment.Count > 0) // Checks if Equipment is empty. If not, proceed.
+                            {
                                 cmd.Parameters.AddWithValue("@Etype", EQUIPMENT);
                                 foreach (List<int> equipment in Equipment)
                                 {
@@ -158,20 +213,25 @@ namespace DungeonSidekickMAUI
                         }
                     }
                 }
-                catch (Exception eSql)
-                {
-                    Debug.WriteLine("Exception: " + eSql.Message);
-                }
             }
+            catch (Exception eSql)
+            {
+
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+
         }
 
-        public required int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
+        //***************************
+        // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.
+        //***************************
+        public int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
 
-        public required List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
+        public List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
 
-        public required List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
+        public List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
 
-        public required List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
+        public List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
 
         // These lable the ETypeID we use in the DB.
         public const int WEAPON = 0;

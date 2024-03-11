@@ -13,7 +13,7 @@ namespace DungeonSidekickMAUI
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CSheet_Stats : ContentPage
 	{
-        private CharacterSheet CharacterSheetcurrent;
+        private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
         /*
          * Function: RollForStats
          * Author: Kenny Rapp
@@ -23,50 +23,66 @@ namespace DungeonSidekickMAUI
         private void RollForStats(object sender, EventArgs e)
         {
             LoadCharacterSheetClass();
-            Navigation.PushAsync(new RollForStatsPage(CharacterSheetcurrent));
+            Navigation.PushAsync(new RollForStatsPage());
         }
-        public CSheet_Stats (CharacterSheet characterSheet)
+        public CSheet_Stats ()
 		{
 			InitializeComponent ();
-            CharacterSheetcurrent = characterSheet;
-            LoadCharacterSheetPage(CharacterSheetcurrent);
+            LoadCharacterSheetPage();
         }
-        
 
-        //Loads the character sheet to the user's viewable page
-        private void LoadCharacterSheetPage(CharacterSheet characterSheet)
+
+        /*
+         * Function: LoadCharacterSheetPage
+         * Author: Brendon Williams
+         * Purpose: Loads the current character sheet to the text boxes on the screen
+         * last Modified : 2/22/2024 8:49 pm
+         */
+        private void LoadCharacterSheetPage()
         {
-            Strength.Text = characterSheet.strength;
-            Dexterity.Text = characterSheet.dexterity;
-            Constitution.Text = characterSheet.constitution;
-            Intelligence.Text = characterSheet.intelligence;
-            Wisdom.Text = characterSheet.wisdom;
-            Constitution.Text = characterSheet.constitution;
-            Charisma.Text = characterSheet.charisma;
+            Strength.Text = CharacterSheetcurrent.strength.ToString();
+            Dexterity.Text = CharacterSheetcurrent.dexterity.ToString();
+            Constitution.Text = CharacterSheetcurrent.constitution.ToString();
+            Intelligence.Text = CharacterSheetcurrent.intelligence.ToString();
+            Wisdom.Text = CharacterSheetcurrent.wisdom.ToString();
+            Constitution.Text = CharacterSheetcurrent.constitution.ToString();
+            Charisma.Text = CharacterSheetcurrent.charisma.ToString();
         }
+
+        /*
+         * Function: LoadCharacterSheetClass
+         * Author: Brendon Williams
+         * Purpose: Takes the text currently on the screen and puts it in the character sheet class
+         * last Modified : 2/22/2024 8:49 pm
+         */
         private void LoadCharacterSheetClass()
         {
-            CharacterSheetcurrent.strength = Strength.Text;
-            CharacterSheetcurrent.dexterity = Dexterity.Text;
-            CharacterSheetcurrent.constitution = Constitution.Text;
-            CharacterSheetcurrent.intelligence = Intelligence.Text;
-            CharacterSheetcurrent.wisdom = Wisdom.Text;
-            CharacterSheetcurrent.constitution = Constitution.Text;
-            CharacterSheetcurrent.charisma = Charisma.Text;
+            CharacterSheetcurrent.strength = int.Parse(Strength.Text);
+            CharacterSheetcurrent.dexterity = int.Parse(Dexterity.Text);
+            CharacterSheetcurrent.constitution = int.Parse(Constitution.Text);
+            CharacterSheetcurrent.intelligence = int.Parse(Intelligence.Text);
+            CharacterSheetcurrent.wisdom = int.Parse(Wisdom.Text);
+            CharacterSheetcurrent.constitution = int.Parse(Constitution.Text);
+            CharacterSheetcurrent.charisma = int.Parse(Charisma.Text);
         }
 
+        /*
+         * Function: SubmitStats
+         * Author: Brendon Williams
+         * Purpose: Updates the character sheet class, then moves to next page
+         * last Modified : 2/22/2024 8:49 pm
+         */
         private void SubmitStats(object sender, EventArgs e)
         {
-
             LoadCharacterSheetClass();
-
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
             string query = "INSERT INTO dbo.CharacterSheet" +
-                "(CharacterName,PlayerName,Race,Class,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
-                "FeaturesTraits,Equipment,Proficiencies,Attacks,Spells,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
-                "(@CharacterName,@PlayerName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Equipment,@Proficiencies,@Attacks,@Spells,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);";
+                "(UID,CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
+                "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
+                "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);" +
+                "SELECT CAST(scope_identity() AS int)";
 
             try
             {
@@ -78,53 +94,68 @@ namespace DungeonSidekickMAUI
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
                             cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@UID", Preferences.Default.Get("UserId", 0));
+                            cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.charactername);
+                            cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.race);
+                            cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.characterclass);
+                            cmd.Parameters.AddWithValue("@Background", CharacterSheetcurrent.background);
+                            cmd.Parameters.AddWithValue("@Alignment", CharacterSheetcurrent.alignment);
+                            cmd.Parameters.AddWithValue("@PersonalityTraits", CharacterSheetcurrent.personalitytraits);
+                            cmd.Parameters.AddWithValue("@Ideals", CharacterSheetcurrent.ideals);
+                            cmd.Parameters.AddWithValue("@Bonds", CharacterSheetcurrent.bonds);
+                            cmd.Parameters.AddWithValue("@Flaws", CharacterSheetcurrent.flaws);
+                            cmd.Parameters.AddWithValue("@FeaturesTraits", CharacterSheetcurrent.featurestraits);
                             int flag = 0;
 
                             if (int.Parse(Strength.Text) >= 0 && int.Parse(Strength.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Strength", int.Parse(Strength.Text));
+                                cmd.Parameters.AddWithValue("@Strength", CharacterSheetcurrent.strength);
                             else
                                 flag = 1;
 
                             if (int.Parse(Dexterity.Text) >= 0 && int.Parse(Dexterity.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Dexterity", int.Parse(Dexterity.Text));
+                                cmd.Parameters.AddWithValue("@Dexterity", CharacterSheetcurrent.dexterity);
                             else
                                 flag = 1;
 
                             if (int.Parse(Constitution.Text) >= 0 && int.Parse(Constitution.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Constitution", int.Parse(Constitution.Text));
+                                cmd.Parameters.AddWithValue("@Constitution", CharacterSheetcurrent.constitution);
                             else
                                 flag = 1;
 
                             if (int.Parse(Intelligence.Text) >= 0 && int.Parse(Intelligence.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Intelligence", int.Parse(Intelligence.Text));
+                                cmd.Parameters.AddWithValue("@Intelligence", CharacterSheetcurrent.intelligence);
                             else
                                 flag = 1;
 
                             if (int.Parse(Wisdom.Text) >= 0 && int.Parse(Wisdom.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Wisdom", int.Parse(Wisdom.Text));
+                                cmd.Parameters.AddWithValue("@Wisdom", CharacterSheetcurrent.wisdom);
                             else
                                 flag = 1;
 
                             if (int.Parse(Charisma.Text) >= 0 && int.Parse(Charisma.Text) <= 18)
-                                cmd.Parameters.AddWithValue("@Charisma", int.Parse(Charisma.Text));
+                                cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.charisma);
                             else
                                 flag = 1;
-
-                            if (flag == 0)
+                            if (flag != 1)
                             {
-                                cmd.ExecuteNonQuery();
+                                Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
                             }
                             else
-                                Console.WriteLine("One of your stats is either below 0 or above 20, please move it to between this range.");
+                                DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
+                            
                         }
                     }
+                    conn.Close();
                 }
             }
             catch (Exception eSql)
             {
+                DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-            Navigation.PushAsync(new CSheet_Inventory(CharacterSheetcurrent));
+
+            Navigation.PushAsync(new LandingPage());
+
         }
     }
 }

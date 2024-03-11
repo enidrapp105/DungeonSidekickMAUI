@@ -7,7 +7,7 @@ public partial class SelectedClassPage : ContentPage
 {
     int ClassID;
     CharacterSheet characterSheet;
-    string ClassName;
+    int cId;
     /*
      * Function: SelectedClassPage Constructor
      * Author: Kenny Rapp
@@ -43,6 +43,7 @@ public partial class SelectedClassPage : ContentPage
                     ClassStack.BackgroundColor = PrimaryColor;
                     Frame optionalSkillsFrame = new Frame();
                     Frame savingThrowsFrame = new Frame();
+                    cId = selectedClass;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
                         cmd.CommandText = query;
@@ -55,8 +56,10 @@ public partial class SelectedClassPage : ContentPage
                                 Label Class = new Label();
                                 Class.FontSize = 36;
                                 Class.HorizontalTextAlignment = TextAlignment.Center;
-                                Class.TextColor = fontColor;
-                                ClassName = reader.GetString(0);
+
+                                Class.TextColor = (Color)fontColor;
+                                string ClassName = reader.GetString(0);
+
                                 Class.Text = ClassName;
 
                                 Frame frame = new Frame()
@@ -193,8 +196,8 @@ public partial class SelectedClassPage : ContentPage
      */
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.characterclass = ClassID;
-        Navigation.PushAsync(new CSheet(characterSheet));
+        characterSheet.characterclass = cId;
+        Navigation.PushAsync(new CSheet());
     }
 
 }
