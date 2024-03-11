@@ -251,7 +251,7 @@ public partial class MonsterCombat : ContentPage
                 dmgMod = num;
             }
 
-            if (int.TryParse(dmgEntry.Text, out int num2))
+            if (int.TryParse(hitEntry.Text, out int num2))
             {
                 hitMod = num2;
             }
@@ -266,6 +266,7 @@ public partial class MonsterCombat : ContentPage
             DiceRoll roller = new DiceRoll();
             int acRoll = roller.Roll("1d20");
             bool throughAC = false;
+            int total = acRoll + hitMod;
             if (acRoll == 20)
             {
                 throughAC = true;
@@ -276,15 +277,15 @@ public partial class MonsterCombat : ContentPage
                 throughAC = false;
                 await DisplayAlert("Hit Roll", "You rolled a " + acRoll + " and failed to hit the monster", "OK");
             }
-            else if ((acRoll + hitMod) > selectedMonster.AC)
+            else if (total > selectedMonster.AC)
             {
                 throughAC = true;
-                await DisplayAlert("Hit Roll", "You rolled a " + (acRoll + hitMod) + " and got past the monsters AC of " + selectedMonster.AC, "OK");
+                await DisplayAlert("Hit Roll", "You rolled a " + total + " and got past the monsters AC of " + selectedMonster.AC, "OK");
             }
             else
             {
                 throughAC = false;
-                await DisplayAlert("Hit Roll", "You rolled a " + (acRoll + hitMod) + " and fail to get past the monsters AC of " + selectedMonster.AC, "OK");
+                await DisplayAlert("Hit Roll", "You rolled a " + total + " and fail to get past the monsters AC of " + selectedMonster.AC, "OK");
             }
             if (throughAC)
             {

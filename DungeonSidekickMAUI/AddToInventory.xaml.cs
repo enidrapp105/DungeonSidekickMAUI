@@ -117,4 +117,9 @@ public partial class AddToInventory : ContentPage
             inv.UpdateDB();
         }
     }
+
+    private void GoToLanding(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new LandingPage());
+    }
 }
