@@ -210,7 +210,7 @@ public class ImportedCharacterSheet
                         cmd.Parameters.Add("@Acrobatics", SqlDbType.Int).Value = c_Acrobatics;
                         cmd.Parameters.Add("@AnimalHandling", SqlDbType.Int).Value = c_AnimalHandling;
                         cmd.Parameters.Add("@Arcana", SqlDbType.Int).Value = c_Arcana;
-                        cmd.Parameters.Add("@Atheletics", SqlDbType.Int).Value = c_Atheletics;
+                        cmd.Parameters.Add("@Athletics", SqlDbType.Int).Value = c_Athletics; // for some reason this is giving an error???
                         cmd.Parameters.Add("@Deception", SqlDbType.Int).Value = c_Deception;
                         cmd.Parameters.Add("@History", SqlDbType.Int).Value = c_History;
                         cmd.Parameters.Add("@Insight", SqlDbType.Int).Value = c_Insight;
@@ -222,7 +222,7 @@ public class ImportedCharacterSheet
                         cmd.Parameters.Add("@Performance", SqlDbType.Int).Value = c_Performance;
                         cmd.Parameters.Add("@Persuasion", SqlDbType.Int).Value = c_Persuasion;
                         cmd.Parameters.Add("@Religion", SqlDbType.Int).Value = c_Religion;
-                        cmd.Parameters.Add("@SleightOfHand", SqlDbType.Int).Value = c_SleightOfHand;
+                        cmd.Parameters.Add("@Sleight", SqlDbType.Int).Value = c_SleightOfHand;
                         cmd.Parameters.Add("@Stealth", SqlDbType.Int).Value = c_Stealth;
                         cmd.Parameters.Add("@Survival", SqlDbType.Int).Value = c_Survival;
 
@@ -231,6 +231,8 @@ public class ImportedCharacterSheet
                         cmd.Parameters.Add("@CharacterID", SqlDbType.Int).Value = p_CharacterID;
 
                         cmd.ExecuteNonQuery();
+
+                        Debug.WriteLine("done");
                     }
                 }
             }
@@ -240,6 +242,8 @@ public class ImportedCharacterSheet
             //DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
+
+        Save(this);
     }
 
     //constructor
@@ -304,7 +308,7 @@ public class ImportedCharacterSheet
     public int c_Acrobatics { get; set; }
     public int c_AnimalHandling { get; set; }
     public int c_Arcana { get; set; }
-    public int c_Atheletics { get; set; }
+    public int c_Athletics { get; set; }
     public int c_Deception { get; set; }
     public int c_History { get; set; }
     public int c_Insight { get; set; }

@@ -100,7 +100,7 @@ public partial class CSheet_Import : ContentPage
                                 Char.c_Acrobatics = reader.GetInt32(30);
                                 Char.c_AnimalHandling = reader.GetInt32(31);
                                 Char.c_Arcana = reader.GetInt32(32);
-                                Char.c_Atheletics = reader.GetInt32(33);
+                                Char.c_Athletics = reader.GetInt32(33);
                                 Char.c_Deception = reader.GetInt32(34);
                                 Char.c_History = reader.GetInt32(35);
                                 Char.c_Insight = reader.GetInt32(36);

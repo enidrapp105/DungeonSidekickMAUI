@@ -99,7 +99,7 @@ public partial class Modify_Character : ContentPage
         Char.c_Acrobatics = int.Parse(entries[i++].Text);
         Char.c_AnimalHandling = int.Parse(entries[i++].Text);
         Char.c_Arcana = int.Parse(entries[i++].Text);
-        Char.c_Atheletics = int.Parse(entries[i++].Text);
+        Char.c_Athletics = int.Parse(entries[i++].Text);
         Char.c_Deception = int.Parse(entries[i++].Text);
         Char.c_History = int.Parse(entries[i++].Text);
         Char.c_Insight = int.Parse(entries[i++].Text);

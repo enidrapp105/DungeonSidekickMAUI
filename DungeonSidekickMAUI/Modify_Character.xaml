@@ -11,8 +11,8 @@
             <StackLayout x:Name="Sheet" BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
 
             </StackLayout>
-            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Cancel" WidthRequest="400" HorizontalOptions="Center" Clicked="Save"/>
-            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Save" WidthRequest="400" HorizontalOptions="Center" Clicked="Cancel"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Cancel" WidthRequest="400" HorizontalOptions="Center" Clicked="Cancel"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Save" WidthRequest="400" HorizontalOptions="Center" Clicked="Save"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>
