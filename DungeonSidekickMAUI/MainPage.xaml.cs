@@ -6,9 +6,7 @@
         {
             InitializeComponent();
             ((AppShell)Shell.Current).FlyoutIsPresented = true;
-            //User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
-            int userId = Preferences.Default.Get("UserId", 0); // Assuming 0 as the default value for user ID
-            User_Disp.Text = "Welcome " + userId.ToString();
+            User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
         }
 

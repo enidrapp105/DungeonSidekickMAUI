@@ -4,11 +4,15 @@
              x:Class="DungeonSidekickMAUI.Modify_Character"
              Title="Modify_Character">
     <ScrollView>
-        <StackLayout>
-            <Label 
-                Text="Welcome to .NET MAUI!"
-                VerticalOptions="Center" 
-                HorizontalOptions="Center" />
+        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </Frame>
+            <StackLayout x:Name="Sheet" BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+
+            </StackLayout>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Cancel" WidthRequest="400" HorizontalOptions="Center" Clicked="Save"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Save" WidthRequest="400" HorizontalOptions="Center" Clicked="Cancel"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

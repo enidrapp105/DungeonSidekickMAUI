@@ -161,8 +161,13 @@ public class ImportedCharacterSheet
         return p_CharacterID;
     }
 
-    //character flavor text, most likely will have no impact on usability other than for a visual representation.    
     public string? c_Name { get; set; }
+
+    public int c_Class { get; set; } //currently stores an id
+    public int c_Race { get; set; } //currently stores an id
+
+    public int c_Level { get; set; }
+
     public string? c_Background { get; set; } //may have other uses later on
     public string? c_Alignment { get; set; }
     public string? c_PersonalityTraits { get; set; }
@@ -171,33 +176,31 @@ public class ImportedCharacterSheet
     public string? c_Flaws { get; set; }
     public string? c_FeaturesTraits { get; set; }
 
-    //these are the IDs. may also want to swap to string with actual names instead. this depends on how we want to work with the data. 
-    public int c_Equipment { get; set; }
-    public int c_Class { get; set; }
-    public int c_Race { get; set; }
+    public int c_Equipment { get; set; } //currently stores an id
+
 
     //character stats
-    public int c_Str { get; set; }
-    public int c_Dex { get; set; }
-    public int c_Const { get; set; }
-    public int c_Int { get; set; }
-    public int c_Wis { get; set; }
+    public int c_Strength { get; set; }
+    public int c_Dexterity { get; set; }
+    public int c_Constitution { get; set; }
+    public int c_Intelligence { get; set; }
+    public int c_Wisdom { get; set; }
     public int c_Charisma { get; set; }
 
     //character combat stats
-    public int c_CurrHP { get; set; }
-    public int c_TempHP { get; set; }
-    public int c_AC { get; set; }
+    public int c_CurrentHealth { get; set; }
+    public int c_TemporaryHealth { get; set; }
+    public int c_ArmorClass { get; set; }
     public int c_Initiative { get; set; }
     public int c_Speed { get; set; }
     public int c_HitDice { get; set; }
 
     //saves
-    public int c_StrSave { get; set; }
-    public int c_DexSave { get; set; }
-    public int c_ConstSave { get; set; }
-    public int c_IntSave { get; set; }
-    public int c_WisSave { get; set; }
+    public int c_StrengthSave { get; set; }
+    public int c_DexteritySave { get; set; }
+    public int c_ConstitutionSave { get; set; }
+    public int c_IntelligenceSave { get; set; }
+    public int c_WisdomSave { get; set; }
     public int c_CharismaSave { get; set; }
 
     //skills
@@ -224,8 +227,8 @@ public class ImportedCharacterSheet
     //public List<String>? c_Proficiencies;
     //public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
 
-    public int c_PasWis { get; set; }
-    public int c_Level { get; set; }
+    public int c_PassiveWisdom { get; set; }
+
 
     //debateable for keeping
     public int p_UID { get; private set; }

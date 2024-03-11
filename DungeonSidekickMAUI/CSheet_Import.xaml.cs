@@ -78,23 +78,23 @@ public partial class CSheet_Import : ContentPage
                                 Char.c_Flaws = reader.GetString(9);
                                 Char.c_FeaturesTraits = reader.GetString(10);
                                 Char.c_Equipment = reader.GetInt32(11); // may need adjusted
-                                Char.c_Str = reader.GetInt32(12);
-                                Char.c_Dex = reader.GetInt32(13);
-                                Char.c_Const = reader.GetInt32(14);
-                                Char.c_Int = reader.GetInt32(15);
-                                Char.c_Wis = reader.GetInt32(16);
+                                Char.c_Strength = reader.GetInt32(12);
+                                Char.c_Dexterity = reader.GetInt32(13);
+                                Char.c_Constitution = reader.GetInt32(14);
+                                Char.c_Intelligence = reader.GetInt32(15);
+                                Char.c_Wisdom = reader.GetInt32(16);
                                 Char.c_Charisma = reader.GetInt32(17);
-                                Char.c_CurrHP = reader.GetInt32(18);
-                                Char.c_TempHP = reader.GetInt32(19);
-                                Char.c_AC = reader.GetInt32(20);
+                                Char.c_CurrentHealth = reader.GetInt32(18);
+                                Char.c_TemporaryHealth = reader.GetInt32(19);
+                                Char.c_ArmorClass = reader.GetInt32(20);
                                 Char.c_Initiative = reader.GetInt32(21);
                                 Char.c_Speed = reader.GetInt32(22);
                                 Char.c_HitDice = reader.GetInt32(23);
-                                Char.c_StrSave = reader.GetInt32(24);
-                                Char.c_DexSave = reader.GetInt32(25);
-                                Char.c_ConstSave = reader.GetInt32(26);
-                                Char.c_IntSave = reader.GetInt32(27);
-                                Char.c_WisSave = reader.GetInt32(28);
+                                Char.c_StrengthSave = reader.GetInt32(24);
+                                Char.c_DexteritySave = reader.GetInt32(25);
+                                Char.c_ConstitutionSave = reader.GetInt32(26);
+                                Char.c_IntelligenceSave = reader.GetInt32(27);
+                                Char.c_WisdomSave = reader.GetInt32(28);
                                 Char.c_CharismaSave = reader.GetInt32(29);
                                 Char.c_Acrobatics = reader.GetInt32(30);
                                 Char.c_AnimalHandling = reader.GetInt32(31);
@@ -114,7 +114,7 @@ public partial class CSheet_Import : ContentPage
                                 Char.c_SleightOfHand = reader.GetInt32(45);
                                 Char.c_Stealth = reader.GetInt32(46);
                                 Char.c_Survival = reader.GetInt32(47);
-                                Char.c_PasWis = reader.GetInt32(48);
+                                Char.c_PassiveWisdom = reader.GetInt32(48);
                                 Char.c_Level = reader.GetInt32(50);
 
                                 //adds new character to character list MIGHT NOT BE NEEDED
