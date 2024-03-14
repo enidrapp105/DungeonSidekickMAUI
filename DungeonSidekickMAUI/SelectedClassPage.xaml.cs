@@ -69,6 +69,7 @@ public partial class SelectedClassPage : ContentPage
                                     CornerRadius = 0,
                                     Content = Class
                                 };
+                                characterSheet.className = ClassName;
                                 Label HitDie = new Label();
                                 HitDie.HorizontalTextAlignment = TextAlignment.Center;
                                 HitDie.TextColor = fontColor;

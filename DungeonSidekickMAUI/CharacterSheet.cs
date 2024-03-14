@@ -38,6 +38,8 @@ namespace DungeonSidekickMAUI
         public string? charactername { get; set; }
         public int race { get; set; }
         public int characterclass { get; set; }
+        public string? raceName { get; set; }
+        public string? className { get; set; }
         public string? background { get; set; }
         public string? alignment { get; set; }
         public string? personalitytraits { get; set; }

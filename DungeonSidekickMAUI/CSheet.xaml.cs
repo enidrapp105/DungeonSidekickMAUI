@@ -22,13 +22,13 @@ public partial class CSheet : ContentPage
     {
         InitializeComponent();
         LoadCharacterSheetPage(CharacterSheetcurrent);
-        if (CharacterSheetcurrent.characterclass != null)
+        if (CharacterSheetcurrent.className != null)
         {
-            ClassButton.Text = "Selected Class: " + CharacterSheetcurrent.characterclass;
+            ClassButton.Text = "Selected Class: " + CharacterSheetcurrent.className;
         }
-        if (CharacterSheetcurrent.race != null)
+        if (CharacterSheetcurrent.raceName != null)
         {
-            RaceButton.Text = "Selected Race: " + CharacterSheetcurrent.race;
+            RaceButton.Text = "Selected Race: " + CharacterSheetcurrent.raceName;
         }
     }
     /* Function Name: LoadCharacterSheetPage

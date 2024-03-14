@@ -4,7 +4,9 @@
              x:Class="DungeonSidekickMAUI.SelectedRacePage">
 
     <ContentPage.Content>
-        <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
-        </StackLayout>
+        <ScrollView>
+            <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

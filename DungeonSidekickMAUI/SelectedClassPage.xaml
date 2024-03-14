@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectedClassPage">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
-            <!--<Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+        <ScrollView>
+            <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
+                <!--<Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassDescLabel"/>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassHitDieLabel"/>
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="400" HorizontalOptions="Center" Clicked="Submit"/>-->
-        </StackLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
