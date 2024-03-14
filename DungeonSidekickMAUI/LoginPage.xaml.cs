@@ -31,13 +31,12 @@ public partial class LoginPage : ContentPage
             {
                 Navigation.PushAsync(new Info_For_Stats());
             }
+            //Navigation.PushAsync(new MainPage());
         }
 		else
 		{
 			DisplayAlert("Your username or password are incorrect", "Please try a different username or password", "Ok");
 		}
-        
-        
     }
 	private void signupButtonClicked(object sender, EventArgs e) 
 	{

@@ -19,7 +19,8 @@
         </Tab>
     </TabBar>
     <ShellContent
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:CSheet_Import}"
+        
         Route="MainPage"/>
 
 </Shell>

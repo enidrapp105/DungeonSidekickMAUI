@@ -15,6 +15,7 @@
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Create a Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Create_Character"/>
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Change Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Character_Import"/>
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Modify Current Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Modify_Character"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Go To Landing Page" WidthRequest="400" HorizontalOptions="Center" Clicked="Landing_Page"/>
 
             <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
 

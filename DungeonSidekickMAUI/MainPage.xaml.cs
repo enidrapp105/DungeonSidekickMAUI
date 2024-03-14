@@ -5,7 +5,7 @@
         public MainPage()
         {
             InitializeComponent();
-            ((AppShell)Shell.Current).FlyoutIsPresented = true;
+            //((AppShell)Shell.Current).FlyoutIsPresented = true;
             CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
@@ -41,6 +41,10 @@
         private void Settings_Page(object sender, EventArgs e)
         {
             Navigation.PushAsync(new Settings_Page());
+        }
+        private void Landing_Page(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new LandingPage());
         }
 
     }

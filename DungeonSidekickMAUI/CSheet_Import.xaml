@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CSheet_Import">
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout>
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character Selection" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
-            <ScrollView>
+            
                 <StackLayout x:Name="CharacterPanel" BackgroundColor="{DynamicResource PrimaryColor}">
 
 
@@ -15,7 +16,8 @@
                     <!--PName = Player Name, CName = Character Name-->
                     <!--<Button BackgroundColor="{DynamicResource AccessoryColor}" TextColor="{DynamicResource FontC}" Text="Import Sheet" Clicked="ImportSheet"/>-->
                 </StackLayout>
-            </ScrollView>
+            
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
