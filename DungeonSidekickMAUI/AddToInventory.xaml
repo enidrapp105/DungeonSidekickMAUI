@@ -16,7 +16,7 @@
                     <DataTemplate>
                         <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}">
                             <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
-                                    Clicked="AddItems" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40" />
+                                    Clicked="AddItems" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40"/>
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
