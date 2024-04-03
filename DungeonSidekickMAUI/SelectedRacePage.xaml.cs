@@ -136,7 +136,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
+                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
@@ -201,7 +201,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
+                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {

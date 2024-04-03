@@ -23,8 +23,8 @@ namespace DungeonSidekickMAUI
         {
             // Have to get the key and iv from *somewhere.*
 
-            string encryptionKey = EncryptionGrabber.GetEncryptionKey();
-            string encryptionIV = EncryptionGrabber.GetEncryptionIV();
+            encryptionKey = EncryptionGrabber.GetEncryptionKey();
+            encryptionIV = EncryptionGrabber.GetEncryptionIV();
             connectionString = Encryption.Encrypt(EncryptionGrabber.GetConnectionString(), encryptionKey, encryptionIV);
         }
 

@@ -15,7 +15,8 @@ namespace DungeonSidekickMAUI
         static EncryptionGrabber()
         {
             var basePath = AppContext.BaseDirectory; // This allows us to find the file without hardcoding a path in.
-            var builder = new ConfigurationBuilder().SetBasePath(basePath).AddJsonFile("secrets.json", optional: false, reloadOnChange: true);
+            var configFilePath = Path.Combine(basePath, "secrets.json");
+            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile(configFilePath, optional: false, reloadOnChange: true);
 
             Configuration = builder.Build();
         }

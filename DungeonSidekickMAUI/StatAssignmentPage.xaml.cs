@@ -210,7 +210,7 @@ public partial class StatAssignmentPage : ContentPage
     }
     public void AssignStatsbyclass(object sender, EventArgs e)
     {
-        Connection connection = Connection.connectionSingleton;
+        Connection connection1 = Connection.connectionSingleton;
         string querystring = "SELECT PreferredStat1, PreferredStat2, PreferredStat3, PreferredStat4, PreferredStat5, PreferredStat6 " +
             "FROM dbo.ClassLookup " +
             "WHERE ClassID = @ClassID";
@@ -218,7 +218,7 @@ public partial class StatAssignmentPage : ContentPage
         List<string> preferredstatsstrings = new List<string>();
         try
         {
-            using (SqlConnection connection = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection connection = new SqlConnection(Encryption.Decrypt(connection1.connectionString, connection1.encryptionKey, connection1.encryptionIV)))
             {
                 // Create a SqlCommand object with the query string and connection
                 using (SqlCommand command = new SqlCommand(querystring, connection))

@@ -21,7 +21,7 @@ public partial class SelectedClassPage : ContentPage
         this.characterSheet = characterSheet;
         InitializeComponent();
 
-        Connection connection = Connection.connectionString;
+        Connection connection = Connection.connectionSingleton;
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
@@ -122,7 +122,7 @@ public partial class SelectedClassPage : ContentPage
                                 try
                                 {
                                     
-                                    using (SqlConnection innerConn = new SqlConnection(connectionString))
+                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {

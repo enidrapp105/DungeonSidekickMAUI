@@ -165,7 +165,7 @@ namespace DungeonSidekickMAUI
         {
 
             Connection connection = Connection.connectionSingleton;
-            string query = "INSERT INTO dbo.Users (Username,SaltedPassword, Salt)" +
+            string query = "INSERT INTO dbo.Users (Username, SaltedPassword, Salt)" +
                 "VALUES (@username,@saltedpassword,@salt);";
 
             try
