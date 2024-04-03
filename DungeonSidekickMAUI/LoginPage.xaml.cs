@@ -54,13 +54,13 @@ public partial class LoginPage : ContentPage
     private int Character_Count()
     {
         int result = 0;
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        Connection connection = Connection.connectionSingleton;
 		string query = "Select CharacterID FROM dbo.CharacterSheet WHERE UID = @UID;";
         int UserId = Preferences.Default.Get("UserId", -1);
 
         try
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)

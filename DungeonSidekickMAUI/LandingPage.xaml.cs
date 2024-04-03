@@ -28,14 +28,14 @@ public partial class LandingPage : ContentPage
 
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        Connection connection = Connection.connectionSingleton;
         foreach (var weapon in inv.Weapons)
         {
             string query = "SELECT name FROM dbo.Weapon" +
             " WHERE WeaponID = @Id;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -93,7 +93,7 @@ public partial class LandingPage : ContentPage
             " WHERE ArmorID = @Id;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -152,7 +152,7 @@ public partial class LandingPage : ContentPage
             " WHERE GearId = @Id;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
