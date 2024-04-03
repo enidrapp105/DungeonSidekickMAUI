@@ -24,7 +24,7 @@ namespace DungeonSidekickMAUI
         private const int iterCount = 10000;
         private const int saltSize = 16;
         private const int numBytesRequested = 32;
-        private const string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        //private const string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         public Password_Hasher(string username)
         {
             this.username = username;
@@ -64,12 +64,13 @@ namespace DungeonSidekickMAUI
         */
         public bool VerifyHashedPassword(string providedPassword)
         {
+            Connection connection = Connection.connectionSingleton;
             string query = "SELECT SaltedPassword FROM dbo.Users" +
                 " WHERE Username =  @Username;";
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -169,7 +170,7 @@ namespace DungeonSidekickMAUI
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -205,7 +206,7 @@ namespace DungeonSidekickMAUI
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)

@@ -30,7 +30,7 @@ namespace DungeonSidekickMAUI
 
         // The actual reason this class was made.
         public string? connectionString;
-        protected string? encryptionKey;
-        protected string? encryptionIV;
+        public string? encryptionKey;
+        public string? encryptionIV;
     }
 }

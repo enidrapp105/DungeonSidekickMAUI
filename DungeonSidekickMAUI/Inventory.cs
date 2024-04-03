@@ -17,7 +17,7 @@ namespace DungeonSidekickMAUI
     public class Inventory
     {
         // Making the string a private member so I don't have to keep instantiating it.
-        private string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        //private string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
 
         public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
@@ -39,6 +39,7 @@ namespace DungeonSidekickMAUI
         }
         public void PullItems() // Query the database and populate the list responsible for storing the data found in the Items table. Shows your items + quantities.
         {
+            Connection connection = Connection.connectionSingleton;
             string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
             " WHERE CharacterID = @CharacterID";
 
@@ -47,7 +48,7 @@ namespace DungeonSidekickMAUI
             Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -136,12 +137,12 @@ namespace DungeonSidekickMAUI
             }
             else // EType was valid, proceed.
             {
-
+                Connection connection = Connection.connectionSingleton;
                 string query = "DELETE FROM dbo.Inventory" +
                     " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
@@ -167,11 +168,12 @@ namespace DungeonSidekickMAUI
 
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
+            Connection connection = Connection.connectionSingleton;
             string query = "INSERT INTO dbo.Inventory(ItemID, Quantity, eTypeID, CharacterID)" +
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
