@@ -163,8 +163,8 @@ namespace DungeonSidekickMAUI
         */
         private static void QueryUserData(string username, string salted_password, string salt)
         {
-            
 
+            Connection connection = Connection.connectionSingleton;
             string query = "INSERT INTO dbo.Users (Username,SaltedPassword, Salt)" +
                 "VALUES (@username,@saltedpassword,@salt);";
 
@@ -200,7 +200,7 @@ namespace DungeonSidekickMAUI
         private void UpdateUserId()
         {
 
-
+            Connection connection = Connection.connectionSingleton;
             string query = "SELECT UID from dbo.Users" +
                 " WHERE Username = @Username";
 

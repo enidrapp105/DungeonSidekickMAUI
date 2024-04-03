@@ -16,7 +16,7 @@ public partial class SelectedRacePage : ContentPage
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        Connection connection = Connection.connectionSingleton;
         RaceID = selectedRace;
 
         string query = "SELECT Race, Description, MoveSpeed, Age, Size, SizeDescription, Languages, LanguageDescription FROM dbo.RaceLookup" +
@@ -27,7 +27,7 @@ public partial class SelectedRacePage : ContentPage
         var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
         try
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)

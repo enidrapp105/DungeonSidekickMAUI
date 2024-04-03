@@ -32,7 +32,7 @@ public partial class CSheet_Import : ContentPage
     private void ImportSheet(/*object sender, EventArgs e*/)
     {
         List<ImportedCharacterSheet> c_List = new List<ImportedCharacterSheet>(); //might be able to remove
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        Connection connection = Connection.connectionSingleton;
 
         string query = "SELECT CharacterID, RaceID, ClassID, CharacterName, Background, Alignment, PersonalityTraits, Ideals, Bonds, Flaws," +
             " FeaturesTraits, Equipment, Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma, CurrentHP, TempHP, AC, Initiative," +
@@ -47,7 +47,7 @@ public partial class CSheet_Import : ContentPage
         if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)

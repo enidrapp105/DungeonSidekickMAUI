@@ -21,12 +21,12 @@ public partial class SelectedClassPage : ContentPage
         this.characterSheet = characterSheet;
         InitializeComponent();
 
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False; MultipleActiveResultSets=true;";
+        Connection connection = Connection.connectionString;
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
