@@ -12,8 +12,8 @@ namespace DungeonSidekickMAUI
     /*
      * Class: AddSpellViewModel
      * Author: Anthony Rielly
-     * Purpose: Create a bindable observable collection that stores UserSpell
-     * last Modified: 2/22/2024 by Anthony Rielly
+     * Purpose: Create a bindable observable collection that stores Spells
+     * last Modified: 04/06/2024 by Anthony Rielly
      */
     public class AddSpellViewModel : BindableObject
     {
@@ -40,7 +40,7 @@ namespace DungeonSidekickMAUI
          * Class: AddSpellViewModel
          * Author: Anthony Rielly
          * Purpose: Pulls from the DB all of the Spells and populates the observable collection
-         * last Modified: 2/22/2024 by Anthony Rielly
+         * last Modified: 04/06/2024 by Anthony Rielly
          */
         public AddSpellViewModel()
         {
