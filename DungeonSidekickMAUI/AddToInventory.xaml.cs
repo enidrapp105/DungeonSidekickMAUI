@@ -108,13 +108,14 @@ public partial class AddToInventory : ContentPage
 
         // waiting for quantity to be entered
 
-        Inventory inv = new Inventory(); 
+        // Grabbing the character singleton to add to its inventory.
+        CharacterSheet character = CharacterSheet.Instance;
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            inv.AddItem(id, quant, eTypeId);
-            inv.UpdateDB();
+            character.inv.AddItem(id, quant, eTypeId);
+            character.inv.UpdateDB();
         }
     }
 

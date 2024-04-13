@@ -77,43 +77,44 @@ public partial class MonsterCombat : ContentPage
         }
     }
 
-    private void PullDiceValue()
-    {
-        int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
-        if (WeaponID == -1) return;
-        string query = "SELECT damageDice FROM dbo.Weapon" +
-            " WHERE WeaponID = @Id;";
-        Connection connection = Connection.connectionSingleton;
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
-            {
-                conn.Open();
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = query;
+    //private void PullDiceValue() I may have removed the need for this function...
+    //{
+    //    CharacterSheet character = CharacterSheet.Instance;
+    //    int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
+    //    if (WeaponID == -1) return;
+    //    string query = "SELECT damageDice FROM dbo.Weapon" +
+    //        " WHERE WeaponID = @Id;";
+    //    Connection connection = Connection.connectionSingleton;
+    //    try
+    //    {
+    //        using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+    //        {
+    //            conn.Open();
+    //            if (conn.State == System.Data.ConnectionState.Open)
+    //            {
+    //                using (SqlCommand cmd = conn.CreateCommand())
+    //                {
+    //                    cmd.CommandText = query;
 
-                        // grabs ID from weapon list
-                        cmd.Parameters.AddWithValue("@Id", WeaponID);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                dice = reader.GetString(0);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception eSql)
-        {
-            DisplayAlert("Error!", eSql.Message, "OK");
-            Debug.WriteLine("Exception: " + eSql.Message);
-        }
-    }
+    //                    // grabs ID from weapon list
+    //                    cmd.Parameters.AddWithValue("@Id", WeaponID);
+    //                    using (SqlDataReader reader = cmd.ExecuteReader())
+    //                    {
+    //                        while (reader.Read())
+    //                        {
+    //                            dice = reader.GetString(0);
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    catch (Exception eSql)
+    //    {
+    //        DisplayAlert("Error!", eSql.Message, "OK");
+    //        Debug.WriteLine("Exception: " + eSql.Message);
+    //    }
+    //}
 
 
     private async void CombatPopup()
@@ -261,7 +262,7 @@ public partial class MonsterCombat : ContentPage
                 hitMod *= -1;
             }
             
-            PullDiceValue();
+            //PullDiceValue(); Why?
             //await DisplayAlert("Dice", dice, "OK");
             DiceRoll roller = new DiceRoll();
             int acRoll = roller.Roll("1d20");

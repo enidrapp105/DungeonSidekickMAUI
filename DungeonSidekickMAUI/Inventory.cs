@@ -12,13 +12,10 @@ namespace DungeonSidekickMAUI
      * Class: Inventory
      * Author: Thomas Hewitt
      * Purpose: Handling all tasks related to the inventory table.
-     * last Modified: 2/18/2024 by Thomas Hewitt
+     * last Modified: 4/13/2024 by Thomas Hewitt
      */
     public class Inventory
     {
-        // Making the string a private member so I don't have to keep instantiating it.
-        //private string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-
         public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.

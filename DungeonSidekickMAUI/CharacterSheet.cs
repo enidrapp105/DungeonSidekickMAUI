@@ -1,5 +1,8 @@
-﻿using System;
+﻿using LocalAuthentication;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +59,10 @@ namespace DungeonSidekickMAUI
         public int wisdom { get; set; }
         public int charisma { get; set; }
         public bool exists { get; set; }
+        public Inventory inv { get; set; } // Maybe make this a singleton? No, that would break too many things.
+        public bool WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
+        public int WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
+        public string damageDice { get; set; }
         /*
          * Function: Purge
          * Author: Brendon Williams
@@ -83,7 +90,58 @@ namespace DungeonSidekickMAUI
             wisdom = 0;
             charisma = 0;
             exists = false;
+            damageDice = 0;
+            inv = new Inventory();
         }
+        /*
+         * Function: Equip Item
+         * Author: Thomas Hewitt
+         * Purpose: Equips the specified item to the current character, further modifying their stats.
+         * last Modified : 4/13/2024 8:52 am
+         */
+        public void EquipItem(int ID, int ETypeID)
+        {
+            if(ETypeID == 0) // Weapon Check
+            {
+                WEquipped = true;
+                WEquippedID = ID;
+                string query = "SELECT damageDice FROM dbo.Weapon" +
+                " WHERE WeaponID = @Id;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        damageDice = reader.GetString(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+
+
+        }
+
     }
 
 }
