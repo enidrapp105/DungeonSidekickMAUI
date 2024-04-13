@@ -21,7 +21,7 @@ namespace DungeonSidekickMAUI
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
             m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
 
-            Items = new List<List<int>>();
+            Gear = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
             //PullItems(); // Should pull what the character currently has in their inventory from the DB.
@@ -30,7 +30,7 @@ namespace DungeonSidekickMAUI
         // Just clears the lists, used when adding items
         public void ClearItems()
         {
-            Items.Clear();
+            Gear.Clear();
             Weapons.Clear();
             Equipment.Clear();
         }
@@ -41,6 +41,7 @@ namespace DungeonSidekickMAUI
             " WHERE CharacterID = @CharacterID";
 
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
+            Gear.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             Weapons.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
@@ -66,9 +67,9 @@ namespace DungeonSidekickMAUI
                                     temp.Add(reader.GetInt32(2));
 
                                     // These if statements will help determine what type of item we are storing. Should store the data in the correct lists.
-                                    if (temp[2] == ITEM)
+                                    if (temp[2] == GEAR)
                                     {
-                                        Items.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
+                                        Gear.Add(temp); // Puts the list of data into Items. This makes UpdateDB easier, in theory.
                                     }
                                     else if (temp[2] == WEAPON)
                                     {
@@ -109,9 +110,9 @@ namespace DungeonSidekickMAUI
                 temp.Add(Quantity);
 
                 // Checking which list to put the data into.
-                if (ETypeID == ITEM)
+                if (ETypeID == GEAR)
                 {
-                    Items.Add(temp);
+                    Gear.Add(temp);
                 }
 
                 else if(ETypeID == WEAPON)
@@ -126,7 +127,7 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void RemoveItem(int ItemID, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
+        public void RemoveEquipment(int ItemID, int ETypeID) // Incoming ETypeID is expected to be 0, 1, or 2.
         {
             if (ETypeID < 0 || ETypeID > 2) // Instant fail, someone gave the wrong values.
             {
@@ -134,6 +135,41 @@ namespace DungeonSidekickMAUI
             }
             else // EType was valid, proceed.
             {
+                switch(ETypeID)
+                {
+                    case GEAR:
+                        for (int i = 0; i < Gear.Count(); ++i)
+                        {
+                            if (Gear[i][0] == ItemID)
+                            {
+                                Gear[i].Clear();
+                            }
+                        }
+                        break;
+
+                    case WEAPON:
+                        for (int i = 0; i < Weapons.Count(); ++i)
+                        {
+                            if (Weapons[i][0] == ItemID)
+                            {
+                                Weapons[i].Clear();
+                            }
+                        }
+                        break;
+
+                    case EQUIPMENT:
+                        for (int i = 0; i < Equipment.Count(); ++i)
+                        {
+                            if (Equipment[i][0] == ItemID)
+                            {
+                                Equipment[i].Clear();
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
                 Connection connection = Connection.connectionSingleton;
                 string query = "DELETE FROM dbo.Inventory" +
                     " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
@@ -163,6 +199,42 @@ namespace DungeonSidekickMAUI
             }
         }
 
+        // Specifically to remove *items*.
+        public void RemoveItem(int ItemID)
+        {
+            Connection connection = Connection.connectionSingleton;
+            string query = "DELETE FROM dbo.Inventory" +
+                " WHERE ItemID = @ItemID AND CharacterID = @CharacterID;";
+            for(int i = 0; i < Items.Count(); ++i)
+            {
+                if (Items[i][0] == ItemID)
+                {
+                    Items[i].Clear(); // Surely this won't cause problems later on.
+                }
+            }
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                            cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
             Connection connection = Connection.connectionSingleton;
@@ -179,13 +251,23 @@ namespace DungeonSidekickMAUI
                         {
                             cmd.CommandText = query;
                             cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
-                            if (Items.Count > 0) // Checks if Items is empty. If not, proceed.
+                            if(Items.Count > 0) // Checks if Items is empty. If not, proceed.
                             {
-                                cmd.Parameters.AddWithValue("@Etype", ITEM);
+                                cmd.Parameters.AddWithValue("@Etype", null);
                                 foreach (List<int> item in Items) // Should iterate through every element of Items and correctly input the necessary data into the query.
                                 {
                                     cmd.Parameters.AddWithValue("@ItemID", item[0]);
                                     cmd.Parameters.AddWithValue("@Quantity", item[1]);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            if (Gear.Count > 0) // Checks if Gear is empty. If not, proceed.
+                            {
+                                cmd.Parameters.AddWithValue("@Etype", GEAR);
+                                foreach (List<int> gear in Gear) // Should iterate through every element of Gear and correctly input the necessary data into the query.
+                                {
+                                    cmd.Parameters.AddWithValue("@ItemID", gear[0]);
+                                    cmd.Parameters.AddWithValue("@Quantity", gear[1]);
                                     cmd.ExecuteNonQuery();
                                 }
                             }
@@ -226,7 +308,9 @@ namespace DungeonSidekickMAUI
         //***************************
         public int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
 
-        public List<List<int>> Items { get; set; } // Stores the data of the Items table. Reduces the number of queries we'll need to use.
+        public List<List<int>> Items { get; set; } // Need to figure out how I'm going to make this work.
+
+        public List<List<int>> Gear { get; set; } // Stores the data of the Gear table. Reduces the number of queries we'll need to use.
 
         public List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
 
@@ -235,7 +319,7 @@ namespace DungeonSidekickMAUI
         // These lable the ETypeID we use in the DB.
         public const int WEAPON = 0;
         public const int EQUIPMENT = 1;
-        public const int ITEM = 2;
+        public const int GEAR = 2;
 
     }
 }

@@ -62,7 +62,9 @@ namespace DungeonSidekickMAUI
         public Inventory inv { get; set; } // Maybe make this a singleton? No, that would break too many things.
         public bool WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
         public int WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
-        public string damageDice { get; set; }
+        public string? damageDice { get; set; }
+        public bool EEquipped { get; set; }
+        public int EEquippedID { get; set; }
         /*
          * Function: Purge
          * Author: Brendon Williams
@@ -90,7 +92,7 @@ namespace DungeonSidekickMAUI
             wisdom = 0;
             charisma = 0;
             exists = false;
-            damageDice = 0;
+            damageDice = null;
             inv = new Inventory();
         }
         /*
@@ -107,6 +109,44 @@ namespace DungeonSidekickMAUI
                 WEquippedID = ID;
                 string query = "SELECT damageDice FROM dbo.Weapon" +
                 " WHERE WeaponID = @Id;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        damageDice = reader.GetString(0);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+
+            if (ETypeID == 1) // Equipment Check
+            {
+                EEquipped = true;
+                EEquippedID = ID;
+                string query = "SELECT damageDice FROM dbo.Gear" +
+                " WHERE GearID = @Id;";
                 Connection connection = Connection.connectionSingleton;
                 try
                 {
