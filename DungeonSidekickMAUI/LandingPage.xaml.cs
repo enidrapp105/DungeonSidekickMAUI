@@ -6,13 +6,18 @@ public partial class LandingPage : ContentPage
     CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
     DiceRoll diceroller;
     Inventory inv;
+    List<string> statusnames;
+    List<string> statusdescriptions;
+    HashSet<string> existingstatuses;
+    // Allows us to use dynamic colors when creating labels, buttons, etc in this class
+    Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+    Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+    Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+    Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+
     public LandingPage()
 	{
-        // Allows us to use dynamic colors when creating labels, buttons, etc in this function
-        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
-        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
-        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+       
 
         InitializeComponent();
         diceroller = new DiceRoll();
@@ -28,7 +33,34 @@ public partial class LandingPage : ContentPage
 
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
+
         Connection connection = Connection.connectionSingleton;
+        statusnames = new List<string>();
+        statusdescriptions = new List<string>();
+        existingstatuses = new HashSet<string>();
+
+        using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+        {
+            string sqlQuery = "SELECT name, description FROM Conditions;";
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string name = reader["name"].ToString();
+                string description = reader["description"].ToString();
+
+                statusnames.Add(name);
+                statusdescriptions.Add(description);
+            }
+
+            reader.Close();
+        }
+        StatusEffectPicker.ItemsSource = statusnames;
         foreach (var weapon in inv.Weapons)
         {
             string query = "SELECT name FROM dbo.Weapon" +
@@ -207,6 +239,54 @@ public partial class LandingPage : ContentPage
         }
     }
 
+    private async void AddEffectButtonClicked(object sender, EventArgs e)
+    {
+        if (StatusEffectPicker.SelectedItem == null)
+        {
+            await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
+            return;
+        }
+        String selectedeffect = StatusEffectPicker.SelectedItem.ToString();
+
+        int index = statusnames.IndexOf(selectedeffect);
+        if (existingstatuses.Add(selectedeffect))
+        {
+            if (index >= 0 && index < statusdescriptions.Count)
+            {
+                string description = statusdescriptions[index];
+                Label effectLabel = new Label
+                {
+                    Text = $"{selectedeffect}: {description}",
+                    TextColor = fontColor,
+                    BackgroundColor = PrimaryColor,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+
+                Button removeButton = new Button
+                {
+                    Text = "Remove",
+                    BackgroundColor = SecondaryColor,
+                    TextColor = fontColor,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+                removeButton.Clicked += (s, args) =>
+                {
+                    statusstack.Children.Remove(effectLabel);
+                    statusstack.Children.Remove(removeButton);
+                    existingstatuses.Remove(selectedeffect);
+                };
+
+                statusstack.Children.Add(effectLabel);
+                statusstack.Children.Add(removeButton);
+            }
+        }
+        else
+        {
+            await DisplayAlert("Effect already present", "Please select a different effect", "Ok");
+            return;
+        }
+
+    }
     private async void RemoveButton(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is UserItem userItem)
