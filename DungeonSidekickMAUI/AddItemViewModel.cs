@@ -59,13 +59,12 @@ public class AddItemViewModel : BindableObject
         };
 
         // hide connection string in the future
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         string query = "SELECT name, eTypeId, WeaponId FROM dbo.Weapon";
-        
+        Connection connection = Connection.connectionSingleton;
         // open the connection and pull the data
         try
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
