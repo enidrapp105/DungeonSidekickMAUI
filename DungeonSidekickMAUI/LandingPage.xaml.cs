@@ -275,6 +275,7 @@ public partial class LandingPage : ContentPage
                 {
                     statusstack.Children.Remove(effectLabel);
                     statusstack.Children.Remove(removeButton);
+                    existingstatuses.Remove(selectedeffect);
                 };
 
                 statusstack.Children.Add(effectLabel);
