@@ -6,17 +6,18 @@ public partial class LandingPage : ContentPage
     CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
     DiceRoll diceroller;
     Inventory inv;
-    List<string> names;
-    List<string> descriptions;
+    List<string> statusnames;
+    List<string> statusdescriptions;
     HashSet<string> existingstatuses;
+    // Allows us to use dynamic colors when creating labels, buttons, etc in this class
+    Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+    Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+    Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+    Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
     public LandingPage()
 	{
-        // Allows us to use dynamic colors when creating labels, buttons, etc in this function
-        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
-        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
-        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+       
 
         InitializeComponent();
         diceroller = new DiceRoll();
@@ -33,8 +34,8 @@ public partial class LandingPage : ContentPage
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        names = new List<string>();
-        descriptions = new List<string>();
+        stausnames = new List<string>();
+        statusdescriptions = new List<string>();
         existingstatuses = new HashSet<string>();
 
         using (SqlConnection connection = new SqlConnection(connectionString))
@@ -239,10 +240,6 @@ public partial class LandingPage : ContentPage
 
     private async void AddEffectButtonClicked(object sender, EventArgs e)
     {
-        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
-        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
-        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
         if (StatusEffectPicker.SelectedItem == null)
         {
             await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
@@ -250,12 +247,12 @@ public partial class LandingPage : ContentPage
         }
         String selectedeffect = StatusEffectPicker.SelectedItem.ToString();
 
-        int index = names.IndexOf(selectedeffect);
+        int index = statusnames.IndexOf(selectedeffect);
         if (existingstatuses.Add(selectedeffect))
         {
-            if (index >= 0 && index < descriptions.Count)
+            if (index >= 0 && index < statusdescriptions.Count)
             {
-                string description = descriptions[index];
+                string description = statusdescriptions[index];
                 Label effectLabel = new Label
                 {
                     Text = $"{selectedeffect}: {description}",
