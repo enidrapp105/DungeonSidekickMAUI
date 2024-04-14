@@ -34,7 +34,7 @@ public partial class LandingPage : ContentPage
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        stausnames = new List<string>();
+        statusnames = new List<string>();
         statusdescriptions = new List<string>();
         existingstatuses = new HashSet<string>();
 
@@ -53,13 +53,13 @@ public partial class LandingPage : ContentPage
                 string name = reader["name"].ToString();
                 string description = reader["description"].ToString();
 
-                names.Add(name);
-                descriptions.Add(description);
+                statusnames.Add(name);
+                statusdescriptions.Add(description);
             }
 
             reader.Close();
         }
-        StatusEffectPicker.ItemsSource = names;
+        StatusEffectPicker.ItemsSource = statusnames;
         foreach (var weapon in inv.Weapons)
         {
             string query = "SELECT name FROM dbo.Weapon" +
