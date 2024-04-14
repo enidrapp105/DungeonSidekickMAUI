@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.CombatSelector">
+    <VerticalStackLayout>
+        <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0" Grid.Row="0" Grid.Column="2">
+            <!--This label handles the title-->
+            <Label Text="What type of combat?" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp" Grid.Row="0" Grid.Column="1"/>
+        </Frame>
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Physical Weapon Combat" Clicked="NavigateToPCombat" WidthRequest="400" HorizontalOptions="Center"/>
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Spell Casting Combat" Clicked="NavigateToSCombat" WidthRequest="400" HorizontalOptions="Center"/>
+    </VerticalStackLayout>
+</ContentPage>
