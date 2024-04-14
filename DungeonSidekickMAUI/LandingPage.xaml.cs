@@ -6,6 +6,10 @@ public partial class LandingPage : ContentPage
     CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
     DiceRoll diceroller;
     Inventory inv;
+    List<string> names;
+    List<string> descriptions;
+    HashSet<string> existingstatuses;
+
     public LandingPage()
 	{
         // Allows us to use dynamic colors when creating labels, buttons, etc in this function
@@ -29,6 +33,32 @@ public partial class LandingPage : ContentPage
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        names = new List<string>();
+        descriptions = new List<string>();
+        existingstatuses = new HashSet<string>();
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            string sqlQuery = "SELECT name, description FROM Conditions;";
+
+            SqlCommand command = new SqlCommand(sqlQuery, connection);
+
+            connection.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string name = reader["name"].ToString();
+                string description = reader["description"].ToString();
+
+                names.Add(name);
+                descriptions.Add(description);
+            }
+
+            reader.Close();
+        }
+        StatusEffectPicker.ItemsSource = names;
         foreach (var weapon in inv.Weapons)
         {
             string query = "SELECT name FROM dbo.Weapon" +
@@ -207,6 +237,57 @@ public partial class LandingPage : ContentPage
         }
     }
 
+    private async void AddEffectButtonClicked(object sender, EventArgs e)
+    {
+        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+        if (StatusEffectPicker.SelectedItem == null)
+        {
+            await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
+            return;
+        }
+        String selectedeffect = StatusEffectPicker.SelectedItem.ToString();
+
+        int index = names.IndexOf(selectedeffect);
+        if (existingstatuses.Add(selectedeffect))
+        {
+            if (index >= 0 && index < descriptions.Count)
+            {
+                string description = descriptions[index];
+                Label effectLabel = new Label
+                {
+                    Text = $"{selectedeffect}: {description}",
+                    TextColor = fontColor,
+                    BackgroundColor = PrimaryColor,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+
+                Button removeButton = new Button
+                {
+                    Text = "Remove",
+                    BackgroundColor = SecondaryColor,
+                    TextColor = fontColor,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+                removeButton.Clicked += (s, args) =>
+                {
+                    statusstack.Children.Remove(effectLabel);
+                    statusstack.Children.Remove(removeButton);
+                };
+
+                statusstack.Children.Add(effectLabel);
+                statusstack.Children.Add(removeButton);
+            }
+        }
+        else
+        {
+            await DisplayAlert("Effect already present", "Please select a different effect", "Ok");
+            return;
+        }
+
+    }
     private async void RemoveButton(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is UserItem userItem)
