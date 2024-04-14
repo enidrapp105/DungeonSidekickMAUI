@@ -43,9 +43,9 @@ public partial class LandingPage : ContentPage
         {
             string sqlQuery = "SELECT name, description FROM Conditions;";
 
-            SqlCommand command = new SqlCommand(sqlQuery, connection);
+            SqlCommand command = new SqlCommand(sqlQuery, conn); // Fix is here, passing 'conn' instead of 'connection'
 
-            connection.Open();
+            conn.Open();
 
             SqlDataReader reader = command.ExecuteReader();
 
