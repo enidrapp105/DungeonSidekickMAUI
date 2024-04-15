@@ -79,7 +79,7 @@ namespace DungeonSidekickMAUI
 
             string query = "INSERT INTO dbo.CharacterSheet" +
                 "(UID,CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
-                "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma) VALUES" +
+                "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,CurrentHP,TempHP) VALUES" +
                 "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
                 "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);" +
                 "SELECT CAST(scope_identity() AS int)";
@@ -142,7 +142,9 @@ namespace DungeonSidekickMAUI
                             }
                             else
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
-                            
+
+                            int HitDie = getHitDie(CharacterSheetcurrent.characterclass);
+
                         }
                     }
                     conn.Close();
@@ -156,6 +158,35 @@ namespace DungeonSidekickMAUI
 
             Navigation.PushAsync(new LandingPage());
 
+        }
+        private int getHitDie(int classID)
+        {
+
+            Connection connection = Connection.connectionSingleton;
+            string query = "SELECT HitDie FROM dbo.ClassLookup WHERE ClassID = @ClassID";
+            int HitDie = 0;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+
+                            cmd.Parameters.AddWithValue("@ClassID", classID);
+                        }
+                    }
+                    conn.Close();
+                }
+            }
+            catch (Exception eSql)
+            {
+                DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+            return HitDie;
         }
     }
 }

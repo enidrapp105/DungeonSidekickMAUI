@@ -7,6 +7,7 @@
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
+
             <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
             WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
 
