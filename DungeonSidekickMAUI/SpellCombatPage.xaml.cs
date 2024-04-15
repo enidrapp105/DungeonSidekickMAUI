@@ -13,7 +13,12 @@ public partial class SpellCombatPage : ContentPage
         InitializeComponent();
         PullSpellsPool();
     }
-
+    /*
+     * Function: PullSpellsPool
+     * Author: Brendon Williams
+     * Purpose: Works like weapon pool, displays all spells to user
+     * Last Modified: 04/15/2024 By Author
+     */
     void PullSpellsPool()
     {
         Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
@@ -78,6 +83,13 @@ public partial class SpellCombatPage : ContentPage
             }
         }
     }
+
+    /*
+     * Function: SelectButton
+     * Author: Brendon Williams
+     * Purpose: Selects spell for user. Currently doesn't work
+     * Last Modified: 04/15/2024 By Author
+     */
     private async void SelectButton(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is int id)
@@ -87,6 +99,13 @@ public partial class SpellCombatPage : ContentPage
             await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
         }
     }
+
+    /*
+     * Function: SelectMonster
+     * Author: Brendon Williams
+     * Purpose: Moves to selecting monsters to fight
+     * Last Modified: 04/15/2024 By Author
+     */
     private void SelectMonster(object sender, EventArgs e)
     {
         Navigation.PushAsync(new SelectMonster());
