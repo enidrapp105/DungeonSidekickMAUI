@@ -39,8 +39,8 @@ public partial class SpellCombatPage : ContentPage
                         {
                             cmd.CommandText = query;
 
-                            // grabs ID from weapon list
-                            cmd.Parameters.AddWithValue("@Id", spell.Spells[0]);
+                            // grabs ID from spell pool list
+                            cmd.Parameters.AddWithValue("@Id", spell);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
@@ -49,15 +49,15 @@ public partial class SpellCombatPage : ContentPage
                                     Label weaponLabel = new Label();
                                     weaponLabel.TextColor = (Color)fontColor;
 
-                                    // grabs the name from the DB and quantity from weapon list
+                                    // should hopefully grab name of spell from spell pool
                                     string name = reader.GetString(0);
-                                    weaponLabel.Text = name + " x" + weapon[1];
+                                    weaponLabel.Text = name;
                                     layout.Add(weaponLabel);
 
                                     // Button that selects the item to be used in combat
                                     Button select = new Button
                                     {
-                                        CommandParameter = weapon[0],
+                                        CommandParameter = spell,
                                         TextColor = fontColor,
                                         Text = "Select",
                                         BackgroundColor = TrinaryColor,
