@@ -43,22 +43,24 @@ public partial class LandingPage : ContentPage
         {
             string sqlQuery = "SELECT name, description FROM Conditions;";
 
-            SqlCommand command = new SqlCommand(sqlQuery, conn); // Fix is here, passing 'conn' instead of 'connection'
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
 
             conn.Open();
-
-            SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
+            if (conn.State == System.Data.ConnectionState.Open)
             {
-                string name = reader["name"].ToString();
-                string description = reader["description"].ToString();
+                SqlDataReader reader = command.ExecuteReader();
 
-                statusnames.Add(name);
-                statusdescriptions.Add(description);
+                while (reader.Read())
+                {
+                    string name = reader["name"].ToString();
+                    string description = reader["description"].ToString();
+
+                    statusnames.Add(name);
+                    statusdescriptions.Add(description);
+                }
+
+                reader.Close();
             }
-
-            reader.Close();
         }
         StatusEffectPicker.ItemsSource = statusnames;
         foreach (var weapon in inv.Weapons)
