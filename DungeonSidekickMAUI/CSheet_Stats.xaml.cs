@@ -145,6 +145,13 @@ namespace DungeonSidekickMAUI
 
                             int HitDie = getHitDie(CharacterSheetcurrent.characterclass);
                             int stdHP = HitDie + ((CharacterSheetcurrent.constitution - 10) % 2);
+
+
+
+                            int chosenHP = stdHP;
+
+                            cmd.Parameters.AddWithValue("@CurrentHP", chosenHP);
+                            cmd.Parameters.AddWithValue("@TempHP", chosenHP);
                         }
                     }
                     conn.Close();
