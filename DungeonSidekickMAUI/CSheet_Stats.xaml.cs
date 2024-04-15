@@ -81,7 +81,7 @@ namespace DungeonSidekickMAUI
                 "(UID,CharacterName,RaceId,ClassId,Background,Alignment,PersonalityTraits,Ideals,Bonds,Flaws," +
                 "FeaturesTraits,Strength,Dexterity,Constitution,Intelligence,Wisdom,Charisma,CurrentHP,TempHP) VALUES" +
                 "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
-                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma);" +
+                "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma,@CurrentHP, @TempHP);" +
                 "SELECT CAST(scope_identity() AS int)";
 
             try
@@ -144,7 +144,7 @@ namespace DungeonSidekickMAUI
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
 
                             int HitDie = getHitDie(CharacterSheetcurrent.characterclass);
-
+                            int stdHP = HitDie + ((CharacterSheetcurrent.constitution - 10) % 2);
                         }
                     }
                     conn.Close();
