@@ -28,7 +28,7 @@ public partial class CSheet_Import : ContentPage
         InitializeComponent();
         ImportSheet();
     }
-    
+
     private void ImportSheet(/*object sender, EventArgs e*/)
     {
         List<ImportedCharacterSheet> c_List = new List<ImportedCharacterSheet>(); //might be able to remove
@@ -76,6 +76,91 @@ public partial class CSheet_Import : ContentPage
                                 Char.c_PersonalityTraits = reader.GetString(6);
                                 Char.c_Ideals = reader.GetString(7);
                                 Char.c_Bonds = reader.GetString(8);
+
+                                Char.c_Flaws = reader.GetString(9);
+                                Char.c_FeaturesTraits = reader.GetString(10);
+                                //Char.c_Equipment = reader.GetInt32(11); // may need adjusted
+                                Char.c_Strength = reader.GetInt32(12);
+                                Char.c_Dexterity = reader.GetInt32(13);
+                                Char.c_Constitution = reader.GetInt32(14);
+                                Char.c_Intelligence = reader.GetInt32(15);
+                                Char.c_Wisdom = reader.GetInt32(16);
+                                Char.c_Charisma = reader.GetInt32(17);
+
+                                try
+                                {
+                                    for (int i = 18; i < 49; i++)
+                                    {
+                                        reader.GetInt32(i);
+                                    }
+                                    Char.c_CurrentHealth = reader.GetInt32(18);
+                                    Char.c_TemporaryHealth = reader.GetInt32(19);
+                                    Char.c_ArmorClass = reader.GetInt32(20);
+                                    Char.c_Initiative = reader.GetInt32(21);
+                                    Char.c_Speed = reader.GetInt32(22);
+                                    Char.c_HitDice = reader.GetInt32(23);
+                                    Char.c_StrengthSave = reader.GetInt32(24);
+                                    Char.c_DexteritySave = reader.GetInt32(25);
+                                    Char.c_ConstitutionSave = reader.GetInt32(26);
+                                    Char.c_IntelligenceSave = reader.GetInt32(27);
+                                    Char.c_WisdomSave = reader.GetInt32(28);
+                                    Char.c_CharismaSave = reader.GetInt32(29);
+                                    Char.c_Acrobatics = reader.GetInt32(30);
+                                    Char.c_AnimalHandling = reader.GetInt32(31);
+                                    Char.c_Arcana = reader.GetInt32(32);
+                                    Char.c_Athletics = reader.GetInt32(33);
+                                    Char.c_Deception = reader.GetInt32(34);
+                                    Char.c_History = reader.GetInt32(35);
+                                    Char.c_Insight = reader.GetInt32(36);
+                                    Char.c_Intimidation = reader.GetInt32(37);
+                                    Char.c_Investigation = reader.GetInt32(38);
+                                    Char.c_Medicine = reader.GetInt32(39);
+                                    Char.c_Nature = reader.GetInt32(40);
+                                    Char.c_Perception = reader.GetInt32(41);
+                                    Char.c_Performance = reader.GetInt32(42);
+                                    Char.c_Persuasion = reader.GetInt32(43);
+                                    Char.c_Religion = reader.GetInt32(44);
+                                    Char.c_SleightOfHand = reader.GetInt32(45);
+                                    Char.c_Stealth = reader.GetInt32(46);
+                                    Char.c_Survival = reader.GetInt32(47);
+                                    Char.c_PassiveWisdom = reader.GetInt32(48);
+                                    Char.c_Level = reader.GetInt32(50);
+                                }
+                                catch
+                                {
+                                    Char.c_CurrentHealth = 1;
+                                    Char.c_TemporaryHealth = 1;
+                                    Char.c_ArmorClass = 1;
+                                    Char.c_Initiative = 1;
+                                    Char.c_Speed = 1;
+                                    Char.c_HitDice = 1;
+                                    Char.c_StrengthSave = 1;
+                                    Char.c_DexteritySave = 1;
+                                    Char.c_ConstitutionSave = 1;
+                                    Char.c_IntelligenceSave = 1;
+                                    Char.c_WisdomSave = 1;
+                                    Char.c_CharismaSave = 1;
+                                    Char.c_Acrobatics = 1;
+                                    Char.c_AnimalHandling = 1;
+                                    Char.c_Arcana = 1;
+                                    Char.c_Athletics = 1;
+                                    Char.c_Deception = 1;
+                                    Char.c_History = 1;
+                                    Char.c_Insight = 1;
+                                    Char.c_Intimidation = 1;
+                                    Char.c_Investigation = 1;
+                                    Char.c_Medicine = 1;
+                                    Char.c_Nature = 1;
+                                    Char.c_Perception = 1;
+                                    Char.c_Performance = 1;
+                                    Char.c_Persuasion = 1;
+                                    Char.c_Religion = 1;
+                                    Char.c_SleightOfHand = 1;
+                                    Char.c_Stealth = 1;
+                                    Char.c_Survival = 1;
+                                    Char.c_PassiveWisdom = 1;
+                                    Char.c_Level = 1;
+                                }
 
                                 // *********************************
                                 // COMMENTED OUT SINCE A LOT ARE NULL VALUES WHEN PULLED FROM DB
