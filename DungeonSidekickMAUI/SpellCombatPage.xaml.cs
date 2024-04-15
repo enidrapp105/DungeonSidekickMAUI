@@ -5,29 +5,29 @@ namespace DungeonSidekickMAUI;
 
 public partial class SpellCombatPage : ContentPage
 {
-    private Inventory inv;
+    private Spellpool spells;
     private Monster currentMonster;
     private int selectedWeaponId;
     public SpellCombatPage()
     {
         InitializeComponent();
-        PullSpells();
+        PullSpellsPool();
     }
 
-    void PullSpells()
+    void PullSpellsPool()
     {
         Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
-        inv = new Inventory();
-        inv.PullItems();
+        spells = new Spellpool();
+        spells.PullSpells();
         string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        foreach (var weapon in inv.Weapons)
+        foreach (var spell in spells.Spells)
         {
-            string query = "SELECT name FROM dbo.Weapon" +
-            " WHERE WeaponID = @Id;";
+            string query = "SELECT name FROM dbo.Spells" +
+            " WHERE SpellID = @Id;";
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -40,7 +40,7 @@ public partial class SpellCombatPage : ContentPage
                             cmd.CommandText = query;
 
                             // grabs ID from weapon list
-                            cmd.Parameters.AddWithValue("@Id", weapon[0]);
+                            cmd.Parameters.AddWithValue("@Id", spell.Spells[0]);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
