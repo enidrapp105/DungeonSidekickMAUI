@@ -161,7 +161,6 @@ namespace DungeonSidekickMAUI
         }
         private int getHitDie(int classID)
         {
-
             Connection connection = Connection.connectionSingleton;
             string query = "SELECT HitDie FROM dbo.ClassLookup WHERE ClassID = @ClassID";
             int HitDie = 0;
@@ -174,8 +173,14 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-
                             cmd.Parameters.AddWithValue("@ClassID", classID);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    HitDie = reader.GetInt32(0);
+                                }
+                            }
                         }
                     }
                     conn.Close();
