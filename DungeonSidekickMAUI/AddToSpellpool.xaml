@@ -8,7 +8,7 @@
             <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
 Clicked="GoToLandingFromSpells" WidthRequest="400" HeightRequest="40" />
-                <Entry Placeholder="Search" HorizontalOptions="Center" TextChanged="Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
+                <Entry Placeholder="Search" HorizontalOptions="Center" TextChanged="Spellpool_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
             </VerticalStackLayout>
         </CollectionView.Header>
         <CollectionView.ItemsLayout HorizontalOptions="Center">

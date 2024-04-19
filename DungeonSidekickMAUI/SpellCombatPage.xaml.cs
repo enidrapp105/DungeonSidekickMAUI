@@ -110,4 +110,15 @@ public partial class SpellCombatPage : ContentPage
     {
         Navigation.PushAsync(new SelectMonster());
     }
+
+    /*
+     * Function: AddSpells
+     * Author: Anthony Rielly
+     * Purpose: Move to the add to spellpool page
+     * Last Modified: 04/18/2024 By Author
+     */
+    private void AddSpells(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddToSpellpool());
+    }
 }

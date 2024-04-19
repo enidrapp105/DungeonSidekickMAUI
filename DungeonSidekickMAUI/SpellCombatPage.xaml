@@ -7,6 +7,7 @@
         <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             <Label Text="Spells" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </VerticalStackLayout>
+        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Spells to Spellpool" Clicked="AddSpells" WidthRequest="400" HorizontalOptions="Center"/>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monsters" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
     </VerticalStackLayout>
 </ContentPage>

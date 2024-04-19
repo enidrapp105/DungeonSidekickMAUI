@@ -22,7 +22,7 @@ public partial class AddToSpellpool : ContentPage
     }
 
     // updates what Spells are visible when the user types something in the search bar
-    void Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
+    void Spellpool_Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
         if (string.IsNullOrWhiteSpace(e.NewTextValue))
             SpellCollectionView.ItemsSource = addSpellViewModel.UserSpells;
