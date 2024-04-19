@@ -34,7 +34,7 @@ namespace DungeonSidekickMAUI
 
         public void PullSpells() // Query the database and populate the list responsible for storing the data found in the Spells table. Shows your Spells + quantities.
         {
-            string query = "SELECT SpellId, Name FROM dbo.Spellpool" +
+            string query = "SELECT SpellID FROM dbo.Spellpool" +
             " WHERE CharacterID = @CharacterID";
 
             Spells.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
