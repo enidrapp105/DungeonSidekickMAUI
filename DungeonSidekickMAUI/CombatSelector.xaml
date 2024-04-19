@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.CombatSelector">
-    <VerticalStackLayout>
+    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0" Grid.Row="0" Grid.Column="2">
             <!--This label handles the title-->
             <Label Text="What type of combat?" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp" Grid.Row="0" Grid.Column="1"/>

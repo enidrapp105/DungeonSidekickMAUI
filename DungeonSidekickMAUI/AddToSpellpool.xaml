@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.AddToSpellpool">
 
-    <CollectionView x:Name="SpellCollectionView" ItemsSource="{Binding Spells}">
+    <CollectionView x:Name="SpellCollectionView" ItemsSource="{Binding Spells}" BackgroundColor="{DynamicResource PrimaryColor}">
         <CollectionView.Header>
             <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
