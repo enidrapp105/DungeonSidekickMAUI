@@ -3,6 +3,8 @@ using Microsoft.Maui.Controls;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Data.SqlClient;
 using System.Diagnostics;
+using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
+using System.Collections.ObjectModel;
 
 /*
 * Class: AddToSpellpool
@@ -14,6 +16,8 @@ using System.Diagnostics;
 public partial class AddToSpellpool : ContentPage
 {
     AddSpellViewModel addSpellViewModel;
+    private readonly TimeSpan searchDelay = TimeSpan.FromMilliseconds(500); // Adjust the delay as needed
+    private DateTime lastTextChangedTime = DateTime.MinValue;
 
     public AddToSpellpool()
     {
@@ -24,10 +28,22 @@ public partial class AddToSpellpool : ContentPage
     // updates what Spells are visible when the user types something in the search bar
     void Spellpool_Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            SpellCollectionView.ItemsSource = addSpellViewModel.UserSpells;
-        else
-            SpellCollectionView.ItemsSource = addSpellViewModel.UserSpells.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+        lastTextChangedTime = DateTime.Now;
+
+        Task.Delay(searchDelay).ContinueWith((task) =>
+        {
+            // Check if the last text change occurred within the delay period
+            if ((DateTime.Now - lastTextChangedTime) >= searchDelay)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                        SpellCollectionView.ItemsSource = addSpellViewModel.UserSpells;
+                    else
+                        SpellCollectionView.ItemsSource = addSpellViewModel.UserSpells.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+                });
+            }
+        }, TaskScheduler.Default);
     }
 
     // Adds the selected Spell to the Spellpool class and updates the DB

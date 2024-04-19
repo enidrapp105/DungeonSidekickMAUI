@@ -4,7 +4,7 @@
              x:Class="DungeonSidekickMAUI.AddToSpellpool">
 
     <CollectionView x:Name="SpellCollectionView" ItemsSource="{Binding Spells}" BackgroundColor="{DynamicResource PrimaryColor}">
-        <CollectionView.Header>
+        <CollectionView.Header BindingMode="OneTime">
             <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
 Clicked="GoToLandingFromSpells" WidthRequest="400" HeightRequest="40" />
