@@ -106,8 +106,6 @@ namespace DungeonSidekickMAUI
         {
             if(ETypeID == 0) // Weapon Check
             {
-                WEquipped = true;
-                WEquippedID = ID;
                 string query = "SELECT damageDice FROM dbo.Weapon" +
                 " WHERE WeaponID = @Id;";
                 Connection connection = Connection.connectionSingleton;
@@ -129,6 +127,8 @@ namespace DungeonSidekickMAUI
                                     while (reader.Read())
                                     {
                                         damageDice = reader.GetString(0);
+                                        WEquipped = true;
+                                        WEquippedID = ID; // These can only be valid if you made it this far (no errors).
                                     }
                                 }
                             }
@@ -144,8 +144,6 @@ namespace DungeonSidekickMAUI
 
             if (ETypeID == 1) // Equipment Check
             {
-                EEquipped = true;
-                EEquippedID = ID;
                 string query = "SELECT armorClassBase FROM dbo.Gear" +
                 " WHERE GearID = @Id;";
                 Connection connection = Connection.connectionSingleton;
@@ -166,7 +164,9 @@ namespace DungeonSidekickMAUI
                                 {
                                     while (reader.Read())
                                     {
-                                        ACBoost = reader.GetInt32(0);
+                                        ACBoost = reader.GetInt32(0); // Need to figure out how to add this under the hood, while still being able to unequip gear.
+                                        EEquipped = true;
+                                        EEquippedID = ID;
                                     }
                                 }
                             }
