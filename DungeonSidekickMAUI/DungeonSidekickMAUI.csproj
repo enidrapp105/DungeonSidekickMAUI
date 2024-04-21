@@ -105,6 +105,9 @@
 	  <MauiXaml Update="CSheet_Stats.xaml">
 	    <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="ExhaustionView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Info_For_Stats.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
