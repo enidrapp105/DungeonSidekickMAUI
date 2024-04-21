@@ -21,6 +21,7 @@ namespace DungeonSidekickMAUI
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
             m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
 
+            Items = new List<List<int>>();
             Gear = new List<List<int>>();
             Weapons = new List<List<int>>();
             Equipment = new List<List<int>>();
@@ -30,6 +31,7 @@ namespace DungeonSidekickMAUI
         // Just clears the lists, used when adding items
         public void ClearItems()
         {
+            Items.Clear();
             Gear.Clear();
             Weapons.Clear();
             Equipment.Clear();
@@ -39,7 +41,7 @@ namespace DungeonSidekickMAUI
             Connection connection = Connection.connectionSingleton;
             string query = "SELECT ItemID, Quantity, eTypeID FROM dbo.Inventory" +
             " WHERE CharacterID = @CharacterID";
-
+            
             Items.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             Gear.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             Weapons.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.

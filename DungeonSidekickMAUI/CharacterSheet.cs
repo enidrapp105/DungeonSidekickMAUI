@@ -1,4 +1,4 @@
-﻿using LocalAuthentication;
+﻿//using LocalAuthentication;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -65,6 +65,7 @@ namespace DungeonSidekickMAUI
         public string? damageDice { get; set; }
         public bool EEquipped { get; set; }
         public int EEquippedID { get; set; }
+        public int ACBoost { get; set; } // The increased armor from equipped armor.
         /*
          * Function: Purge
          * Author: Brendon Williams
@@ -145,7 +146,7 @@ namespace DungeonSidekickMAUI
             {
                 EEquipped = true;
                 EEquippedID = ID;
-                string query = "SELECT damageDice FROM dbo.Gear" +
+                string query = "SELECT armorClassBase FROM dbo.Gear" +
                 " WHERE GearID = @Id;";
                 Connection connection = Connection.connectionSingleton;
                 try
@@ -165,7 +166,7 @@ namespace DungeonSidekickMAUI
                                 {
                                     while (reader.Read())
                                     {
-                                        damageDice = reader.GetString(0);
+                                        ACBoost = reader.GetInt32(0);
                                     }
                                 }
                             }
