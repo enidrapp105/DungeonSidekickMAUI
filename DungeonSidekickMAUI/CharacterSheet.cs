@@ -95,6 +95,12 @@ namespace DungeonSidekickMAUI
             exists = false;
             damageDice = null;
             inv = new Inventory();
+            WEquipped = false;
+            WEquippedID = -1;
+            damageDice = null;
+            EEquipped = false;
+            EEquippedID = -1;
+            ACBoost = 0;
         }
         /*
          * Function: Equip Item
@@ -181,6 +187,40 @@ namespace DungeonSidekickMAUI
             }
 
 
+        }
+
+        /*
+         * Function: RemoveItem
+         * Author: Thomas Hewitt
+         * Purpose: Unequips the specified item from the current character, negating the stat bonuses it gave.
+         * last Modified : 4/21/2024 9:04 am
+         */
+        public void RemoveItem(int ETypeID)
+        {
+            switch(ETypeID) // Used a switch because I simply don't like nested if statements :)
+            {
+                case 0:
+                    if(WEquipped == true)
+                    {
+                        WEquipped = false;
+                        WEquippedID = -1;
+                        damageDice = null;
+                    }
+                    break;
+
+                case 1:
+                    if(EEquipped == true)
+                    {
+                        EEquipped = false;
+                        EEquippedID = -1;
+                        ACBoost = 0;
+                    }
+                    break;
+
+                default:
+                    // Probably print an error or something.
+                    break;
+            }
         }
 
     }
