@@ -59,7 +59,7 @@ namespace DungeonSidekickMAUI
         public int wisdom { get; set; }
         public int charisma { get; set; }
         public bool exists { get; set; }
-        public Inventory inv { get; set; } // Maybe make this a singleton? No, that would break too many things.
+        public Inventory inv { get; set; } // I have ideas for this, but I didn't get around to implementing them this sprint: Thomas
         public bool WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
         public int WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
         public string? damageDice { get; set; }
@@ -116,8 +116,9 @@ namespace DungeonSidekickMAUI
                 " WHERE WeaponID = @Id;";
                 Connection connection = Connection.connectionSingleton;
                 try
-                {
-                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                { 
+                    // Just plugging in the *actual* connection stuff here to remind me to do it everywhere else later for security: Thomas
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, EncryptionGrabber.GetEncryptionKey(), EncryptionGrabber.GetEncryptionIV())))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
