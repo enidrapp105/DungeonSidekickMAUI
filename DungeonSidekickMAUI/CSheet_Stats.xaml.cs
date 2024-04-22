@@ -18,7 +18,7 @@ namespace DungeonSidekickMAUI
         public int chosenHealth { get; private set; }
         public int startingHealth { get; private set; }
 
-        private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
+        private ImportedCharacterSheet CharacterSheetcurrent = ImportedCharacterSheet.Instance;
         /*
          * Function: RollForStats
          * Author: Kenny Rapp

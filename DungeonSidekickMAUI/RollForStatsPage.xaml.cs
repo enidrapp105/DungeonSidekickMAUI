@@ -4,7 +4,7 @@ public partial class RollForStatsPage : ContentPage
 {
     private Random random = new Random();
     private DndClass dndclass;
-    CharacterSheet characterSheet = CharacterSheet.Instance;
+    ImportedCharacterSheet characterSheet = ImportedCharacterSheet.Instance;
     public RollForStatsPage()
     {  
         InitializeComponent();

@@ -4,7 +4,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
 {
-    private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
+    private ImportedCharacterSheet CharacterSheetcurrent = ImportedCharacterSheet.Instance;
     //public DndClass CharacterClass;
     public int Class;
     public int Race;
@@ -40,7 +40,7 @@ public partial class CSheet : ContentPage
      * Returns:
      * nothing
      */
-    private void LoadCharacterSheetPage(CharacterSheet characterSheet)
+    private void LoadCharacterSheetPage(ImportedCharacterSheet characterSheet)
     {
         CName.Text = characterSheet.charactername ;
         Race = characterSheet.race;
