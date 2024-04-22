@@ -13,6 +13,11 @@ namespace DungeonSidekickMAUI
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CSheet_Stats : ContentPage
 	{
+        private TaskCompletionSource<bool> HealthPopupTask;
+
+        public int chosenHealth { get; private set; }
+        public int startingHealth { get; private set; }
+
         private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
         /*
          * Function: RollForStats
@@ -29,6 +34,7 @@ namespace DungeonSidekickMAUI
 		{
 			InitializeComponent ();
             LoadCharacterSheetPage();
+            BindingContext = this;
         }
 
 
@@ -200,5 +206,23 @@ namespace DungeonSidekickMAUI
             }
             return HitDie;
         }
+        //public async Task<int> ShowHealthPopupAsync()
+        //{
+        //    HealthPopupTask = new TaskCompletionSource<bool>();
+
+        //    HealthPopup.IsVisible = true;
+
+        //    await HealthPopupTask.Task;
+
+        //    HealthPopup.IsVisible = false;
+        //}
+        //private void StartingHealthChosen(object sender, EventArgs e)
+        //{
+        //    // Set the chosen health value
+        //    chosenHealth = chosenHealth; // Assuming chosenHealth is the value from your Entry field
+
+        //    // Complete the task when the OK button is clicked
+        //    ShowHealthPopupAsync.SetResult(true);
+        //}
     }
 }
