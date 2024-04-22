@@ -197,7 +197,7 @@ public partial class SelectedClassPage : ContentPage
      */
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.characterclass = cId;
+        characterSheet.c_Class = cId;
         Navigation.PushAsync(new CSheet());
     }
 
