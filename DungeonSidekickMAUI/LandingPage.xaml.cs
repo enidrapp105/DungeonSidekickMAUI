@@ -3,8 +3,8 @@ using Microsoft.Data.SqlClient;
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
-    //CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
-    ImportedCharacterSheet currentcharacterSheet = ImportedCharacterSheet.Load();
+    ImportedCharacterSheet currentcharacterSheet = ImportedCharacterSheet.Instance;
+    ImportedCharacterSheet currentcharacterSheet2 = ImportedCharacterSheet.Load();
     DiceRoll diceroller;
     Inventory inv;
     List<string> statusnames;

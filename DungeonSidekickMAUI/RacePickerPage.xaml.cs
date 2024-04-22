@@ -6,8 +6,8 @@ namespace DungeonSidekickMAUI;
 
 public partial class RacePickerPage : ContentPage
 {
-    CharacterSheet characterSheet;
-    public RacePickerPage(CharacterSheet characterSheet)
+    ImportedCharacterSheet characterSheet;
+    public RacePickerPage(ImportedCharacterSheet characterSheet)
     {
         InitializeComponent();
         this.characterSheet = characterSheet;

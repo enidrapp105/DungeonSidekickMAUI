@@ -18,9 +18,9 @@ public partial class StatAssignmentPage : ContentPage
     private string WIS;
     private string CON;
     private DndClass dndclass;
-    CharacterSheet characterSheet;
+    CharacterSheetCreator characterSheet;
 
-    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, CharacterSheet characterSheet)
+    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, CharacterSheetCreator characterSheet)
     {
         List<string> totals = new List<string> { total1, total2, total3, total4, total5, total6 };
         List<int> sortedTotals = totals.Select(int.Parse).OrderByDescending(x => x).ToList();
