@@ -18,9 +18,9 @@ public partial class StatAssignmentPage : ContentPage
     private string WIS;
     private string CON;
     private DndClass dndclass;
-    CharacterSheetCreator characterSheet;
+    ImportedCharacterSheet characterSheet;
 
-    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, CharacterSheetCreator characterSheet)
+    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, ImportedCharacterSheet characterSheet)
     {
         List<string> totals = new List<string> { total1, total2, total3, total4, total5, total6 };
         List<int> sortedTotals = totals.Select(int.Parse).OrderByDescending(x => x).ToList();
@@ -99,12 +99,12 @@ public partial class StatAssignmentPage : ContentPage
             totallabel5.Text = $"{selectedStat5} {total5}";
             totallabel6.Text = $"{selectedStat6} {total6}";
             AssignValue(totallabel1.Text, totallabel2.Text, totallabel3.Text, totallabel4.Text, totallabel5.Text, totallabel6.Text);
-            this.characterSheet.dexterity = int.Parse(DEX);
-            this.characterSheet.intelligence = int.Parse(INT);
-            this.characterSheet.charisma = int.Parse(CHA);
-            this.characterSheet.strength = int.Parse(STR);
-            this.characterSheet.wisdom = int.Parse(WIS);
-            this.characterSheet.constitution = int.Parse(CON);
+            this.characterSheet.c_Dexterity = int.Parse(DEX);
+            this.characterSheet.c_Intelligence = int.Parse(INT);
+            this.characterSheet.c_Charisma = int.Parse(CHA);
+            this.characterSheet.c_Strength = int.Parse(STR);
+            this.characterSheet.c_Wisdom = int.Parse(WIS);
+            this.characterSheet.c_Constitution = int.Parse(CON);
             Navigation.PushAsync(new CSheet_Stats());
         }
     }
@@ -224,7 +224,7 @@ public partial class StatAssignmentPage : ContentPage
                 using (SqlCommand command = new SqlCommand(querystring, connection))
                 {
                     // Add parameters to the command (to prevent SQL injection)
-                    command.Parameters.AddWithValue("@ClassID", characterSheet.characterclass);
+                    command.Parameters.AddWithValue("@ClassID", characterSheet.c_Class);
 
                     // Open the connection
                     connection.Open();

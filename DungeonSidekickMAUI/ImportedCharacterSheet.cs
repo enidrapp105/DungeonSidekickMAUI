@@ -255,6 +255,9 @@ namespace DungeonSidekickMAUI
         public int p_CharacterID { get; private set; }
 
         public bool exists { get; set; }
+
+        public string c_RaceName { get; set; }
+        public string c_ClassName { get; set; }
     
     }
 }
