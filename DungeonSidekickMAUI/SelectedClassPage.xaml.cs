@@ -6,7 +6,7 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedClassPage : ContentPage
 {
     int ClassID;
-    CharacterSheet characterSheet;
+    ImportedCharacterSheet characterSheet;
     int cId;
     /*
      * Function: SelectedClassPage Constructor
@@ -16,7 +16,7 @@ public partial class SelectedClassPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Pulls from the database lookup table to print out the information
      */
-    public SelectedClassPage(CharacterSheet characterSheet, int selectedClass)
+    public SelectedClassPage(ImportedCharacterSheet characterSheet, int selectedClass)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
@@ -69,7 +69,7 @@ public partial class SelectedClassPage : ContentPage
                                     CornerRadius = 0,
                                     Content = Class
                                 };
-                                characterSheet.className = ClassName;
+                                characterSheet.c_ClassName = ClassName;
                                 Label HitDie = new Label();
                                 HitDie.HorizontalTextAlignment = TextAlignment.Center;
                                 HitDie.TextColor = fontColor;
