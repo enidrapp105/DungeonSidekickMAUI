@@ -32,7 +32,7 @@
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="400" HorizontalOptions="Center"/>
         </StackLayout>
-        <Grid x:Name="HealthPopup"          
+        <!--<Grid x:Name="HealthPopup"          
             BackgroundColor="#80000000"
             IsVisible="False">
             <StackLayout Padding="20"
@@ -47,6 +47,6 @@
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
             </StackLayout>
-        </Grid>
+        </Grid>-->
     </ContentPage.Content>
 </ContentPage>

@@ -52,7 +52,7 @@ public partial class SelectedRacePage : ContentPage
 
                                 Race.TextColor = (Color)fontColor;
                                 string raceName = reader.GetString(0);
-                                characterSheet.raceName = raceName;
+                                characterSheet.c_RaceName = raceName;
                                 Race.Text = raceName;
 
                                 Frame frame = new Frame()
