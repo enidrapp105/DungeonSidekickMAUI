@@ -405,7 +405,7 @@ public partial class LandingPage : ContentPage
 
     private void NavigateToCombat(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CombatPage());
+        Navigation.PushAsync(new CombatSelector());
     }
     /*
      * Function: RollButtonClicked

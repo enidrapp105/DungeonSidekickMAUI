@@ -100,6 +100,9 @@
 	  <Compile Update="AddToInventory.xaml.cs">
 	    <DependentUpon>AddToInventory.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="AddToSpellpool.xaml.cs">
+	    <DependentUpon>AddToSpellpool.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -107,6 +110,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="CombatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CombatSelector.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="CSheet.xaml">
@@ -148,6 +154,9 @@
 		  <MauiXaml Update="MonsterCombat.xaml">
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
+		  <MauiXaml Update="AddToSpellpool.xaml">
+		    <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -167,6 +176,9 @@
 			  <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
 	  <MauiXaml Update="SelectedRacePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SpellCombatPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="StatAssignmentPage.xaml">

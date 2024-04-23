@@ -62,7 +62,7 @@ namespace DungeonSidekickMAUI
          */
         private void p_RemoveMonster(Monster monster)
         {
-            if (monster.AC == 0)
+            if (monster.HP == 0)
                 return;
             m_monsters.Remove(monster);
         }
