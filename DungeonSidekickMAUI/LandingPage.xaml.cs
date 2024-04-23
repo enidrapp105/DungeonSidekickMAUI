@@ -47,6 +47,8 @@ public partial class LandingPage : ContentPage
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
 
+            SqlDataReader reader = command.ExecuteReader();
+
             conn.Open();
 
 
