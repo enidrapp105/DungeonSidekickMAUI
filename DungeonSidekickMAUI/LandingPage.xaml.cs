@@ -49,18 +49,17 @@ public partial class LandingPage : ContentPage
 
             conn.Open();
 
-            SqlDataReader reader = command.ExecuteReader();
 
-            while (reader.Read())
-            {
-                string name = reader["name"].ToString();
-                string description = reader["description"].ToString();
+                while (reader.Read())
+                {
+                    string name = reader["name"].ToString();
+                    string description = reader["description"].ToString();
 
-                statusnames.Add(name);
-                statusdescriptions.Add(description);
-            }
+                    statusnames.Add(name);
+                    statusdescriptions.Add(description);
+                }
 
-            reader.Close();
+                reader.Close();
         }
         using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
         {
@@ -344,7 +343,7 @@ public partial class LandingPage : ContentPage
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            inv.RemoveItem(userItem.Id, userItem.eTypeId);
+            inv.RemoveEquipment(userItem.Id, userItem.eTypeId);
         }
     }
     /*

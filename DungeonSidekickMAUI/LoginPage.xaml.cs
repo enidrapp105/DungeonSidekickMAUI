@@ -42,14 +42,6 @@ public partial class LoginPage : ContentPage
 	{
 		Navigation.PushAsync(new SignupPage());
 	}
-    private void DebugbuttonButtonClicked(object sender, EventArgs e)
-    {
-		Preferences.Default.Set("Username", "Admin");
-		Preferences.Default.Set("UserId", 1);
-
-        //Navigation.PushAsync(new MainPage());
-		Navigation.PushAsync(new CSheet_Import());
-    }
 
     private int Character_Count()
     {
