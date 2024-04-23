@@ -10,7 +10,7 @@ namespace DungeonSidekickMAUI;
 public partial class MonsterCombat : ContentPage
 {
     private Monster selectedMonster;
-    private string dice;
+    //private string dice;
 	public MonsterCombat()
 	{
 		InitializeComponent();
@@ -77,42 +77,47 @@ public partial class MonsterCombat : ContentPage
         }
     }
 
-    private void PullDiceValue()
+    private void PullDiceValue() // Leaving this in because I don't want to delete someone else's work without permission.
     {
-        int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
+        CharacterSheet character = CharacterSheet.Instance;
+        //int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
+        int WeaponID = character.WEquippedID; // Shouldn't need this, just wanted to add it because functionality changed.
         if (WeaponID == -1) return;
-        string query = "SELECT damageDice FROM dbo.Weapon" +
-            " WHERE WeaponID = @Id;";
-        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
-        try
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    using (SqlCommand cmd = conn.CreateCommand())
-                    {
-                        cmd.CommandText = query;
+        character.EquipItem(WeaponID, 0);
+        //dice = character.damageDice;
+        //string query = "SELECT damageDice FROM dbo.Weapon" +
+        //    " WHERE WeaponID = @Id;";
+        //Connection connection = Connection.connectionSingleton;
+        //try
+        //{
+        //    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+        //    {
+        //        conn.Open();
+        //        if (conn.State == System.Data.ConnectionState.Open)
+        //        {
+        //            using (SqlCommand cmd = conn.CreateCommand())
+        //            {
+        //                cmd.CommandText = query;
 
-                        // grabs ID from weapon list
-                        cmd.Parameters.AddWithValue("@Id", WeaponID);
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            while (reader.Read())
-                            {
-                                dice = reader.GetString(0);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception eSql)
-        {
-            DisplayAlert("Error!", eSql.Message, "OK");
-            Debug.WriteLine("Exception: " + eSql.Message);
-        }
+        //                // grabs ID from weapon list
+        //                cmd.Parameters.AddWithValue("@Id", WeaponID);
+        //                using (SqlDataReader reader = cmd.ExecuteReader())
+        //                {
+        //                    while (reader.Read())
+        //                    {
+        //                        dice = reader.GetString(0);
+        //                        character.damageDice = reader.GetString(0); // Testing if equipping works.
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
+        //catch (Exception eSql)
+        //{
+        //    DisplayAlert("Error!", eSql.Message, "OK");
+        //    Debug.WriteLine("Exception: " + eSql.Message);
+        //}
     }
 
 
@@ -123,6 +128,8 @@ public partial class MonsterCombat : ContentPage
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+
+        CharacterSheet character = CharacterSheet.Instance;
 
         bool hitIsPositive = true;
         bool dmgIsPositive = true;
@@ -261,7 +268,7 @@ public partial class MonsterCombat : ContentPage
                 hitMod *= -1;
             }
             
-            PullDiceValue();
+            //PullDiceValue(); // Figured out why this was being called.
             //await DisplayAlert("Dice", dice, "OK");
             DiceRoll roller = new DiceRoll();
             int acRoll = roller.Roll("1d20");
@@ -289,7 +296,7 @@ public partial class MonsterCombat : ContentPage
             }
             if (throughAC)
             {
-                int result = roller.Roll(dice);
+                int result = roller.Roll(character.damageDice);
                 if (dmgIsPositive)
                 {
                     result += dmgMod;

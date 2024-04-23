@@ -27,7 +27,7 @@ namespace DungeonSidekickMAUI
 
             public void Export()
             {
-                string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+                Connection connection = Connection.connectionSingleton;
 
                 string query = "UPDATE dbo.CharacterSheet" +
                     " SET CharacterName = @CharacterName, RaceID = @RaceID, ClassID = @ClassID, Level = @Level, Background = @Background, Alignment = @Alignment, PersonalityTraits = @PersonalityTraits, Ideals = @Ideals, Bonds = @Bonds, Flaws = @Flaws," +
@@ -40,7 +40,7 @@ namespace DungeonSidekickMAUI
 
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)

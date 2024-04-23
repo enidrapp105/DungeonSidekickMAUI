@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DungeonSidekickMAUI.AddToSpellpool">
+
+    <CollectionView x:Name="SpellCollectionView" ItemsSource="{Binding Spells}" BackgroundColor="{DynamicResource PrimaryColor}">
+        <CollectionView.Header BindingMode="OneTime">
+            <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+                <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
+Clicked="GoToLandingFromSpells" WidthRequest="400" HeightRequest="40" />
+                <Entry Placeholder="Search" HorizontalOptions="Center" TextChanged="Spellpool_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
+            </VerticalStackLayout>
+        </CollectionView.Header>
+        <CollectionView.ItemsLayout HorizontalOptions="Center">
+            <GridItemsLayout  Orientation="Vertical" Span="1" VerticalItemSpacing="5"></GridItemsLayout>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center" BackgroundColor="{DynamicResource PrimaryColor}">
+                    <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
+                                    Clicked="AddSpells" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40" />
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>
