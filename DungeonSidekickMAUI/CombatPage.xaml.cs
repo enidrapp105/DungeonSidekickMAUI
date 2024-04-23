@@ -81,8 +81,10 @@ public partial class CombatPage : ContentPage
     {
         if (sender is Button button && button.CommandParameter is int id)
         {
-            selectedWeaponId = id;
-            Preferences.Default.Set("SelectedWeapon", id);
+            CharacterSheet character = CharacterSheet.Instance;
+            //selectedWeaponId = id;
+            //Preferences.Default.Set("SelectedWeapon", id);
+            character.EquipItem(id, 0); // Equipping Weapon.
             await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
         }
     }

@@ -295,7 +295,7 @@ public partial class LandingPage : ContentPage
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            inv.RemoveItem(userItem.Id, userItem.eTypeId);
+            inv.RemoveEquipment(userItem.Id, userItem.eTypeId);
         }
     }
     /*
