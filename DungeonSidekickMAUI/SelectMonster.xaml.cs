@@ -34,12 +34,12 @@ public partial class SelectMonster : ContentPage
     {
         if (sender is Button button && button.CommandParameter is Monster mon)
         {
-            Monster add = new Monster();
-            add.HP = mon.HP;
-            add.AC = mon.AC;
-            add.Name = mon.Name;
-            add.Id = mon.Id;
-            MonsterSelector.Instance.AddMonster(add);
+            Monster monster = new Monster();
+            monster.AC = mon.AC;
+            monster.Id = mon.Id;
+            monster.Name = mon.Name;
+            monster.HP = mon.HP;
+            MonsterSelector.Instance.AddMonster(monster);
             await DisplayAlert("Selected Monster", "Successfully selected the monster for combat.", "Ok");
         }
     }

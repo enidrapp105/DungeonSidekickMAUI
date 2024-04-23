@@ -2,24 +2,25 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectMonster">
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Finish Selecting Monsters" Clicked="SelectedMonsters" WidthRequest="400" HorizontalOptions="Center"/>
-        <Grid RowDefinitions="Auto,Auto" BackgroundColor="{DynamicResource PrimaryColor}">
-            <Entry Grid.Row="0" Placeholder="Search" TextChanged="Monster_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
 
-            <CollectionView Grid.Row="1" x:Name="MyCollectionViews" ItemsSource="{Binding monsterCollection}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout  Orientation="Vertical" Span="1" VerticalItemSpacing="5"></GridItemsLayout>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center">
-                            <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
+    <CollectionView x:Name="MyCollectionViews" ItemsSource="{Binding monsterCollection}" BackgroundColor ="{DynamicResource PrimaryColor}">
+        <CollectionView.Header>
+            <VerticalStackLayout>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Finish Selecting Monsters" Clicked="SelectedMonsters" WidthRequest="400" HorizontalOptions="Center"/>
+                <Entry Placeholder="Search" TextChanged="Monster_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
+            </VerticalStackLayout>
+        </CollectionView.Header>
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout  Orientation="Vertical" Span="1" VerticalItemSpacing="5"></GridItemsLayout>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <VerticalStackLayout VerticalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="Center">
+                    <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="{Binding Name, Mode=OneTime}" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
                                     Clicked="ChooseMonster" CommandParameter="{Binding ., Mode=OneTime}" WidthRequest="400" HeightRequest="40" />
-                        </VerticalStackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
-    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
 </ContentPage>
