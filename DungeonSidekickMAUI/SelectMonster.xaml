@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SelectMonster">
 
-    <CollectionView x:Name="MyCollectionViews" ItemsSource="{Binding monsterCollection}" BackgroundColor ="{DynamicResource PrimaryColor}">
+    <CollectionView x:Name="MonsterCollectionView" ItemsSource="{Binding monsterCollection}" BackgroundColor ="{DynamicResource PrimaryColor}">
         <CollectionView.Header>
             <VerticalStackLayout>
                 <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Finish Selecting Monsters" Clicked="SelectedMonsters" WidthRequest="400" HorizontalOptions="Center"/>

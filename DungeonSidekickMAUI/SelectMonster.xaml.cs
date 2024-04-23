@@ -13,7 +13,8 @@ using System.Diagnostics;
 public partial class SelectMonster : ContentPage
 {
     MonsterViewModel monsterViewModel;
-
+    private readonly TimeSpan searchDelay = TimeSpan.FromMilliseconds(500); // Adjust the delay as needed
+    private DateTime lastTextChangedTime = DateTime.MinValue;
     public SelectMonster()
     {
         InitializeComponent();
@@ -23,10 +24,22 @@ public partial class SelectMonster : ContentPage
     // updates what monsters are visible when the user types something in the search bar
     void Monster_Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            MyCollectionViews.ItemsSource = monsterViewModel.monsterCollection;
-        else
-            MyCollectionViews.ItemsSource = monsterViewModel.monsterCollection.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+        lastTextChangedTime = DateTime.Now;
+
+        Task.Delay(searchDelay).ContinueWith((task) =>
+        {
+            // Check if the last text change occurred within the delay period
+            if ((DateTime.Now - lastTextChangedTime) >= searchDelay)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                        MonsterCollectionView.ItemsSource = monsterViewModel.monsterCollection;
+                    else
+                        MonsterCollectionView.ItemsSource = monsterViewModel.monsterCollection.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+                });
+            }
+        }, TaskScheduler.Default);
     }
 
     // Adds the selected item to the inventory class and updates the DB
