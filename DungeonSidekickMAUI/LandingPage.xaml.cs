@@ -47,12 +47,13 @@ public partial class LandingPage : ContentPage
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
 
-            SqlDataReader reader = command.ExecuteReader();
 
             conn.Open();
 
+            SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+
+            while (reader.Read())
                 {
                     string name = reader["name"].ToString();
                     string description = reader["description"].ToString();
