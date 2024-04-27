@@ -51,7 +51,7 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
 
             };
-
+            
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
             flexLayout.Children.Add(settingsButton);
@@ -59,5 +59,40 @@ namespace DungeonSidekickMAUI
 
             return flexLayout;
         }
+
+        private async void Create_Character(object sender, EventArgs e)
+        {
+            await MyPushAsync(new Info_For_Stats());
+        }
+        private async void Character_Import(object sender, EventArgs e)
+        {
+            await MyPushAsync(new CSheet_Import());
+        }
+        private async void Modify_Character(object sender, EventArgs e)
+        {
+            await MyPushAsync(new Modify_Character());
+        }
+        private async void Settings_Page(object sender, EventArgs e)
+        {
+            await MyPushAsync(new Settings_Page());
+        }
+        private async void Landing_Page(object sender, EventArgs e)
+        {
+            await MyPushAsync(new LandingPage());
+        }
+
+        public static async Task MyPushAsync(Page page)
+        {
+            if (Application.Current.MainPage is NavigationPage navigationPage)
+            {
+                await navigationPage.PushAsync(page);
+            }
+            else
+            {
+                Application.Current.MainPage = new NavigationPage(page);
+            }
+        }
+
+        
     }
 }
