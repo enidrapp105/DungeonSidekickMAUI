@@ -35,6 +35,8 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
 
             };
+            landingPageButton.Clicked += Landing_Page;
+
             var createButton = new Button
             {
                 TextColor = (Color)fontColor,
@@ -43,6 +45,9 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
 
             };
+            createButton.Clicked += Create_Character;
+
+
             var settingsButton = new Button
             {
                 TextColor = (Color)fontColor,
@@ -51,6 +56,7 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
 
             };
+            settingsButton.Clicked += Settings_Page;
             
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
