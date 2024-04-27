@@ -7,65 +7,18 @@ namespace DungeonSidekickMAUI
         public MainPage()
         {
             InitializeComponent();
+            var hasValue2 = Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
             //((AppShell)Shell.Current).FlyoutIsPresented = true;
+            NavigationCommands cmd = new NavigationCommands();
             NavigationPage.SetHasNavigationBar(this, true);
-            NavigationPage.SetTitleView(this, CreateCustomNavigationBar());
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
             CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
         }
 
-        // Function to create custom navigation bar
-        private View CreateCustomNavigationBar()
-        {
-            // Create a flex layout
-            Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
-            Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-            Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
-            
-            var flexLayout = new FlexLayout
-            {
-                Direction = Microsoft.Maui.Layouts.FlexDirection.Row,
-                JustifyContent = Microsoft.Maui.Layouts.FlexJustify.SpaceBetween,
-                AlignItems = Microsoft.Maui.Layouts.FlexAlignItems.Center,
-                Padding = new Thickness(10, 5),
-                BackgroundColor = (Color)primaryColor,
-                HorizontalOptions = LayoutOptions.FillAndExpand
-            };
-
-            // Add elements to the flex layout
-            var landingPageButton = new Button
-            {
-                TextColor = (Color)fontColor,
-                Text = "Landing Page",
-                HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
-                
-            };
-            var createButton = new Button
-            {
-                TextColor = (Color)fontColor,
-                Text = "New Character Sheet",
-                HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
-                
-            };
-            var settingsButton = new Button
-            {
-                TextColor = (Color)fontColor,
-                Text = "Settings",
-                HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
-                
-            };
-
-            flexLayout.Children.Add(landingPageButton);
-            flexLayout.Children.Add(createButton);
-            flexLayout.Children.Add(settingsButton);
-            
-
-            return flexLayout;
-        }
+        
 
         private void AddSelectedChar()
         {
