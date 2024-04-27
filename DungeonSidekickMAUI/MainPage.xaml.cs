@@ -1,4 +1,6 @@
-﻿namespace DungeonSidekickMAUI
+﻿using Microsoft.Extensions.Logging;
+
+namespace DungeonSidekickMAUI
 {
     public partial class MainPage : ContentPage
     {
@@ -6,11 +8,49 @@
         {
             InitializeComponent();
             //((AppShell)Shell.Current).FlyoutIsPresented = true;
+            NavigationPage.SetHasNavigationBar(this, true);
+            NavigationPage.SetTitleView(this, CreateCustomNavigationBar());
             CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
         }
 
+        // Function to create custom navigation bar
+        private View CreateCustomNavigationBar()
+        {
+            // Create a flex layout
+            var flexLayout = new FlexLayout
+            {
+                Direction = Microsoft.Maui.Layouts.FlexDirection.Row,
+                JustifyContent = Microsoft.Maui.Layouts.FlexJustify.SpaceBetween,
+                AlignItems = Microsoft.Maui.Layouts.FlexAlignItems.Center,
+                Padding = new Thickness(10, 5)
+            };
+
+            // Add elements to the flex layout
+            var landingPageButton = new Button
+            {
+                Text = "Landing Page",
+                HorizontalOptions = LayoutOptions.End
+            };
+            var createButton = new Button
+            {
+                Text = "New Character Sheet",
+                HorizontalOptions = LayoutOptions.End
+            };
+            var settingsButton = new Button
+            {
+                Text = "Settings",
+                HorizontalOptions = LayoutOptions.End
+            };
+
+            flexLayout.Children.Add(landingPageButton);
+            flexLayout.Children.Add(createButton);
+            flexLayout.Children.Add(settingsButton);
+            
+
+            return flexLayout;
+        }
 
         private void AddSelectedChar()
         {
