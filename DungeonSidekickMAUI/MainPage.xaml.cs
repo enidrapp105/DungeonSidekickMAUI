@@ -7,8 +7,9 @@ namespace DungeonSidekickMAUI
         public MainPage()
         {
             InitializeComponent();
-            var hasValue2 = Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+
             //((AppShell)Shell.Current).FlyoutIsPresented = true;
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
             NavigationCommands cmd = new NavigationCommands();
             NavigationPage.SetHasNavigationBar(this, true);
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;

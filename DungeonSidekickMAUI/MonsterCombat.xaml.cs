@@ -14,7 +14,8 @@ public partial class MonsterCombat : ContentPage
 	public MonsterCombat()
 	{
 		InitializeComponent();
-		DisplayAllMonsters();
+
+        DisplayAllMonsters();
 	}
 
    /*

@@ -62,7 +62,6 @@ namespace DungeonSidekickMAUI
             flexLayout.Children.Add(createButton);
             flexLayout.Children.Add(settingsButton);
 
-
             return flexLayout;
         }
 
@@ -98,7 +97,5 @@ namespace DungeonSidekickMAUI
                 Application.Current.MainPage = new NavigationPage(page);
             }
         }
-
-        
     }
 }
