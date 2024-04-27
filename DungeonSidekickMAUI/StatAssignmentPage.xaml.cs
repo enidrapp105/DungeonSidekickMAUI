@@ -32,8 +32,17 @@ public partial class StatAssignmentPage : ContentPage
         this.total6 = sortedTotals[5].ToString();
         this.characterSheet = characterSheet;
         InitializeComponent();
+
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
+
         // Convert the totals to integers and sort them
-        
+
 
         // Set the text of labels with sorted totals
         totallabel1.Text = sortedTotals[0].ToString();

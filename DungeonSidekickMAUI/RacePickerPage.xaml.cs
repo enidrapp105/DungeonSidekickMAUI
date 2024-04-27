@@ -10,6 +10,14 @@ public partial class RacePickerPage : ContentPage
     public RacePickerPage(CharacterSheet characterSheet)
     {
         InitializeComponent();
+
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
         this.characterSheet = characterSheet;
         RaceButtonContainer = new StackLayout()
         {

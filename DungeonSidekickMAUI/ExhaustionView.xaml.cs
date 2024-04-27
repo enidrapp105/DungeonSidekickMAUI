@@ -15,6 +15,13 @@ public partial class ExhaustionView : ContentView
     {
         InitializeComponent();
 
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands cmd = new NavigationCommands();
+        NavigationPage.SetHasNavigationBar(this, true);
+        ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+
         // Add levels to the picker
         for (int i = 1; i <= 6; i++)
         {
