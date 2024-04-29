@@ -31,22 +31,19 @@
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="400" HorizontalOptions="Center"/>
-        </StackLayout>
-        <Grid x:Name="HealthPopup"          
-            BackgroundColor="#80000000"
-            IsVisible="False">
-            <StackLayout Padding="20"
-                     HorizontalOptions="Center"
-                     VerticalOptions="Center">
-                <Label Text="{Binding startingHealth, StringFormat='Normally your health would have been {0}'}"/>
-                <Entry Placeholder="Type a number"
+            <Grid x:Name="HealthPopup" BackgroundColor="#80000000" IsVisible="False" HorizontalOptions="Center"  VerticalOptions="Center">
+                <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="{Binding startingHealth, StringFormat='Normally your health would have been {0}'}" x:Name="StartingHealthLabel"/>
+                    <Entry Placeholder="Type a number for health"
                    Text="{Binding chosenHealth}"
-                   HorizontalOptions="FillAndExpand"/>
-                <Button Text="Ok"
+                   HorizontalOptions="FillAndExpand"
+                   x:Name="chosenHealthEntry"/>
+                    <Button Text="Ok"
                     Clicked="StartingHealthChosen"
                     HorizontalOptions="Center"
                     VerticalOptions="Center"/>
-            </StackLayout>
-        </Grid>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

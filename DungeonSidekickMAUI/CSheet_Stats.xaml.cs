@@ -78,7 +78,7 @@ namespace DungeonSidekickMAUI
          * Purpose: Updates the character sheet class, then moves to next page
          * last Modified : 2/22/2024 8:49 pm
          */
-        private void SubmitStats(object sender, EventArgs e)
+        private async void SubmitStats(object sender, EventArgs e)
         {
             LoadCharacterSheetClass();
             Connection connection = Connection.connectionSingleton;
@@ -142,22 +142,25 @@ namespace DungeonSidekickMAUI
                                 cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.c_Charisma);
                             else
                                 flag = 1;
+
+
+                            int HitDie = getHitDie(CharacterSheetcurrent.c_Class);
+                            int stdHP = HitDie + ((CharacterSheetcurrent.c_Constitution - 10) % 2);
+
+                            int chosenHP = stdHP;
+
+                            await ShowHealthPopupAndWaitAsync(100);
+
+                            cmd.Parameters.AddWithValue("@CurrentHP", chosenHP);
+                            cmd.Parameters.AddWithValue("@TempHP", chosenHP);
+
+
                             if (flag != 1)
                             {
                                 Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
                             }
                             else
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
-
-                            int HitDie = getHitDie(CharacterSheetcurrent.c_Class);
-                            int stdHP = HitDie + ((CharacterSheetcurrent.c_Constitution - 10) % 2);
-
-
-
-                            int chosenHP = stdHP;
-
-                            cmd.Parameters.AddWithValue("@CurrentHP", chosenHP);
-                            cmd.Parameters.AddWithValue("@TempHP", chosenHP);
                         }
                     }
                     conn.Close();
@@ -208,23 +211,19 @@ namespace DungeonSidekickMAUI
         }
 
         //********************************HEALTH POPUP IN PROGRESS**********************************
-        //public async Task<int> ShowHealthPopupAsync()
-        //{
-        //    HealthPopupTask = new TaskCompletionSource<bool>();
+        public async Task ShowHealthPopupAndWaitAsync(int startingHealth)
+        {
+            StartingHealthLabel.Text = $"Normally your health would have been {startingHealth}";
+            HealthPopupTask = new TaskCompletionSource<bool>();
+            HealthPopup.IsVisible = true;
+            await HealthPopupTask.Task;
+            HealthPopup.IsVisible = false;
+        }
 
-        //    HealthPopup.IsVisible = true;
-
-        //    await HealthPopupTask.Task;
-
-        //    HealthPopup.IsVisible = false;
-        //}
-        //private void StartingHealthChosen(object sender, EventArgs e)
-        //{
-        //    // Set the chosen health value
-        //    chosenHealth = chosenHealth; // Assuming chosenHealth is the value from your Entry field
-
-        //    // Complete the task when the OK button is clicked
-        //    ShowHealthPopupAsync.SetResult(true);
-        //}
+        private void StartingHealthChosen(object sender, EventArgs e)
+        {
+            chosenHealth = int.TryParse(chosenHealthEntry.Text, out int result) ? result : 0;
+            HealthPopupTask.SetResult(true);
+        }
     }
 }
