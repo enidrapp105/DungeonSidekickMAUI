@@ -99,7 +99,6 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = query;
                             cmd.Parameters.AddWithValue("@UID", Preferences.Default.Get("UserId", 0));
                             cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.c_Name);
                             cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.c_Race);
@@ -155,6 +154,7 @@ namespace DungeonSidekickMAUI
                             cmd.Parameters.AddWithValue("@TempHP", chosenHP);
 
 
+                            cmd.CommandText = query;
                             if (flag != 1)
                             {
                                 Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
