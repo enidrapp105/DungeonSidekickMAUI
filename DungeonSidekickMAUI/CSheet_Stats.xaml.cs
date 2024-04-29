@@ -216,7 +216,7 @@ namespace DungeonSidekickMAUI
             StartingHealthLabel.Text = $"Normally your health would have been {startingHealth}";
             HealthPopupTask = new TaskCompletionSource<bool>();
             HealthPopup.IsVisible = true;
-            await HealthPopupTask.Task;
+            await HealthPopupTask.Task; //why does this give an error?!?!
             HealthPopup.IsVisible = false;
         }
 
