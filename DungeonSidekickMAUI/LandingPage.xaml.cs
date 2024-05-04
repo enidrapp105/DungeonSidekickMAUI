@@ -371,8 +371,9 @@ public partial class LandingPage : ContentPage
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
             currentcharacterSheet.EquipItem(id, eTypeId);
-            AC.Text = "AC: " + currentcharacterSheet.AC.ToString();
+            //AC.Text = "AC: " + currentcharacterSheet.AC.ToString();
             await Navigation.PushAsync(new LandingPage()); // Only using await here because it complains otherwise. It's much faster without it.
+            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
         }
     }
 
