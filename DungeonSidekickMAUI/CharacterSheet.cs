@@ -65,7 +65,7 @@ namespace DungeonSidekickMAUI
         public string? damageDice { get; set; }
         public bool EEquipped { get; set; }
         public int EEquippedID { get; set; }
-        public int ACBoost { get; set; } // The increased armor from equipped armor.
+        public int AC { get; set; } // The increased armor from equipped armor.
         /*
          * Function: Purge
          * Author: Brendon Williams
@@ -100,7 +100,7 @@ namespace DungeonSidekickMAUI
             damageDice = null;
             EEquipped = false;
             EEquippedID = -1;
-            ACBoost = 0;
+            AC = 0;
         }
         /*
          * Function: Equip Item
@@ -151,8 +151,8 @@ namespace DungeonSidekickMAUI
 
             if (ETypeID == 1) // Equipment Check
             {
-                string query = "SELECT armorClassBase FROM dbo.Gear" +
-                " WHERE GearID = @Id;";
+                string query = "SELECT armorClassBase FROM dbo.Armor" +
+                " WHERE ArmorID = @Id;";
                 Connection connection = Connection.connectionSingleton;
                 try
                 {
@@ -171,7 +171,7 @@ namespace DungeonSidekickMAUI
                                 {
                                     while (reader.Read())
                                     {
-                                        ACBoost = reader.GetInt32(0); // Need to figure out how to add this under the hood, while still being able to unequip gear.
+                                        AC = reader.GetInt32(0); // Need to figure out how to add this under the hood, while still being able to unequip gear.
                                         EEquipped = true;
                                         EEquippedID = ID;
                                     }
@@ -214,7 +214,7 @@ namespace DungeonSidekickMAUI
                     {
                         EEquipped = false;
                         EEquippedID = -1;
-                        ACBoost = 0;
+                        AC = 0;
                     }
                     break;
 

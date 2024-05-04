@@ -39,6 +39,8 @@ public partial class LandingPage : ContentPage
             Navigation.PushAsync(new MainPage()); //at some point during the programming process
         }
 
+        AC.Text = "AC: " + currentcharacterSheet.AC.ToString();
+
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
 
@@ -190,7 +192,19 @@ public partial class LandingPage : ContentPage
                                         BackgroundColor = TrinaryColor,
                                         CommandParameter = temp
                                     };
-                                    
+
+                                    // Button to equip armor.
+                                    Button equip = new Button 
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Equip",
+                                        BackgroundColor = TrinaryColor,
+                                        CommandParameter = temp
+                                    };
+
+                                    equip.Clicked += EquipButton;
+                                    layout.Add(equip);
+
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
                                     InvStack.Add(layout);
@@ -265,6 +279,17 @@ public partial class LandingPage : ContentPage
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
+        }
+    }
+
+    private async void EquipButton(object? sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            currentcharacterSheet.EquipItem(id, eTypeId);
+            AC.Text = "AC: " + currentcharacterSheet.AC.ToString();
         }
     }
 
