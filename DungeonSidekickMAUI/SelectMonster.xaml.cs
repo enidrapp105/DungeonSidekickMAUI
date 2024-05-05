@@ -13,20 +13,41 @@ using System.Diagnostics;
 public partial class SelectMonster : ContentPage
 {
     MonsterViewModel monsterViewModel;
-
+    private readonly TimeSpan searchDelay = TimeSpan.FromMilliseconds(500); // Adjust the delay as needed
+    private DateTime lastTextChangedTime = DateTime.MinValue;
     public SelectMonster()
     {
         InitializeComponent();
+
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
         BindingContext = monsterViewModel = new MonsterViewModel();
     }
 
     // updates what monsters are visible when the user types something in the search bar
     void Monster_Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            MyCollectionViews.ItemsSource = monsterViewModel.monsterCollection;
-        else
-            MyCollectionViews.ItemsSource = monsterViewModel.monsterCollection.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+        lastTextChangedTime = DateTime.Now;
+
+        Task.Delay(searchDelay).ContinueWith((task) =>
+        {
+            // Check if the last text change occurred within the delay period
+            if ((DateTime.Now - lastTextChangedTime) >= searchDelay)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                        MonsterCollectionView.ItemsSource = monsterViewModel.monsterCollection;
+                    else
+                        MonsterCollectionView.ItemsSource = monsterViewModel.monsterCollection.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+                });
+            }
+        }, TaskScheduler.Default);
     }
 
     // Adds the selected item to the inventory class and updates the DB
@@ -34,7 +55,12 @@ public partial class SelectMonster : ContentPage
     {
         if (sender is Button button && button.CommandParameter is Monster mon)
         {
-            MonsterSelector.Instance.AddMonster(mon);
+            Monster monster = new Monster();
+            monster.AC = mon.AC;
+            monster.Id = mon.Id;
+            monster.Name = mon.Name;
+            monster.HP = mon.HP;
+            MonsterSelector.Instance.AddMonster(monster);
             await DisplayAlert("Selected Monster", "Successfully selected the monster for combat.", "Ok");
         }
     }

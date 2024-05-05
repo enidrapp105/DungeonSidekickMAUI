@@ -15,20 +15,42 @@ public partial class AddToInventory : ContentPage
 {
     AddItemViewModel addItemViewModel;
     private TaskCompletionSource<int> task;
+    private readonly TimeSpan searchDelay = TimeSpan.FromMilliseconds(500); // Adjust the delay as needed
+    private DateTime lastTextChangedTime = DateTime.MinValue;
 
     public AddToInventory()
 	{
 		InitializeComponent();
+
+        //nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
         BindingContext = addItemViewModel = new AddItemViewModel();
     }
 
     // updates what items are visible when the user types something in the search bar
     void Entry_TextChanged(System.Object sender, Microsoft.Maui.Controls.TextChangedEventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(e.NewTextValue))
-            MyCollectionViews.ItemsSource = addItemViewModel.UserItems;
-        else
-            MyCollectionViews.ItemsSource = addItemViewModel.UserItems.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+        lastTextChangedTime = DateTime.Now;
+
+        Task.Delay(searchDelay).ContinueWith((task) =>
+        {
+            // Check if the last text change occurred within the delay period
+            if ((DateTime.Now - lastTextChangedTime) >= searchDelay)
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (string.IsNullOrWhiteSpace(e.NewTextValue))
+                        InventoryCollectionView.ItemsSource = addItemViewModel.UserItems;
+                    else
+                        InventoryCollectionView.ItemsSource = addItemViewModel.UserItems.Where(i => i.Name.ToLower().StartsWith(e.NewTextValue.ToLower()));
+                });
+            }
+        }, TaskScheduler.Default);
     }
 
     private async Task<int> ShowNumberInputPopup()
@@ -108,13 +130,14 @@ public partial class AddToInventory : ContentPage
 
         // waiting for quantity to be entered
 
-        Inventory inv = new Inventory(); 
+        // Grabbing the character singleton to add to its inventory.
+        CharacterSheet character = CharacterSheet.Instance;
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            inv.AddItem(id, quant, eTypeId);
-            inv.UpdateDB();
+            character.inv.AddItem(id, quant, eTypeId);
+            character.inv.UpdateDB();
         }
     }
 

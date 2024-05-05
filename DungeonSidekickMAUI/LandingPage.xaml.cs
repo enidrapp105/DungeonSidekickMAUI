@@ -9,6 +9,7 @@ public partial class LandingPage : ContentPage
     Inventory inv;
     List<string> statusnames;
     List<string> statusdescriptions;
+    List<string> exhaustiondescriptions;
     HashSet<string> existingstatuses;
     // Allows us to use dynamic colors when creating labels, buttons, etc in this class
     Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
@@ -18,9 +19,16 @@ public partial class LandingPage : ContentPage
 
     public LandingPage()
 	{
-       
 
         InitializeComponent();
+
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
         diceroller = new DiceRoll();
         //if (currentcharacterSheet != null ) 
         //{
@@ -39,6 +47,7 @@ public partial class LandingPage : ContentPage
         statusnames = new List<string>();
         statusdescriptions = new List<string>();
         existingstatuses = new HashSet<string>();
+        exhaustiondescriptions = new List<string>();
 
         using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
         {
@@ -46,12 +55,13 @@ public partial class LandingPage : ContentPage
 
             SqlCommand command = new SqlCommand(sqlQuery, conn);
 
-            conn.Open();
-            if (conn.State == System.Data.ConnectionState.Open)
-            {
-                SqlDataReader reader = command.ExecuteReader();
 
-                while (reader.Read())
+            conn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+
+            while (reader.Read())
                 {
                     string name = reader["name"].ToString();
                     string description = reader["description"].ToString();
@@ -61,7 +71,24 @@ public partial class LandingPage : ContentPage
                 }
 
                 reader.Close();
+        }
+        using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+        {
+            string sqlQuery = "SELECT EffectDescription FROM dbo.ExhaustionEffects;";
+
+            SqlCommand command = new SqlCommand(sqlQuery, conn);
+
+            conn.Open();
+
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string exhaustiondescription = reader["EffectDescription"].ToString();
+                exhaustiondescriptions.Add(exhaustiondescription);
             }
+
+            reader.Close();
         }
         StatusEffectPicker.ItemsSource = statusnames;
         foreach (var weapon in inv.Weapons)
@@ -249,17 +276,52 @@ public partial class LandingPage : ContentPage
             await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
             return;
         }
-        String selectedeffect = StatusEffectPicker.SelectedItem.ToString();
 
-        int index = statusnames.IndexOf(selectedeffect);
-        if (existingstatuses.Add(selectedeffect))
+        string selectedEffect = StatusEffectPicker.SelectedItem.ToString();
+        int index = statusnames.IndexOf(selectedEffect);
+
+        if (existingstatuses.Contains(selectedEffect))
         {
+            await DisplayAlert("Effect already present", "Please select a different effect", "Ok");
+            return;
+        }
+
+        if (selectedEffect == "Exhaustion")
+        {
+            // Create an ExhaustionView with the descriptions
+            ExhaustionView exhaustionView = new ExhaustionView(exhaustiondescriptions)
+            {
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+
+            Button removeButton = new Button
+            {
+                Text = "Remove",
+                BackgroundColor = SecondaryColor,
+                TextColor = fontColor,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+            removeButton.Clicked += (s, args) =>
+            {
+                statusstack.Children.Remove(exhaustionView);
+                statusstack.Children.Remove(removeButton);
+                existingstatuses.Remove(selectedEffect);
+            };
+
+            statusstack.Children.Add(exhaustionView);
+            statusstack.Children.Add(removeButton);
+            existingstatuses.Add(selectedEffect);
+        }
+        else
+        {
+            // Handle other status effects
             if (index >= 0 && index < statusdescriptions.Count)
             {
                 string description = statusdescriptions[index];
                 Label effectLabel = new Label
                 {
-                    Text = $"{selectedeffect}: {description}",
+                    Text = $"{selectedEffect}: {description}",
                     TextColor = fontColor,
                     BackgroundColor = PrimaryColor,
                     Margin = new Thickness(0, 5, 0, 0)
@@ -276,27 +338,23 @@ public partial class LandingPage : ContentPage
                 {
                     statusstack.Children.Remove(effectLabel);
                     statusstack.Children.Remove(removeButton);
-                    existingstatuses.Remove(selectedeffect);
+                    existingstatuses.Remove(selectedEffect);
                 };
 
                 statusstack.Children.Add(effectLabel);
                 statusstack.Children.Add(removeButton);
+                existingstatuses.Add(selectedEffect);
             }
         }
-        else
-        {
-            await DisplayAlert("Effect already present", "Please select a different effect", "Ok");
-            return;
-        }
-
     }
+
     private async void RemoveButton(object sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            inv.RemoveItem(userItem.Id, userItem.eTypeId);
+            inv.RemoveEquipment(userItem.Id, userItem.eTypeId);
         }
     }
     /*
@@ -358,7 +416,7 @@ public partial class LandingPage : ContentPage
 
     private void NavigateToCombat(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CombatPage());
+        Navigation.PushAsync(new CombatSelector());
     }
     /*
      * Function: RollButtonClicked

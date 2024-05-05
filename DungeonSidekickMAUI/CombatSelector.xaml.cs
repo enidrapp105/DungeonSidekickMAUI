@@ -1,10 +1,10 @@
 namespace DungeonSidekickMAUI;
 
-public partial class Info_For_Stats : ContentPage
+public partial class CombatSelector : ContentPage
 {
-    public Info_For_Stats()
-    {
-        InitializeComponent();
+	public CombatSelector()
+	{
+		InitializeComponent();
 
         // nav bar setup
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
@@ -14,8 +14,13 @@ public partial class Info_For_Stats : ContentPage
         NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
     }
 
-    private void To_CSheet(object sender, EventArgs e)
+    private void NavigateToPCombat(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CSheet());
+        Navigation.PushAsync(new CombatPage());
+    }
+
+    private void NavigateToSCombat(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new SpellCombatPage());
     }
 }

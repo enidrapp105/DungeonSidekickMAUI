@@ -1,16 +1,25 @@
-﻿namespace DungeonSidekickMAUI
+﻿using Microsoft.Extensions.Logging;
+
+namespace DungeonSidekickMAUI
 {
     public partial class MainPage : ContentPage
     {
         public MainPage()
         {
             InitializeComponent();
-            //((AppShell)Shell.Current).FlyoutIsPresented = true;
 
+            //((AppShell)Shell.Current).FlyoutIsPresented = true;
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands cmd = new NavigationCommands();
+            NavigationPage.SetHasNavigationBar(this, true);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+            CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
         }
 
+        
 
         private void AddSelectedChar()
         {
