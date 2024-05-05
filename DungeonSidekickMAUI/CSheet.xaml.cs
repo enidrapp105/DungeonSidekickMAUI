@@ -4,7 +4,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class CSheet : ContentPage
 {
-    private CharacterSheet CharacterSheetcurrent = CharacterSheet.Instance;
+    private ImportedCharacterSheet CharacterSheetcurrent = ImportedCharacterSheet.Instance;
     //public DndClass CharacterClass;
     public int Class;
     public int Race;
@@ -30,13 +30,13 @@ public partial class CSheet : ContentPage
         NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
 
         LoadCharacterSheetPage(CharacterSheetcurrent);
-        if (CharacterSheetcurrent.className != null)
+        if (CharacterSheetcurrent.c_ClassName != null)
         {
-            ClassButton.Text = "Selected Class: " + CharacterSheetcurrent.className;
+            ClassButton.Text = "Selected Class: " + CharacterSheetcurrent.c_ClassName;
         }
-        if (CharacterSheetcurrent.raceName != null)
+        if (CharacterSheetcurrent.c_RaceName != null)
         {
-            RaceButton.Text = "Selected Race: " + CharacterSheetcurrent.raceName;
+            RaceButton.Text = "Selected Race: " + CharacterSheetcurrent.c_RaceName;
         }
     }
     /* Function Name: LoadCharacterSheetPage
@@ -48,18 +48,18 @@ public partial class CSheet : ContentPage
      * Returns:
      * nothing
      */
-    private void LoadCharacterSheetPage(CharacterSheet characterSheet)
+    private void LoadCharacterSheetPage(ImportedCharacterSheet characterSheet)
     {
-        CName.Text = characterSheet.charactername ;
-        Race = characterSheet.race;
-        Class = characterSheet.characterclass;
-        Background.Text = characterSheet.background;
-        Allignment.Text = characterSheet.alignment;
-        PTraits.Text = characterSheet.personalitytraits;
-        Ideals.Text = characterSheet.ideals;
-        Bonds.Text = characterSheet.bonds;
-        Flaws.Text = characterSheet.flaws;
-        Traits.Text = characterSheet.featurestraits;
+        CName.Text = characterSheet.c_Name;
+        Race = characterSheet.c_Race;
+        Class = characterSheet.c_Class;
+        Background.Text = characterSheet.c_Background;
+        Allignment.Text = characterSheet.c_Alignment;
+        PTraits.Text = characterSheet.c_PersonalityTraits;
+        Ideals.Text = characterSheet.c_Ideals;
+        Bonds.Text = characterSheet.c_Bonds;
+        Flaws.Text = characterSheet.c_Flaws;
+        Traits.Text = characterSheet.c_FeaturesTraits;
     }
     /* Function Name: LoadCharacterSheetClass
      * Purpose:
@@ -71,16 +71,16 @@ public partial class CSheet : ContentPage
      */
     private void LoadCharacterSheetClass()
     {
-        CharacterSheetcurrent.charactername = CName.Text;
-        CharacterSheetcurrent.race = Race;
-        CharacterSheetcurrent.characterclass = Class;
-        CharacterSheetcurrent.background = Background.Text;
-        CharacterSheetcurrent.alignment = Allignment.Text;
-        CharacterSheetcurrent.personalitytraits = PTraits.Text;
-        CharacterSheetcurrent.ideals = Ideals.Text;
-        CharacterSheetcurrent.bonds = Bonds.Text;
-        CharacterSheetcurrent.flaws = Flaws.Text;
-        CharacterSheetcurrent.featurestraits = Traits.Text;
+        CharacterSheetcurrent.c_Name = CName.Text;
+        CharacterSheetcurrent.c_Race = Race;
+        CharacterSheetcurrent.c_Class = Class;
+        CharacterSheetcurrent.c_Background = Background.Text;
+        CharacterSheetcurrent.c_Alignment = Allignment.Text;
+        CharacterSheetcurrent.c_PersonalityTraits = PTraits.Text;
+        CharacterSheetcurrent.c_Ideals = Ideals.Text;
+        CharacterSheetcurrent.c_Bonds = Bonds.Text;
+        CharacterSheetcurrent.c_Flaws = Flaws.Text;
+        CharacterSheetcurrent.c_FeaturesTraits = Traits.Text;
     } 
     /*
      * Function: RollForStats

@@ -5,7 +5,7 @@ namespace DungeonSidekickMAUI;
 
 public partial class ClassPickerPage : ContentPage
 {
-    CharacterSheet characterSheet;
+    ImportedCharacterSheet characterSheet;
     
     /*
      * Function: ClassPicker default Constructor
@@ -15,7 +15,7 @@ public partial class ClassPickerPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Removed json string and switched to creating the buttons from a DB lookup, rather than hard coded.
      */
-    public ClassPickerPage(CharacterSheet CharacterSheet)
+    public ClassPickerPage(ImportedCharacterSheet CharacterSheet)
     {
         InitializeComponent();
 

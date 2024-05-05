@@ -3,7 +3,8 @@ using Microsoft.Data.SqlClient;
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
-    CharacterSheet currentcharacterSheet = CharacterSheet.Instance;
+    ImportedCharacterSheet currentcharacterSheet = ImportedCharacterSheet.Instance;
+    ImportedCharacterSheet currentcharacterSheet2 = ImportedCharacterSheet.Load();
     DiceRoll diceroller;
     Inventory inv;
     List<string> statusnames;
@@ -29,15 +30,15 @@ public partial class LandingPage : ContentPage
         Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
 
         diceroller = new DiceRoll();
-        if (currentcharacterSheet != null ) 
-        {
-            LoadCharacterSheetPage(currentcharacterSheet);
-        }
-        else
-        {
-            DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok"); //In case the character sheet breaks
-            Navigation.PushAsync(new MainPage()); //at some point during the programming process
-        }
+        //if (currentcharacterSheet != null ) 
+        //{
+        //    LoadCharacterSheetPage(currentcharacterSheet);
+        //}
+        //else
+        //{
+        //    DisplayAlert("Your character sheet didn't convert correctly", "Let's retry making one", "Ok"); //In case the character sheet breaks
+        //    Navigation.PushAsync(new MainPage()); //at some point during the programming process
+        //}
 
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
@@ -375,18 +376,18 @@ public partial class LandingPage : ContentPage
      * Purpose: Helper function that calculates the stat modifiers and then saves them as a global variable for later use
      * Last Modified: 2/24/2024 by Author
      */
-    private void LoadCharacterSheetPage(CharacterSheet characterSheet)
+    private void LoadCharacterSheetPage(ImportedCharacterSheet characterSheet)
     {
 
-        if(currentcharacterSheet.charactername != null)
-            User_Disp.Text = "Welcome " + currentcharacterSheet.charactername;
+        if(currentcharacterSheet.c_Name != null)
+            User_Disp.Text = "Welcome " + currentcharacterSheet.c_Name;
         
-        int StrMod = CalcStatMod(currentcharacterSheet.strength);
-        int DexMod = CalcStatMod(currentcharacterSheet.dexterity);
-        int ConstMod = CalcStatMod(currentcharacterSheet.constitution);
-        int IntMod = CalcStatMod(currentcharacterSheet.intelligence);
-        int WisMod = CalcStatMod(currentcharacterSheet.wisdom);
-        int CharMod = CalcStatMod(currentcharacterSheet.charisma);
+        int StrMod = CalcStatMod(currentcharacterSheet.c_Strength);
+        int DexMod = CalcStatMod(currentcharacterSheet.c_Dexterity);
+        int ConstMod = CalcStatMod(currentcharacterSheet.c_Constitution);
+        int IntMod = CalcStatMod(currentcharacterSheet.c_Intelligence);
+        int WisMod = CalcStatMod(currentcharacterSheet.c_Wisdom);
+        int CharMod = CalcStatMod(currentcharacterSheet.c_Charisma);
 
         Preferences.Default.Set("StrMod",StrMod);//For each stat, CalcStatMod calculates the modifier based on
         lblStr_Mod.Text = StrMod.ToString(); //the stat that gets passed.
