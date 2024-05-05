@@ -14,7 +14,7 @@ namespace DungeonSidekickMAUI
             NavigationPage.SetHasNavigationBar(this, true);
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
             NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
-            CharacterSheet initCSheet = CharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
+            ImportedCharacterSheet initCSheet = ImportedCharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();
         }

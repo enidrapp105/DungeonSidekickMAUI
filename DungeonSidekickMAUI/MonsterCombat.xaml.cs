@@ -297,7 +297,7 @@ public partial class MonsterCombat : ContentPage
             }
             if (throughAC)
             {
-                int result = roller.Roll(character.damageDice);
+                int result = roller.Roll(character.c_damageDice);
                 if (dmgIsPositive)
                 {
                     result += dmgMod;

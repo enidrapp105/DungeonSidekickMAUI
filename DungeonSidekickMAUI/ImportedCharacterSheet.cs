@@ -36,6 +36,112 @@ namespace DungeonSidekickMAUI
             }
         }
 
+        
+
+        //constructor
+        public ImportedCharacterSheet(int p_UID, int p_CharacterID)
+        {
+            this.p_UID = p_UID;
+            this.p_CharacterID = p_CharacterID;
+        }
+
+        //public int GetUID()
+        //{
+        //    return p_UID;
+        //}
+        //public int GetCharacterID()
+        //{
+        //    return p_CharacterID;
+        //}
+
+        public string? c_Name { get; set; }
+
+        public int c_Class { get; set; } //currently stores an id
+        public int c_Race { get; set; } //currently stores an id
+
+        public int c_Level { get; set; }
+
+        public string? c_Background { get; set; } //may have other uses later on
+        public string? c_Alignment { get; set; }
+        public string? c_PersonalityTraits { get; set; }
+        public string? c_Ideals { get; set; }
+        public string? c_Bonds { get; set; }
+        public string? c_Flaws { get; set; }
+        public string? c_FeaturesTraits { get; set; }
+
+        public int c_Equipment { get; set; } //currently stores an id
+
+
+        //character stats
+        public int c_Strength { get; set; }
+        public int c_Dexterity { get; set; }
+        public int c_Constitution { get; set; }
+        public int c_Intelligence { get; set; }
+        public int c_Wisdom { get; set; }
+        public int c_Charisma { get; set; }
+
+        //character combat stats
+        public int c_CurrentHealth { get; set; }
+        public int c_TemporaryHealth { get; set; }
+        public int c_ArmorClass { get; set; }
+        public int c_Initiative { get; set; }
+        public int c_Speed { get; set; }
+        public int c_HitDice { get; set; }
+
+        //saves
+        public int c_StrengthSave { get; set; }
+        public int c_DexteritySave { get; set; }
+        public int c_ConstitutionSave { get; set; }
+        public int c_IntelligenceSave { get; set; }
+        public int c_WisdomSave { get; set; }
+        public int c_CharismaSave { get; set; }
+
+        //skills
+        public int c_Acrobatics { get; set; }
+        public int c_AnimalHandling { get; set; }
+        public int c_Arcana { get; set; }
+        public int c_Athletics { get; set; }
+        public int c_Deception { get; set; }
+        public int c_History { get; set; }
+        public int c_Insight { get; set; }
+        public int c_Intimidation { get; set; }
+        public int c_Investigation { get; set; }
+        public int c_Medicine { get; set; }
+        public int c_Nature { get; set; }
+        public int c_Perception { get; set; }
+        public int c_Performance { get; set; }
+        public int c_Persuasion { get; set; }
+        public int c_Religion { get; set; }
+        public int c_SleightOfHand { get; set; }
+        public int c_Stealth { get; set; }
+        public int c_Survival { get; set; }
+
+        //storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
+        //public List<String>? c_Proficiencies;
+        //public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
+
+        public int c_PassiveWisdom { get; set; }
+
+
+        //debateable for keeping
+        public int p_UID { get; private set; }
+        public int p_CharacterID { get; private set; }
+
+        public bool exists { get; set; }
+
+        public string c_RaceName { get; set; }
+        public string c_ClassName { get; set; }
+
+        public Inventory c_inv { get; set; } // I have ideas for this, but I didn't get around to implementing them this sprint: Thomas
+        public bool c_WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
+        public int c_WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
+        public string? c_damageDice { get; set; }
+        public bool c_EEquipped { get; set; }
+        public int c_EEquippedID { get; set; }
+        public int c_ACBoost { get; set; } // The increased armor from equipped armor.
+
+
+        //******************************************** FUNCTIONS *******************************************************
         public void Purge()
         {
             c_Name = null;
@@ -172,108 +278,127 @@ namespace DungeonSidekickMAUI
 
             Save(this);
         }
-
-        //constructor
-        public ImportedCharacterSheet(int p_UID, int p_CharacterID)
+        /*
+        * Function: Equip Item
+        * Author: Thomas Hewitt
+        * Purpose: Equips the specified item to the current character, further modifying their stats.
+        * last Modified : 4/13/2024 8:52 am
+        */
+        public void EquipItem(int ID, int ETypeID)
         {
-            this.p_UID = p_UID;
-            this.p_CharacterID = p_CharacterID;
+            if (ETypeID == 0) // Weapon Check
+            {
+                string query = "SELECT damageDice FROM dbo.Weapon" +
+                " WHERE WeaponID = @Id;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    // Just plugging in the *actual* connection stuff here to remind me to do it everywhere else later for security: Thomas
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, EncryptionGrabber.GetEncryptionKey(), EncryptionGrabber.GetEncryptionIV())))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        c_damageDice = reader.GetString(0);
+                                        c_WEquipped = true;
+                                        c_WEquippedID = ID; // These can only be valid if you made it this far (no errors).
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+
+            if (ETypeID == 1) // Equipment Check
+            {
+                string query = "SELECT armorClassBase FROM dbo.Gear" +
+                " WHERE GearID = @Id;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        c_ACBoost = reader.GetInt32(0); // Need to figure out how to add this under the hood, while still being able to unequip gear.
+                                        c_EEquipped = true;
+                                        c_EEquippedID = ID;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+
+
         }
 
-        //public int GetUID()
-        //{
-        //    return p_UID;
-        //}
-        //public int GetCharacterID()
-        //{
-        //    return p_CharacterID;
-        //}
+        /*
+         * Function: RemoveItem
+         * Author: Thomas Hewitt
+         * Purpose: Unequips the specified item from the current character, negating the stat bonuses it gave.
+         * last Modified : 4/21/2024 9:04 am
+         */
+        public void RemoveItem(int ETypeID)
+        {
+            switch (ETypeID) // Used a switch because I simply don't like nested if statements :)
+            {
+                case 0:
+                    if (c_WEquipped == true)
+                    {
+                        c_WEquipped = false;
+                        c_WEquippedID = -1;
+                        c_damageDice = null;
+                    }
+                    break;
 
-        public string? c_Name { get; set; }
+                case 1:
+                    if (c_EEquipped == true)
+                    {
+                        c_EEquipped = false;
+                        c_EEquippedID = -1;
+                        c_ACBoost = 0;
+                    }
+                    break;
 
-        public int c_Class { get; set; } //currently stores an id
-        public int c_Race { get; set; } //currently stores an id
-
-        public int c_Level { get; set; }
-
-        public string? c_Background { get; set; } //may have other uses later on
-        public string? c_Alignment { get; set; }
-        public string? c_PersonalityTraits { get; set; }
-        public string? c_Ideals { get; set; }
-        public string? c_Bonds { get; set; }
-        public string? c_Flaws { get; set; }
-        public string? c_FeaturesTraits { get; set; }
-
-        public int c_Equipment { get; set; } //currently stores an id
-
-
-        //character stats
-        public int c_Strength { get; set; }
-        public int c_Dexterity { get; set; }
-        public int c_Constitution { get; set; }
-        public int c_Intelligence { get; set; }
-        public int c_Wisdom { get; set; }
-        public int c_Charisma { get; set; }
-
-        //character combat stats
-        public int c_CurrentHealth { get; set; }
-        public int c_TemporaryHealth { get; set; }
-        public int c_ArmorClass { get; set; }
-        public int c_Initiative { get; set; }
-        public int c_Speed { get; set; }
-        public int c_HitDice { get; set; }
-
-        //saves
-        public int c_StrengthSave { get; set; }
-        public int c_DexteritySave { get; set; }
-        public int c_ConstitutionSave { get; set; }
-        public int c_IntelligenceSave { get; set; }
-        public int c_WisdomSave { get; set; }
-        public int c_CharismaSave { get; set; }
-
-        //skills
-        public int c_Acrobatics { get; set; }
-        public int c_AnimalHandling { get; set; }
-        public int c_Arcana { get; set; }
-        public int c_Athletics { get; set; }
-        public int c_Deception { get; set; }
-        public int c_History { get; set; }
-        public int c_Insight { get; set; }
-        public int c_Intimidation { get; set; }
-        public int c_Investigation { get; set; }
-        public int c_Medicine { get; set; }
-        public int c_Nature { get; set; }
-        public int c_Perception { get; set; }
-        public int c_Performance { get; set; }
-        public int c_Persuasion { get; set; }
-        public int c_Religion { get; set; }
-        public int c_SleightOfHand { get; set; }
-        public int c_Stealth { get; set; }
-        public int c_Survival { get; set; }
-
-        //storing these in a list is going to be slightly better for visibility, without adding too much more complexity to accessing it.
-        //public List<String>? c_Proficiencies;
-        //public List<String>? c_Equipment; //this may need heavy changes, possibly set this as a key value pair list so that we could access data as needed, and not just the names
-
-        public int c_PassiveWisdom { get; set; }
-
-
-        //debateable for keeping
-        public int p_UID { get; private set; }
-        public int p_CharacterID { get; private set; }
-
-        public bool exists { get; set; }
-
-        public string c_RaceName { get; set; }
-        public string c_ClassName { get; set; }
-
-        public Inventory c_inv { get; set; } // I have ideas for this, but I didn't get around to implementing them this sprint: Thomas
-        public bool c_WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
-        public int c_WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
-        public string? c_damageDice { get; set; }
-        public bool c_EEquipped { get; set; }
-        public int c_EEquippedID { get; set; }
-        public int c_ACBoost { get; set; } // The increased armor from equipped armor.
+                default:
+                    // Probably print an error or something.
+                    break;
+            }
+        }
 
     }
 }

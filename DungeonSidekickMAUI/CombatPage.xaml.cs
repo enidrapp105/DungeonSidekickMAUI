@@ -89,7 +89,7 @@ public partial class CombatPage : ContentPage
     {
         if (sender is Button button && button.CommandParameter is int id)
         {
-            CharacterSheet character = CharacterSheet.Instance;
+            ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
             //selectedWeaponId = id;
             //Preferences.Default.Set("SelectedWeapon", id);
             character.EquipItem(id, 0); // Equipping Weapon.
