@@ -22,6 +22,8 @@ public partial class LandingPage : ContentPage
 
         InitializeComponent();
 
+        LoadCharacterSheetPage(currentcharacterSheet2);
+
         // nav bar setup
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         NavigationCommands nav = new NavigationCommands();
@@ -376,7 +378,7 @@ public partial class LandingPage : ContentPage
      * Purpose: Helper function that calculates the stat modifiers and then saves them as a global variable for later use
      * Last Modified: 2/24/2024 by Author
      */
-    private void LoadCharacterSheetPage(ImportedCharacterSheet characterSheet)
+    private void LoadCharacterSheetPage(ImportedCharacterSheet currentcharacterSheet)
     {
 
         if(currentcharacterSheet.c_Name != null)
