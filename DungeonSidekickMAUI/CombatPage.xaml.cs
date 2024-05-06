@@ -6,7 +6,6 @@ public partial class CombatPage : ContentPage
 {
     private Inventory inv;
     private Monster currentMonster;
-    private int selectedWeaponId;
 	public CombatPage()
 	{
 		InitializeComponent();
@@ -90,8 +89,6 @@ public partial class CombatPage : ContentPage
         if (sender is Button button && button.CommandParameter is int id)
         {
             ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
-            //selectedWeaponId = id;
-            //Preferences.Default.Set("SelectedWeapon", id);
             character.EquipItem(id, 0); // Equipping Weapon.
             await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
         }

@@ -135,6 +135,8 @@ namespace DungeonSidekickMAUI
         public Inventory c_inv { get; set; } // I have ideas for this, but I didn't get around to implementing them this sprint: Thomas
         public bool c_WEquipped { get; set; } // Flag to check if a weapon is currently equipped.
         public int c_WEquippedID { get; set; } // Integer to keep track of currently equipped weapon.
+        public bool c_SEquipped { get; set; } //track if spell is equipped
+        public int c_SEquippedID { get; set; } //track id of equipped spell
         public string? c_damageDice { get; set; }
         public bool c_EEquipped { get; set; }
         public int c_EEquippedID { get; set; }
@@ -165,6 +167,8 @@ namespace DungeonSidekickMAUI
             c_inv = new Inventory();
             c_WEquipped = false;
             c_WEquippedID = -1;
+            c_SEquipped = false;
+            c_SEquippedID = -1;
             c_damageDice = null;
             c_EEquipped = false;
             c_EEquippedID = -1;
