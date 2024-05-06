@@ -364,6 +364,12 @@ public partial class LandingPage : ContentPage
         }
     }
 
+    /*
+     * Function: EquipButton
+     * Author: Thomas Hewitt
+     * Purpose: Handles equipping armor when the Equip button is clicked.
+     * Last Modified: 5/5/2024 11:51pm
+     */
     private async void EquipButton(object? sender, EventArgs e)
     {
         if (sender is Button button && button.CommandParameter is UserItem userItem)
@@ -371,9 +377,8 @@ public partial class LandingPage : ContentPage
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
             currentcharacterSheet.EquipItem(id, eTypeId);
-            //AC.Text = "AC: " + currentcharacterSheet.AC.ToString();
             await Navigation.PushAsync(new LandingPage()); // Only using await here because it complains otherwise. It's much faster without it.
-            Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            Navigation.RemovePage(this); // Getting rid of the old page so the back button has fewer issues.
         }
     }
 
