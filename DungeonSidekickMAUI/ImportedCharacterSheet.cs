@@ -282,6 +282,94 @@ namespace DungeonSidekickMAUI
 
             Save(this);
         }
+
+        /*
+         * Function: EquipSpell
+         * Author: Brendon Williams
+         * Purpose: Equips Spells similar to weapons to get damage dice
+         * last Modified : 2/22/2024 8:15 pm
+         */
+        public void EquipSpell(int ID, int level, bool doesDmg)
+        {
+            if (doesDmg == false) // Have to confirm the table we are looking for
+            {
+                string query = "SELECT TOP 1 healing FROM dbo.SpellHealing " +
+                " WHERE SpellID = @Id AND level >= @Level;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, EncryptionGrabber.GetEncryptionKey(), EncryptionGrabber.GetEncryptionIV())))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                cmd.Parameters.AddWithValue("@Level", level);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        c_damageDice = reader.GetString(0);
+                                        c_SEquipped = true;
+                                        c_SEquippedID = ID; // These can only be valid if you made it this far (no errors).
+
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+            else if (doesDmg == true)
+            {
+                string query = "SELECT TOP 1 damage FROM dbo.SpellDamage" +
+                " WHERE SpellId = @Id AND level >= @Level;";
+                Connection connection = Connection.connectionSingleton;
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                cmd.CommandText = query;
+
+                                // grabs ID from weapon list
+                                cmd.Parameters.AddWithValue("@Id", ID);
+                                cmd.Parameters.AddWithValue("@Level", level);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        c_damageDice = reader.GetString(0);
+                                        c_SEquipped = true;
+                                        c_SEquippedID = ID;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    //DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+                }
+            }
+        }
+
         /*
         * Function: Equip Item
         * Author: Thomas Hewitt
