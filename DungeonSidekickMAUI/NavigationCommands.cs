@@ -43,7 +43,6 @@ namespace DungeonSidekickMAUI
                 Text = "New Character Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-
             };
             createButton.Clicked += Create_Character;
 
@@ -54,7 +53,6 @@ namespace DungeonSidekickMAUI
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-
             };
             settingsButton.Clicked += Settings_Page;
             

@@ -6,10 +6,11 @@
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="Classpagestack">
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                    <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                </Frame>
                 <StackLayout x:Name="ClassButtonContainer" Orientation="Vertical" HorizontalOptions="Center">
-                    <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-                        <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-                    </Frame>
+                    
                     <!-- Dynamically created buttons will be added here -->
                 </StackLayout>
             </StackLayout>

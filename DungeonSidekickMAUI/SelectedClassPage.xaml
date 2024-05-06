@@ -5,6 +5,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" x:Name="mainPanel">
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0" x:Name="ClassName">
+                        
+                </Frame>
                 <!--<Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="Classlabel"/>
             </Frame>
