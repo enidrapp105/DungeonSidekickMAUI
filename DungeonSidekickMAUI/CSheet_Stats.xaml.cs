@@ -156,7 +156,7 @@ namespace DungeonSidekickMAUI
 
                             int chosenHP = stdHP;
 
-                            await ShowHealthPopupAndWaitAsync(100);
+                            await ShowHealthPopupAndWaitAsync(stdHP);
 
                             cmd.Parameters.AddWithValue("@CurrentHP", chosenHP);
                             cmd.Parameters.AddWithValue("@TempHP", chosenHP);
