@@ -54,6 +54,7 @@ public partial class SelectedClassPage : ContentPage
                     Frame skillsFrame = new Frame();
 
                     StackLayout Title = new StackLayout();
+                    Title.HorizontalOptions = LayoutOptions.CenterAndExpand;
                     cId = selectedClass;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
@@ -79,8 +80,8 @@ public partial class SelectedClassPage : ContentPage
                                     Padding = 24,
                                     Margin = 5,
                                     CornerRadius = 0,
-                                    WidthRequest = 400,
-                                    HorizontalOptions = LayoutOptions.Center,
+                                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                    MinimumWidthRequest = 400,
                                     Background = TrinaryColor,
                                     Content = Title
                                 };
@@ -92,7 +93,7 @@ public partial class SelectedClassPage : ContentPage
                                 HitDie.Text = "Hit Die: " + reader.GetInt32(1);
                                 Title.Children.Add(Class);
                                 Title.Children.Add(HitDie);
-                                ClassStack.Children.Add(frame);
+                                titlePanel.Children.Add(frame);
                                 //ClassStack.Children.Add(HitDie);
                             }
                             reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
