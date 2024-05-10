@@ -354,6 +354,9 @@ public partial class LandingPage : ContentPage
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
             inv.RemoveEquipment(userItem.Id, userItem.eTypeId);
+            var page = Navigation.NavigationStack.LastOrDefault();
+            await Navigation.PushAsync(new LandingPage());
+            Navigation.RemovePage(page);
         }
     }
     /*

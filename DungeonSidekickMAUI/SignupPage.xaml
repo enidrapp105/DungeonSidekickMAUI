@@ -6,9 +6,12 @@
         <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
             <Label Text="Sign up" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
-        <Entry x:Name="usernamebox" WidthRequest="400" Placeholder="Enter Username" PlaceholderColor="{DynamicResource FontC}"  TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
-        <Entry x:Name="passwordbox" WidthRequest="400" Placeholder="Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
-        <Entry x:Name="passwordbox2" WidthRequest="400" Placeholder="Re-Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
-        <Button TextColor="{DynamicResource FontC}" WidthRequest="400" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource SecondaryColor}"/>
+        <Entry x:Name="usernamebox" WidthRequest="400" Placeholder="Enter Username" PlaceholderColor="{DynamicResource FontC}"  
+               Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
+        <Entry x:Name="passwordbox" WidthRequest="400" Placeholder="Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" 
+               Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
+        <Entry x:Name="passwordbox2" WidthRequest="400" Placeholder="Re-Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" 
+               Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
+        <Button TextColor="{DynamicResource FontC}" WidthRequest="400" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource SecondaryColor}" Margin="5"/>
     </VerticalStackLayout>
 </ContentPage>
