@@ -102,9 +102,40 @@ public partial class SpellCombatPage : ContentPage
     {
         if (sender is Button button && button.CommandParameter is int id)
         {
-            selectedWeaponId = id;
-            Preferences.Default.Set("SelectedWeapon", id);
-            await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
+            ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
+            int doesDmg = 0;
+            string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+            string query = "SELECT deals_damage FROM dbo.Spells" +
+            " WHERE SpellID = @Id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@Id", id);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    doesDmg = reader.GetInt32(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                //DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+            character.EquipSpell(id, 0, doesDmg);
+            await DisplayAlert("Selected Spell", "Successfully selected the item for combat.", "Ok");
         }
     }
 
