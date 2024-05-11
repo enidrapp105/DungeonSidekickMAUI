@@ -293,7 +293,7 @@ namespace DungeonSidekickMAUI
         {
             if (doesDmg == false) // Have to confirm the table we are looking for
             {
-                string query = "SELECT TOP 1 healing FROM dbo.SpellHealing " +
+                string query = "SELECT TOP 1 healing FROM dbo.SpellHealing" +
                 " WHERE SpellID = @Id AND level >= @Level;";
                 Connection connection = Connection.connectionSingleton;
                 try
