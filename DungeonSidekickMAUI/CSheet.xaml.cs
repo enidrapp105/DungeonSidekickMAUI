@@ -132,101 +132,101 @@ public partial class CSheet : ContentPage
     private bool CheckValues()
     {
         bool pass = true;
-        if (CharacterSheetcurrent.charactername == null)
+        if (CharacterSheetcurrent.c_Name == null)
         {
             DisplayAlert("Error", "Name cannot be null", "OK");
             pass = false;
         }
-        else if(CharacterSheetcurrent.charactername.Length >= 50)
+        else if(CharacterSheetcurrent.c_Name.Length >= 50)
         {
             DisplayAlert("Error", "Name must be less than 50 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.race == -1)
+        if (CharacterSheetcurrent.c_Race == -1)
         {
             DisplayAlert("Error", "Race cannot be null", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.characterclass == -1)
+        if (CharacterSheetcurrent.c_Class == -1)
         {
             DisplayAlert("Error", "Class cannot be null", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.background == null)
+        if (CharacterSheetcurrent.c_Background == null)
         {
             DisplayAlert("Error", "Background cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.background.Length >= 50)
+        else if (CharacterSheetcurrent.c_Background.Length >= 50)
         {
             DisplayAlert("Error", "Background must be less than 50 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.alignment == null)
+        if (CharacterSheetcurrent.c_Alignment == null)
         {
             DisplayAlert("Error", "Alignment cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.alignment.Length >= 50)
+        else if (CharacterSheetcurrent.c_Alignment.Length >= 50)
         {
             DisplayAlert("Error", "Alignment must be less than 50 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.personalitytraits == null)
+        if (CharacterSheetcurrent.c_PersonalityTraits == null)
         {
             DisplayAlert("Error", "Personality traits cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.personalitytraits.Length >= 100)
+        else if (CharacterSheetcurrent.c_PersonalityTraits.Length >= 100)
         {
             DisplayAlert("Error", "Personality traits must be less than 100 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.ideals == null)
+        if (CharacterSheetcurrent.c_Ideals == null)
         {
             DisplayAlert("Error", "Ideals cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.ideals.Length >= 100)
+        else if (CharacterSheetcurrent.c_Ideals.Length >= 100)
         {
             DisplayAlert("Error", "Name must be less than 100 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.bonds == null)
+        if (CharacterSheetcurrent.c_Bonds == null)
         {
             DisplayAlert("Error", "Bonds cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.bonds.Length >= 100)
+        else if (CharacterSheetcurrent.c_Bonds.Length >= 100)
         {
             DisplayAlert("Error", "Bonds must be less than 100 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.flaws == null)
+        if (CharacterSheetcurrent.c_Flaws == null)
         {
             DisplayAlert("Error", "Flaws cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.flaws.Length >= 100)
+        else if (CharacterSheetcurrent.c_Flaws.Length >= 100)
         {
             DisplayAlert("Error", "Flaws must be less than 100 characters", "OK");
             pass = false;
         }
 
-        if (CharacterSheetcurrent.featurestraits == null)
+        if (CharacterSheetcurrent.c_FeaturesTraits == null)
         {
             DisplayAlert("Error", "Features and traits cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.featurestraits.Length >= 200)
+        else if (CharacterSheetcurrent.c_FeaturesTraits.Length >= 200)
         {
             DisplayAlert("Error", "Features and traits must be less than 200 characters", "OK");
             pass = false;
