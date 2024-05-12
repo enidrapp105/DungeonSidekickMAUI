@@ -315,6 +315,18 @@ namespace DungeonSidekickMAUI
                                     while (reader.Read())
                                     {
                                         c_damageDice = reader.GetString(0);
+                                        if (c_damageDice.Contains("+ MOD"))
+                                        {
+                                            c_damageDice = c_damageDice.Remove(4); //Use 4 to specifically remove the + MOD
+                                        }
+                                        else if (c_damageDice.Contains("+ 40"))
+                                        {
+                                            c_damageDice = c_damageDice.Insert(5, ",");
+                                        }
+                                        else if (c_damageDice.Contains("+"))
+                                        {
+                                            c_damageDice = c_damageDice.Insert(4, ",");
+                                        }
                                         c_SEquipped = true;
                                         c_SEquippedID = ID; // These can only be valid if you made it this far (no errors).
 
@@ -354,6 +366,18 @@ namespace DungeonSidekickMAUI
                                     while (reader.Read())
                                     {
                                         c_damageDice = reader.GetString(0);
+                                        if (c_damageDice.Contains("+ MOD"))
+                                        {
+                                            c_damageDice = c_damageDice.Remove(4); //Use 4 to specifically remove the + MOD
+                                        }
+                                        else if (c_damageDice.Contains("+ 40"))
+                                        {
+                                            c_damageDice = c_damageDice.Insert(5, ",");
+                                        }
+                                        else if (c_damageDice.Contains("+"))
+                                        {
+                                            c_damageDice = c_damageDice.Insert(4, ",");
+                                        }
                                         c_SEquipped = true;
                                         c_SEquippedID = ID;
                                     }
