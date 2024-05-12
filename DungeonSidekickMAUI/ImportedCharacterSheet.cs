@@ -289,9 +289,9 @@ namespace DungeonSidekickMAUI
          * Purpose: Equips Spells similar to weapons to get damage dice
          * last Modified : 2/22/2024 8:15 pm
          */
-        public void EquipSpell(int ID, int level, int doesDmg)
+        public void EquipSpell(int ID, int level, bool doesDmg)
         {
-            if (doesDmg == 0) // Have to confirm the table we are looking for
+            if (doesDmg) // Have to confirm the table we are looking for
             {
                 string query = "SELECT TOP 1 healing FROM dbo.SpellHealing" +
                 " WHERE SpellID = @Id AND level >= @Level;";
@@ -330,7 +330,7 @@ namespace DungeonSidekickMAUI
                     Debug.WriteLine("Exception: " + eSql.Message);
                 }
             }
-            else if (doesDmg == 1)
+            else
             {
                 string query = "SELECT TOP 1 damage FROM dbo.SpellDamage" +
                 " WHERE SpellId = @Id AND level >= @Level;";

@@ -103,7 +103,7 @@ public partial class SpellCombatPage : ContentPage
         if (sender is Button button && button.CommandParameter is int id)
         {
             ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
-            int doesDmg = 0;
+            bool doesDmg = false;
             string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
             string query = "SELECT deals_damage FROM dbo.Spells" +
             " WHERE SpellID = @Id;";
@@ -116,13 +116,14 @@ public partial class SpellCombatPage : ContentPage
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            cmd.CommandText = query;
                             cmd.Parameters.AddWithValue("@Id", id);
+                            cmd.CommandText = query;
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
                                 {
-                                    doesDmg = reader.GetInt32(0);
+                                    if ((bool)reader.GetSqlBoolean(0) == true)
+                                        doesDmg = true;
                                 }
                             }
                         }
