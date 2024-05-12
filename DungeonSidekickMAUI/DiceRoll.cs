@@ -79,9 +79,13 @@ namespace DungeonSidekickMAUI
                 else if (part.Contains("-") || part.Contains("+"))
                 {
                     // This part is a modifier
-                    int modifier = int.Parse(part);
-                    totalResult += modifier;
-
+                    char firstChar = part[0];
+                    int startIndex = Char.IsDigit(firstChar) ? 0 : 1;
+                    int customValue = int.Parse(part.Substring(startIndex));
+                    if (firstChar == '+')
+                        totalResult += customValue;
+                    else if (firstChar == '-')
+                        totalResult -= customValue;
                 }
             }
 
