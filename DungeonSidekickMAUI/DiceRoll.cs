@@ -70,7 +70,9 @@ namespace DungeonSidekickMAUI
                 {
                     // This part contains a dice roll
                     string[] dicePart = part.Split('d');
-                    int numberOfDice = int.Parse(dicePart[0]);
+                    char firstChar = dicePart[0][0];
+                    int startIndex = Char.IsDigit(firstChar) ? 0 : 1;
+                    int numberOfDice = int.Parse(dicePart[0].Substring(startIndex));
                     int numberOfFaces = int.Parse(dicePart[1]);
 
                     int rollResult = RollDice(numberOfDice, numberOfFaces);
@@ -86,6 +88,11 @@ namespace DungeonSidekickMAUI
                         totalResult += customValue;
                     else if (firstChar == '-')
                         totalResult -= customValue;
+                }
+                else
+                {
+                    int customValue = int.Parse(part);
+                    totalResult -= customValue;
                 }
             }
 
