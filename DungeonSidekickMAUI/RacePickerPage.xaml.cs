@@ -52,6 +52,7 @@ public partial class RacePickerPage : ContentPage
                                     CommandParameter = id,
                                     HeightRequest = 50,
                                     WidthRequest = 400,
+                                    Margin = 5,
                                     MinimumHeightRequest = 50,
                                     MinimumWidthRequest = 50,
                                     BackgroundColor = (Color)frameColor

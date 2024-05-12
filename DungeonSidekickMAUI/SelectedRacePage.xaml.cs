@@ -40,10 +40,54 @@ public partial class SelectedRacePage : ContentPage
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
-                    StackLayout RaceStack = new StackLayout();
+                    bool prof = false;
+                    bool optProf = false;
+                    bool bon = false;
+                    bool optBon = false;
 
-                    
-                    RaceStack.BackgroundColor = (Color)primaryColor;
+                    StackLayout RaceStack = new StackLayout();
+                    Frame RaceFrame = new Frame();
+                    RaceFrame.Content = RaceStack;
+                    RaceFrame.BackgroundColor = (Color)secondaryColor;
+                    RaceFrame.WidthRequest = 400;
+                    RaceFrame.Margin = 5;
+
+                    StackLayout ProfStack = new StackLayout();
+                    Frame ProfFrame = new Frame();
+                    ProfFrame.Content = ProfStack;
+                    ProfFrame.BackgroundColor = (Color)secondaryColor;
+                    ProfFrame.WidthRequest = 400;
+                    ProfFrame.Margin = 5;
+
+                    StackLayout OptProfStack = new StackLayout();
+                    Frame OptProfFrame = new Frame();
+                    OptProfFrame.Content = OptProfStack;
+                    OptProfFrame.BackgroundColor = (Color)secondaryColor;
+                    OptProfFrame.WidthRequest = 400;
+                    OptProfFrame.Margin = 5;
+
+                    StackLayout BonusStack = new StackLayout();
+                    Frame BonusFrame = new Frame();
+                    BonusFrame.Content = BonusStack;
+                    BonusFrame.BackgroundColor = (Color)secondaryColor;
+                    BonusFrame.WidthRequest = 400;
+                    BonusFrame.Margin = 5;
+
+                    StackLayout OptBonusStack = new StackLayout();
+                    Frame OptBonusFrame = new Frame();
+                    OptBonusFrame.Content = OptBonusStack;
+                    OptBonusFrame.BackgroundColor = (Color)secondaryColor;
+                    OptBonusFrame.WidthRequest = 400;
+                    OptBonusFrame.Margin = 5;
+
+                    Frame frame = new Frame()
+                    {
+                        BackgroundColor = (Color)trinaryColor,
+                        Padding = 24,
+                        CornerRadius = 0,
+
+                    };
+                    //RaceStack.BackgroundColor = (Color)primaryColor;
                     raceId = selectedRace;
 
                     using (SqlCommand cmd = conn.CreateCommand())
@@ -63,13 +107,7 @@ public partial class SelectedRacePage : ContentPage
                                 characterSheet.c_RaceName = raceName;
                                 Race.Text = raceName;
 
-                                Frame frame = new Frame()
-                                {
-                                    BackgroundColor = (Color)trinaryColor,
-                                    Padding = 24,
-                                    CornerRadius = 0,
-                                    Content = Race
-                                };
+                                frame.Content = Race;
 
                                 Label Speed = new Label();
                                 Speed.TextColor = (Color)fontColor;
@@ -99,7 +137,7 @@ public partial class SelectedRacePage : ContentPage
                                 LangDesc.TextColor = (Color)fontColor;
                                 LangDesc.Text = reader.GetString(1);
 
-                                RaceStack.Children.Add(frame);
+                                //RaceStack.Children.Add(frame);
                                 RaceStack.Children.Add(Speed);
                                 RaceStack.Children.Add(Desc);
                                 RaceStack.Children.Add(Age);
@@ -130,12 +168,12 @@ public partial class SelectedRacePage : ContentPage
                                         Label StartProf = new Label();
                                         StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Starting Proficiencies: ";
-                                        RaceStack.Children.Add(StartProf);
+                                        OptProfStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
-                                    RaceStack.Children.Add(Choice);
+                                    OptProfStack.Children.Add(Choice);
                                 }
                                 newOption = optional;
 
@@ -160,7 +198,16 @@ public partial class SelectedRacePage : ContentPage
                                                         Label ProfName = new Label();
                                                         ProfName.TextColor = (Color)fontColor;
                                                         ProfName.Text = innerReader.GetString(0);
-                                                        RaceStack.Children.Add(ProfName);
+                                                        if (newOption != 0)
+                                                        {
+                                                            optProf = true;
+                                                            OptProfStack.Children.Add(ProfName);
+                                                        }
+                                                        else
+                                                        {
+                                                            prof = true;
+                                                            ProfStack.Children.Add(ProfName);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -195,12 +242,12 @@ public partial class SelectedRacePage : ContentPage
                                         Label StartProf = new Label();
                                         StartProf.TextColor = (Color)fontColor;
                                         StartProf.Text = "Choose Optional Ability Bonuses: ";
-                                        RaceStack.Children.Add(StartProf);
+                                        OptBonusStack.Children.Add(StartProf);
                                     }
                                     Label Choice = new Label();
                                     Choice.TextColor = (Color)fontColor;
                                     Choice.Text = "Choose " + choice;
-                                    RaceStack.Children.Add(Choice);
+                                    OptBonusStack.Children.Add(Choice);
                                 }
                                 newOption = optional;
 
@@ -225,7 +272,16 @@ public partial class SelectedRacePage : ContentPage
                                                         Label BonusName = new Label();
                                                         BonusName.TextColor = (Color)fontColor;
                                                         BonusName.Text = innerReader.GetString(0) + " " + bonus;
-                                                        RaceStack.Children.Add(BonusName);
+                                                        if (newOption != 0)
+                                                        {
+                                                            optBon = true;
+                                                            OptBonusStack.Children.Add(BonusName);
+                                                        }
+                                                        else
+                                                        {
+                                                            bon = true;
+                                                            BonusStack.Children.Add(BonusName);
+                                                        }
                                                     }
                                                 }
                                             }
@@ -245,11 +301,30 @@ public partial class SelectedRacePage : ContentPage
                     {
                         BackgroundColor = (Color)secondaryColor,
                         TextColor = (Color)fontColor,
-                        Text = "Submit"
+                        Text = "Submit",
+                        Margin = 5,
+                        WidthRequest = 400,
                     };
                     submit.Clicked += Submit;
-                    RaceStack.Children.Add(submit);
-                    MainPanel.Children.Add(RaceStack);
+                    MainPanel.Children.Add(frame);
+                    MainPanel.Children.Add(RaceFrame);
+                    if (prof)
+                    {
+                        MainPanel.Children.Add(ProfFrame);
+                    }
+                    if (optProf)
+                    {
+                        MainPanel.Children.Add(OptProfFrame);
+                    }
+                    if (bon)
+                    {
+                        MainPanel.Children.Add(BonusFrame);
+                    }
+                    if (optBon)
+                    {
+                        MainPanel.Children.Add(OptBonusFrame);
+                    }
+                    MainPanel.Children.Add(submit);
                 }
             }
         }

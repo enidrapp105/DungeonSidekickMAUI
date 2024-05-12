@@ -18,7 +18,12 @@ public partial class SignupPage : ContentPage
             DisplayAlert("Usernames must be at least 8 characters", "Please fix your username", "Ok");
             validlogin = false;
 		}
-		if(passwordbox.Text != passwordbox2.Text)
+        else if (usernamebox.Text.Length > 32)
+        {
+            DisplayAlert("Usernames must be less than 32 characters", "Please fix your username", "Ok");
+            validlogin = false;
+        }
+        if (passwordbox.Text != passwordbox2.Text)
 		{
 			DisplayAlert("Passwords must match", "Please fix your passwords", "Ok");
 			validlogin = false;
@@ -28,7 +33,12 @@ public partial class SignupPage : ContentPage
 			DisplayAlert("Passwords must be at least 8 characters", "Please fix your passwords", "Ok");
 			validlogin = false;
         }
-		if(validlogin) 
+        else if (passwordbox.Text.Length > 60 || passwordbox2.Text.Length > 60)
+        {
+            DisplayAlert("Passwords must be less than 60 characters", "Please fix your passwords", "Ok");
+            validlogin = false;
+        }
+        if (validlogin) 
 		{
 			Password_Hasher password_Hasher = new Password_Hasher(usernamebox.Text);
 			password_Hasher.HashPassword(passwordbox.Text); //HashPassword should handle the saving itself therefore removing the db need here

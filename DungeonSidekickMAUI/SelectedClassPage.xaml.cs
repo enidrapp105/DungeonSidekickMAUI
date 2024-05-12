@@ -48,8 +48,13 @@ public partial class SelectedClassPage : ContentPage
                     //var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object TrinaryColor);
                     //var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object PrimaryColor);
                     ClassStack.BackgroundColor = PrimaryColor;
+                    ClassStack.HorizontalOptions = LayoutOptions.Center;
                     Frame optionalSkillsFrame = new Frame();
                     Frame savingThrowsFrame = new Frame();
+                    Frame skillsFrame = new Frame();
+
+                    StackLayout Title = new StackLayout();
+                    Title.HorizontalOptions = LayoutOptions.CenterAndExpand;
                     cId = selectedClass;
                     using (SqlCommand cmd = conn.CreateCommand())
                     {
@@ -73,16 +78,23 @@ public partial class SelectedClassPage : ContentPage
                                 {
                                     BackgroundColor = SecondaryColor,
                                     Padding = 24,
+                                    Margin = 5,
                                     CornerRadius = 0,
-                                    Content = Class
+                                    HorizontalOptions = LayoutOptions.CenterAndExpand,
+                                    MinimumWidthRequest = 400,
+                                    Background = TrinaryColor,
+                                    Content = Title
                                 };
+
                                 characterSheet.c_ClassName = ClassName;
                                 Label HitDie = new Label();
                                 HitDie.HorizontalTextAlignment = TextAlignment.Center;
                                 HitDie.TextColor = fontColor;
                                 HitDie.Text = "Hit Die: " + reader.GetInt32(1);
-                                ClassStack.Children.Add(Class);
-                                ClassStack.Children.Add(HitDie);
+                                Title.Children.Add(Class);
+                                Title.Children.Add(HitDie);
+                                titlePanel.Children.Add(frame);
+                                //ClassStack.Children.Add(HitDie);
                             }
                             reader.Close(); // allows reader to be used again instead of creating innerReader, 3, etc
                         }
@@ -93,11 +105,27 @@ public partial class SelectedClassPage : ContentPage
                         cmd.Parameters.AddWithValue("@ClassID2", selectedClass);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
+                            StackLayout skills = new StackLayout();
+                            
+                            skillsFrame.BackgroundColor = SecondaryColor;
+                            skillsFrame.Margin = 5;
+                            skillsFrame.WidthRequest = 400;
+                            skillsFrame.HorizontalOptions = LayoutOptions.Center;
+
                             StackLayout savingThrows = new StackLayout();
                             savingThrows.Children.Add(new Label { Text="Saving Throws:", TextColor = fontColor });
                             StackLayout optionalSkills = new StackLayout();
                             savingThrowsFrame.BackgroundColor = SecondaryColor;
                             optionalSkillsFrame.BackgroundColor = SecondaryColor;
+                            optionalSkillsFrame.HorizontalOptions = LayoutOptions.Center;
+
+                            savingThrowsFrame.HorizontalOptions = LayoutOptions.Center;
+
+                            optionalSkillsFrame.Margin = 5;
+                            savingThrowsFrame.Margin = 5;
+
+                            savingThrowsFrame.WidthRequest = 400;
+                            optionalSkillsFrame.WidthRequest = 400;
                             
                             int newOption = 0;
                             while (reader.Read())
@@ -155,7 +183,7 @@ public partial class SelectedClassPage : ContentPage
                                                         }
                                                         else
                                                         {
-                                                            ClassStack.Children.Add(ProfName);
+                                                            skills.Children.Add(ProfName);
                                                         }
                                                     }
                                                 }
@@ -169,6 +197,7 @@ public partial class SelectedClassPage : ContentPage
                                     Debug.WriteLine("Exception: " + eSql.Message);
                                 }
                             }
+                            skillsFrame.Content = skills;
                             savingThrowsFrame.Content = savingThrows;
                             optionalSkillsFrame.Content = optionalSkills;
                         }
@@ -179,9 +208,11 @@ public partial class SelectedClassPage : ContentPage
                     {
                         BackgroundColor = SecondaryColor,
                         TextColor = fontColor,
+                        Margin = 5,
                         Text = "Submit"
                     };
                     submit.Clicked += Submit;
+                    ClassStack.Children.Add(skillsFrame);
                     ClassStack.Children.Add(savingThrowsFrame);
                     ClassStack.Children.Add(optionalSkillsFrame);
                     ClassStack.Children.Add(submit);

@@ -43,7 +43,6 @@ namespace DungeonSidekickMAUI
                 Text = "New Character Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-
             };
             createButton.Clicked += Create_Character;
 
@@ -54,9 +53,26 @@ namespace DungeonSidekickMAUI
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-
             };
             settingsButton.Clicked += Settings_Page;
+
+            var inventoryButton = new Button
+            {
+                TextColor = (Color)fontColor,
+                Text = "Inventory",
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = (Color)secondaryColor,
+            };
+            inventoryButton.Clicked += Inventory_Page;
+
+            var spellpoolButton = new Button
+            {
+                TextColor = (Color)fontColor,
+                Text = "Spellpool",
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = (Color)secondaryColor,
+            };
+            settingsButton.Clicked += Spellpool_Page;
             
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
@@ -84,6 +100,14 @@ namespace DungeonSidekickMAUI
         private async void Landing_Page(object sender, EventArgs e)
         {
             await MyPushAsync(new LandingPage());
+        }
+        private async void Inventory_Page(object sender, EventArgs e)
+        {
+            //await MyPushAsync(new InventoryPage());
+        }
+        private async void Spellpool_Page(object sender, EventArgs e)
+        {
+            //await MyPushAsync(new SpellpoolPage());
         }
 
         public static async Task MyPushAsync(Page page)
