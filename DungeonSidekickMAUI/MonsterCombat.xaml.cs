@@ -80,9 +80,9 @@ public partial class MonsterCombat : ContentPage
 
     private void PullDiceValue() // Leaving this in because I don't want to delete someone else's work without permission.
     {
-        CharacterSheet character = CharacterSheet.Instance;
+        ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
         //int WeaponID = Preferences.Default.Get("SelectedWeapon", -1);
-        int WeaponID = character.WEquippedID; // Shouldn't need this, just wanted to add it because functionality changed.
+        int WeaponID = character.c_WEquippedID; // Shouldn't need this, just wanted to add it because functionality changed.
         if (WeaponID == -1) return;
         character.EquipItem(WeaponID, 0);
         //dice = character.damageDice;
@@ -130,7 +130,7 @@ public partial class MonsterCombat : ContentPage
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
 
-        CharacterSheet character = CharacterSheet.Instance;
+        ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
 
         bool hitIsPositive = true;
         bool dmgIsPositive = true;
@@ -297,7 +297,7 @@ public partial class MonsterCombat : ContentPage
             }
             if (throughAC)
             {
-                int result = roller.Roll(character.damageDice);
+                int result = roller.Roll(character.c_damageDice);
                 if (dmgIsPositive)
                 {
                     result += dmgMod;

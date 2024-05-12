@@ -7,6 +7,7 @@
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
+
             <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
             WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
 
@@ -30,6 +31,19 @@
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="400" HorizontalOptions="Center"/>
+            <Grid x:Name="HealthPopup" BackgroundColor="#80000000" IsVisible="False" HorizontalOptions="Center"  VerticalOptions="Center">
+                <StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="{Binding startingHealth, StringFormat='Normally your health would have been {0}'}" x:Name="StartingHealthLabel"/>
+                    <Entry Placeholder="Type a number for health"
+                   Text="{Binding chosenHealth}"
+                   HorizontalOptions="FillAndExpand"
+                   x:Name="chosenHealthEntry"/>
+                    <Button Text="Ok"
+                    Clicked="StartingHealthChosen"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+                </StackLayout>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

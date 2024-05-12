@@ -10,9 +10,9 @@ namespace DungeonSidekickMAUI;
 public partial class SelectedRacePage : ContentPage
 {
     int RaceID;
-    CharacterSheet characterSheet;
+    ImportedCharacterSheet characterSheet;
     int raceId;
-    public SelectedRacePage(CharacterSheet characterSheet, int selectedRace)
+    public SelectedRacePage(ImportedCharacterSheet characterSheet, int selectedRace)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
@@ -104,7 +104,7 @@ public partial class SelectedRacePage : ContentPage
 
                                 Race.TextColor = (Color)fontColor;
                                 string raceName = reader.GetString(0);
-                                characterSheet.raceName = raceName;
+                                characterSheet.c_RaceName = raceName;
                                 Race.Text = raceName;
 
                                 frame.Content = Race;
@@ -337,7 +337,7 @@ public partial class SelectedRacePage : ContentPage
 
     private void Submit(object sender, EventArgs e)
     {
-        characterSheet.race = raceId;
+        characterSheet.c_Race = raceId;
         Navigation.PushAsync(new CSheet());
     }
 }
