@@ -453,8 +453,8 @@ namespace DungeonSidekickMAUI
 
             if (ETypeID == 1) // Equipment Check
             {
-                string query = "SELECT armorClassBase FROM dbo.Gear" +
-                " WHERE GearID = @Id;";
+                string query = "SELECT armorClassBase FROM dbo.Armor" +
+                " WHERE ArmorID = @Id;";
                 Connection connection = Connection.connectionSingleton;
                 try
                 {

@@ -33,7 +33,7 @@
             </VerticalStackLayout>
             <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Start" Background="{DynamicResource TrinaryColor}" Grid.Row="0" Grid.Column="1"> <!--This stack layout tackles the AC/HP. It is not fully implemented yet-->
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
-                    <Label Text="AC:15" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+                    <Label x:Name="AC" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0" >
                     <Label Text="HP:25" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>

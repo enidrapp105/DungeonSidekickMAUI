@@ -45,6 +45,8 @@ public partial class LandingPage : ContentPage
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
 
+        AC.Text = "AC: " + currentcharacterSheet.c_ACBoost.ToString();
+
         Connection connection = Connection.connectionSingleton;
         statusnames = new List<string>();
         statusdescriptions = new List<string>();
@@ -184,6 +186,21 @@ public partial class LandingPage : ContentPage
                                     temp.Name = name;
                                     temp.Id = armor[0];
                                     temp.eTypeId = 1;
+
+                                    // Only shows if you aren't wearing this armor. Only works on page refresh, though.
+                                    if (temp.Id != currentcharacterSheet.c_EEquippedID)
+                                    {
+                                        // Button to equip armor.
+                                        Button equip = new Button
+                                        {
+                                            TextColor = fontColor,
+                                            Text = "Equip",
+                                            BackgroundColor = TrinaryColor,
+                                            CommandParameter = temp
+                                        };
+                                        equip.Clicked += EquipButton;
+                                        layout.Add(equip);
+                                    }
 
                                     // Button that removes the item from the DB
                                     Button delete = new Button
@@ -347,6 +364,24 @@ public partial class LandingPage : ContentPage
                 statusstack.Children.Add(removeButton);
                 existingstatuses.Add(selectedEffect);
             }
+        }
+    }
+
+    /*
+     * Function: EquipButton
+     * Author: Thomas Hewitt
+     * Purpose: Handles equipping armor when the Equip button is clicked.
+     * Last Modified: 5/5/2024 11:51pm
+     */
+    private async void EquipButton(object? sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            currentcharacterSheet.EquipItem(id, eTypeId);
+            await Navigation.PushAsync(new LandingPage()); // Only using await here because it complains otherwise. It's much faster without it.
+            Navigation.RemovePage(this); // Getting rid of the old page so the back button has fewer issues.
         }
     }
 
