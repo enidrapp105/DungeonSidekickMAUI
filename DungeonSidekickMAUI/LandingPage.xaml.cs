@@ -82,7 +82,7 @@ public partial class LandingPage : ContentPage
             reader.Close();
             sqlQuery = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
             command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet.charactername);
+            command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
             if (conn.State == System.Data.ConnectionState.Open)
             {
                 // No need to create another SqlCommand here
@@ -435,7 +435,7 @@ public partial class LandingPage : ContentPage
                 }
                 query = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
                 command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet.charactername);
+                command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
                     // No need to create another SqlCommand here
