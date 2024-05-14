@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using Microsoft.Data.SqlClient;
+using Microsoft.Maui.Controls;
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
@@ -138,6 +139,23 @@ public partial class LandingPage : ContentPage
         StatusEffectPicker.ItemsSource = statusnames;
         foreach(string selectedEffect in characterconditions)
         {
+            int selectedeffectid = -1;
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                string sqlQuery = "SELECT condition_id FROM dbo.Conditions WHERE name = @name;";
+                SqlCommand command = new SqlCommand(sqlQuery, conn);
+                command.Parameters.AddWithValue("@name", selectedEffect); // Set parameter value
+                conn.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read()) // Check if there are rows
+                    {
+                        // Read the value from the reader
+                        selectedeffectid = (int)reader["condition_id"];
+                    }
+                }
+            }
             int index = statusnames.IndexOf(selectedEffect);
             if (selectedEffect == "Exhaustion")
             {
@@ -155,11 +173,17 @@ public partial class LandingPage : ContentPage
                     TextColor = fontColor,
                     Margin = new Thickness(0, 5, 0, 0)
                 };
-                removeButton.Clicked += (s, args) =>
+                removeButton.Clicked += async (s, args) =>
                 {
                     statusstack.Children.Remove(exhaustionView);
                     statusstack.Children.Remove(removeButton);
                     existingstatuses.Remove(selectedEffect);
+                    // Capture the IDs before removing
+                    int charID = characterid;
+                    int condID = 15;
+
+                    // Remove from database
+                    await RemoveStatusFromDatabase(charID, condID);
                 };
 
                 statusstack.Children.Add(exhaustionView);
@@ -187,11 +211,17 @@ public partial class LandingPage : ContentPage
                         TextColor = fontColor,
                         Margin = new Thickness(0, 5, 0, 0)
                     };
-                    removeButton.Clicked += (s, args) =>
+                    removeButton.Clicked += async (s, args) =>
                     {
                         statusstack.Children.Remove(effectLabel);
                         statusstack.Children.Remove(removeButton);
                         existingstatuses.Remove(selectedEffect);
+                        // Capture the IDs before removing
+                        int charID = characterid;
+                        int condID = selectedeffectid;
+
+                        // Remove from database
+                        await RemoveStatusFromDatabase(charID, condID);
                     };
 
                     statusstack.Children.Add(effectLabel);
@@ -460,7 +490,6 @@ public partial class LandingPage : ContentPage
             DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
-        DisplayAlert("alert", conditionID.ToString() + " " + characterID.ToString(), "ok");
         
 
        
@@ -481,11 +510,18 @@ public partial class LandingPage : ContentPage
                 TextColor = fontColor,
                 Margin = new Thickness(0, 5, 0, 0)
             };
-            removeButton.Clicked += (s, args) =>
+            removeButton.Clicked += async (s, args) =>
             {
                 statusstack.Children.Remove(exhaustionView);
                 statusstack.Children.Remove(removeButton);
                 existingstatuses.Remove(selectedEffect);
+                // Capture the IDs before removing
+                int charID = characterID;
+                int condID = conditionID;
+
+                // Remove from database
+                await RemoveStatusFromDatabase(charID, condID);
+                
             };
 
             statusstack.Children.Add(exhaustionView);
@@ -513,11 +549,17 @@ public partial class LandingPage : ContentPage
                     TextColor = fontColor,
                     Margin = new Thickness(0, 5, 0, 0)
                 };
-                removeButton.Clicked += (s, args) =>
+                removeButton.Clicked += async (s, args) =>
                 {
                     statusstack.Children.Remove(effectLabel);
                     statusstack.Children.Remove(removeButton);
                     existingstatuses.Remove(selectedEffect);
+                    // Capture the IDs before removing
+                    int charID = characterID;
+                    int condID = conditionID;
+
+                    // Remove from database
+                    await RemoveStatusFromDatabase(charID, condID);
                 };
 
                 statusstack.Children.Add(effectLabel);
@@ -526,6 +568,27 @@ public partial class LandingPage : ContentPage
             }
         }
         
+    }
+    async Task RemoveStatusFromDatabase(int charID, int condID)
+    {
+        Connection connection = Connection.connectionSingleton;
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                string query = "DELETE FROM dbo.CharacterConditions WHERE CharacterID = @CharacterID AND ConditionID = @ConditionID";
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CharacterID", charID);
+                command.Parameters.AddWithValue("@ConditionID", condID);
+                await conn.OpenAsync(); // Open asynchronously
+                await command.ExecuteNonQueryAsync(); // Execute asynchronously
+            }
+        }
+        catch (Exception eSql)
+        {
+            await DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
     }
 
     /*
