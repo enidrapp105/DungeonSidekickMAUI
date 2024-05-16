@@ -145,6 +145,6 @@ public partial class AddToInventory : ContentPage
 
     private void GoToLanding(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LandingPage());
+        Navigation.PushAsync(new InventoryPage());
     }
 }

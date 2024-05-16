@@ -46,6 +46,15 @@ namespace DungeonSidekickMAUI
             };
             createButton.Clicked += Create_Character;
 
+            var modifyButton = new Button
+            {
+                TextColor = (Color)fontColor,
+                Text = "Modify Character",
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = (Color)secondaryColor,
+            };
+            createButton.Clicked += Modify_Character;
+
 
             var settingsButton = new Button
             {
@@ -77,6 +86,8 @@ namespace DungeonSidekickMAUI
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
             flexLayout.Children.Add(settingsButton);
+            flexLayout.Children.Add(inventoryButton);
+            flexLayout.Children.Add(spellpoolButton);
 
             return flexLayout;
         }
@@ -103,11 +114,11 @@ namespace DungeonSidekickMAUI
         }
         private async void Inventory_Page(object sender, EventArgs e)
         {
-            //await MyPushAsync(new InventoryPage());
-        }
+            await MyPushAsync(new InventoryPage());
+        } 
         private async void Spellpool_Page(object sender, EventArgs e)
         {
-            //await MyPushAsync(new SpellpoolPage());
+            await MyPushAsync(new SpellpoolPage());
         }
 
         public static async Task MyPushAsync(Page page)
