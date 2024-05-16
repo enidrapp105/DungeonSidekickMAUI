@@ -9,32 +9,32 @@
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
             <StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel1"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker1" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel1"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker1" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  WidthRequest="200" Text="PlaceHolder" x:Name="totallabel2"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker2" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel2"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker2" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel3"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker3" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel3"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker3" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel4"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker4" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel4"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker4" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel5"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker5" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel5"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker5" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal">
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="200" Text="PlaceHolder" x:Name="totallabel6"/>
-                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker6" WidthRequest="100" TextColor="{DynamicResource FontC}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" WidthRequest="250" Text="PlaceHolder" x:Name="totallabel6"/>
+                    <Picker BackgroundColor="{DynamicResource SecondaryColor}" x:Name="StatPicker6" WidthRequest="150" TextColor="{DynamicResource FontC}"/>
                 </StackLayout>
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Assign by Class" WidthRequest="200" Clicked="AssignStatsbyclass"/>
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Submit" WidthRequest="100" Clicked="AssignStats"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Assign by Class" WidthRequest="400" Clicked="AssignStatsbyclass"/>
+                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Submit" WidthRequest="400" Clicked="AssignStats"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
