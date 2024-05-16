@@ -136,9 +136,9 @@ public partial class AddToInventory : ContentPage
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            character.inv.AddItem(id, quant, eTypeId);
-            character.inv.UpdateDB();
-            character.inv.ClearItems();
+            character.c_inv.AddItem(id, quant, eTypeId);
+            character.c_inv.UpdateDB();
+            character.c_inv.ClearItems();
         }
     }
 

@@ -1,5 +1,7 @@
+using System;
 using System.Diagnostics;
 using Microsoft.Data.SqlClient;
+using Microsoft.Maui.Controls;
 namespace DungeonSidekickMAUI;
 public partial class LandingPage : ContentPage
 {
@@ -11,6 +13,7 @@ public partial class LandingPage : ContentPage
     List<string> statusdescriptions;
     List<string> exhaustiondescriptions;
     HashSet<string> existingstatuses;
+    int characterid;
     // Allows us to use dynamic colors when creating labels, buttons, etc in this class
     Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
     Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
@@ -45,11 +48,16 @@ public partial class LandingPage : ContentPage
         inv = new Inventory(); // TEMP PLACEHOLDER 1
         inv.PullItems();
 
+        AC.Text = "AC: " + currentcharacterSheet.c_ACBoost.ToString();
+
         Connection connection = Connection.connectionSingleton;
         statusnames = new List<string>();
         statusdescriptions = new List<string>();
         existingstatuses = new HashSet<string>();
         exhaustiondescriptions = new List<string>();
+        List<int> characterconditionids = new List<int>();
+        List<string> characterconditions = new List<string>();
+
 
         using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
         {
@@ -64,15 +72,28 @@ public partial class LandingPage : ContentPage
 
 
             while (reader.Read())
+            {
+                string name = reader["name"].ToString();
+                string description = reader["description"].ToString();
+
+                statusnames.Add(name);
+                statusdescriptions.Add(description);
+            }
+
+            reader.Close();
+            sqlQuery = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
+            command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
+            if (conn.State == System.Data.ConnectionState.Open)
+            {
+                // No need to create another SqlCommand here
+                object result = command.ExecuteScalar();
+                if (result != null && result != DBNull.Value)
                 {
-                    string name = reader["name"].ToString();
-                    string description = reader["description"].ToString();
-
-                    statusnames.Add(name);
-                    statusdescriptions.Add(description);
+                    characterid = Convert.ToInt32(result);
                 }
+            }
 
-                reader.Close();
         }
         using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
         {
@@ -91,8 +112,124 @@ public partial class LandingPage : ContentPage
             }
 
             reader.Close();
+            sqlQuery = "SElECT ConditionID FROM dbo.CharacterConditions WHERE CharacterID = @characterid;";
+            command = new SqlCommand(sqlQuery, conn);
+            command.Parameters.AddWithValue("@characterid", characterid);
+            reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                int ConditionId = (int)reader["ConditionID"];
+                characterconditionids.Add(ConditionId);
+            }
+            reader.Close();
+            foreach (int conditionid in characterconditionids)
+            {
+                sqlQuery = "SElECT name FROM dbo.Conditions WHERE condition_id = @conditionid;";
+                command = new SqlCommand(sqlQuery, conn);
+                command.Parameters.AddWithValue("@conditionid", conditionid);
+                reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string conditionName = reader["name"].ToString();
+                    characterconditions.Add(conditionName);
+                }
+                reader.Close();
+            }
         }
         StatusEffectPicker.ItemsSource = statusnames;
+        foreach(string selectedEffect in characterconditions)
+        {
+            int selectedeffectid = -1;
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                string sqlQuery = "SELECT condition_id FROM dbo.Conditions WHERE name = @name;";
+                SqlCommand command = new SqlCommand(sqlQuery, conn);
+                command.Parameters.AddWithValue("@name", selectedEffect); // Set parameter value
+                conn.Open();
+
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    if (reader.Read()) // Check if there are rows
+                    {
+                        // Read the value from the reader
+                        selectedeffectid = (int)reader["condition_id"];
+                    }
+                }
+            }
+            int index = statusnames.IndexOf(selectedEffect);
+            if (selectedEffect == "Exhaustion")
+            {
+                // Create an ExhaustionView with the descriptions
+                ExhaustionView exhaustionView = new ExhaustionView(exhaustiondescriptions)
+                {
+                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+
+                Button removeButton = new Button
+                {
+                    Text = "Remove",
+                    BackgroundColor = SecondaryColor,
+                    TextColor = fontColor,
+                    Margin = new Thickness(0, 5, 0, 0)
+                };
+                removeButton.Clicked += async (s, args) =>
+                {
+                    statusstack.Children.Remove(exhaustionView);
+                    statusstack.Children.Remove(removeButton);
+                    existingstatuses.Remove(selectedEffect);
+                    // Capture the IDs before removing
+                    int charID = characterid;
+                    int condID = 15;
+
+                    // Remove from database
+                    await RemoveStatusFromDatabase(charID, condID);
+                };
+
+                statusstack.Children.Add(exhaustionView);
+                statusstack.Children.Add(removeButton);
+                existingstatuses.Add(selectedEffect);
+            }
+            else
+            {
+                // Handle other status effects
+                if (index >= 0 && index < statusdescriptions.Count)
+                {
+                    string description = statusdescriptions[index];
+                    Label effectLabel = new Label
+                    {
+                        Text = $"{selectedEffect}: {description}",
+                        TextColor = fontColor,
+                        BackgroundColor = PrimaryColor,
+                        Margin = new Thickness(0, 5, 0, 0)
+                    };
+
+                    Button removeButton = new Button
+                    {
+                        Text = "Remove",
+                        BackgroundColor = SecondaryColor,
+                        TextColor = fontColor,
+                        Margin = new Thickness(0, 5, 0, 0)
+                    };
+                    removeButton.Clicked += async (s, args) =>
+                    {
+                        statusstack.Children.Remove(effectLabel);
+                        statusstack.Children.Remove(removeButton);
+                        existingstatuses.Remove(selectedEffect);
+                        // Capture the IDs before removing
+                        int charID = characterid;
+                        int condID = selectedeffectid;
+
+                        // Remove from database
+                        await RemoveStatusFromDatabase(charID, condID);
+                    };
+
+                    statusstack.Children.Add(effectLabel);
+                    statusstack.Children.Add(removeButton);
+                    existingstatuses.Add(selectedEffect);
+                }
+            }
+        }
         foreach (var weapon in inv.Weapons)
         {
             string query = "SELECT name FROM dbo.Weapon" +
@@ -185,6 +322,21 @@ public partial class LandingPage : ContentPage
                                     temp.Id = armor[0];
                                     temp.eTypeId = 1;
 
+                                    // Only shows if you aren't wearing this armor. Only works on page refresh, though.
+                                    if (temp.Id != currentcharacterSheet.c_EEquippedID)
+                                    {
+                                        // Button to equip armor.
+                                        Button equip = new Button
+                                        {
+                                            TextColor = fontColor,
+                                            Text = "Equip",
+                                            BackgroundColor = TrinaryColor,
+                                            CommandParameter = temp
+                                        };
+                                        equip.Clicked += EquipButton;
+                                        layout.Add(equip);
+                                    }
+
                                     // Button that removes the item from the DB
                                     Button delete = new Button
                                     {
@@ -273,20 +425,74 @@ public partial class LandingPage : ContentPage
 
     private async void AddEffectButtonClicked(object sender, EventArgs e)
     {
+        string selectedEffect = StatusEffectPicker.SelectedItem.ToString();
+        int index = statusnames.IndexOf(selectedEffect);
+        Connection connection = Connection.connectionSingleton;
+        int conditionID = -1;
+        int characterID = -1;
         if (StatusEffectPicker.SelectedItem == null)
         {
             await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
             return;
         }
-
-        string selectedEffect = StatusEffectPicker.SelectedItem.ToString();
-        int index = statusnames.IndexOf(selectedEffect);
+        
 
         if (existingstatuses.Contains(selectedEffect))
         {
             await DisplayAlert("Effect already present", "Please select a different effect", "Ok");
             return;
         }
+        
+
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                string query = "SELECT condition_id FROM Conditions WHERE name = @SelectedEffect;";
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@SelectedEffect", selectedEffect);
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        object result = command.ExecuteScalar();
+                        if (result != null && result != DBNull.Value)
+                        {
+                            conditionID = Convert.ToInt32(result);
+                        }
+                    }
+                }
+                query = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
+                command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    // No need to create another SqlCommand here
+                    object result = command.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        characterID = Convert.ToInt32(result);
+                    }
+                }
+                query = "INSERT INTO CharacterConditions (CharacterID, ConditionID) VALUES (@CharacterID, @ConditionID);";
+                command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CharacterID", characterID);
+                command.Parameters.AddWithValue("@ConditionID", conditionID);
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+        
+
+       
 
         if (selectedEffect == "Exhaustion")
         {
@@ -304,11 +510,18 @@ public partial class LandingPage : ContentPage
                 TextColor = fontColor,
                 Margin = new Thickness(0, 5, 0, 0)
             };
-            removeButton.Clicked += (s, args) =>
+            removeButton.Clicked += async (s, args) =>
             {
                 statusstack.Children.Remove(exhaustionView);
                 statusstack.Children.Remove(removeButton);
                 existingstatuses.Remove(selectedEffect);
+                // Capture the IDs before removing
+                int charID = characterID;
+                int condID = conditionID;
+
+                // Remove from database
+                await RemoveStatusFromDatabase(charID, condID);
+                
             };
 
             statusstack.Children.Add(exhaustionView);
@@ -336,17 +549,63 @@ public partial class LandingPage : ContentPage
                     TextColor = fontColor,
                     Margin = new Thickness(0, 5, 0, 0)
                 };
-                removeButton.Clicked += (s, args) =>
+                removeButton.Clicked += async (s, args) =>
                 {
                     statusstack.Children.Remove(effectLabel);
                     statusstack.Children.Remove(removeButton);
                     existingstatuses.Remove(selectedEffect);
+                    // Capture the IDs before removing
+                    int charID = characterID;
+                    int condID = conditionID;
+
+                    // Remove from database
+                    await RemoveStatusFromDatabase(charID, condID);
                 };
 
                 statusstack.Children.Add(effectLabel);
                 statusstack.Children.Add(removeButton);
                 existingstatuses.Add(selectedEffect);
             }
+        }
+        
+    }
+    async Task RemoveStatusFromDatabase(int charID, int condID)
+    {
+        Connection connection = Connection.connectionSingleton;
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                string query = "DELETE FROM dbo.CharacterConditions WHERE CharacterID = @CharacterID AND ConditionID = @ConditionID";
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CharacterID", charID);
+                command.Parameters.AddWithValue("@ConditionID", condID);
+                await conn.OpenAsync(); // Open asynchronously
+                await command.ExecuteNonQueryAsync(); // Execute asynchronously
+            }
+        }
+        catch (Exception eSql)
+        {
+            await DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+    }
+
+    /*
+     * Function: EquipButton
+     * Author: Thomas Hewitt
+     * Purpose: Handles equipping armor when the Equip button is clicked.
+     * Last Modified: 5/5/2024 11:51pm
+     */
+    private async void EquipButton(object? sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is UserItem userItem)
+        {
+            int eTypeId = userItem.eTypeId;
+            int id = userItem.Id;
+            currentcharacterSheet.EquipItem(id, eTypeId);
+            await Navigation.PushAsync(new LandingPage()); // Only using await here because it complains otherwise. It's much faster without it.
+            Navigation.RemovePage(this); // Getting rid of the old page so the back button has fewer issues.
         }
     }
 
