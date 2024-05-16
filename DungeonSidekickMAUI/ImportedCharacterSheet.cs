@@ -376,20 +376,30 @@ namespace DungeonSidekickMAUI
                                     while (reader.Read())
                                     {
                                         c_damageDice = reader.GetString(0);
-                                        if (c_damageDice.Contains("+ MOD"))
+                                        string[] dmgSplits = c_damageDice.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries); //This will handle our +MOD and other + problems
+                                        c_damageDice = "";
+                                        foreach (var split in dmgSplits)
                                         {
-                                            c_damageDice = c_damageDice.Remove(4); //Use 4 to specifically remove the + MOD
+                                            if (split.Contains("d"))
+                                            {
+                                                //doing nothing here, want to work on structuring + stuff for our dice roller
+                                            }
+                                            else if (split.Contains("MOD"))
+                                            {
+                                                dmgSplits[2] = Preferences.Default.Get("IntMod", 0).ToString();
+                                            }
+                                            else if (split.Contains("+"))
+                                            {
+                                                dmgSplits[1] = ",+";
+                                            }
                                         }
-                                        else if (c_damageDice.Contains("+ 40"))
+                                        foreach (var split in dmgSplits)
                                         {
-                                            c_damageDice = c_damageDice.Insert(5, ",");
+                                            c_damageDice += split;
                                         }
-                                        else if (c_damageDice.Contains("+"))
-                                        {
-                                            c_damageDice = c_damageDice.Insert(4, ",");
-                                        }
+                                        c_damageDice = c_damageDice.Replace(" ", "");
                                         c_SEquipped = true;
-                                        c_SEquippedID = ID;
+                                        c_SEquippedID = ID; // These can only be valid if you made it this far (no errors).
                                     }
                                 }
                             }
