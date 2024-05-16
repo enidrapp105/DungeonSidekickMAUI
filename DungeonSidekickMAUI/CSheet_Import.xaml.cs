@@ -220,46 +220,51 @@ public partial class CSheet_Import : ContentPage
 
                                 //creating visual example of new Character sheet for user interface to choose from
                                 StackLayout CharacterStack = new StackLayout();
+                                CharacterStack.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
                                 Label CName = new Label();
                                 CName.TextColor = (Color)fontColor;
-                                CName.Text = "Character Name";
-                                Label CNameVal = new Label();
-                                CNameVal.TextColor = (Color)fontColor;
-                                CNameVal.Text = Char.c_Name;
+                                CName.Text = "Character Name: " + Char.c_Name;
+                                CName.WidthRequest = 400;
+                                //Label CNameVal = new Label();
+                                //CNameVal.TextColor = (Color)fontColor;
+                                //CNameVal.Text = Char.c_Name;
 
                                 CharacterStack.Children.Add(CName);
-                                CharacterStack.Children.Add(CNameVal);
+                                //CharacterStack.Children.Add(CNameVal);
 
                                 Label CRace = new Label();
                                 CRace.TextColor = (Color)fontColor;
-                                CRace.Text = "Race";
-                                Label CRaceVal = new Label();
-                                CRaceVal.TextColor = (Color)fontColor;
-                                CRaceVal.Text = Char.c_Race.ToString();
+                                CRace.Text = "Race: " + Char.c_Race.ToString();
+                                CRace.WidthRequest = 400;
+                                //Label CRaceVal = new Label();
+                                //CRaceVal.TextColor = (Color)fontColor;
+                                //CRaceVal.Text = Char.c_Race.ToString();
 
                                 CharacterStack.Children.Add(CRace);
-                                CharacterStack.Children.Add(CRaceVal);
+                                //CharacterStack.Children.Add(CRaceVal);
 
                                 Label CClass = new Label();
                                 CClass.TextColor = (Color)fontColor;
-                                CClass.Text = "Class";
-                                Label CClassVal = new Label();
-                                CClassVal.TextColor = (Color)fontColor;
-                                CClassVal.Text = Char.c_Class.ToString();
+                                CClass.Text = "Class: " + Char.c_Class.ToString();
+                                CClass.WidthRequest = 400;
+                                //Label CClassVal = new Label();
+                                //CClassVal.TextColor = (Color)fontColor;
+                                //CClassVal.Text = Char.c_Class.ToString();
 
                                 CharacterStack.Children.Add(CClass);
-                                CharacterStack.Children.Add(CClassVal);
+                                //CharacterStack.Children.Add(CClassVal);
 
                                 Label CLevel = new Label();
                                 CLevel.TextColor = (Color)fontColor;
-                                CLevel.Text = "Level";
-                                Label CLevelVal = new Label();
-                                CLevelVal.TextColor = (Color)fontColor;
-                                CLevelVal.Text = Char.c_Level.ToString();
+                                CLevel.Text = "Level: " + Char.c_Level.ToString();
+                                CLevel.WidthRequest = 400;
+                                //Label CLevelVal = new Label();
+                                //CLevelVal.TextColor = (Color)fontColor;
+                                //CLevelVal.Text = Char.c_Level.ToString();
 
                                 CharacterStack.Children.Add(CLevel);
-                                CharacterStack.Children.Add(CLevelVal);
+                                //CharacterStack.Children.Add(CLevelVal);
 
                                 Button characterButton = new Button
                                 {

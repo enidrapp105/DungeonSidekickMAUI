@@ -132,6 +132,7 @@ public partial class AddToInventory : ContentPage
 
         // Grabbing the character singleton to add to its inventory.
         ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
+
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
