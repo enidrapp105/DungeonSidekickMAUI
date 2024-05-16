@@ -59,11 +59,12 @@ public partial class AddToSpellpool : ContentPage
         {
             int id = userSpell.Id;
             inv.AddSpell(id);
+            await DisplayAlert("Added Spell", "Successfully added to spellpool", "Ok");
         }
     }
 
     private void GoToLandingFromSpells(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LandingPage());
+        Navigation.PushAsync(new SpellpoolPage());
     }
 }

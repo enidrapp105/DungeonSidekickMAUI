@@ -1,9 +1,94 @@
+using System.Diagnostics;
+using Microsoft.Data.SqlClient;
+using Microsoft.Maui.Controls;
 namespace DungeonSidekickMAUI;
 
 public partial class SpellpoolPage : ContentPage
 {
-	public SpellpoolPage()
+    private Spellpool spells;
+    public SpellpoolPage()
 	{
 		InitializeComponent();
-	}
+
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands nav = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
+        PullSpellsPool();
+    }
+
+    /*
+     * Function: PullSpellsPool
+     * Author: Brendon Williams
+     * Purpose: Works like weapon pool, displays all spells to user
+     * Last Modified: 04/15/2024 By Author
+     */
+    void PullSpellsPool()
+    {
+        Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+        Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+        Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+
+        spells = new Spellpool();
+        spells.PullSpells();
+        string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+        foreach (var spell in spells.Spells)
+        {
+            string query = "SELECT name FROM dbo.Spells" +
+            " WHERE SpellID = @Id;";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+
+                            // grabs ID from spell pool list
+                            cmd.Parameters.AddWithValue("@Id", spell);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    HorizontalStackLayout layout = new HorizontalStackLayout();
+                                    Label weaponLabel = new Label();
+                                    weaponLabel.TextColor = (Color)fontColor;
+
+                                    // should hopefully grab name of spell from spell pool
+                                    string name = reader.GetString(0);
+                                    weaponLabel.Text = name;
+                                    layout.Add(weaponLabel);
+
+                                    SpellpoolStack.Add(layout);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+                DisplayAlert("Error!", eSql.Message, "OK");
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
+    }
+
+    /*
+     * Function: AddSpells
+     * Author: Anthony Rielly
+     * Purpose: Move to the add to spellpool page
+     * Last Modified: 04/18/2024 By Author
+     */
+    private void AddSpells(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddToSpellpool());
+    }
 }

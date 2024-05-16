@@ -53,7 +53,7 @@ namespace DungeonSidekickMAUI
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
             };
-            createButton.Clicked += Modify_Character;
+            modifyButton.Clicked += Modify_Character;
 
 
             var settingsButton = new Button
@@ -81,10 +81,11 @@ namespace DungeonSidekickMAUI
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
             };
-            settingsButton.Clicked += Spellpool_Page;
+            spellpoolButton.Clicked += Spellpool_Page;
             
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
+            flexLayout.Children.Add(modifyButton);
             flexLayout.Children.Add(settingsButton);
             flexLayout.Children.Add(inventoryButton);
             flexLayout.Children.Add(spellpoolButton);
