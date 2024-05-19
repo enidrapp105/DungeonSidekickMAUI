@@ -7,6 +7,7 @@ public partial class ClassPickerPage : ContentPage
 {
     ImportedCharacterSheet characterSheet;
     private bool m_NewAcc;
+    private bool m_ModSheet;
     /*
      * Function: ClassPicker default Constructor
      * Author: Kenny Rapp
@@ -15,9 +16,10 @@ public partial class ClassPickerPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Removed json string and switched to creating the buttons from a DB lookup, rather than hard coded.
      */
-    public ClassPickerPage(ImportedCharacterSheet CharacterSheet, bool newAcc = false)
+    public ClassPickerPage(bool modSheet, ImportedCharacterSheet CharacterSheet,  bool newAcc = false)
     {
         InitializeComponent();
+        m_ModSheet = modSheet;
 
         //nav bar setup
         m_NewAcc = newAcc;

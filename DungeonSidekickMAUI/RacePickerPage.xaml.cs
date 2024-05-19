@@ -8,10 +8,11 @@ public partial class RacePickerPage : ContentPage
 {
     ImportedCharacterSheet characterSheet;
     private bool m_NewAcc;
-    public RacePickerPage(ImportedCharacterSheet characterSheet, bool newAcc = false)
+    private bool m_ModSheet;
+    public RacePickerPage(bool modSheet, ImportedCharacterSheet characterSheet, bool newAcc = false)
     {
         InitializeComponent();
-
+        m_ModSheet = modSheet;
         // nav bar setup
         m_NewAcc = newAcc;
         if (!m_NewAcc)

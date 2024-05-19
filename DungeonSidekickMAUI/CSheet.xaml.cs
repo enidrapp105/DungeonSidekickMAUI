@@ -96,7 +96,7 @@ public partial class CSheet : ContentPage
     private void ClassPickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent, m_NewAcc));
+        Navigation.PushAsync(new ClassPickerPage(false,CharacterSheetcurrent, m_NewAcc));
     }
 
 
@@ -109,7 +109,7 @@ public partial class CSheet : ContentPage
     private void RacePickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent, m_NewAcc));
+        Navigation.PushAsync(new RacePickerPage(false, CharacterSheetcurrent, m_NewAcc));
     }
 
 
