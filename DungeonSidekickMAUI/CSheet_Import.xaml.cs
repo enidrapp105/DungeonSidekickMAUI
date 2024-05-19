@@ -169,7 +169,7 @@ public partial class CSheet_Import : ContentPage
                                     Char.c_PassiveWisdom = 1;
                                     Char.c_Level = 1;
                                 }
-                                using (SqlConnection conn2 = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                using (SqlConnection conn2 = new SqlConnection(connection.connectionString))
                                 {
                                     conn2.Open();
                                     if (conn2.State == System.Data.ConnectionState.Open)
@@ -193,7 +193,7 @@ public partial class CSheet_Import : ContentPage
                                     }
                                 }
 
-                                using (SqlConnection conn3 = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                using (SqlConnection conn3 = new SqlConnection(connection.connectionString))
                                 {
                                     conn3.Open();
                                     if (conn3.State == System.Data.ConnectionState.Open)
