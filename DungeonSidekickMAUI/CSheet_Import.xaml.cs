@@ -169,7 +169,53 @@ public partial class CSheet_Import : ContentPage
                                     Char.c_PassiveWisdom = 1;
                                     Char.c_Level = 1;
                                 }
+                                using (SqlConnection conn2 = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                {
+                                    conn2.Open();
+                                    if (conn2.State == System.Data.ConnectionState.Open)
+                                    {
+                                        using (SqlCommand cmd2 = conn2.CreateCommand())
+                                        {
+                                            //cmd.CommandText = CListQuery;
+                                            string query2 = "SELECT Class FROM dbo.ClassLookup" +
+                                            " WHERE ClassID = @ClassID;";
+                                            cmd2.CommandText = query2;
+                                            cmd2.Parameters.Add("@ClassID", SqlDbType.Int).Value = Char.c_Class;
+                                            using (SqlDataReader reader2 = cmd2.ExecuteReader())
+                                            {
 
+                                                while (reader2.Read())
+                                                {
+                                                    Char.c_ClassName = reader2.GetString(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                using (SqlConnection conn3 = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                {
+                                    conn3.Open();
+                                    if (conn3.State == System.Data.ConnectionState.Open)
+                                    {
+                                        using (SqlCommand cmd3 = conn3.CreateCommand())
+                                        {
+                                            //cmd.CommandText = CListQuery;
+                                            string query3 = "SELECT Race FROM dbo.RaceLookup" +
+                                            " WHERE RaceID = @RaceID;";
+                                            cmd3.CommandText = query3;
+                                            cmd3.Parameters.Add("@RaceID", SqlDbType.Int).Value = Char.c_Race;
+                                            using (SqlDataReader reader3 = cmd3.ExecuteReader())
+                                            {
+
+                                                while (reader3.Read())
+                                                {
+                                                    Char.c_RaceName = reader3.GetString(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 // *********************************
                                 // COMMENTED OUT SINCE A LOT ARE NULL VALUES WHEN PULLED FROM DB
                                 //Char.c_Flaws = reader.GetString(9);
@@ -235,7 +281,7 @@ public partial class CSheet_Import : ContentPage
 
                                 Label CRace = new Label();
                                 CRace.TextColor = (Color)fontColor;
-                                CRace.Text = "Race: " + Char.c_Race.ToString();
+                                CRace.Text = "Race: " + Char.c_RaceName;
                                 CRace.WidthRequest = 400;
                                 //Label CRaceVal = new Label();
                                 //CRaceVal.TextColor = (Color)fontColor;
@@ -246,7 +292,7 @@ public partial class CSheet_Import : ContentPage
 
                                 Label CClass = new Label();
                                 CClass.TextColor = (Color)fontColor;
-                                CClass.Text = "Class: " + Char.c_Class.ToString();
+                                CClass.Text = "Class: " + Char.c_ClassName;
                                 CClass.WidthRequest = 400;
                                 //Label CClassVal = new Label();
                                 //CClassVal.TextColor = (Color)fontColor;
