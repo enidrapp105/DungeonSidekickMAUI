@@ -179,6 +179,7 @@ namespace DungeonSidekickMAUI
         public static void Save(ImportedCharacterSheet character)
         {
             Preferences.Default.Set("UserCharacter", JsonSerializer.Serialize(character));
+            Preferences.Default.Set("CharacterId", character.p_CharacterID);
         }
 
         // for returing to preferences

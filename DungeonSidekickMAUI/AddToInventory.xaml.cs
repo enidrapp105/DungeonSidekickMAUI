@@ -131,15 +131,22 @@ public partial class AddToInventory : ContentPage
         // waiting for quantity to be entered
 
         // Grabbing the character singleton to add to its inventory.
-        ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
+        // DOESNT WORK
+        //ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
+
+        Inventory inv = new Inventory();
+        
 
         if (sender is Button button && button.CommandParameter is UserItem userItem)
         {
             int eTypeId = userItem.eTypeId;
             int id = userItem.Id;
-            character.c_inv.AddItem(id, quant, eTypeId);
-            character.c_inv.UpdateDB();
-            character.c_inv.ClearItems();
+            inv.AddItem(id, quant, eTypeId);
+            inv.UpdateOneItem(id, quant, eTypeId);
+
+            // I dont trust updateDB
+            //character.c_inv.UpdateDB();
+            //character.c_inv.ClearItems();
         }
     }
 

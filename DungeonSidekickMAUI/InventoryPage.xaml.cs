@@ -71,7 +71,7 @@ public partial class InventoryPage : ContentPage
     private void PullGear()
     {
         Connection connection = Connection.connectionSingleton;
-        foreach (var gear in inv.Items)
+        foreach (var gear in inv.Gear)
         {
             string query = "SELECT name FROM dbo.Gear" +
             " WHERE GearId = @Id;";
