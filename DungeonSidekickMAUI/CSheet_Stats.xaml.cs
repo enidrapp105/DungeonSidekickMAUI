@@ -184,7 +184,7 @@ namespace DungeonSidekickMAUI
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-
+            ImportedCharacterSheet.Save(CharacterSheetcurrent);
             Navigation.PushAsync(new LandingPage());
 
         }
