@@ -82,13 +82,34 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
             };
             spellpoolButton.Clicked += Spellpool_Page;
+
+            var combatButton = new Button
+            {
+                TextColor = (Color)fontColor,
+                Text = "Combat",
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = (Color)secondaryColor,
+            };
+            combatButton.Clicked += Combat_Page;
+
+            var changeButton = new Button
+            {
+                TextColor = (Color)fontColor,
+                Text = "Change Character",
+                HorizontalOptions = LayoutOptions.End,
+                BackgroundColor = (Color)secondaryColor,
+            };
+            changeButton.Clicked += Change_Character;
             
             flexLayout.Children.Add(landingPageButton);
             flexLayout.Children.Add(createButton);
+            flexLayout.Children.Add(changeButton);
             flexLayout.Children.Add(modifyButton);
-            flexLayout.Children.Add(settingsButton);
             flexLayout.Children.Add(inventoryButton);
             flexLayout.Children.Add(spellpoolButton);
+            flexLayout.Children.Add(combatButton);
+            flexLayout.Children.Add(settingsButton);
+
 
             return flexLayout;
         }
@@ -120,6 +141,16 @@ namespace DungeonSidekickMAUI
         private async void Spellpool_Page(object sender, EventArgs e)
         {
             await MyPushAsync(new SpellpoolPage());
+        }
+
+        private async void Combat_Page(object sender, EventArgs e)
+        {
+            await MyPushAsync(new CombatSelector());
+        }
+
+        private async void Change_Character(object sender, EventArgs e)
+        {
+            await MyPushAsync(new CSheet_Import());
         }
 
         public static async Task MyPushAsync(Page page)
