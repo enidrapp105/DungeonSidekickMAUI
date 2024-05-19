@@ -89,7 +89,7 @@ public partial class RacePickerPage : ContentPage
     {
         if (sender is Button RaceButton && RaceButton.CommandParameter is int id)
         {
-            Navigation.PushAsync(new SelectedRacePage(characterSheet, id, m_NewAcc));
+            Navigation.PushAsync(new SelectedRacePage(m_ModSheet, characterSheet, id, m_NewAcc));
         }
     }
 }

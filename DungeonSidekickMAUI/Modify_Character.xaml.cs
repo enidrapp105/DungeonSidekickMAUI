@@ -3,6 +3,7 @@ namespace DungeonSidekickMAUI;
 public partial class Modify_Character : ContentPage
 {
     public List<Entry> entries = new List<Entry>(); // Collection to store references to the dynamically created Entry controls
+    ImportedCharacterSheet Char;
     public Modify_Character()
 	{
         InitializeComponent();
@@ -24,7 +25,7 @@ public partial class Modify_Character : ContentPage
         var hasValue4 = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue5 = Application.Current.Resources.TryGetValue("AccentColor", out object accentColor);
         var hasValue6 = Application.Current.Resources.TryGetValue("AccessoryColor", out object accessoryColor);
-        ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
+        Char = ImportedCharacterSheet.Load();
 
         //Grab all Variables of 
         var variablesFull = typeof(ImportedCharacterSheet).GetProperties();
@@ -49,23 +50,54 @@ public partial class Modify_Character : ContentPage
                 WidthRequest = 400,
 
             };
-
-            //Create an entry for each property with a dynamic access name
-            var newEntry = new Entry
-            {
-                Placeholder = "Enter " + correctVariableName, // Use the property name as entry placeholder
-                BackgroundColor = (Color)secondaryColor,
-                TextColor = (Color)fontColor,
-                WidthRequest = 400,
-                Margin = new Thickness(0, 0, 0, 10)
-            };
-
-            //Set a binding between the entry and the corresponding property of the ImportedCharacterSheet instance
-            newEntry.SetBinding(Entry.TextProperty, new Binding(property.Name, BindingMode.TwoWay, source: Char));
-
             Sheet.Children.Add(newLabel);
-            Sheet.Children.Add(newEntry);
-            entries.Add(newEntry); // Add the entry to the collection
+
+            if (correctVariableName == "Class")
+            {
+                Button classChange = new Button()
+                {
+                    Text = "Class: " + Char.c_ClassName,
+                    WidthRequest = 400,
+                    HorizontalOptions = LayoutOptions.Center,
+                    BackgroundColor = (Color)secondaryColor,
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
+                classChange.Clicked += GoToClassPickerPage;
+                Sheet.Add(classChange);
+            }
+            else if (correctVariableName == "Race")
+            {
+                Button raceChange = new Button()
+                {
+                    Text = "Race: " + Char.c_RaceName,
+                    WidthRequest = 400,
+                    HorizontalOptions = LayoutOptions.Center,
+                    BackgroundColor = (Color)secondaryColor,
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
+                raceChange.Clicked += GoToRacePickerPage;
+                Sheet.Add(raceChange);
+            }
+            else
+            {
+
+                //Create an entry for each property with a dynamic access name
+                var newEntry = new Entry
+                {
+                    Placeholder = "Enter " + correctVariableName, // Use the property name as entry placeholder
+                    BackgroundColor = (Color)secondaryColor,
+                    TextColor = (Color)fontColor,
+                    WidthRequest = 400,
+                    Margin = new Thickness(0, 0, 0, 10)
+                };
+
+                //Set a binding between the entry and the corresponding property of the ImportedCharacterSheet instance
+                newEntry.SetBinding(Entry.TextProperty, new Binding(property.Name, BindingMode.TwoWay, source: Char));
+
+                
+                Sheet.Children.Add(newEntry);
+                entries.Add(newEntry); // Add the entry to the collection
+            }
         }
     }
 
@@ -76,8 +108,8 @@ public partial class Modify_Character : ContentPage
         int i = 0;
         ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
         Char.c_Name = entries[i++].Text;
-        Char.c_Class = int.Parse(entries[i++].Text);
-        Char.c_Race = int.Parse(entries[i++].Text);
+        //Char.c_Class = int.Parse(entries[i++].Text);
+        //Char.c_Race = int.Parse(entries[i++].Text);
         Char.c_Level = int.Parse(entries[i++].Text);
         Char.c_Background = entries[i++].Text;
         Char.c_Alignment = entries[i++].Text;
@@ -138,6 +170,18 @@ public partial class Modify_Character : ContentPage
     private void Cancel(object sender, EventArgs e)
     {
         Navigation.PushAsync(new MainPage());
+    }
+
+    private void GoToClassPickerPage(object sender, EventArgs e)
+    {
+        
+        Navigation.PushAsync(new ClassPickerPage(true, Char));
+    }
+
+    private void GoToRacePickerPage(object sender, EventArgs e)
+    {
+        
+        Navigation.PushAsync(new RacePickerPage(true, Char));
     }
 
 }

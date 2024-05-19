@@ -9,6 +9,7 @@ public partial class SelectedClassPage : ContentPage
     ImportedCharacterSheet characterSheet;
     int cId;
     private bool m_NewAcc;
+    private bool m_ModSheet;
     /*
      * Function: SelectedClassPage Constructor
      * Author: Kenny Rapp
@@ -17,10 +18,12 @@ public partial class SelectedClassPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Pulls from the database lookup table to print out the information
      */
-    public SelectedClassPage(ImportedCharacterSheet characterSheet, int selectedClass, bool newAcc = false)
+    public SelectedClassPage(bool modSheet, ImportedCharacterSheet characterSheet, int selectedClass, bool newAcc = false)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
+
+        m_ModSheet = modSheet;
 
         // nav bar setup
         m_NewAcc = newAcc;
@@ -241,7 +244,15 @@ public partial class SelectedClassPage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.c_Class = cId;
-        Navigation.PushAsync(new CSheet(m_NewAcc));
+        if (m_ModSheet)
+        {
+            ImportedCharacterSheet.Save(characterSheet);
+            Navigation.PushAsync(new Modify_Character());
+        }
+        else
+        {
+            Navigation.PushAsync(new CSheet(m_NewAcc));
+        }
     }
 
 }

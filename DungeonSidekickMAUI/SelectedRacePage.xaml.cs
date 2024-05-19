@@ -13,11 +13,13 @@ public partial class SelectedRacePage : ContentPage
     ImportedCharacterSheet characterSheet;
     int raceId;
     private bool m_NewAcc;
-    public SelectedRacePage(ImportedCharacterSheet characterSheet, int selectedRace, bool newAcc = false)
+    private bool m_ModSheet;
+    string raceName;
+    public SelectedRacePage(bool modSheet, ImportedCharacterSheet characterSheet, int selectedRace, bool newAcc = false)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
-
+        m_ModSheet = modSheet;
         // nav bar setup
         m_NewAcc = newAcc;
         if (!m_NewAcc)
@@ -108,7 +110,7 @@ public partial class SelectedRacePage : ContentPage
                                 Race.HorizontalTextAlignment = TextAlignment.Center;
 
                                 Race.TextColor = (Color)fontColor;
-                                string raceName = reader.GetString(0);
+                                raceName = reader.GetString(0);
                                 characterSheet.c_RaceName = raceName;
                                 Race.Text = raceName;
 
@@ -343,6 +345,14 @@ public partial class SelectedRacePage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.c_Race = raceId;
-        Navigation.PushAsync(new CSheet(m_NewAcc));
+        if (m_ModSheet)
+        {
+            ImportedCharacterSheet.Save(characterSheet);
+            Navigation.PushAsync(new Modify_Character());
+        }
+        else
+        {
+            Navigation.PushAsync(new CSheet(m_NewAcc));
+        }
     }
 }

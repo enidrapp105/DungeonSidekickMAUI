@@ -99,7 +99,7 @@ public partial class ClassPickerPage : ContentPage
     {
         if (sender is Button classButton && classButton.CommandParameter is int selectedClass)
         {
-            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass, m_NewAcc));
+            Navigation.PushAsync(new SelectedClassPage(m_ModSheet, characterSheet, selectedClass, m_NewAcc));
         }
     }
 }
