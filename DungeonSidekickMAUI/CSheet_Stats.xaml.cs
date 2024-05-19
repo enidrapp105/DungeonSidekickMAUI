@@ -178,6 +178,7 @@ namespace DungeonSidekickMAUI
                     }
                     conn.Close();
                     ImportedCharacterSheet.Save(CharacterSheetcurrent);
+                    Navigation.PushAsync(new LandingPage());
                 }
             }
             catch (Exception eSql)
@@ -186,7 +187,7 @@ namespace DungeonSidekickMAUI
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
             
-            Navigation.PushAsync(new LandingPage());
+            
 
         }
         private int getHitDie(int classID)
