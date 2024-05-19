@@ -7,16 +7,21 @@ namespace DungeonSidekickMAUI;
 public partial class RacePickerPage : ContentPage
 {
     ImportedCharacterSheet characterSheet;
-    public RacePickerPage(ImportedCharacterSheet characterSheet)
+    private bool m_NewAcc;
+    public RacePickerPage(ImportedCharacterSheet characterSheet, bool newAcc = false)
     {
         InitializeComponent();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
 
         this.characterSheet = characterSheet;
         RaceButtonContainer = new StackLayout()
@@ -83,7 +88,7 @@ public partial class RacePickerPage : ContentPage
     {
         if (sender is Button RaceButton && RaceButton.CommandParameter is int id)
         {
-            Navigation.PushAsync(new SelectedRacePage(characterSheet, id));
+            Navigation.PushAsync(new SelectedRacePage(characterSheet, id, m_NewAcc));
         }
     }
 }

@@ -8,6 +8,7 @@ public partial class CSheet : ContentPage
     //public DndClass CharacterClass;
     public int Class;
     public int Race;
+    private bool m_NewAcc;
 
 
     /* Function Name: CSheet constructor
@@ -18,16 +19,20 @@ public partial class CSheet : ContentPage
      * Returns:
      * nothing
      */
-    public CSheet()
+    public CSheet(bool newAcc = false)
     {
         InitializeComponent();
-
+        m_NewAcc = newAcc;
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands cmd = new NavigationCommands();
-        NavigationPage.SetHasNavigationBar(this, true);
-        ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands cmd = new NavigationCommands();
+            NavigationPage.SetHasNavigationBar(this, true);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+        }
+
 
         LoadCharacterSheetPage(CharacterSheetcurrent);
         if (CharacterSheetcurrent.c_ClassName != null)
@@ -91,7 +96,7 @@ public partial class CSheet : ContentPage
     private void ClassPickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent));
+        Navigation.PushAsync(new ClassPickerPage(CharacterSheetcurrent, m_NewAcc));
     }
 
 
@@ -104,7 +109,7 @@ public partial class CSheet : ContentPage
     private void RacePickerPage(object sender, EventArgs e)
     {
         LoadCharacterSheetClass();
-        Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent));
+        Navigation.PushAsync(new RacePickerPage(CharacterSheetcurrent, m_NewAcc));
     }
 
 
@@ -119,7 +124,7 @@ public partial class CSheet : ContentPage
         LoadCharacterSheetClass();
         if (CheckValues())
         {
-            Navigation.PushAsync(new CSheet_Stats());
+            Navigation.PushAsync(new CSheet_Stats(m_NewAcc));
         }
     }
 

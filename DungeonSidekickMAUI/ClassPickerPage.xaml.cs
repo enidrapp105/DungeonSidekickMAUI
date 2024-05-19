@@ -6,7 +6,7 @@ namespace DungeonSidekickMAUI;
 public partial class ClassPickerPage : ContentPage
 {
     ImportedCharacterSheet characterSheet;
-    
+    private bool m_NewAcc;
     /*
      * Function: ClassPicker default Constructor
      * Author: Kenny Rapp
@@ -15,17 +15,20 @@ public partial class ClassPickerPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Removed json string and switched to creating the buttons from a DB lookup, rather than hard coded.
      */
-    public ClassPickerPage(ImportedCharacterSheet CharacterSheet)
+    public ClassPickerPage(ImportedCharacterSheet CharacterSheet, bool newAcc = false)
     {
         InitializeComponent();
 
         //nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
-
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
         this.characterSheet = CharacterSheet;
         ClassButtonContainer = new StackLayout()
         {
@@ -94,7 +97,7 @@ public partial class ClassPickerPage : ContentPage
     {
         if (sender is Button classButton && classButton.CommandParameter is int selectedClass)
         {
-            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass));
+            Navigation.PushAsync(new SelectedClassPage(characterSheet, selectedClass, m_NewAcc));
         }
     }
 }
