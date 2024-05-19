@@ -66,7 +66,7 @@ namespace DungeonSidekickMAUI
             Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -195,7 +195,7 @@ namespace DungeonSidekickMAUI
                     " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
@@ -234,7 +234,7 @@ namespace DungeonSidekickMAUI
             }
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -262,7 +262,7 @@ namespace DungeonSidekickMAUI
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -307,7 +307,7 @@ namespace DungeonSidekickMAUI
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)

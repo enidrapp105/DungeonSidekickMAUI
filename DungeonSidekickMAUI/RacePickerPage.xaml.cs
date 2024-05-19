@@ -30,7 +30,7 @@ public partial class RacePickerPage : ContentPage
         Color color = new Color(255, 0, 0);
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)

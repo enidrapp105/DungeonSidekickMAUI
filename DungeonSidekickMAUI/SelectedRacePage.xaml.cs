@@ -35,7 +35,7 @@ public partial class SelectedRacePage : ContentPage
         //var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -182,7 +182,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
@@ -256,7 +256,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {

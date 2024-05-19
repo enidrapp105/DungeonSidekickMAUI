@@ -51,13 +51,13 @@ namespace DungeonSidekickMAUI
             };
 
             // hide connection string in the future
-            string connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
+            Connection connection = Connection.connectionSingleton;
             string query = "SELECT name, SpellId FROM dbo.Spells";
 
             // open the connection and pull the data
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)

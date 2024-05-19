@@ -33,7 +33,7 @@ public partial class SelectedClassPage : ContentPage
             " WHERE ClassID = @ClassID;";
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -157,7 +157,7 @@ public partial class SelectedClassPage : ContentPage
                                 try
                                 {
                                     
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {

@@ -227,7 +227,7 @@ public partial class StatAssignmentPage : ContentPage
         List<string> preferredstatsstrings = new List<string>();
         try
         {
-            using (SqlConnection connection = new SqlConnection(Encryption.Decrypt(connection1.connectionString, connection1.encryptionKey, connection1.encryptionIV)))
+            using (SqlConnection connection = new SqlConnection(connection1.connectionString))
             {
                 // Create a SqlCommand object with the query string and connection
                 using (SqlCommand command = new SqlCommand(querystring, connection))

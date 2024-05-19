@@ -58,7 +58,7 @@ public partial class LandingPage : ContentPage
         List<string> characterconditions = new List<string>();
 
 
-        using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+        using (SqlConnection conn = new SqlConnection(connection.connectionString))
         {
             string sqlQuery = "SELECT name, description FROM Conditions;";
 
@@ -94,7 +94,7 @@ public partial class LandingPage : ContentPage
             }
 
         }
-        using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+        using (SqlConnection conn = new SqlConnection(connection.connectionString))
         {
             string sqlQuery = "SELECT EffectDescription FROM dbo.ExhaustionEffects;";
 
@@ -139,7 +139,7 @@ public partial class LandingPage : ContentPage
         foreach(string selectedEffect in characterconditions)
         {
             int selectedeffectid = -1;
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 string sqlQuery = "SELECT condition_id FROM dbo.Conditions WHERE name = @name;";
                 SqlCommand command = new SqlCommand(sqlQuery, conn);
@@ -255,7 +255,7 @@ public partial class LandingPage : ContentPage
 
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 string query = "SELECT condition_id FROM Conditions WHERE name = @SelectedEffect;";
                 SqlCommand command = new SqlCommand(query, conn);
@@ -383,7 +383,7 @@ public partial class LandingPage : ContentPage
         Connection connection = Connection.connectionSingleton;
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 string query = "DELETE FROM dbo.CharacterConditions WHERE CharacterID = @CharacterID AND ConditionID = @ConditionID";
                 SqlCommand command = new SqlCommand(query, conn);

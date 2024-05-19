@@ -203,7 +203,7 @@ namespace DungeonSidekickMAUI
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -360,7 +360,7 @@ namespace DungeonSidekickMAUI
                 Connection connection = Connection.connectionSingleton;
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
@@ -469,7 +469,7 @@ namespace DungeonSidekickMAUI
                 Connection connection = Connection.connectionSingleton;
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)

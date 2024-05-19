@@ -28,7 +28,7 @@ public partial class CSheet_Import : ContentPage
         InitializeComponent();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        //Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         //NavigationCommands cmd = new NavigationCommands();
         //NavigationPage.SetHasNavigationBar(this, true);
         //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
@@ -55,7 +55,7 @@ public partial class CSheet_Import : ContentPage
         if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
