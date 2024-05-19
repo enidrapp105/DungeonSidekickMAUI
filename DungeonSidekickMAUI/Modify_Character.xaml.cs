@@ -5,7 +5,7 @@ public partial class Modify_Character : ContentPage
     public List<Entry> entries = new List<Entry>(); // Collection to store references to the dynamically created Entry controls
     public Modify_Character()
 	{
-		InitializeComponent();
+        InitializeComponent();
 
         // nav bar setup
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
