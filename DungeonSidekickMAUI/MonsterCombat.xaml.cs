@@ -15,6 +15,13 @@ public partial class MonsterCombat : ContentPage
 	{
 		InitializeComponent();
 
+        // nav bar setup
+        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        NavigationCommands cmd = new NavigationCommands();
+        NavigationPage.SetHasNavigationBar(this, true);
+        ((NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+        NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+
         DisplayAllMonsters();
 	}
 
