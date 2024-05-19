@@ -197,8 +197,8 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            cmd.Parameters.AddWithValue("@ClassID", classID);
                             cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@ClassID", classID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
