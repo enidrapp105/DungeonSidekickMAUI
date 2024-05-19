@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.AddToSpellpool">
-    <CollectionView x:Name="SpellCollectionView" ItemsSource="{Binding Spells}" BackgroundColor="{DynamicResource PrimaryColor}">
+    <CollectionView x:Name="SpellCollectionView" BackgroundColor="{DynamicResource PrimaryColor}" ItemsSource="{Binding UserSpells}">
         <CollectionView.Header>
             <VerticalStackLayout>
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 

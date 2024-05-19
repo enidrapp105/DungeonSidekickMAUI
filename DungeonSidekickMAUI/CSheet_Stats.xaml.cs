@@ -18,6 +18,8 @@ namespace DungeonSidekickMAUI
         public int chosenHealth { get; private set; }
         public int startingHealth { get; private set; }
 
+        private bool m_NewAcc;
+
         private ImportedCharacterSheet CharacterSheetcurrent = ImportedCharacterSheet.Instance;
         /*
          * Function: RollForStats
@@ -28,19 +30,22 @@ namespace DungeonSidekickMAUI
         private void RollForStats(object sender, EventArgs e)
         {
             LoadCharacterSheetClass();
-            Navigation.PushAsync(new RollForStatsPage());
+            Navigation.PushAsync(new RollForStatsPage(m_NewAcc));
         }
-        public CSheet_Stats ()
+        public CSheet_Stats (bool newAcc = false)
 		{
 			InitializeComponent ();
 
             // nav bar setup
-            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-            NavigationCommands cmd = new NavigationCommands();
-            NavigationPage.SetHasNavigationBar(this, true);
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
-
+            m_NewAcc = newAcc;
+            if (!m_NewAcc)
+            {
+                Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+                NavigationCommands cmd = new NavigationCommands();
+                NavigationPage.SetHasNavigationBar(this, true);
+                ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+                NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+            }
             LoadCharacterSheetPage();
             BindingContext = this;
         }
@@ -172,6 +177,8 @@ namespace DungeonSidekickMAUI
                         }
                     }
                     conn.Close();
+                    ImportedCharacterSheet.Save(CharacterSheetcurrent);
+                    Navigation.PushAsync(new LandingPage());
                 }
             }
             catch (Exception eSql)
@@ -179,8 +186,8 @@ namespace DungeonSidekickMAUI
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
-
-            Navigation.PushAsync(new LandingPage());
+            
+            
 
         }
         private int getHitDie(int classID)

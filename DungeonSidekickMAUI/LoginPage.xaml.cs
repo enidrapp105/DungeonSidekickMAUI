@@ -29,7 +29,7 @@ public partial class LoginPage : ContentPage
             }
             else
             {
-                Navigation.PushAsync(new Info_For_Stats());
+                Navigation.PushAsync(new Info_For_Stats(true));
             }
             //Navigation.PushAsync(new MainPage());
         }

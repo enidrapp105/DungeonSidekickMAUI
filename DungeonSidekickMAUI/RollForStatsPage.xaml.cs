@@ -4,17 +4,23 @@ public partial class RollForStatsPage : ContentPage
 {
     private Random random = new Random();
     private DndClass dndclass;
+    private bool m_NewAcc;
     ImportedCharacterSheet characterSheet = ImportedCharacterSheet.Instance;
-    public RollForStatsPage()
+    public RollForStatsPage(bool newAcc = false)
     {  
         InitializeComponent();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
+
     }
     /*
      * Function: OnButtonClicked
@@ -145,7 +151,7 @@ public partial class RollForStatsPage : ContentPage
             string retotal4 = ExtractIntFromTotal(total4.Text);
             string retotal5 = ExtractIntFromTotal(total5.Text);
             string retotal6 = ExtractIntFromTotal(total6.Text);
-            Navigation.PushAsync(new StatAssignmentPage(retotal1, retotal2, retotal3, retotal4, retotal5, retotal6, characterSheet));
+            Navigation.PushAsync(new StatAssignmentPage(retotal1, retotal2, retotal3, retotal4, retotal5, retotal6, characterSheet, m_NewAcc));
         }
         else
         {

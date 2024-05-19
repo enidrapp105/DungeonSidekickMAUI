@@ -2,8 +2,11 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MonsterCombat"
-             Title="MonsterCombat">
+             >
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+        <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+            <Label Text="Monster Combat" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" Margin="0,0,0,10"/>
+        </Frame>
         <VerticalStackLayout x:Name="MonsterStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             
         </VerticalStackLayout>

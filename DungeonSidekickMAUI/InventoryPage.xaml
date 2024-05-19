@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.InventoryPage"
              Title="InventoryPage">
-    <StackLayout>
+    
+    <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
     <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
         <!--This label handles the title-->
         <Label Text="Inventory" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
