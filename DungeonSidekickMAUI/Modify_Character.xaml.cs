@@ -44,16 +44,20 @@ public partial class Modify_Character : ContentPage
             var newLabel = new Label
             {
                 Text = correctVariableName, // Use the property name as label text
-                BackgroundColor = (Color)accessoryColor,
+                BackgroundColor = (Color)trinaryColor,
                 TextColor = (Color)fontColor,
+                WidthRequest = 400,
+
             };
 
             //Create an entry for each property with a dynamic access name
             var newEntry = new Entry
             {
                 Placeholder = "Enter " + correctVariableName, // Use the property name as entry placeholder
-                BackgroundColor = (Color)trinaryColor,
-                TextColor = (Color)fontColor
+                BackgroundColor = (Color)secondaryColor,
+                TextColor = (Color)fontColor,
+                WidthRequest = 400,
+                Margin = new Thickness(0, 0, 0, 10)
             };
 
             //Set a binding between the entry and the corresponding property of the ImportedCharacterSheet instance
