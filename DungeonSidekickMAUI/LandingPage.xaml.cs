@@ -239,6 +239,11 @@ public partial class LandingPage : ContentPage
     }
     private async void AddEffectButtonClicked(object sender, EventArgs e)
     {
+        if (StatusEffectPicker.SelectedItem == null)
+        {
+            await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
+            return;
+        }
         string selectedEffect = StatusEffectPicker.SelectedItem.ToString();
         int index = statusnames.IndexOf(selectedEffect);
         Connection connection = Connection.connectionSingleton;
