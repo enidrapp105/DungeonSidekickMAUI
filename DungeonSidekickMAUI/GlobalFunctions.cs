@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace DungeonSidekickMAUI
 {
+
+    /*
+    THIS FUNCTION IS TO BE ABLE TO CHECK A LIST OF STRINGS IF THEY ARE PARSIBLE TO WHAT WE WANT OF THE SAME TYPE
+    TYPE 0: STRING CHECK FOR EXTENDED ASCII
+    TYPE 1: INT CHECK
+    TYPE 2: DOUBLE CHECK
+    */
     public static class GlobalFunctions
     {
         public static bool entryCheck(List<String> list, int type)
@@ -16,7 +23,8 @@ namespace DungeonSidekickMAUI
                     // String Case
                     foreach (string str in list)
                     {
-                        
+                        if (checkExtendedAscii(str) == false)
+                            return false;
                     }
                     break;
                 case 1:
@@ -24,21 +32,24 @@ namespace DungeonSidekickMAUI
                     foreach (string str in list)
                     {
                         if (!int.TryParse(str, out _))
-                        {
-                            return false; // Return false if parsing fails
-                        }
+                            return false;
                     }
                     break;
                 case 2:
                     // Double Case
+                    foreach (string str in list)
+                    {
+                        if (!double.TryParse(str, out _))
+                            return false;
+                    }
                     break;
                 default:
-
+                    // No defined type case
                     return false;
             }
             return true;
         }
-        public static bool CheckExtendedAscii(string str)
+        public static bool checkExtendedAscii(string str)
         {
             foreach (char c in str)
             {
