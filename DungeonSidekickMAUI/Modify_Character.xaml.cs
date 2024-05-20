@@ -1,5 +1,5 @@
 namespace DungeonSidekickMAUI;
-
+using Microsoft.Maui.Controls.Shapes;
 public partial class Modify_Character : ContentPage
 {
     public List<Entry> entries = new List<Entry>(); // Collection to store references to the dynamically created Entry controls
@@ -47,10 +47,23 @@ public partial class Modify_Character : ContentPage
                 Text = correctVariableName, // Use the property name as label text
                 BackgroundColor = (Color)trinaryColor,
                 TextColor = (Color)fontColor,
-                WidthRequest = 400,
+                WidthRequest = 384
 
             };
-            Sheet.Children.Add(newLabel);
+            Border frame = new Border
+            {
+                StrokeThickness = 1,
+                Background = (Color)trinaryColor,
+                Padding = new Thickness(10, 5),
+                HorizontalOptions = LayoutOptions.Center,
+                StrokeShape = new RoundRectangle
+                {
+                    CornerRadius = new CornerRadius(10, 10, 10, 10)
+                },
+                Stroke = (Color)trinaryColor,
+                Content = newLabel
+            };
+            Sheet.Children.Add(frame);
 
             if (correctVariableName == "Class")
             {
