@@ -13,7 +13,13 @@ public partial class SignupPage : ContentPage
     private void signupButtonClicked(object sender, EventArgs e)
 	{
 		bool validlogin = true;
-		if(usernamebox.Text == null || usernamebox.Text.Length < 8)
+		List<string> list = new List<string>();
+		list.Add(usernamebox.Text);
+		list.Add(passwordbox.Text);
+		list.Add(passwordbox2.Text);
+        if (!GlobalFunctions.entryCheck(list, 0))
+            return;
+        if (usernamebox.Text == null || usernamebox.Text.Length < 8)
 		{
             DisplayAlert("Usernames must be at least 8 characters", "Please fix your username", "Ok");
             validlogin = false;
