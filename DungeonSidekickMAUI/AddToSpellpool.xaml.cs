@@ -22,11 +22,13 @@ public partial class AddToSpellpool : ContentPage
     public AddToSpellpool()
     {
         InitializeComponent();
+
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         NavigationCommands nav = new NavigationCommands();
         Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
         ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
         Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+
         BindingContext = addSpellViewModel = new AddSpellViewModel();
     }
 
@@ -59,11 +61,12 @@ public partial class AddToSpellpool : ContentPage
         {
             int id = userSpell.Id;
             inv.AddSpell(id);
+            await DisplayAlert("Added Spell", "Successfully added to spellpool", "Ok");
         }
     }
 
     private void GoToLandingFromSpells(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new LandingPage());
+        Navigation.PushAsync(new SpellpoolPage());
     }
 }

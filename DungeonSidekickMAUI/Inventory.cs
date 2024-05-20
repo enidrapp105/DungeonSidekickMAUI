@@ -16,10 +16,28 @@ namespace DungeonSidekickMAUI
      */
     public class Inventory
     {
+        //***************************
+        // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.
+        //***************************
+        public int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
+
+        public List<List<int>> Items { get; set; } // Need to figure out how I'm going to make this work.
+
+        public List<List<int>> Gear { get; set; } // Stores the data of the Gear table. Reduces the number of queries we'll need to use.
+
+        public List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
+
+        public List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
+
+        // These lable the ETypeID we use in the DB.
+        public const int WEAPON = 0;
+        public const int EQUIPMENT = 1;
+        public const int GEAR = 2;
+
         public Inventory() // Construct the Inventory using the ID of the character it belongs to. Handles the DB nonsense as well.
         {
             // In theory, with the new DB changes, we should only have to call PullItems for the constructor.
-            m_CharacterID = Preferences.Default.Get("CharacterID",1); //Calls user ID preference, if it doesn't have one it returns admin default
+            m_CharacterID = Preferences.Default.Get("CharacterID", 1); //Calls user ID preference, if it doesn't have one it returns admin default
 
             Items = new List<List<int>>();
             Gear = new List<List<int>>();
@@ -48,7 +66,7 @@ namespace DungeonSidekickMAUI
             Equipment.Clear(); // In case this function gets called incorrectly, clear the list to prepare for receiving data from the DB.
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -177,7 +195,7 @@ namespace DungeonSidekickMAUI
                     " WHERE ItemID = @ItemID AND eTypeId = @Etype AND CharacterID = @CharacterID;";
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
                     {
                         conn.Open();
                         if (conn.State == System.Data.ConnectionState.Open)
@@ -216,7 +234,7 @@ namespace DungeonSidekickMAUI
             }
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -237,6 +255,51 @@ namespace DungeonSidekickMAUI
             }
         }
 
+        public void UpdateOneItem(int ItemID, int Quantity, int ETypeID)
+        {
+            Connection connection = Connection.connectionSingleton;
+            string query = "INSERT INTO dbo.Inventory(ItemID, Quantity, eTypeID, CharacterID)" +
+            " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
+                {
+                    conn.Open();
+                    if (conn.State == System.Data.ConnectionState.Open)
+                    {
+                        using (SqlCommand cmd = conn.CreateCommand())
+                        {
+                            cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@CharacterID", m_CharacterID);
+                            if (ETypeID == GEAR) // Checks if Gear is empty. If not, proceed.
+                            {
+                                cmd.Parameters.AddWithValue("@Etype", GEAR);
+                            }
+                            else if (ETypeID == WEAPON) // Checks if Weapons is empty. If not, proceed.
+                            {
+                                cmd.Parameters.AddWithValue("@Etype", WEAPON);
+                            }
+                            else if (ETypeID == EQUIPMENT) // Checks if Equipment is empty. If not, proceed.
+                            {
+                                cmd.Parameters.AddWithValue("@Etype", EQUIPMENT);
+                            }
+                            else
+                            {
+                                // how?
+                            }
+                            cmd.Parameters.AddWithValue("@ItemID", ItemID);
+                            cmd.Parameters.AddWithValue("@Quantity", Quantity);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception eSql)
+            {
+
+                Debug.WriteLine("Exception: " + eSql.Message);
+            }
+        }
         public void UpdateDB() // Mass updates the DB with any changes made to this inventory.
         {
             Connection connection = Connection.connectionSingleton;
@@ -244,7 +307,7 @@ namespace DungeonSidekickMAUI
             " VALUES(@ItemID, @Quantity, @Etype, @CharacterID);";
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -304,24 +367,6 @@ namespace DungeonSidekickMAUI
             }
 
         }
-
-        //***************************
-        // Currently I removed the 'required' from all of these as it would say it must be set in the ctor even though it is.
-        //***************************
-        public int m_CharacterID { get; set; } // Stores the ID of the current Inventory. This is now tied to the ID of the character.
-
-        public List<List<int>> Items { get; set; } // Need to figure out how I'm going to make this work.
-
-        public List<List<int>> Gear { get; set; } // Stores the data of the Gear table. Reduces the number of queries we'll need to use.
-
-        public List<List<int>> Weapons { get; set; } // Stores the data of the Weapons table.
-
-        public List<List<int>> Equipment { get; set; } // Stores the data of the Equipment table.
-
-        // These lable the ETypeID we use in the DB.
-        public const int WEAPON = 0;
-        public const int EQUIPMENT = 1;
-        public const int GEAR = 2;
 
     }
 }

@@ -8,6 +8,8 @@ public partial class SelectedClassPage : ContentPage
     int ClassID;
     ImportedCharacterSheet characterSheet;
     int cId;
+    private bool m_NewAcc;
+    private bool m_ModSheet;
     /*
      * Function: SelectedClassPage Constructor
      * Author: Kenny Rapp
@@ -16,24 +18,30 @@ public partial class SelectedClassPage : ContentPage
      * Modified By Anthony Rielly
      * Modifications: Pulls from the database lookup table to print out the information
      */
-    public SelectedClassPage(ImportedCharacterSheet characterSheet, int selectedClass)
+    public SelectedClassPage(bool modSheet, ImportedCharacterSheet characterSheet, int selectedClass, bool newAcc = false)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
 
+        m_ModSheet = modSheet;
+
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
 
         Connection connection = Connection.connectionSingleton;
         string query = "SELECT Class, HitDie FROM dbo.ClassLookup" +
             " WHERE ClassID = @ClassID;";
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -157,7 +165,7 @@ public partial class SelectedClassPage : ContentPage
                                 try
                                 {
                                     
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
@@ -236,7 +244,15 @@ public partial class SelectedClassPage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.c_Class = cId;
-        Navigation.PushAsync(new CSheet());
+        if (m_ModSheet)
+        {
+            ImportedCharacterSheet.Save(characterSheet);
+            Navigation.PushAsync(new Modify_Character());
+        }
+        else
+        {
+            Navigation.PushAsync(new CSheet(m_NewAcc));
+        }
     }
 
 }

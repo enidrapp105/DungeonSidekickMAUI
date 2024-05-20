@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Reflection;
 
 namespace DungeonSidekickMAUI
 {
-    public static class MauiProgram
+    public class MauiProgram
     {
         public static MauiApp CreateMauiApp()
         {
@@ -18,7 +20,7 @@ namespace DungeonSidekickMAUI
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

@@ -18,9 +18,10 @@ public partial class StatAssignmentPage : ContentPage
     private string WIS;
     private string CON;
     private DndClass dndclass;
+    private bool m_NewAcc;
     ImportedCharacterSheet characterSheet;
 
-    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, ImportedCharacterSheet characterSheet)
+    public StatAssignmentPage(string total1, string total2, string total3, string total4, string total5, string total6, ImportedCharacterSheet characterSheet, bool newAcc = false)
     {
         List<string> totals = new List<string> { total1, total2, total3, total4, total5, total6 };
         List<int> sortedTotals = totals.Select(int.Parse).OrderByDescending(x => x).ToList();
@@ -34,11 +35,16 @@ public partial class StatAssignmentPage : ContentPage
         InitializeComponent();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
+
 
 
         // Convert the totals to integers and sort them
@@ -114,7 +120,7 @@ public partial class StatAssignmentPage : ContentPage
             this.characterSheet.c_Strength = int.Parse(STR);
             this.characterSheet.c_Wisdom = int.Parse(WIS);
             this.characterSheet.c_Constitution = int.Parse(CON);
-            Navigation.PushAsync(new CSheet_Stats());
+            Navigation.PushAsync(new CSheet_Stats(m_NewAcc));
         }
     }
     /*
@@ -227,7 +233,7 @@ public partial class StatAssignmentPage : ContentPage
         List<string> preferredstatsstrings = new List<string>();
         try
         {
-            using (SqlConnection connection = new SqlConnection(Encryption.Decrypt(connection1.connectionString, connection1.encryptionKey, connection1.encryptionIV)))
+            using (SqlConnection connection = new SqlConnection(connection1.connectionString))
             {
                 // Create a SqlCommand object with the query string and connection
                 using (SqlCommand command = new SqlCommand(querystring, connection))

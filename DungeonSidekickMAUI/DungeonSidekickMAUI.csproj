@@ -38,6 +38,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 		<DocumentationFile></DocumentationFile>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<UserSecretsId>b185c816-504e-4a63-b3d5-3b74c9396009</UserSecretsId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
@@ -89,6 +90,7 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -104,6 +106,9 @@
 	  </Compile>
 	  <Compile Update="AddToSpellpool.xaml.cs">
 	    <DependentUpon>AddToSpellpool.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="InventoryPage.xaml.cs">
+	    <DependentUpon>InventoryPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -159,6 +164,9 @@
 		  <MauiXaml Update="AddToSpellpool.xaml">
 		    <Generator>MSBuild:Compile</Generator>
 		  </MauiXaml>
+		  <MauiXaml Update="InventoryPage.xaml">
+		    <Generator>MSBuild:Compile</Generator>
+		  </MauiXaml>
 	  <MauiXaml Update="RacePickerPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -181,6 +189,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="SpellCombatPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="SpellpoolPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="StatAssignmentPage.xaml">

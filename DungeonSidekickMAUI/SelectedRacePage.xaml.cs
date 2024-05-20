@@ -12,17 +12,24 @@ public partial class SelectedRacePage : ContentPage
     int RaceID;
     ImportedCharacterSheet characterSheet;
     int raceId;
-    public SelectedRacePage(ImportedCharacterSheet characterSheet, int selectedRace)
+    private bool m_NewAcc;
+    private bool m_ModSheet;
+    string raceName;
+    public SelectedRacePage(bool modSheet, ImportedCharacterSheet characterSheet, int selectedRace, bool newAcc = false)
     {
         this.characterSheet = characterSheet;
         InitializeComponent();
-
+        m_ModSheet = modSheet;
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
 
         Connection connection = Connection.connectionSingleton;
         RaceID = selectedRace;
@@ -35,7 +42,7 @@ public partial class SelectedRacePage : ContentPage
         //var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -103,7 +110,7 @@ public partial class SelectedRacePage : ContentPage
                                 Race.HorizontalTextAlignment = TextAlignment.Center;
 
                                 Race.TextColor = (Color)fontColor;
-                                string raceName = reader.GetString(0);
+                                raceName = reader.GetString(0);
                                 characterSheet.c_RaceName = raceName;
                                 Race.Text = raceName;
 
@@ -182,7 +189,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
@@ -256,7 +263,7 @@ public partial class SelectedRacePage : ContentPage
                                 try
                                 {
 
-                                    using (SqlConnection innerConn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                                    using (SqlConnection innerConn = new SqlConnection(connection.connectionString))
                                     {
                                         using (SqlCommand innerCmd = innerConn.CreateCommand())
                                         {
@@ -338,6 +345,14 @@ public partial class SelectedRacePage : ContentPage
     private void Submit(object sender, EventArgs e)
     {
         characterSheet.c_Race = raceId;
-        Navigation.PushAsync(new CSheet());
+        if (m_ModSheet)
+        {
+            ImportedCharacterSheet.Save(characterSheet);
+            Navigation.PushAsync(new Modify_Character());
+        }
+        else
+        {
+            Navigation.PushAsync(new CSheet(m_NewAcc));
+        }
     }
 }

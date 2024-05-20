@@ -28,7 +28,7 @@ public partial class CSheet_Import : ContentPage
         InitializeComponent();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+        //Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         //NavigationCommands cmd = new NavigationCommands();
         //NavigationPage.SetHasNavigationBar(this, true);
         //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
@@ -55,7 +55,7 @@ public partial class CSheet_Import : ContentPage
         if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -169,7 +169,53 @@ public partial class CSheet_Import : ContentPage
                                     Char.c_PassiveWisdom = 1;
                                     Char.c_Level = 1;
                                 }
+                                using (SqlConnection conn2 = new SqlConnection(connection.connectionString))
+                                {
+                                    conn2.Open();
+                                    if (conn2.State == System.Data.ConnectionState.Open)
+                                    {
+                                        using (SqlCommand cmd2 = conn2.CreateCommand())
+                                        {
+                                            //cmd.CommandText = CListQuery;
+                                            string query2 = "SELECT Class FROM dbo.ClassLookup" +
+                                            " WHERE ClassID = @ClassID;";
+                                            cmd2.CommandText = query2;
+                                            cmd2.Parameters.Add("@ClassID", SqlDbType.Int).Value = Char.c_Class;
+                                            using (SqlDataReader reader2 = cmd2.ExecuteReader())
+                                            {
 
+                                                while (reader2.Read())
+                                                {
+                                                    Char.c_ClassName = reader2.GetString(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                using (SqlConnection conn3 = new SqlConnection(connection.connectionString))
+                                {
+                                    conn3.Open();
+                                    if (conn3.State == System.Data.ConnectionState.Open)
+                                    {
+                                        using (SqlCommand cmd3 = conn3.CreateCommand())
+                                        {
+                                            //cmd.CommandText = CListQuery;
+                                            string query3 = "SELECT Race FROM dbo.RaceLookup" +
+                                            " WHERE RaceID = @RaceID;";
+                                            cmd3.CommandText = query3;
+                                            cmd3.Parameters.Add("@RaceID", SqlDbType.Int).Value = Char.c_Race;
+                                            using (SqlDataReader reader3 = cmd3.ExecuteReader())
+                                            {
+
+                                                while (reader3.Read())
+                                                {
+                                                    Char.c_RaceName = reader3.GetString(0);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                                 // *********************************
                                 // COMMENTED OUT SINCE A LOT ARE NULL VALUES WHEN PULLED FROM DB
                                 //Char.c_Flaws = reader.GetString(9);
@@ -220,46 +266,51 @@ public partial class CSheet_Import : ContentPage
 
                                 //creating visual example of new Character sheet for user interface to choose from
                                 StackLayout CharacterStack = new StackLayout();
+                                CharacterStack.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
                                 Label CName = new Label();
                                 CName.TextColor = (Color)fontColor;
-                                CName.Text = "Character Name";
-                                Label CNameVal = new Label();
-                                CNameVal.TextColor = (Color)fontColor;
-                                CNameVal.Text = Char.c_Name;
+                                CName.Text = "Character Name: " + Char.c_Name;
+                                CName.WidthRequest = 400;
+                                //Label CNameVal = new Label();
+                                //CNameVal.TextColor = (Color)fontColor;
+                                //CNameVal.Text = Char.c_Name;
 
                                 CharacterStack.Children.Add(CName);
-                                CharacterStack.Children.Add(CNameVal);
+                                //CharacterStack.Children.Add(CNameVal);
 
                                 Label CRace = new Label();
                                 CRace.TextColor = (Color)fontColor;
-                                CRace.Text = "Race";
-                                Label CRaceVal = new Label();
-                                CRaceVal.TextColor = (Color)fontColor;
-                                CRaceVal.Text = Char.c_Race.ToString();
+                                CRace.Text = "Race: " + Char.c_RaceName;
+                                CRace.WidthRequest = 400;
+                                //Label CRaceVal = new Label();
+                                //CRaceVal.TextColor = (Color)fontColor;
+                                //CRaceVal.Text = Char.c_Race.ToString();
 
                                 CharacterStack.Children.Add(CRace);
-                                CharacterStack.Children.Add(CRaceVal);
+                                //CharacterStack.Children.Add(CRaceVal);
 
                                 Label CClass = new Label();
                                 CClass.TextColor = (Color)fontColor;
-                                CClass.Text = "Class";
-                                Label CClassVal = new Label();
-                                CClassVal.TextColor = (Color)fontColor;
-                                CClassVal.Text = Char.c_Class.ToString();
+                                CClass.Text = "Class: " + Char.c_ClassName;
+                                CClass.WidthRequest = 400;
+                                //Label CClassVal = new Label();
+                                //CClassVal.TextColor = (Color)fontColor;
+                                //CClassVal.Text = Char.c_Class.ToString();
 
                                 CharacterStack.Children.Add(CClass);
-                                CharacterStack.Children.Add(CClassVal);
+                                //CharacterStack.Children.Add(CClassVal);
 
                                 Label CLevel = new Label();
                                 CLevel.TextColor = (Color)fontColor;
-                                CLevel.Text = "Level";
-                                Label CLevelVal = new Label();
-                                CLevelVal.TextColor = (Color)fontColor;
-                                CLevelVal.Text = Char.c_Level.ToString();
+                                CLevel.Text = "Level: " + Char.c_Level.ToString();
+                                CLevel.WidthRequest = 400;
+                                //Label CLevelVal = new Label();
+                                //CLevelVal.TextColor = (Color)fontColor;
+                                //CLevelVal.Text = Char.c_Level.ToString();
 
                                 CharacterStack.Children.Add(CLevel);
-                                CharacterStack.Children.Add(CLevelVal);
+                                //CharacterStack.Children.Add(CLevelVal);
 
                                 Button characterButton = new Button
                                 {

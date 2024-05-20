@@ -6,9 +6,11 @@ public partial class CombatPage : ContentPage
 {
     private Inventory inv;
     private Monster currentMonster;
+    private bool selected;
 	public CombatPage()
 	{
 		InitializeComponent();
+        selected = false;
 
         // nav bar setup
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
@@ -36,7 +38,7 @@ public partial class CombatPage : ContentPage
             " WHERE WeaponID = @Id;";
             try
             {
-                using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+                using (SqlConnection conn = new SqlConnection(connection.connectionString))
                 {
                     conn.Open();
                     if (conn.State == System.Data.ConnectionState.Open)
@@ -90,11 +92,19 @@ public partial class CombatPage : ContentPage
         {
             ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
             character.EquipItem(id, 0); // Equipping Weapon.
+            selected = true;
             await DisplayAlert("Selected Weapon", "Successfully selected the item for combat.", "Ok");
         }
     }
     private void SelectMonster(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new SelectMonster());
+        if (selected)
+        {
+            Navigation.PushAsync(new SelectMonster());
+        }
+        else
+        {
+            DisplayAlert("No Weapon Selected", "Please select a weapon before proceeding. If you don't see any weapons, you can add one in the inventory page.", "Ok");
+        }
     }
 }

@@ -21,16 +21,11 @@ namespace DungeonSidekickMAUI
         // Private constructor to prevent others from making a new one.
         private Connection()
         {
-            // Have to get the key and iv from *somewhere.*
-
-            encryptionKey = EncryptionGrabber.GetEncryptionKey();
-            encryptionIV = EncryptionGrabber.GetEncryptionIV();
-            connectionString = Encryption.Encrypt(EncryptionGrabber.GetConnectionString(), encryptionKey, encryptionIV);
+            
+            connectionString = "server=satou.cset.oit.edu, 5433; database=harrow; UID=harrow; password=5HuHsW&BYmiF*6; TrustServerCertificate=True; Encrypt=False;";
         }
 
         // The actual reason this class was made.
         public string? connectionString;
-        public string? encryptionKey;
-        public string? encryptionIV;
     }
 }

@@ -8,10 +8,11 @@ public partial class SpellCombatPage : ContentPage
     private Spellpool spells;
     private Monster currentMonster;
     private int selectedWeaponId;
+    private bool selected;
     public SpellCombatPage()
     {
         InitializeComponent();
-
+        selected = false;
         // nav bar setup
         Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
         NavigationCommands nav = new NavigationCommands();
@@ -132,10 +133,11 @@ public partial class SpellCombatPage : ContentPage
             }
             catch (Exception eSql)
             {
-                //DisplayAlert("Error!", eSql.Message, "OK");
+                await DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
             character.EquipSpell(id, 0, doesDmg);
+            selected = true;
             await DisplayAlert("Selected Spell", "Successfully selected the item for combat.", "Ok");
         }
     }
@@ -159,6 +161,14 @@ public partial class SpellCombatPage : ContentPage
      */
     private void AddSpells(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new AddToSpellpool());
+        if (selected)
+        {
+            Navigation.PushAsync(new AddToSpellpool());
+        }
+        else
+        {
+            DisplayAlert("No Spell Selected", "Please select a spell before proceeding. If you don't see any spells, you can add one in the spellpool page. Some spells may not deal damage, others may heal instead.", "Ok");
+        }
+
     }
 }

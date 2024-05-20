@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using System.Text.Json.Nodes;
+//using Android.Renderscripts;
+
 
 namespace DungeonSidekickMAUI
 {
@@ -14,26 +17,29 @@ namespace DungeonSidekickMAUI
 
         static EncryptionGrabber()
         {
-            var basePath = AppContext.BaseDirectory; // This allows us to find the file without hardcoding a path in.
-            var configFilePath = Path.Combine(basePath, "secrets.json");
-            IConfigurationBuilder builder = new ConfigurationBuilder().AddJsonFile(configFilePath, optional: false, reloadOnChange: true);
+            //var basePath = AppContext.BaseDirectory; // This allows us to find the file without hardcoding a path in.
+            //var configFilePath = Path.Combine(basePath, "secrets.json");
+            
 
-            Configuration = builder.Build();
+            //Configuration = builder.Build();
         }
 
         public static string GetConnectionString()
         {
-            return Configuration[$"ConnectionString:string"];
+            IConfigurationRoot config = new ConfigurationBuilder().AddUserSecrets<EncryptionGrabber>().Build();
+            return config[$"ConnectionString:string"];
         }
 
         public static string GetEncryptionKey()
         {
-            return Configuration["Encryption:Key"];
+            IConfigurationRoot config = new ConfigurationBuilder().AddUserSecrets<EncryptionGrabber>().Build();
+            return config["Encryption:Key"];
         }
 
         public static string GetEncryptionIV()
         {
-            return Configuration["Encryption:IV"];
+            IConfigurationRoot config = new ConfigurationBuilder().AddUserSecrets<EncryptionGrabber>().Build();
+            return config["Encryption:IV"];
         }
     }
 }

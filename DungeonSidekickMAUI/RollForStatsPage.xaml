@@ -8,7 +8,7 @@
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
-                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource PrimaryColor}">
+                <StackLayout Orientation="Horizontal" x:Name="stack1" ClassId="1" BackgroundColor="{DynamicResource PrimaryColor}" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
 
@@ -16,9 +16,10 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA2" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA3" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonA4" Clicked="OnButtonClicked"/>
+                    
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total1"/>-->
-                <StackLayout Orientation="Horizontal" x:Name="stack2" ClassId="2">
+                <StackLayout Orientation="Horizontal" x:Name="stack2" ClassId="2" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB1" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB2" Clicked="OnButtonClicked"/>
@@ -26,7 +27,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonB4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total2"/>-->
-                <StackLayout Orientation="Horizontal" x:Name="stack3" ClassId="3">
+                <StackLayout Orientation="Horizontal" x:Name="stack3" ClassId="3" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
 
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC1" Clicked="OnButtonClicked"/>
@@ -35,7 +36,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonC4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total3"/>-->
-                <StackLayout Orientation="Horizontal" x:Name="stack4" ClassId="4">
+                <StackLayout Orientation="Horizontal" x:Name="stack4" ClassId="4" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD1" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD2" Clicked="OnButtonClicked"/>
@@ -43,7 +44,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonD4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total4"/>-->
-                <StackLayout Orientation="Horizontal" x:Name="stack5" ClassId="5">
+                <StackLayout Orientation="Horizontal" x:Name="stack5" ClassId="5" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE1" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE2" Clicked="OnButtonClicked"/>
@@ -51,7 +52,7 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonE4" Clicked="OnButtonClicked"/>
                 </StackLayout>
                 <!--<Label TextColor="White" Text="" x:Name="total5"/>-->
-                <StackLayout Orientation="Horizontal" x:Name="stack6" ClassId="6">
+                <StackLayout Orientation="Horizontal" x:Name="stack6" ClassId="6" HorizontalOptions="CenterAndExpand">
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll" MinimumWidthRequest="50" WidthRequest="150" Clicked="OnRollButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF1" Clicked="OnButtonClicked"/>
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF2" Clicked="OnButtonClicked"/>
@@ -59,12 +60,12 @@
                     <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="" MinimumWidthRequest="50" WidthRequest="100" x:Name="ButtonF4" Clicked="OnButtonClicked"/>
 
                 </StackLayout>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total1"/>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total2"/>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total3"/>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total4"/>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total5"/>
-                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total6"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total1" HorizontalOptions="CenterAndExpand"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total2" HorizontalOptions="CenterAndExpand"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total3" HorizontalOptions="CenterAndExpand"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total4" HorizontalOptions="CenterAndExpand"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total5" HorizontalOptions="CenterAndExpand"/>
+                <Label TextColor="{DynamicResource FontC}" Text="" x:Name="total6" HorizontalOptions="CenterAndExpand"/>
                 <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="White" Text="Submit" WidthRequest="100" Clicked="SubmitStats"/>
             </StackLayout>
         </ScrollView>

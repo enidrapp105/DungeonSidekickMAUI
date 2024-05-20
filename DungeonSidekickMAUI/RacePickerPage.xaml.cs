@@ -7,16 +7,22 @@ namespace DungeonSidekickMAUI;
 public partial class RacePickerPage : ContentPage
 {
     ImportedCharacterSheet characterSheet;
-    public RacePickerPage(ImportedCharacterSheet characterSheet)
+    private bool m_NewAcc;
+    private bool m_ModSheet;
+    public RacePickerPage(bool modSheet, ImportedCharacterSheet characterSheet, bool newAcc = false)
     {
         InitializeComponent();
-
+        m_ModSheet = modSheet;
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        m_NewAcc = newAcc;
+        if (!m_NewAcc)
+        {
+            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+            NavigationCommands nav = new NavigationCommands();
+            Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
+            ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
+            Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        }
 
         this.characterSheet = characterSheet;
         RaceButtonContainer = new StackLayout()
@@ -30,7 +36,7 @@ public partial class RacePickerPage : ContentPage
         Color color = new Color(255, 0, 0);
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
@@ -83,7 +89,7 @@ public partial class RacePickerPage : ContentPage
     {
         if (sender is Button RaceButton && RaceButton.CommandParameter is int id)
         {
-            Navigation.PushAsync(new SelectedRacePage(characterSheet, id));
+            Navigation.PushAsync(new SelectedRacePage(m_ModSheet, characterSheet, id, m_NewAcc));
         }
     }
 }
