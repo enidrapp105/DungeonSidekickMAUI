@@ -219,13 +219,12 @@ namespace DungeonSidekickMAUI
             return HitDie;
         }
 
-        //********************************HEALTH POPUP IN PROGRESS**********************************
         public async Task ShowHealthPopupAndWaitAsync(int startingHealth)
         {
             StartingHealthLabel.Text = $"Normally your health would have been {startingHealth}";
             HealthPopupTask = new TaskCompletionSource<bool>();
             HealthPopup.IsVisible = true;
-            await HealthPopupTask.Task; //why does this give an error?!?!
+            await HealthPopupTask.Task;
             HealthPopup.IsVisible = false;
         }
 
