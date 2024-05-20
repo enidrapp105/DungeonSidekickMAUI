@@ -24,7 +24,10 @@ namespace DungeonSidekickMAUI
                     foreach (string str in list)
                     {
                         if (checkExtendedAscii(str) == false)
+                        {
+                            Application.Current.MainPage.DisplayAlert("Text Entry Failure", "Extended ASCII letters detected, please use standard characters!", "OK");
                             return false;
+                        }
                     }
                     break;
                 case 1:
@@ -32,7 +35,10 @@ namespace DungeonSidekickMAUI
                     foreach (string str in list)
                     {
                         if (!int.TryParse(str, out _))
+                        {
+                            Application.Current.MainPage.DisplayAlert("Text Entry Failure", "Please enter numbers in the entered fields!", "OK");
                             return false;
+                        }
                     }
                     break;
                 case 2:
@@ -40,7 +46,10 @@ namespace DungeonSidekickMAUI
                     foreach (string str in list)
                     {
                         if (!double.TryParse(str, out _))
+                        {
+                            Application.Current.MainPage.DisplayAlert("Text Entry Failure", "Please enter numbers in the entered fields!", "OK");
                             return false;
+                        }
                     }
                     break;
                 default:
