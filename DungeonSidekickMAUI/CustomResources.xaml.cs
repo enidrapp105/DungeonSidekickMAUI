@@ -131,5 +131,19 @@ public partial class CustomResources : ResourceDictionary
             colors.Remove("AccessoryColor");
             colors.Add("AccessoryColor", Color.FromRgb(list[15], list[16], list[17]));
         }
+        else
+        {
+            CustomResources designSave = new CustomResources();
+
+            String Primary = (255 + " " + 255 + " " + 255);
+            String Secondary = (190 + " " + 190 + " " + 190);
+            String Trinary = (100 + " " + 255 + " " + 255);
+            String FC = (0 + " " + 0 + " " + 0);
+            String ACCENT = (200 + " " + 200 + " " + 255);
+            String ACCESSORY = (50 + " " + 0 + " " + 255);
+
+            designSave.SaveColors(Primary, Secondary, Trinary, FC, ACCENT, ACCESSORY);
+            CustomResources.GetColors();
+        }
     }
 }
