@@ -63,7 +63,7 @@ public partial class SignupPage : ContentPage
         string query = "SELECT Username FROM dbo.Users WHERE Username = @Username COLLATE SQL_Latin1_General_CP1_CI_AS";
         try
         {
-            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
                 conn.Open();
                 if (conn.State == System.Data.ConnectionState.Open)
