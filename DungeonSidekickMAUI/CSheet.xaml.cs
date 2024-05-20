@@ -116,6 +116,17 @@ public partial class CSheet : ContentPage
      */
     private void SubmitStats(object sender, EventArgs e)
     {
+        List<string> list = new List<string>();
+        list.Add(CName.Text);
+        list.Add(Background.Text);
+        list.Add(Allignment.Text);
+        list.Add(PTraits.Text); 
+        list.Add(Ideals.Text); 
+        list.Add(Bonds.Text); 
+        list.Add(Flaws.Text);
+        list.Add(Traits.Text);
+        if (!GlobalFunctions.entryCheck(list, 0))
+            return;
         LoadCharacterSheetClass();
         if (CheckValues())
         {

@@ -20,6 +20,11 @@ public partial class LoginPage : ContentPage
 		//Also updates Preferences.Default.Get "Username" and "UserId" to the correct values
 		//For reference as to how they are called. string username = Preferences.Default.Get("Username", "");
 		//Where the second quote is the default value if the preference isn't set
+        List<string> list = new List<string>();
+        list.Add(UName.Text);
+        list.Add(Pass.Text);
+        if (!GlobalFunctions.entryCheck(list, 0))
+            return;
 		if (password_Hasher.VerifyHashedPassword(Pass.Text))
 		{
 
