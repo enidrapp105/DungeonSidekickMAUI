@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.Data.SqlClient;
 using System.Security.Cryptography;
 
 namespace DungeonSidekickMAUI;
@@ -44,6 +45,11 @@ public partial class SignupPage : ContentPage
             DisplayAlert("Passwords must be less than 60 characters", "Please fix your passwords", "Ok");
             validlogin = false;
         }
+        else if (!usernameCheck(usernamebox.Text))
+        {
+            DisplayAlert("Username already exists.", "Please try another username.", "Ok");
+            validlogin = false;
+        }
         if (validlogin) 
 		{
 			Password_Hasher password_Hasher = new Password_Hasher(usernamebox.Text);
@@ -51,4 +57,38 @@ public partial class SignupPage : ContentPage
             Navigation.PushAsync(new LoginPage());
         }
     }
+	private bool usernameCheck(string username) 
+	{
+        Connection connection = Connection.connectionSingleton;
+        string query = "SELECT Username FROM dbo.Users WHERE Username = @Username COLLATE SQL_Latin1_General_CP1_CI_AS";
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(Encryption.Decrypt(connection.connectionString, connection.encryptionKey, connection.encryptionIV)))
+            {
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = query;
+                        cmd.Parameters.AddWithValue("@Username", username);
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                // If there are rows, it means the username is found
+                                return false;
+                            }
+                        }
+                    }
+                }
+                conn.Close();
+            }
+        }
+        catch (Exception eSql)
+        {
+            DisplayAlert("Error!", eSql.Message, "OK");
+        }
+        return true;
+	}
 }
