@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Java.Util;
+using Microsoft.Data.SqlClient;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -88,6 +89,15 @@ namespace DungeonSidekickMAUI
          */
         private async void SubmitStats(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
+            list.Add(Strength.Text);
+            list.Add(Dexterity.Text);
+            list.Add(Constitution.Text);
+            list.Add(Intelligence.Text); 
+            list.Add(Wisdom.Text); 
+            list.Add(Charisma.Text);
+            if (!GlobalFunctions.entryCheck(list, 1))
+                return;
             LoadCharacterSheetClass();
             Connection connection = Connection.connectionSingleton;
 
@@ -230,6 +240,10 @@ namespace DungeonSidekickMAUI
 
         private void StartingHealthChosen(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
+            list.Add(chosenHealthEntry.Text);
+            if (!GlobalFunctions.entryCheck(list, 1))
+                return;
             chosenHealth = int.TryParse(chosenHealthEntry.Text, out int result) ? result : 0;
             HealthPopupTask.SetResult(true);
         }
