@@ -93,6 +93,15 @@ namespace DungeonSidekickMAUI
          */
         private async void SubmitStats(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
+            list.Add(Strength.Text);
+            list.Add(Dexterity.Text);
+            list.Add(Constitution.Text);
+            list.Add(Intelligence.Text); 
+            list.Add(Wisdom.Text); 
+            list.Add(Charisma.Text);
+            if (!GlobalFunctions.entryCheck(list, 1))
+                return;
             LoadCharacterSheetClass();
             Connection connection = Connection.connectionSingleton;
 
@@ -204,8 +213,8 @@ namespace DungeonSidekickMAUI
                     {
                         using (SqlCommand cmd = conn.CreateCommand())
                         {
-                            cmd.Parameters.AddWithValue("@ClassID", classID);
                             cmd.CommandText = query;
+                            cmd.Parameters.AddWithValue("@ClassID", classID);
                             using (SqlDataReader reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
@@ -226,18 +235,21 @@ namespace DungeonSidekickMAUI
             return HitDie;
         }
 
-        //********************************HEALTH POPUP IN PROGRESS**********************************
         public async Task ShowHealthPopupAndWaitAsync(int startingHealth)
         {
             StartingHealthLabel.Text = $"Normally your health would have been {startingHealth}";
             HealthPopupTask = new TaskCompletionSource<bool>();
             HealthPopup.IsVisible = true;
-            await HealthPopupTask.Task; //why does this give an error?!?!
+            await HealthPopupTask.Task;
             HealthPopup.IsVisible = false;
         }
 
         private void StartingHealthChosen(object sender, EventArgs e)
         {
+            List<string> list = new List<string>();
+            list.Add(chosenHealthEntry.Text);
+            if (!GlobalFunctions.entryCheck(list, 1))
+                return;
             chosenHealth = int.TryParse(chosenHealthEntry.Text, out int result) ? result : 0;
             HealthPopupTask.SetResult(true);
         }

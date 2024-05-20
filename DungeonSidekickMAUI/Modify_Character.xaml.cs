@@ -116,7 +116,21 @@ public partial class Modify_Character : ContentPage
 
     private void Save(object sender, EventArgs e)
     {
+        List<string> strings = new List<string>();
+        List<string> ints = new List<string>();
 
+        strings.Add(entries[0].Text);
+        for (int x = 4; x != 10; x++)
+            strings.Add(entries[x].Text);
+        ints.Add(entries[1].Text);
+        ints.Add(entries[2].Text);
+        ints.Add(entries[3].Text);
+        for (int y = 11; y > 48; y++)
+            ints.Add(entries[y].Text);
+        if (!GlobalFunctions.entryCheck(strings, 0))
+            return;
+        if (!GlobalFunctions.entryCheck(ints, 1))
+            return;
 
         int i = 0;
         ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
