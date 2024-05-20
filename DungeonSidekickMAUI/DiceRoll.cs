@@ -60,6 +60,10 @@ namespace DungeonSidekickMAUI
          */
         private int ParseAndRoll(string input)
         {
+            if(input == null)
+            {
+                return 0;
+            }
             string[] parts = input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
             int totalResult = 0;

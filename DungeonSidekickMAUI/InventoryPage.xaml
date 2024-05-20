@@ -9,7 +9,7 @@
         <!--This label handles the title-->
         <Label Text="Inventory" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
     </Frame>
-    <VerticalStackLayout HorizontalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" x:Name="InvStack">
+    <VerticalStackLayout HorizontalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" x:Name="InvStack" WidthRequest="400">
 
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem" WidthRequest="400" HorizontalOptions="Center"/>
     </VerticalStackLayout>
