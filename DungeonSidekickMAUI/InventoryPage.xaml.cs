@@ -96,6 +96,7 @@ public partial class InventoryPage : ContentPage
                                     HorizontalStackLayout layout = new HorizontalStackLayout();
                                     Label gearLabel = new Label();
                                     gearLabel.TextColor = (Color)fontColor;
+                                    
 
                                     // grabs the name from the DB and quantity from items list
                                     string name = reader.GetString(0);
@@ -111,7 +112,9 @@ public partial class InventoryPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        CommandParameter = temp
+                                        CommandParameter = temp,
+                                        HorizontalOptions = LayoutOptions.End,
+                                        Margin = new Thickness(0, 0, 0, 10)
 
                                     };
                                     delete.Clicked += RemoveButton;
@@ -177,7 +180,9 @@ public partial class InventoryPage : ContentPage
                                             TextColor = fontColor,
                                             Text = "Equip",
                                             BackgroundColor = TrinaryColor,
-                                            CommandParameter = temp
+                                            CommandParameter = temp,
+                                            HorizontalOptions = LayoutOptions.End,
+                                            Margin = new Thickness(0, 0, 0, 10)
                                         };
                                         equip.Clicked += EquipButton;
                                         layout.Add(equip);
@@ -189,7 +194,9 @@ public partial class InventoryPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        CommandParameter = temp
+                                        CommandParameter = temp,
+                                        HorizontalOptions = LayoutOptions.End,
+                                        Margin = new Thickness(0, 0, 0, 10)
                                     };
 
                                     delete.Clicked += RemoveButton;
@@ -252,7 +259,9 @@ public partial class InventoryPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Remove",
                                         BackgroundColor = TrinaryColor,
-                                        CommandParameter = temp
+                                        CommandParameter = temp,
+                                        HorizontalOptions = LayoutOptions.End,
+                                        Margin = new Thickness(0, 0, 0, 10)
                                     };
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
