@@ -80,18 +80,7 @@ public partial class LandingPage : ContentPage
             }
 
             reader.Close();
-            sqlQuery = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
-            command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
-            if (conn.State == System.Data.ConnectionState.Open)
-            {
-                // No need to create another SqlCommand here
-                object result = command.ExecuteScalar();
-                if (result != null && result != DBNull.Value)
-                {
-                    characterid = Convert.ToInt32(result);
-                }
-            }
+            characterid = currentcharacterSheet2.p_CharacterID;
 
         }
         using (SqlConnection conn = new SqlConnection(connection.connectionString))
@@ -282,21 +271,9 @@ public partial class LandingPage : ContentPage
                         }
                     }
                 }
-                query = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
-                command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    // No need to create another SqlCommand here
-                    object result = command.ExecuteScalar();
-                    if (result != null && result != DBNull.Value)
-                    {
-                        characterID = Convert.ToInt32(result);
-                    }
-                }
                 query = "INSERT INTO CharacterConditions (CharacterID, ConditionID) VALUES (@CharacterID, @ConditionID);";
                 command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@CharacterID", characterID);
+                command.Parameters.AddWithValue("@CharacterID", characterid);
                 command.Parameters.AddWithValue("@ConditionID", conditionID);
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
