@@ -93,15 +93,7 @@ namespace DungeonSidekickMAUI
          */
         private async void SubmitStats(object sender, EventArgs e)
         {
-            List<string> list = new List<string>();
-            list.Add(Strength.Text);
-            list.Add(Dexterity.Text);
-            list.Add(Constitution.Text);
-            list.Add(Intelligence.Text); 
-            list.Add(Wisdom.Text); 
-            list.Add(Charisma.Text);
-            if (!GlobalFunctions.entryCheck(list, 1))
-                return;
+            int chosenHP = 0;
             LoadCharacterSheetClass();
             Connection connection = Connection.connectionSingleton;
 
@@ -111,7 +103,7 @@ namespace DungeonSidekickMAUI
                 "(@UID,@CharacterName,@Race,@Class,@Background,@Alignment,@PersonalityTraits,@Ideals,@Bonds," +
                 "@Flaws,@FeaturesTraits,@Strength,@Dexterity,@Constitution,@Intelligence,@Wisdom,@Charisma,@CurrentHP, @TempHP);" +
                 "SELECT CAST(scope_identity() AS int)";
-
+            bool successful = true;
             try
             {
                 using (SqlConnection conn = new SqlConnection(connection.connectionString))
@@ -168,7 +160,7 @@ namespace DungeonSidekickMAUI
                             int HitDie = getHitDie(CharacterSheetcurrent.c_Class);
                             int stdHP = HitDie + ((CharacterSheetcurrent.c_Constitution - 10) % 2);
 
-                            int chosenHP = stdHP;
+                            chosenHP = stdHP;
 
                             await ShowHealthPopupAndWaitAsync(stdHP);
 
@@ -182,7 +174,10 @@ namespace DungeonSidekickMAUI
                                 Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
                             }
                             else
+                            {
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
+                                successful = false;
+                            }
                         }
                     }
                     conn.Close();
@@ -192,11 +187,88 @@ namespace DungeonSidekickMAUI
             }
             catch (Exception eSql)
             {
-                DisplayAlert("Error!", eSql.Message, "OK");
+                await DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
+                successful = false;
             }
-            
-            
+            if (successful)
+            {
+                try
+                {
+                    using (SqlConnection conn = new SqlConnection(connection.connectionString))
+                    {
+                        conn.Open();
+                        if (conn.State == System.Data.ConnectionState.Open)
+                        {
+                            using (SqlCommand cmd = conn.CreateCommand())
+                            {
+                                query = "SELECT CharacterID FROM dbo.CharacterSheet " +
+                                "WHERE UID = @UID " +
+                                "AND CharacterName = @CharacterName " +
+                                "AND RaceId = @Race " +
+                                "AND ClassId = @Class " +
+                                "AND Background = @Background " +
+                                "AND Alignment = @Alignment " +
+                                "AND PersonalityTraits = @PersonalityTraits " +
+                                "AND Ideals = @Ideals " +
+                                "AND Bonds = @Bonds " +
+                                "AND Flaws = @Flaws " +
+                                "AND FeaturesTraits = @FeaturesTraits " +
+                                "AND Strength = @Strength " +
+                                "AND Dexterity = @Dexterity " +
+                                "AND Constitution = @Constitution " +
+                                "AND Intelligence = @Intelligence " +
+                                "AND Wisdom = @Wisdom " +
+                                "AND Charisma = @Charisma " +
+                                "AND CurrentHP = @CurrentHP " +
+                                "AND TempHP = @TempHP ";
+
+                                cmd.Parameters.AddWithValue("@UID", Preferences.Default.Get("UserId", 0));
+                                cmd.Parameters.AddWithValue("@CharacterName", CharacterSheetcurrent.c_Name);
+                                cmd.Parameters.AddWithValue("@Race", CharacterSheetcurrent.c_Race);
+                                cmd.Parameters.AddWithValue("@Class", CharacterSheetcurrent.c_Class);
+                                cmd.Parameters.AddWithValue("@Background", CharacterSheetcurrent.c_Background);
+                                cmd.Parameters.AddWithValue("@Alignment", CharacterSheetcurrent.c_Alignment);
+                                cmd.Parameters.AddWithValue("@PersonalityTraits", CharacterSheetcurrent.c_PersonalityTraits);
+                                cmd.Parameters.AddWithValue("@Ideals", CharacterSheetcurrent.c_Ideals);
+                                cmd.Parameters.AddWithValue("@Bonds", CharacterSheetcurrent.c_Bonds);
+                                cmd.Parameters.AddWithValue("@Flaws", CharacterSheetcurrent.c_Flaws);
+                                cmd.Parameters.AddWithValue("@FeaturesTraits", CharacterSheetcurrent.c_FeaturesTraits);
+
+                                cmd.Parameters.AddWithValue("@Strength", CharacterSheetcurrent.c_Strength);
+
+                                cmd.Parameters.AddWithValue("@Dexterity", CharacterSheetcurrent.c_Dexterity);
+
+                                cmd.Parameters.AddWithValue("@Constitution", CharacterSheetcurrent.c_Constitution);
+                                cmd.Parameters.AddWithValue("@Intelligence", CharacterSheetcurrent.c_Intelligence);
+                                cmd.Parameters.AddWithValue("@Wisdom", CharacterSheetcurrent.c_Wisdom);
+                                cmd.Parameters.AddWithValue("@Charisma", CharacterSheetcurrent.c_Charisma);
+                                cmd.Parameters.AddWithValue("@CurrentHP", chosenHP);
+                                cmd.Parameters.AddWithValue("@TempHP", chosenHP);
+                                cmd.CommandText = query;
+
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+
+                                    while (reader.Read())
+                                    {
+                                        Preferences.Default.Set("CharacterID", reader.GetInt32(0));
+                                    }
+                                }
+                            }
+                        }
+                        conn.Close();
+
+                    }
+                }
+                catch (Exception eSql)
+                {
+                    await DisplayAlert("Error!", eSql.Message, "OK");
+                    Debug.WriteLine("Exception: " + eSql.Message);
+
+                }
+            }
+
 
         }
         private int getHitDie(int classID)
