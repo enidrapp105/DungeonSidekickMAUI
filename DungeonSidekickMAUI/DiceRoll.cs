@@ -88,6 +88,8 @@ namespace DungeonSidekickMAUI
                     char firstChar = part[0];
                     int startIndex = Char.IsDigit(firstChar) ? 0 : 1;
                     int customValue = int.Parse(part.Substring(startIndex));
+                    if (customValue > 10000 || customValue < -10000)
+                        customValue = 0;
                     if (firstChar == '+')
                         totalResult += customValue;
                     else if (firstChar == '-')
