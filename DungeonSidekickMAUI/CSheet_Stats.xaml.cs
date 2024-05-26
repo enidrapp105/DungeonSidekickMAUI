@@ -180,14 +180,14 @@ namespace DungeonSidekickMAUI
                             if (flag != 1)
                             {
                                 Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
+                                ImportedCharacterSheet.Save(CharacterSheetcurrent);
+                                Navigation.PushAsync(new LandingPage());
                             }
                             else
                                 DisplayAlert("Your stats are invalid.", "Please make sure they are between 0 and 18.", "Ok");
                         }
                     }
-                    conn.Close();
-                    ImportedCharacterSheet.Save(CharacterSheetcurrent);
-                    Navigation.PushAsync(new LandingPage());
+                    conn.Close();  
                 }
             }
             catch (Exception eSql)
