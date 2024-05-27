@@ -8,8 +8,8 @@
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
 
-            <Entry Placeholder="Character Name" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="CName"
-                WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Character Name" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="CName"
+                WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="49"/>
             <!--Color is temp-->
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Race" Clicked="RacePickerPage"
@@ -18,26 +18,26 @@
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Class" Clicked="ClassPickerPage"
                WidthRequest="400" HorizontalOptions="Center" x:Name="ClassButton" Margin="5"/>
 
-            <Entry Placeholder="Background" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Background"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="50" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" />
+            <Editor Placeholder="Background" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Background"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="50" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="49"/>
 
             <Entry Placeholder="Allignment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
 
-            <Entry Placeholder="Personality Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="PTraits"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Personality Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="PTraits"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="99"/>
 
-            <Entry Placeholder="Ideals" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Ideals"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Ideals" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Ideals"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="99"/>
 
-            <Entry Placeholder="Bonds" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Bonds"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Bonds" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Bonds"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="99"/>
 
-            <Entry Placeholder="Flaws" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Flaws"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Flaws" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Flaws"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="99"/>
 
-            <Entry Placeholder="Features and Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Traits"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Editor Placeholder="Features and Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Traits"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="199"/>
             <!--'&' doesnt work?-->
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
