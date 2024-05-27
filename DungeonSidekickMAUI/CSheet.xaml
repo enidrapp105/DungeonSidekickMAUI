@@ -21,8 +21,23 @@
             <Entry Placeholder="Background" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Background"
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="50" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" />
 
-            <Entry Placeholder="Allignment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
+            <Picker Title="Alignment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center"  Margin="5">
+                <Picker.Items>
+                    <x:String>Lawful Good</x:String>
+                    <x:String>Neutral Good</x:String>
+                    <x:String>Chaotic Good</x:String>
+                    <x:String>Lawful Neutral</x:String>
+                    <x:String>Neutral Neutral</x:String>
+                    <x:String>Chaotic Neutral</x:String>
+                    <x:String>Lawful Evil</x:String>
+                    <x:String>Neutral Evil</x:String>
+                    <x:String>Chaotic Evil</x:String>
+                </Picker.Items>
+            </Picker>
+            
+            <!--<Entry Placeholder="Allignment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"-->
+               <!--VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>-->
 
             <Entry Placeholder="Personality Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="PTraits"
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="75" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
