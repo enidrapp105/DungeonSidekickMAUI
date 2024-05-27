@@ -9,22 +9,23 @@
             </Frame>
 
             <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
             <Entry Placeholder="Dexterity" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Dexterity"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
             <Entry Placeholder="Constitution" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Constitution"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
             <Entry Placeholder="Intelligence" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Intelligence"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
             <Entry Placeholder="Wisdom" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Wisdom"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
             <Entry Placeholder="Charisma" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Charisma"
-            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+            WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
+
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
             WidthRequest="400" HorizontalOptions="Center"/>
@@ -35,7 +36,7 @@
                 <StackLayout Margin="10,10,10,10" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
                     <Label Text="{Binding startingHealth, StringFormat='Normally your health would have been {0}'}" x:Name="StartingHealthLabel" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" VerticalOptions="Center"/>
                     <Entry Placeholder="Type a number for health" Text="{Binding chosenHealth}" HorizontalOptions="FillAndExpand" x:Name="chosenHealthEntry" 
-                           BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" PlaceholderColor="{DynamicResource AccessoryColor}"/>
+                           BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
                     <Button Text="Ok" Clicked="StartingHealthChosen" HorizontalOptions="Center" VerticalOptions="Center"/>
                 </StackLayout>
             </Grid>
