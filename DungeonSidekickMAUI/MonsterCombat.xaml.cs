@@ -53,7 +53,7 @@ public partial class MonsterCombat : ContentPage
             monsterLabel.TextColor = (Color)fontColor;
             string name = monster.Name;
             monsterLabel.Text = name + " HP: " + monster.HP;
-            layout.Add(monsterLabel);
+
 
             // Button that selects the monster to be fought in combat
             Button select = new Button
@@ -62,9 +62,11 @@ public partial class MonsterCombat : ContentPage
                 TextColor = fontColor,
                 Text = "Select",
                 BackgroundColor = TrinaryColor,
+                Margin = new Thickness(10,0,10,10)
             };
             select.Clicked += SelectButton;
             layout.Add(select);
+            layout.Add(monsterLabel);
             MonsterStack.Add(layout);
         }
     }

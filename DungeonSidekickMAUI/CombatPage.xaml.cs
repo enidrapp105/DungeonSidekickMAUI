@@ -60,7 +60,7 @@ public partial class CombatPage : ContentPage
                                     // grabs the name from the DB and quantity from weapon list
                                     string name = reader.GetString(0);
                                     weaponLabel.Text = name + " x" + weapon[1];
-                                    layout.Add(weaponLabel);
+                                    
 
                                     // Button that selects the item to be used in combat
                                     Button select = new Button
@@ -69,9 +69,11 @@ public partial class CombatPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Select",
                                         BackgroundColor = TrinaryColor,
+                                        Margin = new Thickness(10,0,10,10)
                                     };
                                     select.Clicked += SelectButton;
                                     layout.Add(select);
+                                    layout.Add(weaponLabel);
                                     CombatStack.Add(layout);
                                 }
                             }
