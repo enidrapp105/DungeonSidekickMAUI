@@ -18,6 +18,7 @@ public partial class AddToSpellpool : ContentPage
     AddSpellViewModel addSpellViewModel;
     private readonly TimeSpan searchDelay = TimeSpan.FromMilliseconds(500); // Adjust the delay as needed
     private DateTime lastTextChangedTime = DateTime.MinValue;
+    
 
     public AddToSpellpool()
     {
@@ -57,11 +58,23 @@ public partial class AddToSpellpool : ContentPage
     private async void AddSpells(object sender, EventArgs e)
     {
         Spellpool inv = new Spellpool();
+        inv.PullSpells();
         if (sender is Button button && button.CommandParameter is Spells userSpell)
         {
             int id = userSpell.Id;
-            inv.AddSpell(id);
-            await DisplayAlert("Added Spell", "Successfully added to spellpool", "Ok");
+            int retVal = inv.AddSpell(id);
+            if (retVal == -1)
+            {
+                await DisplayAlert("Cannot Add Spell", "Your spellpool already contains this spell.", "Ok");
+            }
+            else if (retVal == -2)
+            {
+                await DisplayAlert("Cannot Add Spell", "Failed to connect to the database. Please try again.", "Ok");
+            }
+            else
+            {
+                await DisplayAlert("Added Spell", "Successfully added to spellpool", "Ok");
+            }
         }
     }
 
