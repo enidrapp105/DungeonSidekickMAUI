@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 
 namespace DungeonSidekickMAUI;
 
+//using AVFoundation;
 using System.Data;
 /*
     Author: Jonathan Raffaelly
@@ -51,7 +52,7 @@ public partial class CSheet_Import : ContentPage
             " WHERE UID = @UID;";
 
         int UserId = Preferences.Default.Get("UserId", -1);
-
+        int characterId = 0;
         if (UserId == -1) DisplayAlert("You do not have a valid account", "This should never happen", "Ok");
         try
         {
@@ -76,7 +77,8 @@ public partial class CSheet_Import : ContentPage
                             while (reader.Read())
                             {
                                 //creating character sheet with all data
-                                ImportedCharacterSheet Char = new ImportedCharacterSheet(reader.GetInt32(49), reader.GetInt32(0));
+                                characterId = reader.GetInt32(0);
+                                ImportedCharacterSheet Char = new ImportedCharacterSheet(reader.GetInt32(49), characterId);
                                 Char.c_Race = reader.GetInt32(1);
                                 Char.c_Class = reader.GetInt32(2);
                                 Char.c_Name = reader.GetString(3);
@@ -235,6 +237,26 @@ public partial class CSheet_Import : ContentPage
                                 cFrame.Margin = new Thickness(0,0,0,10);
                                 cFrame.Padding = 0;
 
+                                Button showMeButton = new Button
+                                {
+                                    TextColor = (Color)fontColor,
+                                    BackgroundColor = (Color)trinaryColor,
+                                    WidthRequest = 120,
+                                    Margin = new Thickness(5, 5, 0, 10),
+                                    Text = "Show More",
+                                    HorizontalOptions = LayoutOptions.Start,
+                                    
+                                };
+                                showMeButton.Command = new Command
+                                    (
+                                        execute: async () =>
+                                        {
+                                            ShowMore(showMeButton, CharacterStack, characterId);
+                                        }
+                                    );
+
+                                //CharacterStack.Add(showMeButton);
+
                                 Label CName = new Label();
                                 CName.TextColor = (Color)fontColor;
                                 CName.Text = "Character Name: " + Char.c_Name;
@@ -323,6 +345,18 @@ public partial class CSheet_Import : ContentPage
         {
             DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
+        }
+    }
+
+    private void ShowMore(Button sender, StackLayout stack, int characterId)
+    {
+        if(sender.Text == "Show More")
+        {
+            sender.Text = "Show Less";
+        }
+        else if(sender.Text == "Show Less")
+        {
+            sender.Text = "Show More";
         }
     }
 }
