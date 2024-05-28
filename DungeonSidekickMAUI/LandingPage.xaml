@@ -36,7 +36,7 @@
                         <Label x:Name="AC" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                     </Frame>
                     <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0" >
-                        <Label Text="HP:25" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+                        <Label x:Name="HP" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                     </Frame>
                     </HorizontalStackLayout>
                 <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Go To Combat" Clicked="NavigateToCombat" WidthRequest="400" HorizontalOptions="Center"/>

@@ -48,6 +48,7 @@ public partial class LandingPage : ContentPage
         
 
         AC.Text = "AC: " + currentcharacterSheet.c_ACBoost.ToString();
+        HP.Text = "HP: " + currentcharacterSheet.c_CurrentHealth.ToString();
 
         Connection connection = Connection.connectionSingleton;
         statusnames = new List<string>();
