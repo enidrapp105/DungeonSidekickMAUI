@@ -2,8 +2,10 @@ namespace DungeonSidekickMAUI;
 using Microsoft.Maui.Controls.Shapes;
 public partial class Modify_Character : ContentPage
 {
-    public List<Entry> entries = new List<Entry>(); // Collection to store references to the dynamically created Entry controls
+    Picker alignmentPicker;
+    public List<Editor> entries = new List<Editor>(); // Collection to store references to the dynamically created Entry controls
     ImportedCharacterSheet Char;
+
     public Modify_Character()
 	{
         InitializeComponent();
@@ -29,11 +31,14 @@ public partial class Modify_Character : ContentPage
 
         //Grab all Variables of 
         var variablesFull = typeof(ImportedCharacterSheet).GetProperties();
-
+        int x = 0;
         foreach (var property in variablesFull)
         {
             //Skips properties that should be invisible
-            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID" || property.Name == "c_Equipment")
+            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID" || property.Name == "c_Equipment" || property.Name == "exists"
+                || property.Name == "c_RaceName" || property.Name == "c_ClassName" || property.Name == "c_inv" || property.Name == "c_WEquipped"
+                || property.Name == "c_WEquippedID" || property.Name == "c_SEquipped" || property.Name == "c_SEquippedID" || property.Name == "c_damageDice" || property.Name == "c_EEquipped"
+                || property.Name == "c_EEquippedID" || property.Name == "c_ACBoost")
             {
                 continue;
             }
@@ -91,25 +96,69 @@ public partial class Modify_Character : ContentPage
                 raceChange.Clicked += GoToRacePickerPage;
                 Sheet.Add(raceChange);
             }
+            else if (correctVariableName == "Alignment")
+            {
+                alignmentPicker = new Picker
+                {
+                    //Title = "Alignment",
+                    FontSize = Device.GetNamedSize(NamedSize.Body, typeof(Picker)),
+                    BackgroundColor = (Color)Application.Current.Resources["SecondaryColor"],
+                    TextColor = (Color)Application.Current.Resources["FontC"],
+                    VerticalTextAlignment = TextAlignment.Start,
+                    WidthRequest = 400,
+                    HorizontalOptions = LayoutOptions.Center,
+                    Margin = new Thickness(5),
+                    TitleColor = (Color)Application.Current.Resources["FontC"]
+                };
+
+                // Add items to the Picker
+                alignmentPicker.Items.Add("Lawful Good");
+                alignmentPicker.Items.Add("Neutral Good");
+                alignmentPicker.Items.Add("Chaotic Good");
+                alignmentPicker.Items.Add("Lawful Neutral");
+                alignmentPicker.Items.Add("True Neutral");
+                alignmentPicker.Items.Add("Chaotic Neutral");
+                alignmentPicker.Items.Add("Lawful Evil");
+                alignmentPicker.Items.Add("Neutral Evil");
+                alignmentPicker.Items.Add("Chaotic Evil");
+
+                alignmentPicker.SetBinding(Picker.SelectedItemProperty, new Binding(property.Name, BindingMode.TwoWay, source: Char));
+
+                Sheet.Children.Add(alignmentPicker);
+            }
             else
             {
-
-                //Create an entry for each property with a dynamic access name
-                var newEntry = new Entry
+                //Create an editor for each property with a dynamic access name
+                var newEntry = new Editor
                 {
                     Placeholder = "Enter " + correctVariableName, // Use the property name as entry placeholder
                     BackgroundColor = (Color)secondaryColor,
                     TextColor = (Color)fontColor,
                     WidthRequest = 400,
-                    Margin = new Thickness(0, 0, 0, 10)
+                    Margin = new Thickness(0, 0, 0, 10),
+                    MaxLength = 5
                 };
+                int[] stringValues = { 0, 2, 3, 4, 5, 6, 7 };
+                if (stringValues.Contains(x))
+                {
+                    newEntry.MaxLength = 50;
+                }
+                else if (x == 16 || x == 17)
+                {
+                    newEntry.MaxLength = 4;
+                }
+                else
+                {
+                    newEntry.MaxLength = 2;
+                }
 
                 //Set a binding between the entry and the corresponding property of the ImportedCharacterSheet instance
-                newEntry.SetBinding(Entry.TextProperty, new Binding(property.Name, BindingMode.TwoWay, source: Char));
+                newEntry.SetBinding(Editor.TextProperty, new Binding(property.Name, BindingMode.TwoWay, source: Char));
 
                 
                 Sheet.Children.Add(newEntry);
                 entries.Add(newEntry); // Add the entry to the collection
+                x++;
             }
         }
     }
@@ -120,12 +169,10 @@ public partial class Modify_Character : ContentPage
         List<string> ints = new List<string>();
 
         strings.Add(entries[0].Text);
-        for (int x = 4; x != 10; x++)
+        for (int x = 2; x < 8; x++)
             strings.Add(entries[x].Text);
         ints.Add(entries[1].Text);
-        ints.Add(entries[2].Text);
-        ints.Add(entries[3].Text);
-        for (int y = 11; y > 48; y++)
+        for (int y = 8; y < 45; y++)
             ints.Add(entries[y].Text);
         if (!GlobalFunctions.entryCheck(strings, 0))
             return;
@@ -135,11 +182,9 @@ public partial class Modify_Character : ContentPage
         int i = 0;
         ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
         Char.c_Name = entries[i++].Text;
-        //Char.c_Class = int.Parse(entries[i++].Text);
-        //Char.c_Race = int.Parse(entries[i++].Text);
         Char.c_Level = int.Parse(entries[i++].Text);
         Char.c_Background = entries[i++].Text;
-        Char.c_Alignment = entries[i++].Text;
+        Char.c_Alignment = alignmentPicker.SelectedItem.ToString();
         Char.c_PersonalityTraits = entries[i++].Text;
         Char.c_Ideals = entries[i++].Text;
         Char.c_Bonds = entries[i++].Text;
