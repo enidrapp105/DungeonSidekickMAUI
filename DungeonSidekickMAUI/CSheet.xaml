@@ -22,7 +22,7 @@
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="50" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" />
 
             <Picker Title="Alignment" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Allignment"
-               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center"  Margin="5">
+               VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center"  Margin="5" TitleColor="{DynamicResource FontC}">
                 <Picker.Items>
                     <x:String>Lawful Good</x:String>
                     <x:String>Neutral Good</x:String>
@@ -53,7 +53,6 @@
 
             <Entry Placeholder="Features and Traits" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Traits"
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5"/>
-            <!--'&' doesnt work?-->
 
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
                WidthRequest="400" HorizontalOptions="Center" Margin="5"/>
