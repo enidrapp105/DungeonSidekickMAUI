@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.MonsterCombat"
              >
+    <ScrollView>
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
         <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
             <Label Text="Monster Combat" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36" Margin="0,0,0,10"/>
@@ -11,4 +12,5 @@
             
         </VerticalStackLayout>
     </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
