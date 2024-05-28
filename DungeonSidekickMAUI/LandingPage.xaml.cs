@@ -80,18 +80,7 @@ public partial class LandingPage : ContentPage
             }
 
             reader.Close();
-            sqlQuery = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
-            command = new SqlCommand(sqlQuery, conn);
-            command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
-            if (conn.State == System.Data.ConnectionState.Open)
-            {
-                // No need to create another SqlCommand here
-                object result = command.ExecuteScalar();
-                if (result != null && result != DBNull.Value)
-                {
-                    characterid = Convert.ToInt32(result);
-                }
-            }
+            characterid = currentcharacterSheet2.p_CharacterID;
 
         }
         using (SqlConnection conn = new SqlConnection(connection.connectionString))
@@ -111,7 +100,7 @@ public partial class LandingPage : ContentPage
             }
 
             reader.Close();
-            sqlQuery = "SElECT ConditionID FROM dbo.CharacterConditions WHERE CharacterID = @characterid;";
+            sqlQuery = "SELECT ConditionID FROM dbo.CharacterConditions WHERE CharacterID = @characterid;";
             command = new SqlCommand(sqlQuery, conn);
             command.Parameters.AddWithValue("@characterid", characterid);
             reader = command.ExecuteReader();
@@ -155,13 +144,59 @@ public partial class LandingPage : ContentPage
                     }
                 }
             }
-            int index = statusnames.IndexOf(selectedEffect);
-            if (selectedEffect == "Exhaustion")
+            PopulateEffects(selectedEffect, selectedeffectid);
+        }
+        
+    }
+    private void PopulateEffects(string selectedEffect, int selectedeffectid)
+    {
+        int index = statusnames.IndexOf(selectedEffect);
+        if (selectedEffect == "Exhaustion")
+        {
+            // Create an ExhaustionView with the descriptions
+            ExhaustionView exhaustionView = new ExhaustionView(exhaustiondescriptions, characterid)
             {
-                // Create an ExhaustionView with the descriptions
-                ExhaustionView exhaustionView = new ExhaustionView(exhaustiondescriptions)
+                HorizontalOptions = LayoutOptions.FillAndExpand,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+
+            Button removeButton = new Button
+            {
+                Text = "Remove",
+                BackgroundColor = SecondaryColor,
+                TextColor = fontColor,
+                Margin = new Thickness(0, 5, 0, 0)
+            };
+            removeButton.Clicked += async (s, args) =>
+            {
+                statusstack.Children.Remove(exhaustionView);
+                statusstack.Children.Remove(removeButton);
+                existingstatuses.Remove(selectedEffect);
+                // Capture the IDs before removing
+                int charID = characterid;
+                int condID = 15;
+
+                // Remove from database
+                await RemoveStatusFromDatabase(charID, condID);
+                await RemoveExaustionFromDatabase(charID);
+            };
+
+            statusstack.Children.Add(exhaustionView);
+            statusstack.Children.Add(removeButton);
+            existingstatuses.Add(selectedEffect);
+
+        }
+        else
+        {
+            // Handle other status effects
+            if (index >= 0 && index < statusdescriptions.Count)
+            {
+                string description = statusdescriptions[index];
+                Label effectLabel = new Label
                 {
-                    HorizontalOptions = LayoutOptions.FillAndExpand,
+                    Text = $"{selectedEffect}: {description}",
+                    TextColor = fontColor,
+                    BackgroundColor = PrimaryColor,
                     Margin = new Thickness(0, 5, 0, 0)
                 };
 
@@ -174,66 +209,30 @@ public partial class LandingPage : ContentPage
                 };
                 removeButton.Clicked += async (s, args) =>
                 {
-                    statusstack.Children.Remove(exhaustionView);
+                    statusstack.Children.Remove(effectLabel);
                     statusstack.Children.Remove(removeButton);
                     existingstatuses.Remove(selectedEffect);
                     // Capture the IDs before removing
                     int charID = characterid;
-                    int condID = 15;
+                    int condID = selectedeffectid;
 
                     // Remove from database
                     await RemoveStatusFromDatabase(charID, condID);
                 };
 
-                statusstack.Children.Add(exhaustionView);
+                statusstack.Children.Add(effectLabel);
                 statusstack.Children.Add(removeButton);
                 existingstatuses.Add(selectedEffect);
             }
-            else
-            {
-                // Handle other status effects
-                if (index >= 0 && index < statusdescriptions.Count)
-                {
-                    string description = statusdescriptions[index];
-                    Label effectLabel = new Label
-                    {
-                        Text = $"{selectedEffect}: {description}",
-                        TextColor = fontColor,
-                        BackgroundColor = PrimaryColor,
-                        Margin = new Thickness(0, 5, 0, 0)
-                    };
-
-                    Button removeButton = new Button
-                    {
-                        Text = "Remove",
-                        BackgroundColor = SecondaryColor,
-                        TextColor = fontColor,
-                        Margin = new Thickness(0, 5, 0, 0)
-                    };
-                    removeButton.Clicked += async (s, args) =>
-                    {
-                        statusstack.Children.Remove(effectLabel);
-                        statusstack.Children.Remove(removeButton);
-                        existingstatuses.Remove(selectedEffect);
-                        // Capture the IDs before removing
-                        int charID = characterid;
-                        int condID = selectedeffectid;
-
-                        // Remove from database
-                        await RemoveStatusFromDatabase(charID, condID);
-                    };
-
-                    statusstack.Children.Add(effectLabel);
-                    statusstack.Children.Add(removeButton);
-                    existingstatuses.Add(selectedEffect);
-                }
-            }
         }
-        
     }
-
     private async void AddEffectButtonClicked(object sender, EventArgs e)
     {
+        if (StatusEffectPicker.SelectedItem == null)
+        {
+            await DisplayAlert("No Effect Selected", "Please select an effect", "Ok");
+            return;
+        }
         string selectedEffect = StatusEffectPicker.SelectedItem.ToString();
         int index = statusnames.IndexOf(selectedEffect);
         Connection connection = Connection.connectionSingleton;
@@ -272,21 +271,9 @@ public partial class LandingPage : ContentPage
                         }
                     }
                 }
-                query = "SELECT CharacterID FROM CharacterSheet WHERE CharacterName = @CharacterName;";
-                command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@CharacterName", currentcharacterSheet2.c_Name);
-                if (conn.State == System.Data.ConnectionState.Open)
-                {
-                    // No need to create another SqlCommand here
-                    object result = command.ExecuteScalar();
-                    if (result != null && result != DBNull.Value)
-                    {
-                        characterID = Convert.ToInt32(result);
-                    }
-                }
                 query = "INSERT INTO CharacterConditions (CharacterID, ConditionID) VALUES (@CharacterID, @ConditionID);";
                 command = new SqlCommand(query, conn);
-                command.Parameters.AddWithValue("@CharacterID", characterID);
+                command.Parameters.AddWithValue("@CharacterID", characterid);
                 command.Parameters.AddWithValue("@ConditionID", conditionID);
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
@@ -299,83 +286,11 @@ public partial class LandingPage : ContentPage
             DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
         }
-        
 
-       
 
-        if (selectedEffect == "Exhaustion")
-        {
-            // Create an ExhaustionView with the descriptions
-            ExhaustionView exhaustionView = new ExhaustionView(exhaustiondescriptions)
-            {
-                HorizontalOptions = LayoutOptions.FillAndExpand,
-                Margin = new Thickness(0, 5, 0, 0)
-            };
 
-            Button removeButton = new Button
-            {
-                Text = "Remove",
-                BackgroundColor = SecondaryColor,
-                TextColor = fontColor,
-                Margin = new Thickness(0, 5, 0, 0)
-            };
-            removeButton.Clicked += async (s, args) =>
-            {
-                statusstack.Children.Remove(exhaustionView);
-                statusstack.Children.Remove(removeButton);
-                existingstatuses.Remove(selectedEffect);
-                // Capture the IDs before removing
-                int charID = characterID;
-                int condID = conditionID;
 
-                // Remove from database
-                await RemoveStatusFromDatabase(charID, condID);
-                
-            };
-
-            statusstack.Children.Add(exhaustionView);
-            statusstack.Children.Add(removeButton);
-            existingstatuses.Add(selectedEffect);
-        }
-        else
-        {
-            // Handle other status effects
-            if (index >= 0 && index < statusdescriptions.Count)
-            {
-                string description = statusdescriptions[index];
-                Label effectLabel = new Label
-                {
-                    Text = $"{selectedEffect}: {description}",
-                    TextColor = fontColor,
-                    BackgroundColor = PrimaryColor,
-                    Margin = new Thickness(0, 5, 0, 0)
-                };
-
-                Button removeButton = new Button
-                {
-                    Text = "Remove",
-                    BackgroundColor = SecondaryColor,
-                    TextColor = fontColor,
-                    Margin = new Thickness(0, 5, 0, 0)
-                };
-                removeButton.Clicked += async (s, args) =>
-                {
-                    statusstack.Children.Remove(effectLabel);
-                    statusstack.Children.Remove(removeButton);
-                    existingstatuses.Remove(selectedEffect);
-                    // Capture the IDs before removing
-                    int charID = characterID;
-                    int condID = conditionID;
-
-                    // Remove from database
-                    await RemoveStatusFromDatabase(charID, condID);
-                };
-
-                statusstack.Children.Add(effectLabel);
-                statusstack.Children.Add(removeButton);
-                existingstatuses.Add(selectedEffect);
-            }
-        }
+        PopulateEffects(selectedEffect, conditionID);
         
     }
     async Task RemoveStatusFromDatabase(int charID, int condID)
@@ -385,7 +300,7 @@ public partial class LandingPage : ContentPage
         {
             using (SqlConnection conn = new SqlConnection(connection.connectionString))
             {
-                string query = "DELETE FROM dbo.CharacterConditions WHERE CharacterID = @CharacterID AND ConditionID = @ConditionID";
+                string query = "DELETE FROM dbo.CharacterConditions WHERE CharacterID = @CharacterID AND ConditionID = @ConditionID;";
                 SqlCommand command = new SqlCommand(query, conn);
                 command.Parameters.AddWithValue("@CharacterID", charID);
                 command.Parameters.AddWithValue("@ConditionID", condID);
@@ -394,6 +309,30 @@ public partial class LandingPage : ContentPage
             }
         }
         catch (Exception eSql)
+        {
+            await DisplayAlert("Error!", eSql.Message, "OK");
+            Debug.WriteLine("Exception: " + eSql.Message);
+        }
+    }
+
+    async Task RemoveExaustionFromDatabase(int charID)
+    {
+        Connection connection = Connection.connectionSingleton;
+        try
+        {
+            using (SqlConnection conn = new SqlConnection(connection.connectionString))
+            {
+                string query = "DELETE FROM CharacterExhaustionLevelLookup WHERE CharacterID = @CharacterID;";
+                SqlCommand command = new SqlCommand(query, conn);
+                command.Parameters.AddWithValue("@CharacterID", charID);
+                conn.Open();
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        catch(Exception eSql)
         {
             await DisplayAlert("Error!", eSql.Message, "OK");
             Debug.WriteLine("Exception: " + eSql.Message);
