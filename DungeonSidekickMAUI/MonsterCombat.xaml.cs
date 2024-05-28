@@ -152,6 +152,7 @@ public partial class MonsterCombat : ContentPage
             Placeholder = "Damage modifier",
             Keyboard = Keyboard.Numeric,
             WidthRequest = 250,
+            MaxLength = 5,
             TextColor = fontColor,
             BackgroundColor = SecondaryColor
         };
@@ -171,6 +172,7 @@ public partial class MonsterCombat : ContentPage
             Placeholder = "Hit modifier",
             Keyboard = Keyboard.Numeric,
             WidthRequest = 250,
+            MaxLength = 5,
             TextColor = fontColor,
             BackgroundColor = SecondaryColor
         };
