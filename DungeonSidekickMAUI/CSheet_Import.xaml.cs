@@ -71,6 +71,7 @@ public partial class CSheet_Import : ContentPage
                         {
                             var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
                             var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
+                            var hasValue3 = Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
 
                             while (reader.Read())
                             {
@@ -216,62 +217,29 @@ public partial class CSheet_Import : ContentPage
                                         }
                                     }
                                 }
-                                // *********************************
-                                // COMMENTED OUT SINCE A LOT ARE NULL VALUES WHEN PULLED FROM DB
-                                //Char.c_Flaws = reader.GetString(9);
-                                //Char.c_FeaturesTraits = reader.GetString(10);
-                                //Char.c_Equipment = reader.GetInt32(11); // may need adjusted
-                                //Char.c_Strength = reader.GetInt32(12);
-                                //Char.c_Dexterity = reader.GetInt32(13);
-                                //Char.c_Constitution = reader.GetInt32(14);
-                                //Char.c_Intelligence = reader.GetInt32(15);
-                                //Char.c_Wisdom = reader.GetInt32(16);
-                                //Char.c_Charisma = reader.GetInt32(17);
-                                //Char.c_CurrentHealth = reader.GetInt32(18);
-                                //Char.c_TemporaryHealth = reader.GetInt32(19);
-                                //Char.c_ArmorClass = reader.GetInt32(20);
-                                //Char.c_Initiative = reader.GetInt32(21);
-                                //Char.c_Speed = reader.GetInt32(22);
-                                //Char.c_HitDice = reader.GetInt32(23);
-                                //Char.c_StrengthSave = reader.GetInt32(24);
-                                //Char.c_DexteritySave = reader.GetInt32(25);
-                                //Char.c_ConstitutionSave = reader.GetInt32(26);
-                                //Char.c_IntelligenceSave = reader.GetInt32(27);
-                                //Char.c_WisdomSave = reader.GetInt32(28);
-                                //Char.c_CharismaSave = reader.GetInt32(29);
-                                //Char.c_Acrobatics = reader.GetInt32(30);
-                                //Char.c_AnimalHandling = reader.GetInt32(31);
-                                //Char.c_Arcana = reader.GetInt32(32);
-                                //Char.c_Athletics = reader.GetInt32(33);
-                                //Char.c_Deception = reader.GetInt32(34);
-                                //Char.c_History = reader.GetInt32(35);
-                                //Char.c_Insight = reader.GetInt32(36);
-                                //Char.c_Intimidation = reader.GetInt32(37);
-                                //Char.c_Investigation = reader.GetInt32(38);
-                                //Char.c_Medicine = reader.GetInt32(39);
-                                //Char.c_Nature = reader.GetInt32(40);
-                                //Char.c_Perception = reader.GetInt32(41);
-                                //Char.c_Performance = reader.GetInt32(42);
-                                //Char.c_Persuasion = reader.GetInt32(43);
-                                //Char.c_Religion = reader.GetInt32(44);
-                                //Char.c_SleightOfHand = reader.GetInt32(45);
-                                //Char.c_Stealth = reader.GetInt32(46);
-                                //Char.c_Survival = reader.GetInt32(47);
-                                //Char.c_PassiveWisdom = reader.GetInt32(48);
-                                //Char.c_Level = reader.GetInt32(50);
-                                //***********************************
 
                                 //adds new character to character list MIGHT NOT BE NEEDED
                                 c_List.Add(Char);
 
+                                
+
                                 //creating visual example of new Character sheet for user interface to choose from
                                 StackLayout CharacterStack = new StackLayout();
                                 CharacterStack.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                                CharacterStack.WidthRequest = 400;
+
+                                Frame cFrame = new Frame();
+                                cFrame.BackgroundColor = (Color)secondaryColor;
+                                cFrame.Content = CharacterStack;
+                                cFrame.WidthRequest = 400;
+                                cFrame.Margin = new Thickness(0,0,0,10);
+                                cFrame.Padding = 0;
 
                                 Label CName = new Label();
                                 CName.TextColor = (Color)fontColor;
                                 CName.Text = "Character Name: " + Char.c_Name;
                                 CName.WidthRequest = 400;
+                                CName.Margin = new Thickness(10, 10, 0, 0);
                                 //Label CNameVal = new Label();
                                 //CNameVal.TextColor = (Color)fontColor;
                                 //CNameVal.Text = Char.c_Name;
@@ -283,6 +251,7 @@ public partial class CSheet_Import : ContentPage
                                 CRace.TextColor = (Color)fontColor;
                                 CRace.Text = "Race: " + Char.c_RaceName;
                                 CRace.WidthRequest = 400;
+                                CRace.Margin = new Thickness(10, 10, 0, 0);
                                 //Label CRaceVal = new Label();
                                 //CRaceVal.TextColor = (Color)fontColor;
                                 //CRaceVal.Text = Char.c_Race.ToString();
@@ -294,6 +263,7 @@ public partial class CSheet_Import : ContentPage
                                 CClass.TextColor = (Color)fontColor;
                                 CClass.Text = "Class: " + Char.c_ClassName;
                                 CClass.WidthRequest = 400;
+                                CClass.Margin = new Thickness(10, 10, 0, 0);
                                 //Label CClassVal = new Label();
                                 //CClassVal.TextColor = (Color)fontColor;
                                 //CClassVal.Text = Char.c_Class.ToString();
@@ -305,6 +275,7 @@ public partial class CSheet_Import : ContentPage
                                 CLevel.TextColor = (Color)fontColor;
                                 CLevel.Text = "Level: " + Char.c_Level.ToString();
                                 CLevel.WidthRequest = 400;
+                                CLevel.Margin = new Thickness(10, 10, 0, 0);
                                 //Label CLevelVal = new Label();
                                 //CLevelVal.TextColor = (Color)fontColor;
                                 //CLevelVal.Text = Char.c_Level.ToString();
@@ -316,7 +287,10 @@ public partial class CSheet_Import : ContentPage
                                 {
                                     TextColor = (Color)fontColor,
                                     Text = "Select Character",
-                                    BackgroundColor = (Color)secondaryColor,
+                                    BackgroundColor = (Color)trinaryColor,
+                                    WidthRequest = 300,
+                                    HorizontalOptions = LayoutOptions.Center,
+                                    Margin = new Thickness(0, 0, 0, 10),
                                     Command = new Command
                                     (
                                         execute: async () =>
@@ -335,9 +309,9 @@ public partial class CSheet_Import : ContentPage
                                     HeightRequest = 1,
                                     HorizontalOptions = LayoutOptions.FillAndExpand
                                 };
-                                CharacterStack.Children.Add(line);
-
-                                CharacterPanel.Children.Add(CharacterStack);
+                                //CharacterStack.Children.Add(line);
+                                
+                                CharacterPanel.Children.Add(cFrame);
 
                             }
                         }
