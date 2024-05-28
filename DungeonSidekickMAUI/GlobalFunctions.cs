@@ -24,7 +24,7 @@ namespace DungeonSidekickMAUI
             {
                 if (string.IsNullOrEmpty(str))
                 {
-                    Application.Current.MainPage.DisplayAlert("Text Entry Failure", "Please Ensure that all Textboxes are filled in!", "OK");
+                    Application.Current.MainPage.DisplayAlert("Text Entry Failure", "Please ensure that all Textboxes are have text in them!", "OK");
                     return false;
                 }
             }
