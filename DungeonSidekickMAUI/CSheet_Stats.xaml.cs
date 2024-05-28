@@ -172,6 +172,8 @@ namespace DungeonSidekickMAUI
                             if (flag != 1)
                             {
                                 Preferences.Default.Set("CharacterID", (int)cmd.ExecuteScalar());
+                                ImportedCharacterSheet.Save(CharacterSheetcurrent);
+                                Navigation.PushAsync(new LandingPage());
                             }
                             else
                             {
@@ -180,9 +182,7 @@ namespace DungeonSidekickMAUI
                             }
                         }
                     }
-                    conn.Close();
-                    ImportedCharacterSheet.Save(CharacterSheetcurrent);
-                    Navigation.PushAsync(new LandingPage());
+                    conn.Close();  
                 }
             }
             catch (Exception eSql)

@@ -59,7 +59,8 @@ public partial class CSheet : ContentPage
         Race = characterSheet.c_Race;
         Class = characterSheet.c_Class;
         Background.Text = characterSheet.c_Background;
-        Allignment.Text = characterSheet.c_Alignment;
+        //Allignment.Text = characterSheet.c_Alignment;
+        Allignment.SelectedItem = characterSheet.c_Alignment;
         PTraits.Text = characterSheet.c_PersonalityTraits;
         Ideals.Text = characterSheet.c_Ideals;
         Bonds.Text = characterSheet.c_Bonds;
@@ -80,7 +81,8 @@ public partial class CSheet : ContentPage
         CharacterSheetcurrent.c_Race = Race;
         CharacterSheetcurrent.c_Class = Class;
         CharacterSheetcurrent.c_Background = Background.Text;
-        CharacterSheetcurrent.c_Alignment = Allignment.Text;
+        //CharacterSheetcurrent.c_Alignment = Allignment.Text;
+        CharacterSheetcurrent.c_Alignment = (string)Allignment.SelectedItem;
         CharacterSheetcurrent.c_PersonalityTraits = PTraits.Text;
         CharacterSheetcurrent.c_Ideals = Ideals.Text;
         CharacterSheetcurrent.c_Bonds = Bonds.Text;
@@ -124,7 +126,7 @@ public partial class CSheet : ContentPage
         List<string> list = new List<string>();
         list.Add(CName.Text);
         list.Add(Background.Text);
-        list.Add(Allignment.Text);
+        //list.Add(Allignment.Text);
         list.Add(PTraits.Text); 
         list.Add(Ideals.Text); 
         list.Add(Bonds.Text); 
@@ -187,11 +189,11 @@ public partial class CSheet : ContentPage
             DisplayAlert("Error", "Alignment cannot be null", "OK");
             pass = false;
         }
-        else if (CharacterSheetcurrent.c_Alignment.Length >= 50)
-        {
-            DisplayAlert("Error", "Alignment must be less than 50 characters", "OK");
-            pass = false;
-        }
+        //else if (CharacterSheetcurrent.c_Alignment.Length >= 50)
+        //{
+        //    DisplayAlert("Error", "Alignment must be less than 50 characters", "OK");
+        //    pass = false;
+        //}
 
         if (CharacterSheetcurrent.c_PersonalityTraits == null)
         {

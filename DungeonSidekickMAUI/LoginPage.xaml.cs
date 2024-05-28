@@ -15,7 +15,17 @@ public partial class LoginPage : ContentPage
 
     private void loginButtonClicked(object sender, EventArgs e)
 	{
-		Password_Hasher password_Hasher = new Password_Hasher(UName.Text);
+        if (UName.Text == null)
+        {
+            DisplayAlert("Your username is blank", "Please try a different username", "Ok");
+            return;
+        }
+        else if (Pass.Text == null)
+        {
+            DisplayAlert("Your password is blank", "Please try a different password", "Ok");
+            return;
+        }
+        Password_Hasher password_Hasher = new Password_Hasher(UName.Text);
 		//checks the db and returns true if check passes.
 		//Also updates Preferences.Default.Get "Username" and "UserId" to the correct values
 		//For reference as to how they are called. string username = Preferences.Default.Get("Username", "");
