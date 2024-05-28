@@ -66,7 +66,7 @@ public partial class SpellCombatPage : ContentPage
                                     // should hopefully grab name of spell from spell pool
                                     string name = reader.GetString(0);
                                     weaponLabel.Text = name;
-                                    layout.Add(weaponLabel);
+                                    
 
                                     // Button that selects the item to be used in combat
                                     Button select = new Button
@@ -75,9 +75,11 @@ public partial class SpellCombatPage : ContentPage
                                         TextColor = fontColor,
                                         Text = "Select",
                                         BackgroundColor = TrinaryColor,
+                                        Margin = new Thickness (10, 0, 10, 10)
                                     };
                                     select.Clicked += SelectButton;
                                     layout.Add(select);
+                                    layout.Add(weaponLabel);
                                     CombatStack.Add(layout);
                                 }
                             }

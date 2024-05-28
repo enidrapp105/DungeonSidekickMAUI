@@ -32,6 +32,7 @@ namespace DungeonSidekickMAUI
             Spells.Clear();
         }
 
+
         public void PullSpells() // Query the database and populate the list responsible for storing the data found in the Spells table. Shows your Spells + quantities.
         {
             string query = "SELECT SpellID FROM dbo.Spellpool" +
@@ -67,10 +68,15 @@ namespace DungeonSidekickMAUI
             }
         }
 
-        public void AddSpell(int SpellID) // Incoming ETypeID is expected to be 0, 1, or 2.
+        // returns -2 on fail, 0 on success, -1 if it already contains the spell
+        public int AddSpell(int SpellID)
         {
             string query = "INSERT INTO dbo.Spellpool(SpellID, CharacterID)" +
             " VALUES(@SpellID, @CharacterID);";
+            if (Spells.Contains(SpellID))
+            {
+                return -1;
+            }
             Spells.Add(SpellID);
             try
             {
@@ -92,7 +98,9 @@ namespace DungeonSidekickMAUI
             catch (Exception eSql)
             {
                 Debug.WriteLine("Exception: " + eSql.Message);
+                return -2;
             }
+            return 0;
         }
 
         public void RemoveSpell(int SpellID) // Incoming ETypeID is expected to be 0, 1, or 2.

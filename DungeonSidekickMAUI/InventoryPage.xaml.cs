@@ -101,7 +101,7 @@ public partial class InventoryPage : ContentPage
                                     // grabs the name from the DB and quantity from items list
                                     string name = reader.GetString(0);
                                     gearLabel.Text = name + " x" + gear[1];
-                                    layout.Add(gearLabel);
+                                    
                                     temp.Name = name;
                                     temp.Id = gear[0];
                                     temp.eTypeId = 2;
@@ -114,13 +114,14 @@ public partial class InventoryPage : ContentPage
                                         BackgroundColor = TrinaryColor,
                                         CommandParameter = temp,
                                         HorizontalOptions = LayoutOptions.End,
-                                        Margin = new Thickness(0, 0, 0, 10)
+                                        Margin = new Thickness(10, 0, 10, 10)
 
                                     };
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
 
                                     InvStack.Add(layout);
+                                    layout.Add(gearLabel);
                                 }
                             }
                         }
@@ -166,10 +167,25 @@ public partial class InventoryPage : ContentPage
                                     // grabs the name from the DB and quantity from equipment list
                                     string name = reader.GetString(0);
                                     armorLabel.Text = name + " x" + armor[1];
-                                    layout.Add(armorLabel);
+                                    
                                     temp.Name = name;
                                     temp.Id = armor[0];
                                     temp.eTypeId = 1;
+
+                                    // Button that removes the item from the DB
+                                    Button delete = new Button
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Remove",
+                                        BackgroundColor = TrinaryColor,
+                                        CommandParameter = temp,
+                                        HorizontalOptions = LayoutOptions.End,
+                                        Margin = new Thickness(10, 0, 10, 10)
+                                    };
+
+                                    delete.Clicked += RemoveButton;
+                                    layout.Add(delete);
+                                    
 
                                     // Only shows if you aren't wearing this armor. Only works on page refresh, though.
                                     if (temp.Id != currentcharacterSheet.c_EEquippedID)
@@ -182,25 +198,13 @@ public partial class InventoryPage : ContentPage
                                             BackgroundColor = TrinaryColor,
                                             CommandParameter = temp,
                                             HorizontalOptions = LayoutOptions.End,
-                                            Margin = new Thickness(0, 0, 0, 10)
+                                            Margin = new Thickness(10, 0, 10, 10)
                                         };
                                         equip.Clicked += EquipButton;
                                         layout.Add(equip);
                                     }
 
-                                    // Button that removes the item from the DB
-                                    Button delete = new Button
-                                    {
-                                        TextColor = fontColor,
-                                        Text = "Remove",
-                                        BackgroundColor = TrinaryColor,
-                                        CommandParameter = temp,
-                                        HorizontalOptions = LayoutOptions.End,
-                                        Margin = new Thickness(0, 0, 0, 10)
-                                    };
-
-                                    delete.Clicked += RemoveButton;
-                                    layout.Add(delete);
+                                    layout.Add(armorLabel);
                                     InvStack.Add(layout);
                                 }
                             }
@@ -251,7 +255,7 @@ public partial class InventoryPage : ContentPage
                                     temp.Name = name;
                                     temp.Id = weapon[0];
                                     temp.eTypeId = 0;
-                                    layout.Add(weaponLabel);
+                                    
 
                                     // Button that removes the item from the DB
                                     Button delete = new Button
@@ -261,10 +265,11 @@ public partial class InventoryPage : ContentPage
                                         BackgroundColor = TrinaryColor,
                                         CommandParameter = temp,
                                         HorizontalOptions = LayoutOptions.End,
-                                        Margin = new Thickness(0, 0, 0, 10)
+                                        Margin = new Thickness(10, 0, 10, 10)
                                     };
                                     delete.Clicked += RemoveButton;
                                     layout.Add(delete);
+                                    layout.Add(weaponLabel);
                                     InvStack.Add(layout);
                                 }
                             }
