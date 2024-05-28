@@ -94,6 +94,15 @@ namespace DungeonSidekickMAUI
         private async void SubmitStats(object sender, EventArgs e)
         {
             int chosenHP = 0;
+            List<string> list = new List<string>();
+            list.Add(Strength.Text);
+            list.Add(Dexterity.Text);
+            list.Add(Constitution.Text);
+            list.Add(Intelligence.Text);
+            list.Add(Wisdom.Text);
+            list.Add(Charisma.Text);
+            if (!GlobalFunctions.entryCheck(list, 1))
+                return;
             LoadCharacterSheetClass();
             Connection connection = Connection.connectionSingleton;
 
