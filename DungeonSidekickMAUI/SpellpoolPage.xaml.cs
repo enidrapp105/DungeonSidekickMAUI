@@ -57,6 +57,7 @@ public partial class SpellpoolPage : ContentPage
                             {
                                 while (reader.Read())
                                 {
+                                    
                                     HorizontalStackLayout layout = new HorizontalStackLayout();
                                     Label weaponLabel = new Label();
                                     weaponLabel.TextColor = (Color)fontColor;
@@ -64,6 +65,23 @@ public partial class SpellpoolPage : ContentPage
                                     // should hopefully grab name of spell from spell pool
                                     string name = reader.GetString(0);
                                     weaponLabel.Text = name;
+
+                                    Spells temp = new Spells();
+                                    temp.Id = spell;
+                                    temp.Name = name;
+
+                                    // Button that removes the item from the DB
+                                    Button delete = new Button
+                                    {
+                                        TextColor = fontColor,
+                                        Text = "Remove",
+                                        BackgroundColor = TrinaryColor,
+                                        CommandParameter = temp,
+                                        HorizontalOptions = LayoutOptions.End,
+                                        Margin = new Thickness(10, 0, 10, 10)
+                                    };
+                                    delete.Clicked += RemoveButton;
+                                    layout.Add(delete);
                                     layout.Add(weaponLabel);
 
                                     SpellpoolStack.Add(layout);
@@ -78,6 +96,17 @@ public partial class SpellpoolPage : ContentPage
                 DisplayAlert("Error!", eSql.Message, "OK");
                 Debug.WriteLine("Exception: " + eSql.Message);
             }
+        }
+    }
+
+    private async void RemoveButton(object sender, EventArgs e)
+    {
+        if (sender is Button button && button.CommandParameter is Spells spell)
+        {
+            spells.RemoveSpell(spell.Id);
+            var page = Navigation.NavigationStack.LastOrDefault();
+            await Navigation.PushAsync(new SpellpoolPage());
+            Navigation.RemovePage(page);
         }
     }
 
