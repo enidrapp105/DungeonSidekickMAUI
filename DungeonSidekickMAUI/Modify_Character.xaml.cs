@@ -33,7 +33,10 @@ public partial class Modify_Character : ContentPage
         foreach (var property in variablesFull)
         {
             //Skips properties that should be invisible
-            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID" || property.Name == "c_Equipment")
+            if (!property.CanWrite || property.Name == "p_UID" || property.Name == "p_CharacterID" || property.Name == "c_Equipment" || property.Name == "exists"
+                || property.Name == "c_RaceName" || property.Name == "c_ClassName" || property.Name == "c_inv" || property.Name == "c_WEquipped"
+                || property.Name == "c_WEquippedID" || property.Name == "c_SEquipped" || property.Name == "c_SEquippedID" || property.Name == "c_damageDice" || property.Name == "c_EEquipped"
+                || property.Name == "c_EEquippedID" || property.Name == "c_ACBoost")
             {
                 continue;
             }
@@ -120,12 +123,10 @@ public partial class Modify_Character : ContentPage
         List<string> ints = new List<string>();
 
         strings.Add(entries[0].Text);
-        for (int x = 4; x != 10; x++)
+        for (int x = 2; x < 9; x++)
             strings.Add(entries[x].Text);
         ints.Add(entries[1].Text);
-        ints.Add(entries[2].Text);
-        ints.Add(entries[3].Text);
-        for (int y = 11; y > 48; y++)
+        for (int y = 9; y < 46; y++)
             ints.Add(entries[y].Text);
         if (!GlobalFunctions.entryCheck(strings, 0))
             return;
@@ -135,8 +136,6 @@ public partial class Modify_Character : ContentPage
         int i = 0;
         ImportedCharacterSheet Char = ImportedCharacterSheet.Load();
         Char.c_Name = entries[i++].Text;
-        //Char.c_Class = int.Parse(entries[i++].Text);
-        //Char.c_Race = int.Parse(entries[i++].Text);
         Char.c_Level = int.Parse(entries[i++].Text);
         Char.c_Background = entries[i++].Text;
         Char.c_Alignment = entries[i++].Text;
