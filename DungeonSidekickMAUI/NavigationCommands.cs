@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Maui.Layouts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,6 @@ namespace DungeonSidekickMAUI
             Application.Current.Resources.TryGetValue("FontC", out object fontColor);
             Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
 
-
             // Add elements to the flex layout
             var landingPageButton = new Button
             {
@@ -26,6 +26,7 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
                 Margin = 2,
+
             };
             landingPageButton.Clicked += Landing_Page;
 
@@ -37,6 +38,7 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
                 Margin = 2
+
             };
             createButton.Clicked += Create_Character;
 
@@ -50,7 +52,6 @@ namespace DungeonSidekickMAUI
                 Margin = 2
             };
             modifyButton.Clicked += Modify_Character;
-
 
             var settingsButton = new Button
             {
@@ -82,7 +83,6 @@ namespace DungeonSidekickMAUI
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
                 Margin = 2
-
             };
             spellpoolButton.Clicked += Spellpool_Page;
 
@@ -120,6 +120,7 @@ namespace DungeonSidekickMAUI
                 new ColumnDefinition { Width = new GridLength(130) }
             },
                 //Padding = new Thickness(10, 5),
+
                 WidthRequest = 400,
                 BackgroundColor = (Color)primaryColor
             };
@@ -127,6 +128,7 @@ namespace DungeonSidekickMAUI
             HorizontalStackLayout flexLayout = new HorizontalStackLayout
             {
                 // = new Thickness(10, 5),
+
                 BackgroundColor = (Color)primaryColor,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 VerticalOptions = LayoutOptions.StartAndExpand

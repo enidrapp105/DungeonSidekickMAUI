@@ -30,6 +30,7 @@ public partial class CSheet : ContentPage
             NavigationCommands cmd = new NavigationCommands();
             NavigationPage.SetHasNavigationBar(this, false);
             var customNavBar = cmd.CreateCustomNavigationBar();
+
             NavigationBar.Children.Add(customNavBar);
         }
 
