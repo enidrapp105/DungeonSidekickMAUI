@@ -4,6 +4,9 @@
              x:Class="DungeonSidekickMAUI.CSheet">
     <ScrollView>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>

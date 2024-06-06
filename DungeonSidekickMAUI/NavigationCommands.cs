@@ -16,15 +16,6 @@ namespace DungeonSidekickMAUI
             Application.Current.Resources.TryGetValue("FontC", out object fontColor);
             Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
 
-            var flexLayout = new FlexLayout
-            {
-                Direction = Microsoft.Maui.Layouts.FlexDirection.Row,
-                JustifyContent = Microsoft.Maui.Layouts.FlexJustify.SpaceBetween,
-                AlignItems = Microsoft.Maui.Layouts.FlexAlignItems.Center,
-                Padding = new Thickness(10, 5),
-                BackgroundColor = (Color)primaryColor,
-                HorizontalOptions = LayoutOptions.FillAndExpand
-            };
 
             // Add elements to the flex layout
             var landingPageButton = new Button
@@ -41,7 +32,7 @@ namespace DungeonSidekickMAUI
             var createButton = new Button
             {
                 TextColor = (Color)fontColor,
-                Text = "New Character Sheet",
+                Text = "New Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
@@ -52,7 +43,7 @@ namespace DungeonSidekickMAUI
             var modifyButton = new Button
             {
                 TextColor = (Color)fontColor,
-                Text = "Modify Character",
+                Text = "Modify Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
@@ -101,13 +92,15 @@ namespace DungeonSidekickMAUI
                 Text = "Combat",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             combatButton.Clicked += Combat_Page;
 
             var changeButton = new Button
             {
                 TextColor = (Color)fontColor,
-                Text = "Change Character",
+                Text = "Change Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
                 WidthRequest = 130,
@@ -159,9 +152,9 @@ namespace DungeonSidekickMAUI
                 grid.Add(changeButton, 0, 2);
                 grid.Add(modifyButton, 1, 0);
                 grid.Add(inventoryButton, 1, 1);
-                grid.Add(spellpoolButton, 1, 2);
+                grid.Add(spellpoolButton, 2, 1);
                 grid.Add(combatButton, 2, 0);
-                grid.Add(settingsButton, 2, 1);
+                grid.Add(settingsButton, 1, 2);
             }
             if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
             {
