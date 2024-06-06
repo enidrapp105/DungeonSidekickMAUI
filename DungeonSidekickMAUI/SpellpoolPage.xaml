@@ -5,6 +5,9 @@
              Title="SpellpoolPage">
     <ScrollView>
         <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}" >
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
             <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Spells to Spellpool" Clicked="AddSpells" WidthRequest="400" HorizontalOptions="Center"/>
             <VerticalStackLayout  BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400" x:Name="SpellpoolStack" >
                     <Label Text="Spells" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>

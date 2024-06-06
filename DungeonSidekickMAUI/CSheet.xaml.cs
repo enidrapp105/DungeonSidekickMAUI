@@ -29,13 +29,8 @@ public partial class CSheet : ContentPage
             //Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
             NavigationCommands cmd = new NavigationCommands();
             NavigationPage.SetHasNavigationBar(this, false);
-            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-            //NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
             var customNavBar = cmd.CreateCustomNavigationBar();
-            if(customNavBar == null)
-            {
-                DisplayAlert("How", "Could this happen to me...", "Ok");
-            }
+
             NavigationBar.Children.Add(customNavBar);
         }
 

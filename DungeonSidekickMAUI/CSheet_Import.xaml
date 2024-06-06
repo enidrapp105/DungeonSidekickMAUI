@@ -5,7 +5,10 @@
     <ContentPage.Content>
         <ScrollView>
         <StackLayout>
-            <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+                </StackLayout>
+                <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Character Selection" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
             </Frame>
             

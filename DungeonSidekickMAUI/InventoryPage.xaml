@@ -6,7 +6,10 @@
 
     <ScrollView>
     <StackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-    <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
+            <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
         <!--This label handles the title-->
         <Label Text="Inventory" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36"/>
     </Frame>

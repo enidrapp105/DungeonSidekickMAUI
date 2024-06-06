@@ -12,11 +12,10 @@ public partial class Info_For_Stats : ContentPage
         // nav bar setup
         if (!m_NewAcc)
         {
-            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
             NavigationCommands cmd = new NavigationCommands();
-            NavigationPage.SetHasNavigationBar(this, true);
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+            NavigationPage.SetHasNavigationBar(this, false);
+            var customNavBar = cmd.CreateCustomNavigationBar();
+            NavigationBar.Children.Add(customNavBar);
         }
     }
 

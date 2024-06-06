@@ -6,6 +6,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="MainPanel" BackgroundColor="{DynamicResource PrimaryColor}">
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+                </StackLayout>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

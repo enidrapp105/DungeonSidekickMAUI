@@ -9,11 +9,11 @@ namespace DungeonSidekickMAUI
             InitializeComponent();
 
             //((AppShell)Shell.Current).FlyoutIsPresented = true;
-            Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
             NavigationCommands cmd = new NavigationCommands();
-            NavigationPage.SetHasNavigationBar(this, true);
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-            NavigationPage.SetTitleView(this, cmd.CreateCustomNavigationBar());
+            NavigationPage.SetHasNavigationBar(this, false);
+            var customNavBar = cmd.CreateCustomNavigationBar();
+            NavigationBar.Children.Add(customNavBar);
+
             ImportedCharacterSheet initCSheet = ImportedCharacterSheet.Instance; //Initializes the character sheet, so that we can call the same reference consistently
             User_Disp.Text = "Welcome " + Preferences.Default.Get("Username","");
             AddSelectedChar();

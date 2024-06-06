@@ -5,7 +5,10 @@
              Title="CombatPage">
     <ScrollView>
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
+            <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             <Label Text="Inventory" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </VerticalStackLayout>
         <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monster" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>

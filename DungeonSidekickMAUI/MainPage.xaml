@@ -4,6 +4,9 @@
              x:Class="DungeonSidekickMAUI.MainPage">
     <ScrollView>
         <StackLayout BackgroundColor="{DynamicResource PrimaryColor}" VerticalOptions="FillAndExpand">
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                 <Label Text="Dungeon SideKick" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>

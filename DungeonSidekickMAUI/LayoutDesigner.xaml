@@ -6,7 +6,9 @@
     <ContentPage.Content>
         <ScrollView>
             <StackLayout x:Name="stackLayout" BackgroundColor="LightSlateGray">
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
+                </StackLayout>
                 <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
                     <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>

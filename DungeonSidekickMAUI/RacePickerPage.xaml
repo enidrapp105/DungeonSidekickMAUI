@@ -5,6 +5,9 @@
     <ContentPage.Content>
         <ScrollView Orientation="Vertical" HorizontalOptions="CenterAndExpand" BackgroundColor="{DynamicResource PrimaryColor}">
             <StackLayout x:Name="RacePageStack" >
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+                </StackLayout>
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
                     <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
                 </Frame>

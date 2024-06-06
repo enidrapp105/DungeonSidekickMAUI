@@ -13,13 +13,9 @@ namespace DungeonSidekickMAUI
         public View CreateCustomNavigationBar()
         {
             // Create a flex layout
-            if (!Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor) ||
-                !Application.Current.Resources.TryGetValue("FontC", out object fontColor) ||
-                !Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor))
-            {
-                Application.Current.MainPage.DisplayAlert("Color Issue", "Our resource dictionary crashed...", "Ok");
-                throw new InvalidOperationException("Required resources are not found.");
-            }
+            Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+            Application.Current.Resources.TryGetValue("FontC", out object fontColor);
+            Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
 
             // Add elements to the flex layout
             var landingPageButton = new Button
@@ -28,7 +24,9 @@ namespace DungeonSidekickMAUI
                 Text = "Landing Page",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2,
+
             };
             landingPageButton.Clicked += Landing_Page;
 
@@ -38,7 +36,9 @@ namespace DungeonSidekickMAUI
                 Text = "New Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
+
             };
             createButton.Clicked += Create_Character;
 
@@ -48,7 +48,8 @@ namespace DungeonSidekickMAUI
                 Text = "Modify Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             modifyButton.Clicked += Modify_Character;
 
@@ -58,7 +59,8 @@ namespace DungeonSidekickMAUI
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             settingsButton.Clicked += Settings_Page;
 
@@ -68,7 +70,8 @@ namespace DungeonSidekickMAUI
                 Text = "Inventory",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             inventoryButton.Clicked += Inventory_Page;
 
@@ -78,7 +81,8 @@ namespace DungeonSidekickMAUI
                 Text = "Spellpool",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             spellpoolButton.Clicked += Spellpool_Page;
 
@@ -88,7 +92,8 @@ namespace DungeonSidekickMAUI
                 Text = "Combat",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             combatButton.Clicked += Combat_Page;
 
@@ -98,7 +103,8 @@ namespace DungeonSidekickMAUI
                 Text = "Change Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-                WidthRequest = 130
+                WidthRequest = 130,
+                Margin = 2
             };
             changeButton.Clicked += Change_Character;
             var grid = new Grid
@@ -113,14 +119,16 @@ namespace DungeonSidekickMAUI
                 new ColumnDefinition { Width = new GridLength(130) },
                 new ColumnDefinition { Width = new GridLength(130) }
             },
-                Padding = new Thickness(10, 5),
+                //Padding = new Thickness(10, 5),
+
                 WidthRequest = 400,
                 BackgroundColor = (Color)primaryColor
             };
 
             HorizontalStackLayout flexLayout = new HorizontalStackLayout
             {
-                Padding = new Thickness(10, 5),
+                // = new Thickness(10, 5),
+
                 BackgroundColor = (Color)primaryColor,
                 HorizontalOptions = LayoutOptions.StartAndExpand,
                 VerticalOptions = LayoutOptions.StartAndExpand
@@ -146,9 +154,9 @@ namespace DungeonSidekickMAUI
                 grid.Add(changeButton, 0, 2);
                 grid.Add(modifyButton, 1, 0);
                 grid.Add(inventoryButton, 1, 1);
-                grid.Add(spellpoolButton, 1, 2);
+                grid.Add(spellpoolButton, 2, 1);
                 grid.Add(combatButton, 2, 0);
-                grid.Add(settingsButton, 2, 1);
+                grid.Add(settingsButton, 1, 2);
             }
             if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
             {
