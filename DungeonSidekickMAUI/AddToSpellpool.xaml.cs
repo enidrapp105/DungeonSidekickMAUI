@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;
 using System.Collections.ObjectModel;
+//using UIKit;
 
 /*
 * Class: AddToSpellpool
@@ -24,11 +25,10 @@ public partial class AddToSpellpool : ContentPage
     {
         InitializeComponent();
 
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        NavigationCommands cmd = new NavigationCommands();
+        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, false);
+        var customNavBar = cmd.CreateCustomNavigationBar();
+        NavigationBar.Children.Add(customNavBar);
 
         BindingContext = addSpellViewModel = new AddSpellViewModel();
     }

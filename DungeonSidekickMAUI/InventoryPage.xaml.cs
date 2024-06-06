@@ -20,11 +20,10 @@ public partial class InventoryPage : ContentPage
         inv.PullItems();
 
         // nav bar setup
-        Color primaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
-        NavigationCommands nav = new NavigationCommands();
-        Microsoft.Maui.Controls.NavigationPage.SetHasNavigationBar(this, true);
-        ((Microsoft.Maui.Controls.NavigationPage)Microsoft.Maui.Controls.Application.Current.MainPage).BarBackgroundColor = (Color)primaryColor;
-        Microsoft.Maui.Controls.NavigationPage.SetTitleView(this, nav.CreateCustomNavigationBar());
+        NavigationCommands cmd = new NavigationCommands();
+        NavigationPage.SetHasNavigationBar(this, false);
+        var customNavBar = cmd.CreateCustomNavigationBar();
+        NavigationBar.Children.Add(customNavBar);
 
         PullWeapons();
         PullArmor();

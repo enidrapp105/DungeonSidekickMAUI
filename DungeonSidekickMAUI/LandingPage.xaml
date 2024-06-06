@@ -4,6 +4,9 @@
              x:Class="DungeonSidekickMAUI.LandingPage">
     <ScrollView Background="{DynamicResource PrimaryColor}">
         <VerticalStackLayout>
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+            </StackLayout>
             <!--I have discovered this won't work for phone implementation, unfortunate-->
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" CornerRadius="0">
                 <!--This label handles the title-->

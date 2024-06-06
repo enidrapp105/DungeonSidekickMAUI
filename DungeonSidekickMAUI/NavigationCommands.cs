@@ -33,7 +33,8 @@ namespace DungeonSidekickMAUI
                 Text = "Landing Page",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
-
+                WidthRequest = 130,
+                Margin = 2,
             };
             landingPageButton.Clicked += Landing_Page;
 
@@ -43,6 +44,8 @@ namespace DungeonSidekickMAUI
                 Text = "New Character Sheet",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             createButton.Clicked += Create_Character;
 
@@ -52,6 +55,8 @@ namespace DungeonSidekickMAUI
                 Text = "Modify Character",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             modifyButton.Clicked += Modify_Character;
 
@@ -62,6 +67,8 @@ namespace DungeonSidekickMAUI
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             settingsButton.Clicked += Settings_Page;
 
@@ -71,6 +78,8 @@ namespace DungeonSidekickMAUI
                 Text = "Inventory",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             inventoryButton.Clicked += Inventory_Page;
 
@@ -80,6 +89,9 @@ namespace DungeonSidekickMAUI
                 Text = "Spellpool",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
+
             };
             spellpoolButton.Clicked += Spellpool_Page;
 
@@ -98,20 +110,68 @@ namespace DungeonSidekickMAUI
                 Text = "Change Character",
                 HorizontalOptions = LayoutOptions.End,
                 BackgroundColor = (Color)secondaryColor,
+                WidthRequest = 130,
+                Margin = 2
             };
             changeButton.Clicked += Change_Character;
-            
-            flexLayout.Children.Add(landingPageButton);
-            flexLayout.Children.Add(createButton);
-            flexLayout.Children.Add(changeButton);
-            flexLayout.Children.Add(modifyButton);
-            flexLayout.Children.Add(inventoryButton);
-            flexLayout.Children.Add(spellpoolButton);
-            flexLayout.Children.Add(combatButton);
-            flexLayout.Children.Add(settingsButton);
+            var grid = new Grid
+            {
+                RowDefinitions = {
+                new RowDefinition { Height = new GridLength(50) },
+                new RowDefinition { Height = new GridLength(50) },
+                new RowDefinition { Height = new GridLength(50) }
+            },
+                ColumnDefinitions = {
+                new ColumnDefinition { Width = new GridLength(130) },
+                new ColumnDefinition { Width = new GridLength(130) },
+                new ColumnDefinition { Width = new GridLength(130) }
+            },
+                //Padding = new Thickness(10, 5),
+                WidthRequest = 400,
+                BackgroundColor = (Color)primaryColor
+            };
 
+            HorizontalStackLayout flexLayout = new HorizontalStackLayout
+            {
+                // = new Thickness(10, 5),
+                BackgroundColor = (Color)primaryColor,
+                HorizontalOptions = LayoutOptions.StartAndExpand,
+                VerticalOptions = LayoutOptions.StartAndExpand
+            };
 
-            return flexLayout;
+            View retVal;
+            if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+            {
+                flexLayout.Children.Add(landingPageButton);
+                flexLayout.Children.Add(createButton);
+                flexLayout.Children.Add(changeButton);
+                flexLayout.Children.Add(modifyButton);
+                flexLayout.Children.Add(inventoryButton);
+                flexLayout.Children.Add(spellpoolButton);
+                flexLayout.Children.Add(combatButton);
+                flexLayout.Children.Add(settingsButton);
+                retVal = flexLayout;
+            }
+            else
+            {
+                grid.Add(landingPageButton, 0, 0);
+                grid.Add(createButton, 0, 1);
+                grid.Add(changeButton, 0, 2);
+                grid.Add(modifyButton, 1, 0);
+                grid.Add(inventoryButton, 1, 1);
+                grid.Add(spellpoolButton, 1, 2);
+                grid.Add(combatButton, 2, 0);
+                grid.Add(settingsButton, 2, 1);
+            }
+            if (DeviceInfo.Current.Platform == DevicePlatform.WinUI)
+            {
+                retVal = flexLayout;
+            }
+            else
+            {
+                retVal = grid;
+            }
+            return retVal;
         }
 
         private async void Create_Character(object sender, EventArgs e)

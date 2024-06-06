@@ -5,6 +5,9 @@
     <CollectionView x:Name="SpellCollectionView" BackgroundColor="{DynamicResource PrimaryColor}" ItemsSource="{Binding UserSpells}">
         <CollectionView.Header>
             <VerticalStackLayout>
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+                </StackLayout>
                 <Button VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Text="Finish Selecting" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}" 
                         Clicked="GoToLandingFromSpells" WidthRequest="400" HeightRequest="40" />
                 <Entry Placeholder="Search" HorizontalOptions="Center" TextChanged="Spellpool_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>

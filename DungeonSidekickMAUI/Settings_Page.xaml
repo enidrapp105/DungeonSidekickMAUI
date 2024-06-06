@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.Settings_Page">
     <StackLayout BackgroundColor="LightSlateGray">
+        <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+        </StackLayout>
         <Frame BackgroundColor="Black" Padding="24" CornerRadius="0">
             <Label Text="Settings" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>

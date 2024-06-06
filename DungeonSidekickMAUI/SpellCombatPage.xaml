@@ -4,6 +4,9 @@
              x:Class="DungeonSidekickMAUI.SpellCombatPage"
              Title="SpellCombatPage">
     <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+        <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+        </StackLayout>
         <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
             <Label Text="Spells" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </VerticalStackLayout>

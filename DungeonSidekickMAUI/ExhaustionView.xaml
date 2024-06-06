@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.ExhaustionView">
     <StackLayout Orientation="Vertical" Padding="10">
+        <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+
+        </StackLayout>
         <StackLayout Orientation="Horizontal">
             <Label Text="Exhaustion Level:" VerticalOptions="Center" />
             <Picker x:Name="LevelPicker" Title="Select Level" VerticalOptions="CenterAndExpand" />
