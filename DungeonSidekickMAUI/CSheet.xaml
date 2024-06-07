@@ -15,10 +15,10 @@
                 WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="49"/>
             <!--Color is temp-->
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Race" Clicked="RacePickerPage"
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Pick your Race" Clicked="RacePickerPage"
                 WidthRequest="400" HorizontalOptions="Center" x:Name="RaceButton" Margin="5"/>
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Pick your Class" Clicked="ClassPickerPage"
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Pick your Class" Clicked="ClassPickerPage"
                WidthRequest="400" HorizontalOptions="Center" x:Name="ClassButton" Margin="5"/>
 
             <Editor Placeholder="Background" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Background"
@@ -59,7 +59,7 @@
                VerticalTextAlignment="Start" WidthRequest="400" HorizontalOptions="Center" HeightRequest="100" PlaceholderColor="{DynamicResource AccessoryColor}" Margin="5" MaxLength="199"/>
 
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
                WidthRequest="400" HorizontalOptions="Center" Margin="5"/>
 
         </StackLayout>

@@ -15,7 +15,7 @@
     </Frame>
     <VerticalStackLayout HorizontalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" x:Name="InvStack" WidthRequest="400">
 
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem" WidthRequest="400" HorizontalOptions="Center"/>
+        <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Add Item" Clicked="AddItem" WidthRequest="400" HorizontalOptions="Center"/>
     </VerticalStackLayout>
     </StackLayout>
     </ScrollView>

@@ -19,6 +19,8 @@ public partial class LandingPage : ContentPage
     Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
     Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
     Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+    Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+    Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
 
     public LandingPage()
 	{
@@ -163,7 +165,7 @@ public partial class LandingPage : ContentPage
             Button removeButton = new Button
             {
                 Text = "Remove",
-                BackgroundColor = SecondaryColor,
+                BackgroundColor = AccentColor,
                 TextColor = fontColor,
                 Margin = new Thickness(0, 5, 0, 0)
             };
@@ -203,7 +205,7 @@ public partial class LandingPage : ContentPage
                 Button removeButton = new Button
                 {
                     Text = "Remove",
-                    BackgroundColor = SecondaryColor,
+                    BackgroundColor = AccentColor,
                     TextColor = fontColor,
                     Margin = new Thickness(0, 5, 0, 0)
                 };

@@ -162,14 +162,14 @@ public partial class SpellCombatPage : ContentPage
      */
     private void AddSpells(object sender, EventArgs e)
     {
-        if (selected)
-        {
-            Navigation.PushAsync(new AddToSpellpool());
-        }
-        else
-        {
-            DisplayAlert("No Spell Selected", "Please select a spell before proceeding. If you don't see any spells, you can add one in the spellpool page. Some spells may not deal damage, others may heal instead.", "Ok");
-        }
-
+        //if (selected)
+        //{
+        //    Navigation.PushAsync(new AddToSpellpool());
+        //}
+        //else
+        //{
+        //    DisplayAlert("No Spell Selected", "Please select a spell before proceeding. If you don't see any spells, you can add one in the spellpool page. Some spells may not deal damage, others may heal instead.", "Ok");
+        //}
+        Navigation.PushAsync(new AddToSpellpool());
     }
 }

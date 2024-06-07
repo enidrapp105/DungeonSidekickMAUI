@@ -30,10 +30,10 @@
             WidthRequest="400" HorizontalOptions="Center" PlaceholderColor="{DynamicResource AccessoryColor}" Keyboard="Numeric"/>
 
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Roll for Stats" Clicked="RollForStats"
             WidthRequest="400" HorizontalOptions="Center"/>
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Submit Form" Clicked="SubmitStats"
             WidthRequest="400" HorizontalOptions="Center"/>
             <Grid x:Name="HealthPopup" IsVisible="False" HorizontalOptions="Center"  VerticalOptions="Center">
                 <StackLayout Margin="10,10,10,10" HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">

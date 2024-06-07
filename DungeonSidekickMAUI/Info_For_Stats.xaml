@@ -12,7 +12,7 @@
                     <Label Text="Character Creation Information" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
+                <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Select Your Stats" Clicked="To_CSheet"
 WidthRequest="400" HorizontalOptions="Center" Margin="5"/>
                 
                 <Frame BackgroundColor="{DynamicResource SecondaryColor}" Padding="6" Margin="5" WidthRequest="400">

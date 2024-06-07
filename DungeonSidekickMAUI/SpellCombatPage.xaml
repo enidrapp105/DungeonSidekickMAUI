@@ -3,14 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.SpellCombatPage"
              Title="SpellCombatPage">
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+    <ScrollView>
+        <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
-        </StackLayout>
-        <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
-            <Label Text="Spells" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </StackLayout>
+            <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
+                <Label Text="Spells" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </VerticalStackLayout>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Add Spells to Spellpool" Clicked="AddSpells" WidthRequest="400" HorizontalOptions="Center"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Select Monsters" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
         </VerticalStackLayout>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Add Spells to Spellpool" Clicked="AddSpells" WidthRequest="400" HorizontalOptions="Center"/>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monsters" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
-    </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

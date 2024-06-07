@@ -14,11 +14,11 @@
                 <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
             </StackLayout>
 
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Create a Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Create_Character"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Change Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Character_Import"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Modify Current Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Modify_Character"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Go To Landing Page" WidthRequest="400" HorizontalOptions="Center" Clicked="Landing_Page"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Create a Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Create_Character"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Change Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Character_Import"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Modify Current Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Modify_Character"/>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Go To Landing Page" WidthRequest="400" HorizontalOptions="Center" Clicked="Landing_Page"/>
 
             <Button BackgroundColor="Blue" TextColor="White" Text="Settings" WidthRequest="100" HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="Settings_Page" Margin="30"/>
 

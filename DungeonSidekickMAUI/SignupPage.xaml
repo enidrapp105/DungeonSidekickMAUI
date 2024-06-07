@@ -7,13 +7,13 @@
             <Label Text="Sign up" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
         </Frame>
         <Label Text="Username must use standard characters, and be 8-32 characters long." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
-        <Entry x:Name="usernamebox" WidthRequest="400" Placeholder="Enter Username" PlaceholderColor="{DynamicResource FontC}"  
+        <Entry x:Name="usernamebox" WidthRequest="400" Placeholder="Enter Username" PlaceholderColor="{DynamicResource AccessoryColor}"  
                Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
         <Label Text="Password must use standard characters, and be 8-60 characters long." HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="16"/>
-        <Entry x:Name="passwordbox" WidthRequest="400" Placeholder="Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" 
+        <Entry x:Name="passwordbox" WidthRequest="400" Placeholder="Enter Password" PlaceholderColor="{DynamicResource AccessoryColor}" IsPassword="true" 
                Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
-        <Entry x:Name="passwordbox2" WidthRequest="400" Placeholder="Re-Enter Password" PlaceholderColor="{DynamicResource FontC}" IsPassword="true" 
+        <Entry x:Name="passwordbox2" WidthRequest="400" Placeholder="Re-Enter Password" PlaceholderColor="{DynamicResource AccessoryColor}" IsPassword="true" 
                Margin="5" TextColor="{DynamicResource FontC}" BackgroundColor="{DynamicResource SecondaryColor}"/>
-        <Button TextColor="{DynamicResource FontC}" WidthRequest="400" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource SecondaryColor}" Margin="5"/>
+        <Button TextColor="{DynamicResource FontC}" WidthRequest="400" Text="Submit" Clicked="signupButtonClicked" BackgroundColor="{DynamicResource AccentColor}" Margin="5"/>
     </VerticalStackLayout>
 </ContentPage>
