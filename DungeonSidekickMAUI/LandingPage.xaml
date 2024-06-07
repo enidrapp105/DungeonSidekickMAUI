@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LandingPage">
     <ScrollView Background="{DynamicResource PrimaryColor}">
-        <VerticalStackLayout HorizontalOptions="Center">
+        <VerticalStackLayout>
             <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
             </StackLayout>
@@ -12,7 +12,7 @@
                 <!--This label handles the title-->
                 <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp"/>
             </Frame>
-            <Grid RowDefinitions="auto" ColumnDefinitions="auto,auto,auto">
+            <Grid RowDefinitions="auto" ColumnDefinitions="auto,auto,auto" HorizontalOptions="Center">
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Start" MaximumWidthRequest="600" Background="{DynamicResource TrinaryColor}" Grid.Row = "0" Grid.Column="0">
                     <Picker BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" TitleColor="{DynamicResource FontC}" x:Name="StatusEffectPicker" Title="Status effects" WidthRequest="200" HorizontalOptions="Center"/>
                     <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Add Status Effect" Clicked="AddEffectButtonClicked"/>
