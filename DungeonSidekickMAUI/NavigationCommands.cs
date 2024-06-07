@@ -58,10 +58,10 @@ namespace DungeonSidekickMAUI
 
             var settingsButton = new Button
             {
-                TextColor = (Color)fontColor,
+                TextColor = Colors.White,
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)accentColor,
+                BackgroundColor = Colors.Blue,
                 WidthRequest = 130,
                 Margin = 2
             };
