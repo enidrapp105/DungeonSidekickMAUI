@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LandingPage">
     <ScrollView Background="{DynamicResource PrimaryColor}">
-        <VerticalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center">
             <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
             </StackLayout>
