@@ -12,10 +12,10 @@
                 <!--This label handles the title-->
                 <Label Text="Character Sheet Display" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontSize="36" x:Name="User_Disp"/>
             </Frame>
-            <Grid RowDefinitions="auto" ColumnDefinitions="auto,auto,auto">
+            <Grid RowDefinitions="auto" ColumnDefinitions="auto,auto,auto" HorizontalOptions="Center">
                 <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Start" MaximumWidthRequest="600" Background="{DynamicResource TrinaryColor}" Grid.Row = "0" Grid.Column="0">
                     <Picker BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" TitleColor="{DynamicResource FontC}" x:Name="StatusEffectPicker" Title="Status effects" WidthRequest="200" HorizontalOptions="Center"/>
-                    <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Add Status Effect" Clicked="AddEffectButtonClicked"/>
+                    <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Add Status Effect" Clicked="AddEffectButtonClicked"/>
 
                     <!--This stack layout handles the stat modifiers -->
                     <Label Text="STR Modifier" HorizontalTextAlignment="Start" TextColor="{DynamicResource FontC}" FontAutoScalingEnabled="True" FontSize="30"/>
@@ -42,7 +42,7 @@
                         <Label x:Name="HP" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                     </Frame>
                     </HorizontalStackLayout>
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Go To Combat" Clicked="NavigateToCombat" WidthRequest="400" HorizontalOptions="Center"/>
+                <!--<Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Go To Combat" Clicked="NavigateToCombat" WidthRequest="400" HorizontalOptions="Center"/>-->
                 </VerticalStackLayout>
             </Grid>
         </VerticalStackLayout>

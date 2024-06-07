@@ -150,9 +150,9 @@ public partial class LayoutDesigner : ContentPage
         double Accentgreen = AccentgreenSlider.Value;
         double Accentblue = AccentblueSlider.Value;
 
-        double Accessoryred = AccentredSlider.Value;
-        double Accessorygreen = AccentgreenSlider.Value;
-        double Accessoryblue = AccentblueSlider.Value;
+        double Accessoryred = AccessoryredSlider.Value;
+        double Accessorygreen = AccessorygreenSlider.Value;
+        double Accessoryblue = AccessoryblueSlider.Value;
 
         // Applies colors to visual boxes for user
         PrimaryBox.BackgroundColor = Color.FromRgb((int)pred, (int)pgreen, (int)pblue);

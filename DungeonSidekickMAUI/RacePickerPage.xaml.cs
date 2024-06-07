@@ -44,7 +44,11 @@ public partial class RacePickerPage : ContentPage
                     {
                         cmd.CommandText = query;
                         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
-                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+                        var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
+                        var hasValue3 = Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
+                                                    var hasValue4 = Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+                        var hasValue5 = Application.Current.Resources.TryGetValue("AccentColor", out object accentColor);
+                        var hasValue6 = Application.Current.Resources.TryGetValue("accessoryColor", out object accessoryColor);
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -60,7 +64,7 @@ public partial class RacePickerPage : ContentPage
                                     Margin = 5,
                                     MinimumHeightRequest = 50,
                                     MinimumWidthRequest = 50,
-                                    BackgroundColor = (Color)frameColor
+                                    BackgroundColor = (Color)accentColor
 
                                 };
                                 RaceButton.Clicked += OnRaceButtonClicked;

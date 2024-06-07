@@ -33,6 +33,8 @@ public partial class SpellCombatPage : ContentPage
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+        Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+        Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
 
         spells = new Spellpool();
         spells.PullSpells();
@@ -73,7 +75,7 @@ public partial class SpellCombatPage : ContentPage
                                         CommandParameter = spell,
                                         TextColor = fontColor,
                                         Text = "Select",
-                                        BackgroundColor = TrinaryColor,
+                                        BackgroundColor = AccentColor,
                                         Margin = new Thickness (10, 0, 10, 10)
                                     };
                                     select.Clicked += SelectButton;
@@ -162,14 +164,14 @@ public partial class SpellCombatPage : ContentPage
      */
     private void AddSpells(object sender, EventArgs e)
     {
-        if (selected)
-        {
-            Navigation.PushAsync(new AddToSpellpool());
-        }
-        else
-        {
-            DisplayAlert("No Spell Selected", "Please select a spell before proceeding. If you don't see any spells, you can add one in the spellpool page. Some spells may not deal damage, others may heal instead.", "Ok");
-        }
-
+        //if (selected)
+        //{
+        //    Navigation.PushAsync(new AddToSpellpool());
+        //}
+        //else
+        //{
+        //    DisplayAlert("No Spell Selected", "Please select a spell before proceeding. If you don't see any spells, you can add one in the spellpool page. Some spells may not deal damage, others may heal instead.", "Ok");
+        //}
+        Navigation.PushAsync(new AddToSpellpool());
     }
 }

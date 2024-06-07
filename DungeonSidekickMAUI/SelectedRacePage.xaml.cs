@@ -38,7 +38,9 @@ public partial class SelectedRacePage : ContentPage
         var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
         var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
-        //var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+        var hasValue4 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+        var hasValue5 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("AccentColor", out object accentColor);
+        var hasValue6 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("accessoryColor", out object accessoryColor);
         try
         {
             using (SqlConnection conn = new SqlConnection(connection.connectionString))
@@ -305,7 +307,7 @@ public partial class SelectedRacePage : ContentPage
 
                     Button submit = new Button()
                     {
-                        BackgroundColor = (Color)secondaryColor,
+                        BackgroundColor = (Color)accentColor,
                         TextColor = (Color)fontColor,
                         Text = "Submit",
                         Margin = 5,

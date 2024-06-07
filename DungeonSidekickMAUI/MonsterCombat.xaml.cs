@@ -36,6 +36,8 @@ public partial class MonsterCombat : ContentPage
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+        Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+        Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
 
         List<Monster> monsters = MonsterSelector.Instance.m_monsters;
         Label title = new Label();
@@ -60,7 +62,7 @@ public partial class MonsterCombat : ContentPage
                 CommandParameter = monster,
                 TextColor = fontColor,
                 Text = "Select",
-                BackgroundColor = TrinaryColor,
+                BackgroundColor = AccentColor,
                 Margin = new Thickness(10,0,10,10)
             };
             select.Clicked += SelectButton;
@@ -137,6 +139,8 @@ public partial class MonsterCombat : ContentPage
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+        Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+        Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
 
         ImportedCharacterSheet character = ImportedCharacterSheet.Instance;
 
@@ -162,7 +166,7 @@ public partial class MonsterCombat : ContentPage
             Text = "+",
             WidthRequest = 100,
             TextColor = fontColor,
-            BackgroundColor = SecondaryColor
+            BackgroundColor = AccentColor
         };
 
         // Create entry for number input
@@ -182,7 +186,7 @@ public partial class MonsterCombat : ContentPage
             Text = "+",
             WidthRequest = 100,
             TextColor = fontColor,
-            BackgroundColor = SecondaryColor
+            BackgroundColor = AccentColor
         };
 
         // Create button for submission
@@ -191,7 +195,7 @@ public partial class MonsterCombat : ContentPage
             Text = "Roll Dice",
             WidthRequest = 350,
             TextColor = fontColor,
-            BackgroundColor = SecondaryColor
+            BackgroundColor = AccentColor
         };
 
         // Create layout for making it look pretty

@@ -4,14 +4,14 @@
              x:Class="DungeonSidekickMAUI.CombatPage"
              Title="CombatPage">
     <ScrollView>
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-            <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
+        <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
+                <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
-            </StackLayout>
-            <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
-            <Label Text="Inventory" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+                </StackLayout>
+                <VerticalStackLayout x:Name="CombatStack" BackgroundColor="{DynamicResource SecondaryColor}" WidthRequest="400">
+                <Label Text="Inventory" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
+            </VerticalStackLayout>
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Select Monster" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
         </VerticalStackLayout>
-        <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Select Monster" Clicked="SelectMonster" WidthRequest="400" HorizontalOptions="Center"/>
-    </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

@@ -46,10 +46,12 @@ public partial class SelectedClassPage : ContentPage
                 if (conn.State == System.Data.ConnectionState.Open)
                 {
                     StackLayout ClassStack = new StackLayout();
-                    Color PrimaryColor = (Color)Application.Current.Resources["PrimaryColor"];
-                    Color SecondaryColor = (Color)Application.Current.Resources["SecondaryColor"];
-                    Color TrinaryColor = (Color)Application.Current.Resources["TrinaryColor"];
-                    Color fontColor = (Color)Application.Current.Resources["FontC"];
+                    Color PrimaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["PrimaryColor"];
+                    Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
+                    Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
+                    Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+                    Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+                    Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
                     //var hasValue = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("FontC", out object fontColor);
                     //var hasValue2 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("SecondaryColor", out object SecondaryColor);
                     //var hasValue3 = Microsoft.Maui.Controls.Application.Current.Resources.TryGetValue("TrinaryColor", out object TrinaryColor);
@@ -213,7 +215,7 @@ public partial class SelectedClassPage : ContentPage
                     // Creates the submit button
                     Button submit = new Button()
                     {
-                        BackgroundColor = SecondaryColor,
+                        BackgroundColor = AccentColor,
                         TextColor = fontColor,
                         Margin = 5,
                         Text = "Submit"

@@ -17,7 +17,7 @@
             </Frame>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassDescLabel"/>
             <Label Text="" TextColor="{DynamicResource FontC}" HorizontalOptions="Center" x:Name="ClassHitDieLabel"/>
-            <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="400" HorizontalOptions="Center" Clicked="Submit"/>-->
+            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Text="Select Class" WidthRequest="400" HorizontalOptions="Center" Clicked="Submit"/>-->
                 </StackLayout>
             </StackLayout>
         </ScrollView>

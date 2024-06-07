@@ -9,7 +9,7 @@
                 <StackLayout x:Name="NavigationBar" BackgroundColor="{DynamicResource PrimaryColor}">
 
                 </StackLayout>
-                <Button BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"  Text="Finish Selecting Monsters" Clicked="SelectedMonsters" WidthRequest="400" HorizontalOptions="Center"/>
+                <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Finish Selecting Monsters" Clicked="SelectedMonsters" WidthRequest="400" HorizontalOptions="Center"/>
                 <Entry Placeholder="Search" TextChanged="Monster_Entry_TextChanged" WidthRequest="400" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}"></Entry>
             </VerticalStackLayout>
         </CollectionView.Header>
