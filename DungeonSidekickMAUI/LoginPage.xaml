@@ -2,17 +2,17 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DungeonSidekickMAUI.LoginPage">
-    <VerticalStackLayout BackgroundColor="{DynamicResource PrimaryColor}">
-        <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-            <Label Text="Login Page" BackgroundColor="{DynamicResource TrinaryColor}" TextColor="{DynamicResource FontC}" FontSize="36" HorizontalTextAlignment="Center"/>
+    <VerticalStackLayout BackgroundColor="White">
+        <Frame BackgroundColor="Gray" Padding="24" CornerRadius="0">
+            <Label Text="Login Page" BackgroundColor="Gray" TextColor="Black" FontSize="36" HorizontalTextAlignment="Center"/>
         </Frame>
-        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="UName"
-             WidthRequest="400" HorizontalOptions="Center" Margin="5" PlaceholderColor="{DynamicResource AccessoryColor}"/>
-        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Pass"
-            WidthRequest="400" HorizontalOptions="Center" IsPassword="True" Margin="5" PlaceholderColor="{DynamicResource AccessoryColor}"/>
-        <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Log In" Clicked="loginButtonClicked"
+        <Entry Placeholder="Username" FontSize="Body" BackgroundColor="Cyan" TextColor="Black" x:Name="UName"
+             WidthRequest="400" HorizontalOptions="Center" Margin="5" PlaceholderColor="Gray"/>
+        <Entry Placeholder="Password" FontSize="Body" BackgroundColor="Cyan" TextColor="Black" x:Name="Pass"
+            WidthRequest="400" HorizontalOptions="Center" IsPassword="True" Margin="5" PlaceholderColor="Gray"/>
+        <Button BackgroundColor="LightSteelBlue" TextColor="Black"  Text="Log In" Clicked="loginButtonClicked"
             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="5"/>
-        <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}"  Text="Don't have an account?" Clicked="signupButtonClicked"
+        <Button BackgroundColor="LightSteelBlue" TextColor="Black"  Text="Don't have an account?" Clicked="signupButtonClicked"
             MinimumWidthRequest="400" HorizontalOptions="Center" Margin="5"/> <!--For some reason, 400 is different for this button-->
         <!--Debug button-->
     </VerticalStackLayout>
