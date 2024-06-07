@@ -76,7 +76,7 @@ public partial class Modify_Character : ContentPage
                     Text = "Class: " + Char.c_ClassName,
                     WidthRequest = 400,
                     HorizontalOptions = LayoutOptions.Center,
-                    BackgroundColor = (Color)secondaryColor,
+                    BackgroundColor = (Color)accentColor,
                     Margin = new Thickness(0, 0, 0, 10)
                 };
                 classChange.Clicked += GoToClassPickerPage;
@@ -89,7 +89,7 @@ public partial class Modify_Character : ContentPage
                     Text = "Race: " + Char.c_RaceName,
                     WidthRequest = 400,
                     HorizontalOptions = LayoutOptions.Center,
-                    BackgroundColor = (Color)secondaryColor,
+                    BackgroundColor = (Color)accentColor,
                     Margin = new Thickness(0, 0, 0, 10)
                 };
                 raceChange.Clicked += GoToRacePickerPage;

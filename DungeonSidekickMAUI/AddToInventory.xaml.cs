@@ -58,6 +58,10 @@ public partial class AddToInventory : ContentPage
         // Allows us to use the dynamic colors with the out object
         var hasValue = Application.Current.Resources.TryGetValue("FontC", out object fontColor);
         var hasValue2 = Application.Current.Resources.TryGetValue("SecondaryColor", out object frameColor);
+        var hasValue3 = Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
+                                    var hasValue4 = Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
+        var hasValue5 = Application.Current.Resources.TryGetValue("AccentColor", out object accentColor);
+        var hasValue6 = Application.Current.Resources.TryGetValue("accessoryColor", out object accessoryColor);
 
         // Create entry for number input
         var numberEntry = new Entry
@@ -75,7 +79,7 @@ public partial class AddToInventory : ContentPage
             Text = "Enter",
             WidthRequest = 350,
             TextColor = (Color)fontColor,
-            BackgroundColor = (Color)frameColor
+            BackgroundColor = (Color)accentColor
         };
 
         // Create layout for popup contents

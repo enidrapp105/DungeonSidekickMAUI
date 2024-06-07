@@ -33,6 +33,8 @@ public partial class SpellCombatPage : ContentPage
         Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
         Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
         Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+        Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+        Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
 
         spells = new Spellpool();
         spells.PullSpells();
@@ -73,7 +75,7 @@ public partial class SpellCombatPage : ContentPage
                                         CommandParameter = spell,
                                         TextColor = fontColor,
                                         Text = "Select",
-                                        BackgroundColor = TrinaryColor,
+                                        BackgroundColor = AccentColor,
                                         Margin = new Thickness (10, 0, 10, 10)
                                     };
                                     select.Clicked += SelectButton;

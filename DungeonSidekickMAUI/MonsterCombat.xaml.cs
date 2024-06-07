@@ -62,7 +62,7 @@ public partial class MonsterCombat : ContentPage
                 CommandParameter = monster,
                 TextColor = fontColor,
                 Text = "Select",
-                BackgroundColor = TrinaryColor,
+                BackgroundColor = AccentColor,
                 Margin = new Thickness(10,0,10,10)
             };
             select.Clicked += SelectButton;
@@ -186,7 +186,7 @@ public partial class MonsterCombat : ContentPage
             Text = "+",
             WidthRequest = 100,
             TextColor = fontColor,
-            BackgroundColor = SecondaryColor
+            BackgroundColor = AccentColor
         };
 
         // Create button for submission

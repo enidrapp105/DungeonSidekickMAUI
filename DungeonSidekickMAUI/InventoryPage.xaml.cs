@@ -12,6 +12,8 @@ public partial class InventoryPage : ContentPage
     Color SecondaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["SecondaryColor"];
     Color TrinaryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["TrinaryColor"];
     Color fontColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["FontC"];
+    Color AccentColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccentColor"];
+    Color AccessoryColor = (Color)Microsoft.Maui.Controls.Application.Current.Resources["AccessoryColor"];
     ImportedCharacterSheet currentcharacterSheet = ImportedCharacterSheet.Instance;
     public InventoryPage()
 	{
@@ -110,7 +112,7 @@ public partial class InventoryPage : ContentPage
                                     {
                                         TextColor = fontColor,
                                         Text = "Remove",
-                                        BackgroundColor = TrinaryColor,
+                                        BackgroundColor = AccentColor,
                                         CommandParameter = temp,
                                         HorizontalOptions = LayoutOptions.End,
                                         Margin = new Thickness(10, 0, 10, 10)
@@ -176,7 +178,7 @@ public partial class InventoryPage : ContentPage
                                     {
                                         TextColor = fontColor,
                                         Text = "Remove",
-                                        BackgroundColor = TrinaryColor,
+                                        BackgroundColor = AccentColor,
                                         CommandParameter = temp,
                                         HorizontalOptions = LayoutOptions.End,
                                         Margin = new Thickness(10, 0, 10, 10)
@@ -194,7 +196,7 @@ public partial class InventoryPage : ContentPage
                                         {
                                             TextColor = fontColor,
                                             Text = "Equip",
-                                            BackgroundColor = TrinaryColor,
+                                            BackgroundColor = AccentColor,
                                             CommandParameter = temp,
                                             HorizontalOptions = LayoutOptions.End,
                                             Margin = new Thickness(10, 0, 10, 10)
@@ -261,7 +263,7 @@ public partial class InventoryPage : ContentPage
                                     {
                                         TextColor = fontColor,
                                         Text = "Remove",
-                                        BackgroundColor = TrinaryColor,
+                                        BackgroundColor = AccentColor,
                                         CommandParameter = temp,
                                         HorizontalOptions = LayoutOptions.End,
                                         Margin = new Thickness(10, 0, 10, 10)

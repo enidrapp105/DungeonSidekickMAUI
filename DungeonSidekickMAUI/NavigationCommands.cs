@@ -16,6 +16,9 @@ namespace DungeonSidekickMAUI
             Application.Current.Resources.TryGetValue("PrimaryColor", out object primaryColor);
             Application.Current.Resources.TryGetValue("FontC", out object fontColor);
             Application.Current.Resources.TryGetValue("SecondaryColor", out object secondaryColor);
+            Application.Current.Resources.TryGetValue("TrinaryColor", out object trinaryColor);
+            Application.Current.Resources.TryGetValue("AccentColor", out object accentColor);
+            Application.Current.Resources.TryGetValue("accessoryColor", out object accessoryColor);
 
             // Add elements to the flex layout
             var landingPageButton = new Button
@@ -23,7 +26,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Landing Page",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2,
 
@@ -35,7 +38,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "New Sheet",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
 
@@ -47,7 +50,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Modify Sheet",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
@@ -58,7 +61,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Settings",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
@@ -69,7 +72,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Inventory",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
@@ -80,7 +83,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Spellpool",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
@@ -91,7 +94,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Combat",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
@@ -102,7 +105,7 @@ namespace DungeonSidekickMAUI
                 TextColor = (Color)fontColor,
                 Text = "Change Sheet",
                 HorizontalOptions = LayoutOptions.End,
-                BackgroundColor = (Color)secondaryColor,
+                BackgroundColor = (Color)accentColor,
                 WidthRequest = 130,
                 Margin = 2
             };
