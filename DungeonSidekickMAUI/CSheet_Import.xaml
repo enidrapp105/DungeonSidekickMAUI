@@ -9,7 +9,7 @@
 
                 </StackLayout>
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-                <Label Text="Character Selection" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                    <Label Text="Character Selection" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
             
                 <StackLayout x:Name="CharacterPanel" BackgroundColor="{DynamicResource PrimaryColor}">

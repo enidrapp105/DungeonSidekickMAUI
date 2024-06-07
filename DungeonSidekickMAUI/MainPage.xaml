@@ -14,7 +14,6 @@
                 <Label Text="Who are you?" TextColor="{DynamicResource FontC}"  FontSize="16" Padding="30,0,30,0" x:Name="User_Disp"/>
             </StackLayout>
 
-            <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Dungeon Master(DM)?" WidthRequest="400" HorizontalOptions="Center"/>
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Create a Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Create_Character"/>
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Change Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Character_Import"/>
             <Button BackgroundColor="{DynamicResource AccentColor}" TextColor="{DynamicResource FontC}" Margin="5" Text="Modify Current Character" WidthRequest="400" HorizontalOptions="Center" Clicked="Modify_Character"/>

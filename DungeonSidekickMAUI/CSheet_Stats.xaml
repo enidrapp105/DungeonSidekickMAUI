@@ -8,7 +8,7 @@
 
             </StackLayout>
             <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-                <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                <Label Text="Character's Stats" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
             </Frame>
 
             <Entry Placeholder="Strength" FontSize="Body" BackgroundColor="{DynamicResource SecondaryColor}" TextColor="{DynamicResource FontC}" x:Name="Strength"

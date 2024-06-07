@@ -10,7 +10,7 @@
 
                 </StackLayout>
                 <Frame BackgroundColor="{DynamicResource TrinaryColor}" Padding="24" CornerRadius="0">
-                    <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+                    <Label Text="Character Creation" HorizontalTextAlignment="Center" TextColor="{DynamicResource FontC}" FontSize="36"/>
                 </Frame>
                 <StackLayout x:Name="ClassButtonContainer" Orientation="Vertical" HorizontalOptions="Center">
                     
