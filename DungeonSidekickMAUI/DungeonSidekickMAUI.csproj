@@ -46,6 +46,7 @@
 		<TargetPlatformAndroid>True</TargetPlatformAndroid>
 		<TargetRuntimeAndroid>net8.0</TargetRuntimeAndroid>
 		<MinTargetFrameworkAndroid>21.0</MinTargetFrameworkAndroid>
+		<WindowsPackageType Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">None</WindowsPackageType>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
